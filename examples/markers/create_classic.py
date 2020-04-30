@@ -1,9 +1,9 @@
 import numpy as np
 
-import opytimark.markers as m
+import opytimark.markers.classic as c
 
-# Declaring a function from the `markers` package
-f = m.Sphere()
+# Declaring a function from the `classic` package
+f = c.Sphere()
 
 # Declaring an input variable for feeding the function
 x = np.array([1, 1.5, 2, 2.5])

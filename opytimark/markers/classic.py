@@ -15,12 +15,20 @@ class Sphere(Benchmark):
     Global Minima:
         :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
-    
     """
 
     def __init__(self, name='Sphere', dims=-1, continuous=True, convex=True,
                  differentiable=True, multimodal=False, separable=True):
         """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
 
         """
 

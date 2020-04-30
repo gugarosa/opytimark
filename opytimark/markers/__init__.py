@@ -2,5 +2,3 @@
 It contains the logic of every implemented benchmarking
 function.
 """
-
-from opytimark.markers.classic import Sphere
