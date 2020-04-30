@@ -15,4 +15,3 @@ def test_benchmark_call():
 
     with pytest.raises(NotImplementedError):
         new_benchmark(None)
-
