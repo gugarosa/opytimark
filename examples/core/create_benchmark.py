@@ -1,6 +1,7 @@
-from opytimark.core import Benchmark
 import numpy as np
 
-b = Benchmark()
+from opytimark.core import Benchmark
 
-print(b(np.zeros(1)))
+# Creating a Benchmark class instance
+# Note that this class does not have __call__ method implemented
+b = Benchmark()
