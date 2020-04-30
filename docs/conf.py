@@ -195,7 +195,6 @@ epub_exclude_files = ['search.html']
 
 # -- Extension configuration -------------------------------------------------
 autodoc_default_options = {
-    'exclude-members': '__weakref__'
+    'exclude-members': '__weakref__',
+    'member-order': 'bysource'
 }
-
-autodoc_member_order = 'bysource'
