@@ -1,4 +1,5 @@
 import numpy as np
+
 import opytimark.markers as m
 
 # Declaring a function from the `markers` package

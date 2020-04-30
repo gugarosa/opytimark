@@ -1,6 +1,6 @@
-from opytimark.core.benchmark import Benchmark
+from opytimark.core import Benchmark
 import numpy as np
 
 b = Benchmark()
 
-print(b(np.zeros(2)))
+print(b(np.zeros(1)))

@@ -1,1 +1,1 @@
-from opytimark.markers.standard import Sphere
+from opytimark.markers.classic import Sphere
