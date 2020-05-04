@@ -2,6 +2,7 @@ import itertools as it
 
 import numpy as np
 import opytimark.utils.decorator as d
+import opytimark.utils.exception as e
 from opytimark.core import Benchmark
 
 
@@ -20,7 +21,7 @@ class Knapsack(Benchmark):
     """
 
     def __init__(self, name='Knapsack', dims=-1, continuous=False, convex=False,
-                 differentiable=False, multimodal=False, separable=False):
+                 differentiable=False, multimodal=False, separable=False, costs=None, weights=None, max_capacity=0):
         """Initialization method.
 
         Args:
@@ -31,12 +32,32 @@ class Knapsack(Benchmark):
             differentiable (bool): Whether the function is differentiable.
             multimodal (bool): Whether the function is multimodal.
             separable (bool): Whether the function is separable.
+            costs (list): List of items costs.
+            weights (list): List of items weights.
+            max_capacity: Maximum capacity of the knapsack.
 
         """
 
         # Override its parent class
         super(Knapsack, self).__init__(name, dims, continuous,
                                        convex, differentiable, multimodal, separable)
+
+        # Checking if costs and weights have the same length
+        if len(costs) != len(weights):
+            raise e.SizeError('`costs` and `weights` needs to have the same size')
+
+        #
+        self.costs = costs
+
+        #
+        self.weights = weights
+
+        #
+        self.max_capacity = max_capacity
+
+        #
+        self.dims = len(costs)
+   
 
     @d.check_dimension
     def __call__(self, x):
@@ -50,13 +71,10 @@ class Knapsack(Benchmark):
 
         """
 
-        a = [55, 10, 47, 5, 4, 50, 8, 61, 85, 87]
-        c = [95, 4, 60, 32, 23, 72, 80, 62, 65, 46]
-        
-        fixedCapacity = 269
+        fixedCapacity = self.max_capacity
 
-        profit = list(it.compress(a, x))
-        capacity = list(it.compress(c, x))
+        profit = list(it.compress(self.costs, x))
+        capacity = list(it.compress(self.weights, x))
         n = len(capacity)
 
         mat = [[0 for i in range(fixedCapacity + 1)]
