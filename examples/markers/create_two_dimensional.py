@@ -1,4 +1,5 @@
 import numpy as np
+
 from opytimark.markers.two_dimensional import Adjiman
 
 # Declaring a function from the `two_dimensional` package

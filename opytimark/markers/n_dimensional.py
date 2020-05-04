@@ -6,7 +6,7 @@ from opytimark.core import Benchmark
 
 class Sphere(Benchmark):
     """Sphere class implements the Sphere's benchmarking function.
-    
+
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} x_i^2
 
     Domain:
@@ -33,7 +33,8 @@ class Sphere(Benchmark):
         """
 
         # Override its parent class
-        super(Sphere, self).__init__(name, dims, continuous, convex, differentiable, multimodal, separable)
+        super(Sphere, self).__init__(name, dims, continuous,
+                                     convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):

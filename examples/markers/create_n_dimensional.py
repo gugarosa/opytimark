@@ -1,4 +1,5 @@
 import numpy as np
+
 from opytimark.markers.n_dimensional import Sphere
 
 # Declaring a function from the `n_dimensional` package

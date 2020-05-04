@@ -6,8 +6,8 @@ from opytimark.core import Benchmark
 
 class Adjiman(Benchmark):
     """Adjiman class implements the Adjiman's benchmarking function.
-    
-    .. math:: f(\mathbf{x}) = cos(x_1) sin(x_2) - \\frac{x_1}{x_2^2+1}
+
+    .. math:: f(\mathbf{x}) = = f(x_1, x_2) = cos(x_1) sin(x_2) - \\frac{x_1}{x_2^2+1}
 
     Domain:
         The function is commonly evaluated using :math:`x_1 \in [-1, 2], x_2 \in [-1, 1]`.
@@ -33,7 +33,8 @@ class Adjiman(Benchmark):
         """
 
         # Override its parent class
-        super(Adjiman, self).__init__(name, dims, continuous, convex, differentiable, multimodal, separable)
+        super(Adjiman, self).__init__(name, dims, continuous,
+                                      convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
