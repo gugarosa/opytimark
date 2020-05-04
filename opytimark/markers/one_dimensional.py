@@ -45,11 +45,11 @@ class GramacyLee(Benchmark):
             x (np.array): An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `y`.
+            The benchmarking function output `f(x)`.
 
         """
 
         # Calculating the Gramacy & Lee's function
-        y = np.sin(10 * np.pi * x[0]) / (2 * x[0] + c.EPSILON) + ((x[0] - 1) ** 4)
+        f = np.sin(10 * np.pi * x[0]) / (2 * x[0] + c.EPSILON) + ((x[0] - 1) ** 4)
 
-        return np.sum(y)
+        return np.sum(f)

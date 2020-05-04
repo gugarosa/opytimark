@@ -44,11 +44,11 @@ class Wolfe(Benchmark):
             x (np.array): An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `y`.
+            The benchmarking function output `f(x)`.
 
         """
 
         # Calculating the Wolfe's function
-        y = 4 / 3 * ((x[0] ** 2 + x[1] ** 2 - x[0] * x[1]) ** 0.75) + x[2]
+        f = 4 / 3 * ((x[0] ** 2 + x[1] ** 2 - x[0] * x[1]) ** 0.75) + x[2]
 
-        return np.sum(y)
+        return np.sum(f)

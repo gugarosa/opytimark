@@ -55,7 +55,7 @@ class Benchmark:
             x (np.array): An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `y`.
+            The benchmarking function output `f(x)`.
 
         """
 

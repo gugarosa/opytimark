@@ -44,11 +44,11 @@ class Sphere(Benchmark):
             x (np.array): An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `y`.
+            The benchmarking function output `f(x)`.
 
         """
 
         # Calculating the sphere's function
-        y = x ** 2
+        f = x ** 2
 
-        return np.sum(y)
+        return np.sum(f)
