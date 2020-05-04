@@ -7,13 +7,13 @@ from opytimark.core import Benchmark
 class Adjiman(Benchmark):
     """Adjiman class implements the Adjiman's benchmarking function.
     
-    .. math:: f(x, y) = cos(x) sin(y) - \frac{x}{y^2+1}
+    .. math:: f(\mathbf{x}) = cos(x_1) sin(x_2) - \\frac{x_1}{x_2^2+1}
 
     Domain:
-        The function is commonly evaluated using :math:`x \in [-1, 2], y \in [-1, 1]`.
+        The function is commonly evaluated using :math:`x_1 \in [-1, 2], x_2 \in [-1, 1]`.
 
     Global Minima:
-        :math:`f(x^*, y^*) = -2.02181 \mid \mathbf{x^*, y^*} = (2, 0.10578)`.
+        :math:`f(\mathbf{x^*}) = -2.02181 \mid \mathbf{x^*} = (2, 0.10578)`.
 
     """
 

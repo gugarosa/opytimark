@@ -1,8 +1,7 @@
 import numpy as np
+from opytimark.markers.two_dimensional import Adjiman
 
-from opytimark.markers.bi_dim import Adjiman
-
-# Declaring a function from the `bi_dim` package
+# Declaring a function from the `two_dimensional` package
 f = Adjiman()
 
 # Declaring an input variable for feeding the function

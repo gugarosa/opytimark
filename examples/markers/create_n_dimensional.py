@@ -1,8 +1,7 @@
 import numpy as np
+from opytimark.markers.n_dimensional import Sphere
 
-from opytimark.markers.n_dim import Sphere
-
-# Declaring a function from the `n_dim` package
+# Declaring a function from the `n_dimensional` package
 f = Sphere()
 
 # Declaring an input variable for feeding the function

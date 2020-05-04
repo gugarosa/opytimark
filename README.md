@@ -58,7 +58,10 @@ Opytimark is based on the following structure, and you should pay attention to i
     - core
         - benchmark
     - markers
-        - classic
+        - one_dimensional
+        - two_dimensional
+        - three_dimensional
+        - n_dimensional
     - utils
         - constants
         - decorator
