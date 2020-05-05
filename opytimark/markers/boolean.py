@@ -1,6 +1,8 @@
 import itertools as it
 
 import numpy as np
+
+import opytimark.utils.constants as c
 import opytimark.utils.decorator as d
 import opytimark.utils.exception as e
 from opytimark.core import Benchmark
@@ -9,7 +11,7 @@ from opytimark.core import Benchmark
 class Knapsack(Benchmark):
     """Knapsack class implements a boolean-based version of the Knapsack problem.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \max{\sum_{i=1}^{n}v_i x_i}
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \min -{\sum_{i=1}^{n}v_i x_i}
 
     s.t.
 
@@ -21,7 +23,8 @@ class Knapsack(Benchmark):
     """
 
     def __init__(self, name='Knapsack', dims=-1, continuous=False, convex=False,
-                 differentiable=False, multimodal=False, separable=False, costs=None, weights=None, max_capacity=0):
+                 differentiable=False, multimodal=False, separable=False,
+                 values=[0], weights=[0], max_capacity=0.0):
         """Initialization method.
 
         Args:
@@ -32,7 +35,7 @@ class Knapsack(Benchmark):
             differentiable (bool): Whether the function is differentiable.
             multimodal (bool): Whether the function is multimodal.
             separable (bool): Whether the function is separable.
-            costs (list): List of items costs.
+            values (list): List of items values.
             weights (list): List of items weights.
             max_capacity: Maximum capacity of the knapsack.
 
@@ -42,22 +45,69 @@ class Knapsack(Benchmark):
         super(Knapsack, self).__init__(name, dims, continuous,
                                        convex, differentiable, multimodal, separable)
 
-        # Checking if costs and weights have the same length
-        if len(costs) != len(weights):
-            raise e.SizeError('`costs` and `weights` needs to have the same size')
+        # Checking if values and weights have the same length
+        if len(values) != len(weights):
+            raise e.SizeError(
+                '`values` and `weights` needs to have the same size')
 
-        #
-        self.costs = costs
+        # Items values
+        self.values = values
 
-        #
+        # Items weights
         self.weights = weights
 
-        #
+        # Maximum capacity of the knapsack
         self.max_capacity = max_capacity
 
-        #
-        self.dims = len(costs)
-   
+        # Re-writes the correct number of dimensions
+        self.dims = len(values)
+
+    @property
+    def values(self):
+        """list: values of items in the knapsack.
+
+        """
+
+        return self._values
+
+    @values.setter
+    def values(self, values):
+        if not isinstance(values, list):
+            raise e.TypeError('`values` should be a list')
+
+        self._values = values
+
+    @property
+    def weights(self):
+        """list: Weights of items in the knapsack.
+
+        """
+
+        return self._weights
+
+    @weights.setter
+    def weights(self, weights):
+        if not isinstance(weights, list):
+            raise e.TypeError('`weights` should be a list')
+
+        self._weights = weights
+
+    @property
+    def max_capacity(self):
+        """float: Maximum capacity of the knapsack.
+
+        """
+
+        return self._max_capacity
+
+    @max_capacity.setter
+    def max_capacity(self, max_capacity):
+        if not (isinstance(max_capacity, float) or isinstance(max_capacity, int)):
+            raise e.TypeError('`max_capacity` should be a float or integer')
+        if (max_capacity < 0):
+            raise e.ValueError('`max_capacity` should be >= 0')
+
+        self._max_capacity = max_capacity
 
     @d.check_dimension
     def __call__(self, x):
@@ -71,38 +121,18 @@ class Knapsack(Benchmark):
 
         """
 
-        fixedCapacity = self.max_capacity
+        # Gathering an array of possible values
+        v = np.array(list(it.compress(self.values, x)))
 
-        profit = list(it.compress(self.costs, x))
-        capacity = list(it.compress(self.weights, x))
-        n = len(capacity)
+        # Gathering an array of possible weights
+        w = np.array(list(it.compress(self.weights, x)))
 
-        mat = [[0 for i in range(fixedCapacity + 1)]
-               for i in range(2)]
-
-        i = 0
-        while i < n:
-            j = 0
-            if i % 2 == 0:
-                while j < fixedCapacity:
-                    j += 1
-                    if capacity[i] <= j:
-                        mat[1][j] = max(profit[i] + mat[0][j -
-                                                           capacity[i]], mat[0][j])
-                    else:
-                        mat[1][j] = mat[0][j]
-
-            else:
-                while j < fixedCapacity:
-                    j += 1
-                    if capacity[i] <= j:
-                        mat[0][j] = max(profit[i] + mat[1][j -
-                                                           capacity[i]], mat[1][j])
-                    else:
-                        mat[0][j] = mat[1][j]
-            i += 1
-
-        if n % 2 == 0:
-            return -mat[0][fixedCapacity]
+        # If the sum of weights exceed the maximum capacity
+        if np.sum(w) > self.max_capacity:
+            # Returns the maximum number possible
+            return c.FLOAT_MAX
+        
+        # If the sum of weights is allowed
         else:
-            return -mat[1][fixedCapacity]
+            # Returns its negative sum as it is a minimization problem
+            return -np.sum(v)

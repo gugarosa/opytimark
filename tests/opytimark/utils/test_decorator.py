@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from opytimark.markers import classic
+from opytimark.markers import n_dimensional
 from opytimark.utils import decorator
 
 
@@ -10,7 +10,7 @@ def test_check_dimension():
     def call(obj, x):
         return x
 
-    f = classic.Sphere()
+    f = n_dimensional.Sphere()
 
     try:
         call(f, np.array([]))

@@ -1,4 +1,5 @@
 import opytimark.utils.decorator as d
+import opytimark.utils.exception as e
 
 
 class Benchmark:
@@ -44,6 +45,113 @@ class Benchmark:
 
         # Separability
         self.separable = separable
+
+    @property
+    def name(self):
+        """str: Name of the function.
+
+        """
+
+        return self._name
+
+    @name.setter
+    def name(self, name):
+        if not isinstance(name, str):
+            raise e.TypeError('`name` should be a string')
+
+        self._name = name
+
+    @property
+    def dims(self):
+        """int: Number of allowed dimensions
+
+        """
+
+        return self._dims
+
+    @dims.setter
+    def dims(self, dims):
+        if not isinstance(dims, int):
+            raise e.TypeError('`dims` should be a integer')
+        if (dims < -1 or dims == 0):
+            raise e.ValueError('`dims` should be >= -1 and different than 0')
+
+        self._dims = dims
+
+    @property
+    def continuous(self):
+        """bool: Whether function is continuous or not.
+
+        """
+
+        return self._continuous
+
+    @continuous.setter
+    def continuous(self, continuous):
+        if not isinstance(continuous, bool):
+            raise e.TypeError('`continuous` should be a boolean')
+
+        self._continuous = continuous
+
+    @property
+    def convex(self):
+        """bool: Whether function is convex or not.
+
+        """
+
+        return self._convex
+
+    @convex.setter
+    def convex(self, convex):
+        if not isinstance(convex, bool):
+            raise e.TypeError('`convex` should be a boolean')
+
+        self._convex = convex
+
+    @property
+    def differentiable(self):
+        """bool: Whether function is differentiable or not.
+
+        """
+
+        return self._differentiable
+
+    @differentiable.setter
+    def differentiable(self, differentiable):
+        if not isinstance(differentiable, bool):
+            raise e.TypeError('`differentiable` should be a boolean')
+
+        self._differentiable = differentiable
+
+    @property
+    def multimodal(self):
+        """bool: Whether function is multimodal or not.
+
+        """
+
+        return self._multimodal
+
+    @multimodal.setter
+    def multimodal(self, multimodal):
+        if not isinstance(multimodal, bool):
+            raise e.TypeError('`multimodal` should be a boolean')
+
+        self._multimodal = multimodal
+
+    @property
+    def separable(self):
+        """bool: Whether function is separable or not.
+
+        """
+
+        return self._separable
+
+    @separable.setter
+    def separable(self, separable):
+        if not isinstance(separable, bool):
+            raise e.TypeError('`separable` should be a boolean')
+
+        self._separable = separable
 
     def __call__(self, x):
         """This method returns the function's output when the class is called.
