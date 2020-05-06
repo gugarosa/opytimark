@@ -57,6 +57,10 @@ opytimark.markers.n_dimensional
    :members:
    :show-inheritance:
 
+.. autoapiclass:: opytimark.markers.n_dimensional.Michalewicz
+   :members:
+   :show-inheritance:
+
 .. autoapiclass:: opytimark.markers.n_dimensional.Pathological
    :members:
    :show-inheritance:
@@ -90,6 +94,10 @@ opytimark.markers.n_dimensional
    :show-inheritance:
 
 .. autoapiclass:: opytimark.markers.n_dimensional.Rosenbrock
+   :members:
+   :show-inheritance:
+
+.. autoapiclass:: opytimark.markers.n_dimensional.RotatedHyperEllipsoid
    :members:
    :show-inheritance:
 
@@ -146,6 +154,10 @@ opytimark.markers.n_dimensional
    :show-inheritance:
 
 .. autoapiclass:: opytimark.markers.n_dimensional.SumSquares
+   :members:
+   :show-inheritance:
+
+.. autoapiclass:: opytimark.markers.n_dimensional.Trid
    :members:
    :show-inheritance:
 

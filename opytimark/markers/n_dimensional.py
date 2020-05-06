@@ -777,6 +777,61 @@ class Levy(Benchmark):
         return f
 
 
+class Michalewicz(Benchmark):
+    """Michalewicz class implements the Michalewicz's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = - \sum_{i=1}^{n}sin(x_i)sin^{20}(\\frac{ix_i^2}{\\pi})
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [0, \\pi] \mid i = \{1, 2, \ldots, n\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) =  \mid \mathbf{x^*} = (, , \ldots, )`.
+
+    """
+
+    def __init__(self, name='Michalewicz', dims=-1, continuous=True, convex=True,
+                 differentiable=True, multimodal=True, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Michalewicz, self).__init__(name, dims, continuous,
+                                     convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Instantiating function
+        f = 0
+
+        # For every input dimension
+        for i in range(x.shape[0]):
+            # Calculating the Michalewicz's function
+            f += np.sin(x[i]) * (np.sin((i * x[i] ** 2) / np.pi) ** 20)
+
+        return -f
+
+
 class Pathological(Benchmark):
     """Pathological class implements the Pathological's benchmarking function.
 
@@ -1249,6 +1304,62 @@ class Rosenbrock(Benchmark):
         for i in range(x.shape[0] - 1):
             # Calculating the Rosenbrock's function
             f += 100 * ((x[i + 1] - x[i] ** 2) ** 2) + ((x[i] - 1) ** 2)
+
+        return f
+
+class RotatedHyperEllipsoid(Benchmark):
+    """RotatedHyperEllipsoid class implements the Rotated Hyper-Ellipsoid's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}\sum_{j=1}^{i}x_j^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-65.536, 65.536] \mid i = \{1, 2, \ldots, n\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+
+    """
+
+    def __init__(self, name='RotatedHyperEllipsoid', dims=-1, continuous=True, convex=True,
+                 differentiable=True, multimodal=False, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(RotatedHyperEllipsoid, self).__init__(name, dims, continuous,
+                                     convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Instantiating function
+        f = 0
+
+        # For every input dimension
+        for i in range(x.shape[0]):
+            # For `j` in `i` range
+            for j in range(i):
+                # Calculating the Rotated Hyper-Ellipsoid's function
+                f += x[j] ** 2
 
         return f
 
@@ -1985,3 +2096,225 @@ class SumSquares(Benchmark):
             f += (i + 1) * (x[i] ** 2)
 
         return f
+
+
+class Trid(Benchmark):
+    """Trid class implements the Trid's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}(x_i - 1)^2 - \sum_{i=2}^{n}x_i x_{i-1}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-n^2, n^2] \mid i = \{1, 2, \ldots, n\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -\\frac{n(n+4)(n-1)}{6} \mid x_i = i(n+1-i)`.
+
+    """
+
+    def __init__(self, name='Trid', dims=-1, continuous=True, convex=True,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Trid, self).__init__(name, dims, continuous,
+                                     convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Instantiating term
+        term = 0
+
+        for i in range(1, x.shape[0]):
+            term += x[i] * x[i - 1]
+
+        # Calculating the Trid's function
+        f = np.sum((x - 1) ** 2) - term
+
+        return f
+
+class Trigonometric1(Benchmark):
+    """Trigonometric1 class implements the Trigonometric's 1st benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}[n - \sum_{j=1}^{n} cos(x_j) + i(1 - cos(x_i) - sin(x_i))]^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [0, \\pi] \mid i = \{1, 2, \ldots, n\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+
+    """
+
+    def __init__(self, name='Trigonometric1', dims=-1, continuous=True, convex=True,
+                 differentiable=True, multimodal=False, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Trigonometric1, self).__init__(name, dims, continuous,
+                                     convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Defining the input dimension
+        n = x.shape[0]
+
+        # For every input dimension
+        for i in range(n):
+            # Resetting partial term
+            partial = 0
+
+            # For every input dimension
+            for j in range(n):
+                # Calculating partial term
+                partial += np.cos(x[j])
+
+            # Calculating the Trigonometric's 1st function
+            f += (n - partial + i * (1 - np.cos(x[i] - np.sin(x[i])))) ** 2
+
+        return f
+
+class Trigonometric2(Benchmark):
+    """Trigonometric2 class implements the Trigonometric's 2nd benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = 1 + \sum_{i=1}^{n}8sin^2[7(x_i - 0.9)^2] + 6sin^2[14(x_1-0.9)^2] + (x_i-0.9)^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-500, 500] \mid i = \{1, 2, \ldots, n\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 1 \mid \mathbf{x^*} = (0.9, 0.9, \ldots, 0.9)`.
+
+    """
+
+    def __init__(self, name='Trigonometric2', dims=-1, continuous=True, convex=True,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Trigonometric2, self).__init__(name, dims, continuous,
+                                     convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Instantiating function
+        f = 0
+
+        # For every input dimension
+        for i in range(x.shape[0]):
+            # Calculating the Trigonometric's 2nd function
+            f += 8 * (np.sin(7 * (x[i] - 0.9) ** 2) ** 2) + 6 * (np.sin(14 * (x[0] - 0.9) ** 2) ** 2) + ((x[i] - 0.9) ** 2)
+
+        return 1 + f
+
+
+class Wavy(Benchmark):
+    """Wavy class implements the Wavy's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = 1 - \\frac{1}{n} \sum_{i=1}^{n}cos(10x_i)e^{\\frac{-x_i^2}{2}}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-\\pi, \\pi] \mid i = \{1, 2, \ldots, n\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+
+    """
+
+    def __init__(self, name='Wavy', dims=-1, continuous=True, convex=True,
+                 differentiable=True, multimodal=True, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Wavy, self).__init__(name, dims, continuous,
+                                     convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Wavy's function
+        f = np.cos(10 * x) * np.exp(-1 * (x ** 2) / 2)
+
+        return 1 - (1 / x.shape[0]) * np.sum(f)
