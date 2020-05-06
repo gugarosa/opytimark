@@ -1,5 +1,6 @@
 import numpy as np
 
+import opytimark.utils.constants as c
 import opytimark.utils.decorator as d
 from opytimark.core import Benchmark
 
@@ -58,7 +59,7 @@ class Ackley1(Benchmark):
         term2 = inv * np.sum(np.cos(2 * np.pi * x))
 
         # Calculating Ackley's 1st function
-        f = - 20 * np.exp(term1) - np.exp(term2) + 20 + np.e
+        f = 20 + np.e - np.exp(term2) - 20 * np.exp(term1)
 
         return np.sum(f)
 
@@ -278,7 +279,7 @@ class CosineMixture(Benchmark):
         The function is commonly evaluated using :math:`x_i \in [-1, 1] \mid i = \{1, 2, \ldots, n\}`.
 
     Global Minima:
-        :math:`f(\mathbf{x^*}) = 0.1n \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        :math:`f(\mathbf{x^*}) = -0.1n \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
@@ -370,7 +371,7 @@ class Csendes(Benchmark):
         """
 
         # Calculating the Csendes' function
-        f = (x ** 6) * (2 + np.sin(1 / x))
+        f = (x ** 6) * (2 + np.sin(1 / (x + c.EPSILON)))
 
         return np.sum(f)
 
@@ -384,7 +385,7 @@ class Deb1(Benchmark):
         The function is commonly evaluated using :math:`x_i \in [-1, 1] \mid i = \{1, 2, \ldots, n\}`.
 
     Global Minima:
-        :math:`f(\mathbf{x^*}) = -1 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        :math:`f(\mathbf{x^*}) = -1 \mid \mathbf{x^*} = (-0.9, -0.7, \ldots, 0.9)`.
 
     """
 
@@ -434,10 +435,10 @@ class Deb3(Benchmark):
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = -\\frac{1}{n}\sum_{i=1}^{n}sin^6(5 \\pi (x_i^{\\frac{3}{4}}-0.05))
 
     Domain:
-        The function is commonly evaluated using :math:`x_i \in [-1, 1] \mid i = \{1, 2, \ldots, n\}`.
+        The function is commonly evaluated using :math:`x_i \in [0, 1] \mid i = \{1, 2, \ldots, n\}`.
 
     Global Minima:
-        :math:`f(\mathbf{x^*}) = -1 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        :math:`f(\mathbf{x^*}) = ? \mid \mathbf{x^*} = (?, ?, \ldots, ?)`.
 
     """
 
@@ -545,7 +546,7 @@ class DixonPrice(Benchmark):
 class Exponential(Benchmark):
     """Exponential class implements the Exponential's benchmarking function.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = -e^{-0.5\sum_{i=1}^n{x_i^2}}
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = e^{-0.5\sum_{i=1}^n{x_i^2}}
 
     Domain:
         The function is commonly evaluated using :math:`x_i \in [-1, 1] \mid i = \{1, 2, \ldots, n\}`.
@@ -587,7 +588,7 @@ class Exponential(Benchmark):
         """
 
         # Calculating the Exponential's function
-        f = -np.exp(-0.5 * np.sum(x ** 2))
+        f = np.exp(-0.5 * np.sum(x ** 2))
 
         return f
 
@@ -701,11 +702,10 @@ class HappyCat(Benchmark):
         n = x.shape[0]
 
         # Calculating norm of `x`
-        norm = np.linalg.norm(x)
+        square = np.sum(x ** 2)
 
         # Calculating the HappyCat's function
-        f = ((norm - n) ** 2) ** (1 / 8) + (1 / n) * \
-            (1 / 2 * norm + np.sum(x)) + 1 / 2
+        f = ((square - n) ** 2) ** (1 / 8) + (1 / n) * (1 / 2 * square + np.sum(x)) + 1 / 2
 
         return f
 
@@ -768,8 +768,7 @@ class Levy(Benchmark):
         w = w[0:x.shape[0]-1]
 
         # Calculating second term
-        term2 = np.sum(((w - 1) ** 2) * (1 + 10 *
-                                         (np.sin(np.pi * w + 1) ** 2)))
+        term2 = np.sum(((w - 1) ** 2) * (1 + 10 * (np.sin(np.pi * w + 1) ** 2)))
 
         # Calculating the Levy's function
         f = term1 + term2 + term3
@@ -786,7 +785,7 @@ class Michalewicz(Benchmark):
         The function is commonly evaluated using :math:`x_i \in [0, \\pi] \mid i = \{1, 2, \ldots, n\}`.
 
     Global Minima:
-        :math:`f(\mathbf{x^*}) =  \mid \mathbf{x^*} = (, , \ldots, )`.
+        :math:`f(\mathbf{x^*}) = ? \mid \mathbf{x^*} = (?, ?, \ldots, ?)`.
 
     """
 
@@ -827,7 +826,7 @@ class Michalewicz(Benchmark):
         # For every input dimension
         for i in range(x.shape[0]):
             # Calculating the Michalewicz's function
-            f += np.sin(x[i]) * (np.sin((i * x[i] ** 2) / np.pi) ** 20)
+            f += np.sin(x[i]) * (np.sin((i + 1) * x[i] ** 2 / np.pi) ** 20)
 
         return -f
 
@@ -2318,3 +2317,60 @@ class Wavy(Benchmark):
         f = np.cos(10 * x) * np.exp(-1 * (x ** 2) / 2)
 
         return 1 - (1 / x.shape[0]) * np.sum(f)
+
+
+class Zakharov(Benchmark):
+    """Zakharov class implements the Zakharov's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^n x_i^{2}+(\sum_{i=1}^n 0.5ix_i)^2 + (\sum_{i=1}^n 0.5ix_i)^4
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-5, 10] \mid i = \{1, 2, \ldots, n\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+
+    """
+
+    def __init__(self, name='Zakharov', dims=-1, continuous=True, convex=True,
+                 differentiable=True, multimodal=False, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Zakharov, self).__init__(name, dims, continuous,
+                                     convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Instantiating term
+        term = 0
+
+        # For every input dimension
+        for i in range(x.shape[0]):
+            term += 0.5 * i * x[i]
+
+        # Calculating the Zakharov's function
+        f = np.sum(x) + (term ** 2) + (term ** 4)
+
+        return f
