@@ -4,7 +4,7 @@ with open('README.md', 'r') as f:
     long_description = f.read()
 
 setup(name='opytimark',
-      version='1.0.1',
+      version='1.0.2',
       description='Python Optimization Benchmarking Functions',
       long_description=long_description,
       long_description_content_type='text/markdown',
