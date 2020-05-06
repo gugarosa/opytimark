@@ -205,7 +205,7 @@ opytimark.markers.n_dimensional
    :members:
    :show-inheritance:
 
-.. autoapiclass:: opytimark.markers.n_dimensional.XinSheYang1
+.. autoapiclass:: opytimark.markers.n_dimensional.XinSheYang
    :members:
    :show-inheritance:
 

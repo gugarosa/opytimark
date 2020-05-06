@@ -520,6 +520,46 @@ def test_wavy():
     assert y == 0
 
 
+def test_xin_she_yang():
+    f = n_dimensional.XinSheYang()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_xin_she_yan2():
+    f = n_dimensional.XinSheYang2()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_xin_she_yang3():
+    f = n_dimensional.XinSheYang3()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == -1
+
+
+def test_xin_she_yang4():
+    f = n_dimensional.XinSheYang4()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == -1
+
+
 def test_zakharov():
     f = n_dimensional.Zakharov()
 

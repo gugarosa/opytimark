@@ -2746,6 +2746,209 @@ class Wavy(Benchmark):
         return 1 - (1 / x.shape[0]) * np.sum(f)
 
 
+class XinSheYang(Benchmark):
+    """XinSheYang class implements the Xin-She Yang's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}\epsilon_i|x_i|^i
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+
+    """
+
+    def __init__(self, name='XinSheYang', dims=-1, continuous=True, convex=False,
+                 differentiable=False, multimodal=True, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(XinSheYang, self).__init__(name, dims, continuous,
+                                     convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Instantiating function
+        f = 0
+
+        # For every decision variable
+        for i in range(x.shape[0]):
+            # Calculating the Xin-She Yang's function
+            f += np.random.uniform() * (np.fabs(x[i]) ** (i + 1))
+
+        return f
+
+
+class XinSheYang2(Benchmark):
+    """XinSheYang2 class implements the Xin-She Yang's 2nd benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = (\sum_{i=1}^{n}|x_i|)e^{-\sum_{i=1}^{n}sin(x_i^2)}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-2 \\pi, 2 \\pi] \mid i = \{1, 2, \ldots, n\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+
+    """
+
+    def __init__(self, name='XinSheYang2', dims=-1, continuous=True, convex=False,
+                 differentiable=False, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(XinSheYang2, self).__init__(name, dims, continuous,
+                                     convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Xin-She Yang's 2nd function
+        f = np.sum(np.fabs(x)) * np.exp(-np.sum(np.sin(x ** 2)))
+
+        return f
+
+class XinSheYang3(Benchmark):
+    """XinSheYang3 class implements the Xin-She Yang's 3rd benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = e^{-\sum_{i=1}^{n}(\\frac{x_i}{\\beta})^{2m}} - 2e^{-\sum_{i=1}^{n}x_i^2} \prod_{i=1}^{n} cos^2(x_i)
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-2 \\pi, 2 \\pi] \mid i = \{1, 2, \ldots, n\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -1 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+
+    """
+
+    def __init__(self, name='XinSheYang3', dims=-1, continuous=True, convex=False,
+                 differentiable=True, multimodal=False, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(XinSheYang3, self).__init__(name, dims, continuous,
+                                     convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Xin-She Yang's 3rd function
+        f = np.exp(-np.sum((x / 15) ** 10)) - 2 * np.exp(-np.sum(x ** 2)) * np.prod(np.cos(x) ** 2)
+
+        return f
+
+class XinSheYang4(Benchmark):
+    """XinSheYang4 class implements the Xin-She Yang's 4th benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = (\sum_{i=1}^{n} sin^2(x_i) - e^{-\sum_{i=1}^{n}x_i^2})e^{-\sum_{i=1}^{n}sin^2(\sqrt{|x_i|})}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, \ldots, n\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -1 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+
+    """
+
+    def __init__(self, name='XinSheYang4', dims=-1, continuous=True, convex=False,
+                 differentiable=False, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(XinSheYang4, self).__init__(name, dims, continuous,
+                                     convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Xin-She Yang's 4th function
+        f = (np.sum(np.sin(x) ** 2) - np.exp(-np.sum(x ** 2))) * np.exp(-np.sum(np.sin(np.sqrt(np.fabs(x)) ** 2)))
+
+        return f
+
+
 class Zakharov(Benchmark):
     """Zakharov class implements the Zakharov's benchmarking function.
 
