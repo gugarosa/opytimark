@@ -174,6 +174,26 @@ def test_periodic():
     assert y == 0.9
 
 
+def test_perm_0_d_beta():
+    f = n_dimensional.Perm0DBeta()
+
+    x = np.array([1, 1/2, 1/3, 1/4, 1/5])
+
+    y = f(x)
+
+    assert np.round(y) == 0
+
+
+def test_perm_d_beta():
+    f = n_dimensional.PermDBeta()
+
+    x = np.array([1, 2, 3, 4, 5])
+
+    y = f(x)
+
+    assert np.round(y) == 0
+
+
 def test_powell_sum():
     f = n_dimensional.PowellSum()
 
@@ -320,6 +340,26 @@ def test_schwefel223():
     assert y == 0
 
 
+def test_schwefel225():
+    f = n_dimensional.Schwefel225()
+
+    x = np.ones(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_schwefel226():
+    f = n_dimensional.Schwefel226()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
 def test_shubert():
     f = n_dimensional.Shubert()
 
@@ -350,8 +390,48 @@ def test_shubert4():
     assert np.round(y) == -223
 
 
+def test_schaffer_f6():
+    f = n_dimensional.SchafferF6()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
 def test_sphere():
     f = n_dimensional.Sphere()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_step():
+    f = n_dimensional.Step()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_step2():
+    f = n_dimensional.Step2()
+
+    x = np.full(50, -0.5)
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_step3():
+    f = n_dimensional.Step3()
 
     x = np.zeros(50)
 

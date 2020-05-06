@@ -69,6 +69,14 @@ opytimark.markers.n_dimensional
    :members:
    :show-inheritance:
 
+.. autoapiclass:: opytimark.markers.n_dimensional.Perm0DBeta
+   :members:
+   :show-inheritance:
+
+.. autoapiclass:: opytimark.markers.n_dimensional.PermDBeta
+   :members:
+   :show-inheritance:
+
 .. autoapiclass:: opytimark.markers.n_dimensional.PowellSum
    :members:
    :show-inheritance:
@@ -125,6 +133,14 @@ opytimark.markers.n_dimensional
    :members:
    :show-inheritance:
 
+.. autoapiclass:: opytimark.markers.n_dimensional.Schwefel225
+   :members:
+   :show-inheritance:
+
+.. autoapiclass:: opytimark.markers.n_dimensional.Schwefel226
+   :members:
+   :show-inheritance:
+
 .. autoapiclass:: opytimark.markers.n_dimensional.Shubert
    :members:
    :show-inheritance:
@@ -137,7 +153,23 @@ opytimark.markers.n_dimensional
    :members:
    :show-inheritance:
 
+.. autoapiclass:: opytimark.markers.n_dimensional.SchafferF6
+   :members:
+   :show-inheritance:
+
 .. autoapiclass:: opytimark.markers.n_dimensional.Sphere
+   :members:
+   :show-inheritance:
+
+.. autoapiclass:: opytimark.markers.n_dimensional.Step
+   :members:
+   :show-inheritance:
+
+.. autoapiclass:: opytimark.markers.n_dimensional.Step2
+   :members:
+   :show-inheritance:
+
+.. autoapiclass:: opytimark.markers.n_dimensional.Step3
    :members:
    :show-inheritance:
 
