@@ -1001,7 +1001,7 @@ class Qing(Benchmark):
         The function is commonly evaluated using :math:`x_i \in [-500, 500] \mid i = \{1, 2, \ldots, n\}`.
 
     Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (\pm \sqrt{i}, \pm \sqrt{i}, \ldots, \pm \sqrt{i})`.
+        :math:`f(\mathbf{x^*}) = 0 \mid x_i^* = (\pm \sqrt{i}, \pm \sqrt{i}, \ldots, \pm \sqrt{i})`.
 
     """
 
@@ -1042,7 +1042,7 @@ class Qing(Benchmark):
         # For every input dimension
         for i in range(x.shape[0]):
             # Calculating the Qing's function
-            f += (x[i] ** 2 - i + 1) ** 2
+            f += (x[i] ** 2 - (i + 1)) ** 2
 
         return f
 
@@ -1111,7 +1111,7 @@ class Quintic(Benchmark):
         The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, \ldots, n\}`.
 
     Global Minima:
-        :math:`f(\mathbf{x^*}) = -1 or 2 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (-1 or 2, -1 or 2, \ldots, -1 or 2)`.
 
     """
 
@@ -1730,7 +1730,7 @@ class Shubert3(Benchmark):
         The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, \ldots, n\}`.
 
     Global Minima:
-        :math:`f(\mathbf{x^*}) = -29.6733337 \mid \mathbf{x^*} = \\text{multiple solutions}`.
+        :math:`f(\mathbf{x^*}) = -29.6733337 \mid \mathbf{x^*} = (?, ?, \ldots, ?)`.
 
     """
 
@@ -1787,7 +1787,7 @@ class Shubert4(Benchmark):
         The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, \ldots, n\}`.
 
     Global Minima:
-        :math:`f(\mathbf{x^*}) = -25.740858 \mid \mathbf{x^*} = \\text{multiple solutions}`.
+        :math:`f(\mathbf{x^*}) = -25.740858 \mid \mathbf{x^*} = (?, ?, \ldots, ?)`.
 
     """
 
@@ -2198,6 +2198,9 @@ class Trigonometric1(Benchmark):
 
         # Defining the input dimension
         n = x.shape[0]
+
+        # Instantiating function
+        f = 0
 
         # For every input dimension
         for i in range(n):

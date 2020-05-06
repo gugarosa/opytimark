@@ -3,6 +3,7 @@ import pytest
 
 from opytimark.markers import n_dimensional
 
+
 def test_ackley1():
     f = n_dimensional.Ackley1()
 
@@ -11,6 +12,7 @@ def test_ackley1():
     y = f(x)
 
     assert y == 0
+
 
 def test_alpine1():
     f = n_dimensional.Alpine1()
@@ -41,6 +43,7 @@ def test_brown():
 
     assert y == 0
 
+
 def test_chung_reynolds():
     f = n_dimensional.ChungReynolds()
 
@@ -49,6 +52,7 @@ def test_chung_reynolds():
     y = f(x)
 
     assert y == 0
+
 
 def test_cosine_mixture():
     f = n_dimensional.CosineMixture()
@@ -59,6 +63,7 @@ def test_cosine_mixture():
 
     assert y == -5.0
 
+
 def test_csendes():
     f = n_dimensional.Csendes()
 
@@ -68,6 +73,7 @@ def test_csendes():
 
     assert y == 0
 
+
 def test_deb1():
     f = n_dimensional.Deb1()
 
@@ -76,6 +82,7 @@ def test_deb1():
     y = f(x)
 
     assert y == -1.0
+
 
 def test_deb3():
     f = n_dimensional.Deb3()
@@ -106,6 +113,7 @@ def test_exponential():
 
     assert y == 1
 
+
 def test_griewank():
     f = n_dimensional.Griewank()
 
@@ -114,6 +122,7 @@ def test_griewank():
     y = f(x)
 
     assert y == 0
+
 
 def test_happy_cat():
     f = n_dimensional.HappyCat()
@@ -124,6 +133,7 @@ def test_happy_cat():
 
     assert y == 0
 
+
 def test_levy():
     f = n_dimensional.Levy()
 
@@ -133,6 +143,7 @@ def test_levy():
 
     assert np.round(y) == 0
 
+
 def test_michalewicz():
     f = n_dimensional.Michalewicz()
 
@@ -141,3 +152,299 @@ def test_michalewicz():
     y = f(x)
 
     assert np.round(y, 4) == -1.8011
+
+
+def test_pathological():
+    f = n_dimensional.Pathological()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_periodic():
+    f = n_dimensional.Periodic()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0.9
+
+
+def test_powell_sum():
+    f = n_dimensional.PowellSum()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_qing():
+    f = n_dimensional.Qing()
+
+    x = np.array([np.sqrt(1), np.sqrt(2), np.sqrt(3)])
+
+    y = f(x)
+
+    assert np.round(y) == 0
+
+
+def test_quartic():
+    f = n_dimensional.Quartic()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y <= 1
+
+
+def test_quintic():
+    f = n_dimensional.Quintic()
+
+    x = np.full(50, -1)
+
+    y = f(x)
+
+    assert y == 0
+
+    x = np.full(50, 2)
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_rastrigin():
+    f = n_dimensional.Rastrigin()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_ridge():
+    f = n_dimensional.Ridge()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_rosenbrock():
+    f = n_dimensional.Rosenbrock()
+
+    x = np.ones(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_rotated_hyper_ellipsoid():
+    f = n_dimensional.RotatedHyperEllipsoid()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_salomon():
+    f = n_dimensional.Salomon()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_schumer_steiglitz():
+    f = n_dimensional.SchumerSteiglitz()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_schwefel220():
+    f = n_dimensional.Schwefel220()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_schwefel221():
+    f = n_dimensional.Schwefel221()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_schwefel222():
+    f = n_dimensional.Schwefel222()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_schwefel223():
+    f = n_dimensional.Schwefel223()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_shubert():
+    f = n_dimensional.Shubert()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert np.round(y) == 0
+
+
+def test_shubert3():
+    f = n_dimensional.Shubert3()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert np.round(y) == -237
+
+
+def test_shubert4():
+    f = n_dimensional.Shubert4()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert np.round(y) == -223
+
+
+def test_sphere():
+    f = n_dimensional.Sphere()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_streched_v_sine_wave():
+    f = n_dimensional.StrechedVSineWave()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_styblinski_tang():
+    f = n_dimensional.StyblinskiTang()
+
+    x = np.array([-2.903534, -2.903534])
+
+    y = f(x)
+
+    assert np.round(y, 4) == -78.3323
+
+
+def test_sum_different_powers():
+    f = n_dimensional.SumDifferentPowers()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_sum_squares():
+    f = n_dimensional.SumSquares()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_trid():
+    f = n_dimensional.Trid()
+
+    x = np.array([2, 2])
+
+    y = f(x)
+
+    assert y == -2
+
+
+def test_trigonometric1():
+    f = n_dimensional.Trigonometric1()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_trigonometric2():
+    f = n_dimensional.Trigonometric2()
+
+    x = np.full(50, 0.9)
+
+    y = f(x)
+
+    assert y == 1
+
+
+def test_wavy():
+    f = n_dimensional.Wavy()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_zakharov():
+    f = n_dimensional.Zakharov()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
