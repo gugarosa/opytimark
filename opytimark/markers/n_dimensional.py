@@ -64,6 +64,61 @@ class Ackley1(Benchmark):
         return np.sum(f)
 
 
+class Ackley4(Benchmark):
+    """Ackley4 class implements the Ackley's 4th benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n-1}(e^{-0.2}\sqrt{x_i^2+x_{i+1}^2}+3(cos(2x_i)+sin(2x_{i+1})))
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-35, -35] \mid i = \{1, 2, \ldots, n\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = −4.590101633799122 \mid \mathbf{x^*} = (-1.51, -0.755)`.
+
+    """
+
+    def __init__(self, name='Ackley4', dims=-1, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Ackley4, self).__init__(name, dims, continuous,
+                                      convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Instantiating function
+        f = 0
+
+        # For every input dimension
+        for i in range(x.shape[0] - 1):
+            # Calculating Ackley's 4th function
+            f += np.exp(-0.2) * np.sqrt(x[i] ** 2 + x[i + 1] ** 2) + 3 * (np.cos(2 * x[i]) + np.sin(2 * x[i + 1]))
+
+        return f
+
+
 class Alpine1(Benchmark):
     """Alpine1 class implements the Alpine's 1st benchmarking function.
 
@@ -1050,6 +1105,61 @@ class PermDBeta(Benchmark):
         return f
 
 
+class PowellSingular2(Benchmark):
+    """PowellSingular2 class implements the Powell's Singular 2nd benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n-2}(x_{i-1}+10x_i)^2 + 5(x_{i+1} - x_{i+2})^2 + (x_i - 2x_{i+1})^4 + 10(x_{i-1} - x_{i+2})^4
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-4, 5] \mid i = \{1, 2, \ldots, n\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+
+    """
+
+    def __init__(self, name='PowellSingular2', dims=-1, continuous=True, convex=True,
+                 differentiable=False, multimodal=False, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(PowellSingular2, self).__init__(name, dims, continuous,
+                                        convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Instanciating function
+        f = 0
+
+        # For every input dimension
+        for i in range(x.shape[0] - 2):
+            # Calculating the Powell's Singular 2nd function
+            f += (x[i - 1] + 10 * x[i]) ** 2 + 5 * (x[i + 1] - x[i + 2]) ** 2 + (x[i] - 2 * x[i + 1]) ** 4 + 10 * (x[i - 1] - x[i + 2]) ** 4
+
+        return f
+
+
 class PowellSum(Benchmark):
     """PowellSum class implements the Powell's Sum benchmarking function.
 
@@ -1263,6 +1373,67 @@ class Quintic(Benchmark):
         f = np.fabs(x ** 5 - 3 * x ** 4 + 4 * x ** 3 + 2 * x ** 2 - 10 * x - 4)
 
         return np.sum(f)
+
+
+class Rana(Benchmark):
+    """Rana class implements the Rana's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n-2}(x_{i+1} + 1)cos(t_2)sin(t_1) + x_i cos(t_1)sin(t_2)
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-500, 500] \mid i = \{1, 2, \ldots, n\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+
+    """
+
+    def __init__(self, name='Rana', dims=-1, continuous=True, convex=True,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Rana, self).__init__(name, dims, continuous,
+                                        convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Instantiating function
+        f = 0
+
+        # For every input dimension
+        for i in range(x.shape[0] - 2):
+            # Calculating `t1`
+            t1 = np.sqrt(np.fabs(x[i + 1] + x[i] + 1))
+
+            # Calculating `t2`
+            t2 = np.sqrt(np.fabs(x[i + 1] - x[i] + 1))
+
+            # Calculating the Rana's function
+            f += (x[i + 1] + 1) * np.cos(t2) * np.sin(t1) + x[i] * np.cos(t1) * np.sin(t2)
+
+        return f
 
 
 class Rastrigin(Benchmark):
@@ -1575,6 +1746,56 @@ class SchumerSteiglitz(Benchmark):
         f = x ** 4
 
         return np.sum(f)
+
+
+class Schwefel(Benchmark):
+    """Schwefel class implements the Schwefel's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = 418.9829n -\sum_{i=1}^{n} x_i sin(\sqrt{|x_i|})
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (420.9687, 420.9687, \ldots, 420.9687)`.
+
+    """
+
+    def __init__(self, name='Schwefel', dims=-1, continuous=True, convex=False,
+                 differentiable=False, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Schwefel, self).__init__(name, dims, continuous,
+                                          convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Schwefel's function
+        f = x * np.sin(np.sqrt(np.fabs(x)))
+
+        return 418.9829 * x.shape[0] - np.sum(f)
 
 
 class Schwefel220(Benchmark):
@@ -2204,7 +2425,7 @@ class Step(Benchmark):
         """
 
         # Calculating the Step's function
-        f = np.round(x)
+        f = np.floor(np.fabs(x))
 
         return np.sum(f)
 
@@ -2254,7 +2475,7 @@ class Step2(Benchmark):
         """
 
         # Calculating the Step's 2nd function
-        f = np.round(x + 0.5) ** 2
+        f = np.floor(x + 0.5) ** 2
 
         return np.sum(f)
 
@@ -2304,7 +2525,7 @@ class Step3(Benchmark):
         """
 
         # Calculating the Step's 3rd function
-        f = np.round(x ** 2)
+        f = np.floor(x ** 2)
 
         return np.sum(f)
 

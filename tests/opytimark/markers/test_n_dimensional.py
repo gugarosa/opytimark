@@ -7,11 +7,21 @@ from opytimark.markers import n_dimensional
 def test_ackley1():
     f = n_dimensional.Ackley1()
 
-    x = np.zeros(1)
+    x = np.zeros(50)
 
     y = f(x)
 
     assert y == 0
+
+
+def test_ackley4():
+    f = n_dimensional.Ackley4()
+
+    x = np.array([-1.51, -0.755])
+
+    y = f(x)
+
+    assert y == -4.5901006651507235
 
 
 def test_alpine1():
@@ -194,6 +204,16 @@ def test_perm_d_beta():
     assert np.round(y) == 0
 
 
+def test_powell_singular2():
+    f = n_dimensional.PowellSingular2()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
 def test_powell_sum():
     f = n_dimensional.PowellSum()
 
@@ -238,6 +258,16 @@ def test_quintic():
     y = f(x)
 
     assert y == 0
+
+
+def test_rana():
+    f = n_dimensional.Rana()
+
+    x = np.full(50, -500)
+
+    y = f(x)
+
+    assert y == -22285.14852971478
 
 
 def test_rastrigin():
@@ -298,6 +328,16 @@ def test_schumer_steiglitz():
     y = f(x)
 
     assert y == 0
+
+
+def test_schwefel():
+    f = n_dimensional.Schwefel()
+
+    x = np.full(50, 420.9687)
+
+    y = f(x)
+
+    assert np.round(y) == 0
 
 
 def test_schwefel220():

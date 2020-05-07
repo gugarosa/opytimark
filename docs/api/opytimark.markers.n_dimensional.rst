@@ -5,6 +5,10 @@ opytimark.markers.n_dimensional
    :members:
    :show-inheritance:
 
+.. autoapiclass:: opytimark.markers.n_dimensional.Ackley4
+   :members:
+   :show-inheritance:
+
 .. autoapiclass:: opytimark.markers.n_dimensional.Alpine1
    :members:
    :show-inheritance:
@@ -77,6 +81,10 @@ opytimark.markers.n_dimensional
    :members:
    :show-inheritance:
 
+.. autoapiclass:: opytimark.markers.n_dimensional.PowellSingular2
+   :members:
+   :show-inheritance:
+
 .. autoapiclass:: opytimark.markers.n_dimensional.PowellSum
    :members:
    :show-inheritance:
@@ -90,6 +98,10 @@ opytimark.markers.n_dimensional
    :show-inheritance:
 
 .. autoapiclass:: opytimark.markers.n_dimensional.Quintic
+   :members:
+   :show-inheritance:
+
+.. autoapiclass:: opytimark.markers.n_dimensional.Rana
    :members:
    :show-inheritance:
 
@@ -114,6 +126,10 @@ opytimark.markers.n_dimensional
    :show-inheritance:
 
 .. autoapiclass:: opytimark.markers.n_dimensional.SchumerSteiglitz
+   :members:
+   :show-inheritance:
+
+.. autoapiclass:: opytimark.markers.n_dimensional.Schwefel
    :members:
    :show-inheritance:
 
