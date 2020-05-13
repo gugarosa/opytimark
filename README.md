@@ -61,7 +61,7 @@ Opytimark is based on the following structure, and you should pay attention to i
         - boolean
         - one_dimensional
         - two_dimensional
-        - three_dimensional
+        - many_dimensional
         - n_dimensional
     - utils
         - constants

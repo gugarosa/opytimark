@@ -1,11 +1,11 @@
 import numpy as np
 import pytest
 
-from opytimark.markers import three_dimensional
+from opytimark.markers import many_dimensional
 
 
 def test_biggs_exponential3():
-    f = three_dimensional.BiggsExponential3()
+    f = many_dimensional.BiggsExponential3()
 
     x = np.array([1, 10, 5])
 
@@ -15,7 +15,7 @@ def test_biggs_exponential3():
 
 
 def test_wolfe():
-    f = three_dimensional.Wolfe()
+    f = many_dimensional.Wolfe()
 
     x = np.array([1, 1, 1])
 
