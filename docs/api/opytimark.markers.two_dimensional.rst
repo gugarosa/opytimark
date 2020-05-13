@@ -113,6 +113,10 @@ opytimark.markers.two_dimensional
    :members:
    :show-inheritance:
 
+.. autoapiclass:: opytimark.markers.two_dimensional.EggHolder
+   :members:
+   :show-inheritance:
+
 .. autoapiclass:: opytimark.markers.two_dimensional.FreudensteinRoth
    :members:
    :show-inheritance:
