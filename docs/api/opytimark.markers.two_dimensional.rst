@@ -45,6 +45,10 @@ opytimark.markers.two_dimensional
    :members:
    :show-inheritance:
 
+.. autoapiclass:: opytimark.markers.two_dimensional.BraninHoo
+   :members:
+   :show-inheritance:
+
 .. autoapiclass:: opytimark.markers.two_dimensional.Brent
    :members:
    :show-inheritance:
