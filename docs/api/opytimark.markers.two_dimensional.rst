@@ -161,6 +161,26 @@ opytimark.markers.two_dimensional
    :members:
    :show-inheritance:
 
+.. autoapiclass:: opytimark.markers.two_dimensional.Mishra3
+   :members:
+   :show-inheritance:
+
+.. autoapiclass:: opytimark.markers.two_dimensional.Mishra4
+   :members:
+   :show-inheritance:
+
+.. autoapiclass:: opytimark.markers.two_dimensional.Mishra5
+   :members:
+   :show-inheritance:
+
+.. autoapiclass:: opytimark.markers.two_dimensional.Mishra6
+   :members:
+   :show-inheritance:
+
+.. autoapiclass:: opytimark.markers.two_dimensional.Mishra8
+   :members:
+   :show-inheritance:
+
 .. autoapiclass:: opytimark.markers.two_dimensional.Parsopoulos
    :members:
    :show-inheritance:

@@ -133,6 +133,14 @@ opytimark.markers.n_dimensional
    :members:
    :show-inheritance:
 
+.. autoapiclass:: opytimark.markers.n_dimensional.Schwefel12
+   :members:
+   :show-inheritance:
+
+.. autoapiclass:: opytimark.markers.n_dimensional.Schwefel24
+   :members:
+   :show-inheritance:
+
 .. autoapiclass:: opytimark.markers.n_dimensional.Schwefel220
    :members:
    :show-inheritance:

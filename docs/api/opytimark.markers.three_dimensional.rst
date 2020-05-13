@@ -17,6 +17,10 @@ opytimark.markers.three_dimensional
    :members:
    :show-inheritance:
 
+.. autoapiclass:: opytimark.markers.two_dimensional.Mishra9
+   :members:
+   :show-inheritance:
+
 .. autoapiclass:: opytimark.markers.three_dimensional.SchmidtVetters
    :members:
    :show-inheritance:
