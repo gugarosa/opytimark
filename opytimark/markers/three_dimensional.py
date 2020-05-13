@@ -4,6 +4,67 @@ import opytimark.utils.decorator as d
 from opytimark.core import Benchmark
 
 
+class BiggsExponential3(Benchmark):
+    """BiggsExponential3 class implements the Biggs Exponential's 3rd benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3) = \sum_{i=1}^{10}(e^{-t_ix_1} - x_3e^{-t_ix_2} - y_i)^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [0, 20] \mid i = \{1, 2, 3\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (1, 10, 5)`.
+
+    """
+
+    def __init__(self, name='BiggsExponential3', dims=3, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(BiggsExponential3, self).__init__(name, dims, continuous,
+                                                convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Instantiating function
+        f = 0
+
+        # For `i` ranging from 0 to 10
+        for i in range(1, 11):
+            # Calculating `z`
+            z = i / 10
+
+            # Calculating partial `y`
+            y = np.exp(-z) - 5 * np.exp(-10 * z)
+
+            # Calculating Biggs Exponential's 3rd function
+            f += (np.exp(-z * x[0]) - x[2] * np.exp(-z * x[1]) - y) ** 2
+
+        return f
+
+
 class Wolfe(Benchmark):
     """Wolfe class implements the Wolfe's benchmarking function.
 
