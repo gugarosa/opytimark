@@ -307,6 +307,165 @@ class BoxBetts(Benchmark):
         return f
 
 
+class Colville(Benchmark):
+    """Colville class implements the Colville's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3, x_4) = 100(x_1 - x_2^2)^2 + (1 - x_1)^2 + 90(x_4 - x_3^2)^2 + (1 - x_3)^2 + 10.1((x_2-1)^2 + (x_4-1)^2) + 19.8(x_2-1)(x_4-1)
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, 3, 4\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (1, 1, 1, 1)`.
+
+    """
+
+    def __init__(self, name='Colville', dims=4, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Colville, self).__init__(name, dims, continuous,
+                                    convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Colville's function
+        f = 100 * (x[0] - x[1] ** 2) ** 2 + (1 - x[0]) ** 2 + 90 * (x[3] - x[2] ** 2) ** 2 + (1 - x[2]) ** 2 + 10.1 * ((x[1] - 1) ** 2 + (x[3] - 1) ** 2) + 19.8 * (x[1] - 1) * (x[3] - 1)
+
+        return f
+
+
+class GulfResearch(Benchmark):
+    """GulfResearch class implements the GulfResearch's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3) = \sum_{i=1}^{99}[e^(-\\frac{(u_i-x_2)^x_3}{x_1}) - 0.01i]^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [0.1, 100], x_2 \in [0, 25.6], x_3 \in [0, 5]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (50, 25, 1.5)`.
+
+    """
+
+    def __init__(self, name='GulfResearch', dims=3, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(GulfResearch, self).__init__(name, dims, continuous,
+                                    convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Instantiating function
+        f = 0
+
+        # For `i` ranging from 1 to 99
+        for i in range(1, 100):
+            # Calculating `u`
+            u = 25 + (-50 * np.log(0.01 * i)) ** (1 / 1.5)
+
+            # Calculating the GulfResearch's function
+            f += (np.exp(-((u - x[1]) ** x[2]) / x[0]) - 0.01 * i) ** 2
+
+        return f
+
+
+class MieleCantrell(Benchmark):
+    """MieleCantrell class implements the MieleCantrell's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3, x_4) = (e^{-x_1} - x_2)^4 + 100(x_2 - x_3)^6 + (tan(x_3-x_4))^4 + x_1^8
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-1, 1] \mid i = \{1, 2, 3, 4\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 1, 1, 1)`.
+
+    """
+
+    def __init__(self, name='MieleCantrell', dims=4, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(MieleCantrell, self).__init__(name, dims, continuous,
+                                    convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the MieleCantrell's function
+        f = (np.exp(-x[0]) - x[1]) ** 4 + 100 * (x[1] - x[2]) ** 6 + (np.tan(x[2] - x[3])) ** 4 + x[0] ** 8
+
+        return f
+
+
+
 class Wolfe(Benchmark):
     """Wolfe class implements the Wolfe's benchmarking function.
 

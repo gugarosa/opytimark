@@ -54,6 +54,36 @@ def test_box_betts():
     assert y == 0
 
 
+def test_colville():
+    f = many_dimensional.Colville()
+
+    x = np.array([1, 1, 1, 1])
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_gulf_research():
+    f = many_dimensional.GulfResearch()
+
+    x = np.array([50, 25, 1.5])
+
+    y = f(x)
+
+    assert np.round(y) == 0
+
+
+def test_miele_cantrell():
+    f = many_dimensional.MieleCantrell()
+
+    x = np.array([0, 1, 1, 1])
+
+    y = f(x)
+
+    assert y == 0
+
+
 def test_wolfe():
     f = many_dimensional.Wolfe()
 
