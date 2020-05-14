@@ -129,7 +129,7 @@ class BiggsExponential4(Benchmark):
 class BiggsExponential5(Benchmark):
     """BiggsExponential5 class implements the Biggs Exponential's 5th benchmarking function.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3, x_4, x_5) = \sum_{i=1}^{10}(x_3e^{-t_ix_1} - x_4e^{-t_ix_2} + 3e^{-t_ix_5} - y_i)^2
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3, x_4, x_5) = \sum_{i=1}^{11}(x_3e^{-t_ix_1} - x_4e^{-t_ix_2} + 3e^{-t_ix_5} - y_i)^2
 
     Domain:
         The function is commonly evaluated using :math:`x_i \in [0, 20] \mid i = \{1, 2, 3, 4, 5\}`.
@@ -191,7 +191,7 @@ class BiggsExponential5(Benchmark):
 class BiggsExponential6(Benchmark):
     """BiggsExponential6 class implements the Biggs Exponential's 6th benchmarking function.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3, x_4, x_5, x_6) = \sum_{i=1}^{10}(x_3e^{-t_ix_1} - x_4e^{-t_ix_2} + x_6e^{-t_ix_5} - y_i)^2
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3, x_4, x_5, x_6) = \sum_{i=1}^{13}(x_3e^{-t_ix_1} - x_4e^{-t_ix_2} + x_6e^{-t_ix_5} - y_i)^2
 
     Domain:
         The function is commonly evaluated using :math:`x_i \in [0, 20] \mid i = \{1, 2, 3, 4, 5, 6\}`.
@@ -253,7 +253,8 @@ class BiggsExponential6(Benchmark):
 class BoxBetts(Benchmark):
     """BoxBetts class implements the BoxBetts's benchmarking function.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3) = \sum_{i=1}^{n}g(x_i)^2
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3) = \sum_{i=1}^{n}g(x)^2
+    .. math:: g(x) = e^{-0.1(i+1)x_1} - e^{-0.1(i+1)x_2} - (e^{-0.1(i+1)} - e^{-(i+1)}*x_3)
 
     Domain:
         The function is commonly evaluated using :math:`x_1 \in [0.9, 1.2], x_2 \in [9, 11.2], x_3 \in [0.9, 1.2]`.
