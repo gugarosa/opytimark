@@ -51,7 +51,7 @@ class BiggsExponential3(Benchmark):
         # Instantiating function
         f = 0
 
-        # For `i` ranging from 0 to 10
+        # For `i` ranging from 1 to 10
         for i in range(1, 11):
             # Calculating `z`
             z = i / 10
@@ -61,6 +61,247 @@ class BiggsExponential3(Benchmark):
 
             # Calculating Biggs Exponential's 3rd function
             f += (np.exp(-z * x[0]) - x[2] * np.exp(-z * x[1]) - y) ** 2
+
+        return f
+
+
+class BiggsExponential4(Benchmark):
+    """BiggsExponential4 class implements the Biggs Exponential's 4th benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3, x_4) = \sum_{i=1}^{10}(x_3e^{-t_ix_1} - x_4e^{-t_ix_2} - y_i)^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [0, 20] \mid i = \{1, 2, 3, 4\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (1, 10, 1, 5)`.
+
+    """
+
+    def __init__(self, name='BiggsExponential4', dims=4, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(BiggsExponential4, self).__init__(name, dims, continuous,
+                                                convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Instantiating function
+        f = 0
+
+        # For `i` ranging from 1 to 10
+        for i in range(1, 11):
+            # Calculating `z`
+            z = i / 10
+
+            # Calculating partial `y`
+            y = np.exp(-z) - 5 * np.exp(-10 * z)
+
+            # Calculating Biggs Exponential's 4th function
+            f += (x[2] * np.exp(-z * x[0]) - x[3] * np.exp(-z * x[1]) - y) ** 2
+
+        return f
+
+
+class BiggsExponential5(Benchmark):
+    """BiggsExponential5 class implements the Biggs Exponential's 5th benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3, x_4, x_5) = \sum_{i=1}^{10}(x_3e^{-t_ix_1} - x_4e^{-t_ix_2} + 3e^{-t_ix_5} - y_i)^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [0, 20] \mid i = \{1, 2, 3, 4, 5\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (1, 10, 1, 5, 4)`.
+
+    """
+
+    def __init__(self, name='BiggsExponential5', dims=5, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(BiggsExponential5, self).__init__(name, dims, continuous,
+                                                convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Instantiating function
+        f = 0
+
+        # For `i` ranging from 1 to 11
+        for i in range(1, 12):
+            # Calculating `z`
+            z = i / 10
+
+            # Calculating partial `y`
+            y = np.exp(-z) - 5 * np.exp(-10 * z) + 3 * np.exp(-4 * z)
+
+            # Calculating Biggs Exponential's 5th function
+            f += (x[2] * np.exp(-z * x[0]) - x[3] *
+                  np.exp(-z * x[1]) + 3 * np.exp(-z * x[4]) - y) ** 2
+
+        return f
+
+
+class BiggsExponential6(Benchmark):
+    """BiggsExponential6 class implements the Biggs Exponential's 6th benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3, x_4, x_5, x_6) = \sum_{i=1}^{10}(x_3e^{-t_ix_1} - x_4e^{-t_ix_2} + x_6e^{-t_ix_5} - y_i)^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [0, 20] \mid i = \{1, 2, 3, 4, 5, 6\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (1, 10, 1, 5, 4, 3)`.
+
+    """
+
+    def __init__(self, name='BiggsExponential6', dims=6, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(BiggsExponential6, self).__init__(name, dims, continuous,
+                                                convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Instantiating function
+        f = 0
+
+        # For `i` ranging from 1 to 13
+        for i in range(1, 14):
+            # Calculating `z`
+            z = i / 10
+
+            # Calculating partial `y`
+            y = np.exp(-z) - 5 * np.exp(-10 * z) + 3 * np.exp(-4 * z)
+
+            # Calculating Biggs Exponential's 6th function
+            f += (x[2] * np.exp(-z * x[0]) - x[3] *
+                  np.exp(-z * x[1]) + x[5] * np.exp(-z * x[4]) - y) ** 2
+
+        return f
+
+
+class BoxBetts(Benchmark):
+    """BoxBetts class implements the BoxBetts's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3) = \sum_{i=1}^{n}g(x_i)^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [0.9, 1.2], x_2 \in [9, 11.2], x_3 \in [0.9, 1.2]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (1, 10, 1)`.
+
+    """
+
+    def __init__(self, name='BoxBetts', dims=3, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(BoxBetts, self).__init__(name, dims, continuous,
+                                       convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Instantiating function
+        f = 0
+
+        # For every input dimension
+        for i in range(x.shape[0]):
+            # Calculating the BoxBetts's function
+            f += (np.exp(-0.1 * (i + 2) * x[0]) - np.exp(-0.1 * (i + 2) * x[1]) - (
+                np.exp(-0.1 * (i + 2)) - np.exp(-(i + 2)) * x[2])) ** 2
 
         return f
 
@@ -112,4 +353,4 @@ class Wolfe(Benchmark):
         # Calculating the Wolfe's function
         f = 4 / 3 * ((x[0] ** 2 + x[1] ** 2 - x[0] * x[1]) ** 0.75) + x[2]
 
-        return np.sum(f)
+        return f
