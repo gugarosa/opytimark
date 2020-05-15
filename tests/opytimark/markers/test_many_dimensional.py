@@ -74,10 +74,30 @@ def test_gulf_research():
     assert np.round(y) == 0
 
 
+def test_helical_valley():
+    f = many_dimensional.HelicalValley()
+
+    x = np.array([1, 0, 0])
+
+    y = f(x)
+
+    assert y == 0
+
+
 def test_miele_cantrell():
     f = many_dimensional.MieleCantrell()
 
     x = np.array([0, 1, 1, 1])
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_mishra9():
+    f = many_dimensional.Mishra9()
+
+    x = np.array([1, 2, 3])
 
     y = f(x)
 

@@ -1,5 +1,6 @@
 import numpy as np
 
+import opytimark.utils.constants as c
 import opytimark.utils.decorator as d
 from opytimark.core import Benchmark
 
@@ -337,7 +338,7 @@ class Colville(Benchmark):
 
         # Override its parent class
         super(Colville, self).__init__(name, dims, continuous,
-                                    convex, differentiable, multimodal, separable)
+                                       convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -352,7 +353,9 @@ class Colville(Benchmark):
         """
 
         # Calculating the Colville's function
-        f = 100 * (x[0] - x[1] ** 2) ** 2 + (1 - x[0]) ** 2 + 90 * (x[3] - x[2] ** 2) ** 2 + (1 - x[2]) ** 2 + 10.1 * ((x[1] - 1) ** 2 + (x[3] - 1) ** 2) + 19.8 * (x[1] - 1) * (x[3] - 1)
+        f = 100 * (x[0] - x[1] ** 2) ** 2 + (1 - x[0]) ** 2 + 90 * (x[3] - x[2] ** 2) ** 2 + \
+            (1 - x[2]) ** 2 + 10.1 * ((x[1] - 1) ** 2 +
+                                      (x[3] - 1) ** 2) + 19.8 * (x[1] - 1) * (x[3] - 1)
 
         return f
 
@@ -387,7 +390,7 @@ class GulfResearch(Benchmark):
 
         # Override its parent class
         super(GulfResearch, self).__init__(name, dims, continuous,
-                                    convex, differentiable, multimodal, separable)
+                                           convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -411,6 +414,66 @@ class GulfResearch(Benchmark):
 
             # Calculating the GulfResearch's function
             f += (np.exp(-((u - x[1]) ** x[2]) / x[0]) - 0.01 * i) ** 2
+
+        return f
+
+
+class HelicalValley(Benchmark):
+    """HelicalValley class implements the Helical Valley's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3) = 100[(x_3-10\\theta)^2 + (\\sqrt{x_1^2+x_2^2}-1)] + x_3^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, 3\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (1, 0, 0)`.
+
+    """
+
+    def __init__(self, name='HelicalValley', dims=3, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(HelicalValley, self).__init__(name, dims, continuous,
+                                            convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Checking whether x[0] is bigger or equal to zero
+        if x[0] >= 0:
+            # Calculating theta
+            theta = np.arctan(x[1] / x[0])
+
+        # Checking whether x[0] is smaller than zero
+        else:
+            # Calculating theta
+            theta = np.pi + np.arctan(x[1] / x[0])
+
+        # Calculating the Helical Valley's function
+        f = 100 * (x[2] - 10 * theta) ** 2 + (np.sqrt(x[0] ** 2 + x[1] ** 2) - 1) ** 2 + x[2] ** 2
 
         return f
 
@@ -445,7 +508,7 @@ class MieleCantrell(Benchmark):
 
         # Override its parent class
         super(MieleCantrell, self).__init__(name, dims, continuous,
-                                    convex, differentiable, multimodal, separable)
+                                            convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -460,10 +523,69 @@ class MieleCantrell(Benchmark):
         """
 
         # Calculating the MieleCantrell's function
-        f = (np.exp(-x[0]) - x[1]) ** 4 + 100 * (x[1] - x[2]) ** 6 + (np.tan(x[2] - x[3])) ** 4 + x[0] ** 8
+        f = (np.exp(-x[0]) - x[1]) ** 4 + 100 * (x[1] - x[2]
+                                                 ) ** 6 + (np.tan(x[2] - x[3])) ** 4 + x[0] ** 8
 
         return f
 
+
+class Mishra9(Benchmark):
+    """Mishra9 class implements the Mishra's 9th benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3) = (ab^2c + abc^2 + b^2 + (x_1 + x_2 - x_3)^2)^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, 3\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (1, 2, 3)`.
+
+    """
+
+    def __init__(self, name='Mishra9', dims=3, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Mishra9, self).__init__(name, dims, continuous,
+                                      convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating `a`
+        a = 2 * (x[0] ** 3) + 5 * x[0] * x[1] + 4 * x[2] - 2 * (x[0] ** 2) * x[2] - 18
+
+        # Calculating `b`
+        b = x[0] + (x[1] ** 2) * x[2] + x[0] * (x[2] ** 2) - 22
+
+        # Calculating `c`
+        c = 8 * (x[0] ** 2) + 2 * x[1] * x[2] + 2 * (x[1] ** 2) + 3 * (x[1] ** 3) - 52
+
+        # Calculating the Mishra's 9th function
+        f = (a * (b ** 2) * c + a * b * (c ** 2) + (b ** 2) + (x[0] + x[1] - x[2]) ** 2) ** 2
+
+        return f
 
 
 class Wolfe(Benchmark):
