@@ -473,7 +473,8 @@ class HelicalValley(Benchmark):
             theta = np.pi + np.arctan(x[1] / x[0])
 
         # Calculating the Helical Valley's function
-        f = 100 * (x[2] - 10 * theta) ** 2 + (np.sqrt(x[0] ** 2 + x[1] ** 2) - 1) ** 2 + x[2] ** 2
+        f = 100 * (x[2] - 10 * theta) ** 2 + \
+            (np.sqrt(x[0] ** 2 + x[1] ** 2) - 1) ** 2 + x[2] ** 2
 
         return f
 
@@ -574,16 +575,210 @@ class Mishra9(Benchmark):
         """
 
         # Calculating `a`
-        a = 2 * (x[0] ** 3) + 5 * x[0] * x[1] + 4 * x[2] - 2 * (x[0] ** 2) * x[2] - 18
+        a = 2 * (x[0] ** 3) + 5 * x[0] * x[1] + 4 * \
+            x[2] - 2 * (x[0] ** 2) * x[2] - 18
 
         # Calculating `b`
         b = x[0] + (x[1] ** 2) * x[2] + x[0] * (x[2] ** 2) - 22
 
         # Calculating `c`
-        c = 8 * (x[0] ** 2) + 2 * x[1] * x[2] + 2 * (x[1] ** 2) + 3 * (x[1] ** 3) - 52
+        c = 8 * (x[0] ** 2) + 2 * x[1] * x[2] + 2 * \
+            (x[1] ** 2) + 3 * (x[1] ** 3) - 52
 
         # Calculating the Mishra's 9th function
-        f = (a * (b ** 2) * c + a * b * (c ** 2) + (b ** 2) + (x[0] + x[1] - x[2]) ** 2) ** 2
+        f = (a * (b ** 2) * c + a * b * (c ** 2) +
+             (b ** 2) + (x[0] + x[1] - x[2]) ** 2) ** 2
+
+        return f
+
+
+class Paviani(Benchmark):
+    """Paviani class implements the Paviani's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_10) = \sum_{i=1}^{10}[ln(x_i-2)^2 + ln(10-x_i)^2] - (\prod_{i=1}^{10}x_i)^{0.2}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [2.0001, 10] \mid i = \{1, 2, \ldots, 10\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -45.778452053828865 \mid \mathbf{x^*} = (9.351, 9.351, \ldots, 9.351)`.
+
+    """
+
+    def __init__(self, name='Paviani', dims=10, continuous=True, convex=True,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Paviani, self).__init__(name, dims, continuous,
+                                      convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Instantiating summatory term
+        sum_term = 0
+
+        # Instantiating produtory term
+        prod_term = 1
+
+        # For every input dimension
+        for i in range(x.shape[0]):
+            # Calculating summatory term
+            sum_term += np.log(x[i] - 2) ** 2 + np.log(10 - x[i]) ** 2
+
+            # Calculating produtory term
+            prod_term *= x[i]
+
+        # Calculating the Paviani's function
+        f = sum_term - prod_term ** 0.2
+
+        return f
+
+
+class SchmidtVetters(Benchmark):
+    """SchmidtVetters class implements the Schmidt Vetters's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3) = \\frac{1}{1 + (x_1-x_2)^2} + sin(\\frac{\\pi x_2+x_3}{2}) + e^{(\\frac{x_1+x_2}{x_2}-2)^2}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [0, 2] \mid i = \{1, 2, 3\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 3 \mid \mathbf{x^*} = (0.78547, 0.78547, 0.78547)`.
+
+    """
+
+    def __init__(self, name='SchmidtVetters', dims=3, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(SchmidtVetters, self).__init__(name, dims, continuous,
+                                             convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Schmidt Vetters's function
+        f = 1 / (1 + (x[0] - x[1]) ** 2) + np.sin((np.pi ** x[1] +
+                                                   x[2]) / 2) + np.exp((x[0] + x[1]) / x[1] - 2) ** 2
+
+        return f
+
+
+class Watson(Benchmark):
+    """Watson class implements the Watson's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3, x_4, x_5, x_6) = 
+
+    Domain:
+        The function is commonly evaluated using :math:`|x_i| \leq 10 \mid i = \{1, 2, 3, 4, 5, 6\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0.002288 \mid \mathbf{x^*} = (−0.0158, 1.012, −0.2329, 1.260, −1.513, 0.9928)`.
+
+    """
+
+    def __init__(self, name='Watson', dims=6, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Watson, self).__init__(name, dims, continuous,
+                                     convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Instantiating function
+        f = 0
+
+        # For `i` ranging from 0 to 29
+        for i in range(30):
+            # Instanciating outer and inner summatories
+            outer_sum, inner_sum = 0, 0
+
+            # Calculating `a`
+            a = i / 29
+
+            # For `j` ranging from 0 to 4
+            for j in range(2, 7):
+                # Calculating outer summatory
+                outer_sum += (j - 1) * (a ** (j - 2)) * x[j - 1]
+
+            # For `j` ranging from 0 to 5
+            for j in range(1, 7):
+                # Calculating inner summatory
+                inner_sum += (a ** (j - 1)) * x[j - 1]
+
+            # Calculating partial Watson's function
+            f += (outer_sum - inner_sum ** 2 - 1) ** 2
+
+            print(f)
+
+        # Calculating final Watson's function
+        f += x[0] ** 2
 
         return f
 

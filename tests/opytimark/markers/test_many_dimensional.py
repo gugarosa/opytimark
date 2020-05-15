@@ -104,6 +104,36 @@ def test_mishra9():
     assert y == 0
 
 
+def test_paviani():
+    f = many_dimensional.Paviani()
+
+    x = np.full(10, 9.351)
+
+    y = f(x)
+
+    assert y == -45.778452053828865
+
+
+def test_schmidt_vetters():
+    f = many_dimensional.SchmidtVetters()
+
+    x = np.array([0.78547, 0.78547, 0.78547])
+
+    y = f(x)
+
+    assert np.round(y) == 3
+
+
+def test_watson():
+    f = many_dimensional.Watson()
+
+    x = np.array([-0.0158, 1.0129, -0.23299, 1.2598, -1.5129, 0.9928])
+
+    y = f(x)
+
+    assert np.round(y, 5) == 0.00229
+
+
 def test_wolfe():
     f = many_dimensional.Wolfe()
 
