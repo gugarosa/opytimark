@@ -619,3 +619,303 @@ class BraninHoo(Benchmark):
         f = (x[1] - ((5.1 * x[0] ** 2) / (4 * np.pi ** 2)) + ((5 * x[0]) / np.pi) - 6) ** 2 + 10 * (1 - (1 / (8 * np.pi))) * np.cos(x[0]) + 10
 
         return f
+
+
+class Brent(Benchmark):
+    """Brent class implements the Brent's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = (x_1 + 10)^2 + (x_2 + 10)^2 + e^{-x_1^2 - x_2^2}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-10, 10], x_2 \in [-10, 10]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = e^{-200} \mid \mathbf{x^*} = (-10, -10)`.
+
+    """
+
+    def __init__(self, name='Brent', dims=2, continuous=True, convex=True,
+                 differentiable=True, multimodal=False, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Brent, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Brent's function
+        f = (x[0] + 10) ** 2 + (x[1] + 10) ** 2 + np.exp(-(x[0] ** 2) - (x[1] ** 2))
+
+        return f
+
+
+class Bukin2(Benchmark):
+    """Bukin2 class implements the Bukin's 2nd benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = 100(x_2 - 0.01x_1^2 + 1) + 0.01(x_1 + 10)^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-15, -5], x_2 \in [-3, 3]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = # \mid \mathbf{x^*} = (-10, 0)`.
+
+    """
+
+    def __init__(self, name='Bukin2', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Bukin2, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Bukin's 2nd function
+        f = 100 * (x[1] - 0.01 * x[0] ** 2 + 1) + 0.01 * (x[0] + 10) ** 2
+
+        return f
+
+
+class Bukin4(Benchmark):
+    """Bukin4 class implements the Bukin's 4th benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = 100x_2^2 + 0.01|x_1 + 10|
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-15, -5], x_2 \in [-3, 3]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = # \mid \mathbf{x^*} = (-10, 0)`.
+
+    """
+
+    def __init__(self, name='Bukin4', dims=2, continuous=True, convex=False,
+                 differentiable=False, multimodal=True, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Bukin4, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Bukin's 4th function
+        f = 100 * x[1] ** 2 + 0.01 * np.fabs(x[0] + 10)
+
+        return f
+
+
+class Bukin6(Benchmark):
+    """Bukin6 class implements the Bukin's 6th benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = 100sqrt{|x_2-0.01x_1^2|} + 0.01|x_1+10|
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-15, -5], x_2 \in [-3, 3]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = # \mid \mathbf{x^*} = (-10, 1)`.
+
+    """
+
+    def __init__(self, name='Bukin6', dims=2, continuous=True, convex=False,
+                 differentiable=False, multimodal=True, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Bukin6, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Bukin's 6th function
+        f = 100 * np.sqrt(np.fabs(x[1] - 0.01 * x[0] ** 2)) + 0.01 * np.fabs(x[0] + 10)
+
+        return f
+
+
+class Camel3(Benchmark):
+    """Camel3 class implements the Camel's Three Hump benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = 2x_1^2 - 1.05x_1^4 + \\frac{x_1^6}{6} + x_1x_2 + x_2^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-5, 5], x_2 \in [-5, 5]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0)`.
+
+    """
+
+    def __init__(self, name='Camel3', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Camel3, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Camel's Three Hump function
+        f = 2 * x[0] ** 2 - 1.05 * x[0] ** 4 + x[0] ** 6 / 6 + x[0] * x[1] + x[1] ** 2
+
+        return f
+
+
+class Camel6(Benchmark):
+    """Camel6 class implements the Camel's Six Hump benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = (4 - 2.1x_1^2 + \\frac{x_1^4}{3})x_1^2 + x_1x_2 + (4x_2^2 - 4)x_2^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-5, 5], x_2 \in [-5, 5]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -1.0316284229280819 \mid \mathbf{x^*} = (−0.0898, 0.7126) or (0.0898,−0.7126)`.
+
+    """
+
+    def __init__(self, name='Camel6', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Camel6, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Camel's Six Hump function
+        f = (4 - 2.1 * x[0] ** 2 + x[0] ** 4 / 3) * x[0] ** 2 + x[0] * x[1] + (4 * x[1] ** 2 - 4) * x[1] ** 2
+
+        return f

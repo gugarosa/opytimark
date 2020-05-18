@@ -122,3 +122,63 @@ def test_branin_hoo():
     y = f(x)
 
     assert y == 0.39788735775266204
+
+
+def test_brent():
+    f = two_dimensional.Brent()
+
+    x = np.array([-10, -10])
+
+    y = f(x)
+
+    assert y == np.exp(-200)
+
+
+def test_bukin2():
+    f = two_dimensional.Bukin2()
+
+    x = np.array([-10, 0])
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_bukin4():
+    f = two_dimensional.Bukin4()
+
+    x = np.array([-10, 0])
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_bukin6():
+    f = two_dimensional.Bukin6()
+
+    x = np.array([-10, 1])
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_camel3():
+    f = two_dimensional.Camel3()
+
+    x = np.array([0, 0])
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_camel6():
+    f = two_dimensional.Camel6()
+
+    x = np.array([0.0898, -0.7126])
+
+    y = f(x)
+
+    assert y == -1.0316284229280819
