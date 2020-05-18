@@ -63,7 +63,7 @@ class Ackley3(Benchmark):
         The function is commonly evaluated using :math:`x_1 \in [-32, 32], x_2 \in [-32, 32]`.
 
     Global Minima:
-        :math:`f(\mathbf{x^*}) \\approx ? \mid \mathbf{x^*} \\approx (?, ?)`.
+        :math:`f(\mathbf{x^*}) \\approx −195.629028238419 \mid \mathbf{x^*} \\approx (\pm 0.682584587365898, -0.36075325513719)`.
 
     """
 
@@ -251,7 +251,8 @@ class Beale(Benchmark):
         """
 
         # Calculating the Beale's function
-        f = (1.5 - x[0] + x[0] * x[1]) ** 2 + (2.25 - x[0] + x[0] * x[1] ** 2) ** 2 + (2.625 - x[0] + x[0] * x[1] ** 3) ** 2
+        f = (1.5 - x[0] + x[0] * x[1]) ** 2 + (2.25 - x[0] + x[0]
+                                               * x[1] ** 2) ** 2 + (2.625 - x[0] + x[0] * x[1] ** 3) ** 2
 
         return f
 
@@ -310,7 +311,7 @@ class BiggsExponential2(Benchmark):
 
             # Calculating partial `y`
             y = np.exp(-z) - 5 * np.exp(-10 * z)
-            
+
             # Calculating Biggs Exponential's 2nd function
             f += (np.exp(-z * x[0]) - 5 * np.exp(-z * x[1]) - y) ** 2
 
@@ -363,5 +364,258 @@ class Bird(Benchmark):
 
         # Calculating the Bird's function
         f = np.sin(x[0]) * np.exp((1 - np.cos(x[1])) ** 2) + np.cos(x[1]) * np.exp((1 - np.sin(x[0])) ** 2) + (x[0] - x[1]) ** 2
+
+        return f
+
+
+class Bohachevsky1(Benchmark):
+    """Bohachevsky1 class implements the Bohachevsky's 1st benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = x_1^2 + 2x_2^2 - 0.3cos(3\\pi x_1) - 0.4cos(4\\pi x_2) + 0.7
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-100, 100], x_2 \in [-100, 100]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0)`.
+
+    """
+
+    def __init__(self, name='Bohachevsky1', dims=2, continuous=True, convex=True,
+                 differentiable=True, multimodal=False, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Bohachevsky1, self).__init__(name, dims, continuous,
+                                           convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Bohachevsky's 1st function
+        f = x[0] ** 2 + 2 * x[1] ** 2 - 0.3 * \
+            np.cos(3 * np.pi * x[0]) - 0.4 * np.cos(4 * np.pi * x[1]) + 0.7
+
+        return f
+
+
+class Bohachevsky2(Benchmark):
+    """Bohachevsky2 class implements the Bohachevsky's 2nd benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = x_1^2 + 2x_2^2 - 0.3cos(3\\pi x_1)cos(4\\pi x_2) + 0.7
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-100, 100], x_2 \in [-100, 100]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0)`.
+
+    """
+
+    def __init__(self, name='Bohachevsky2', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Bohachevsky2, self).__init__(name, dims, continuous,
+                                           convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Bohachevsky's 2nd function
+        f = x[0] ** 2 + 2 * x[1] ** 2 - 0.3 * \
+            np.cos(3 * np.pi * x[0]) * np.cos(4 * np.pi * x[1]) + 0.3
+
+        return f
+
+
+class Bohachevsky3(Benchmark):
+    """Bohachevsky3 class implements the Bohachevsky's 3rd benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = x_1^2 + 2x_2^2 - 0.3cos(3\\pi x_1 + 4\\pi x_2) + 0.3
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-100, 100], x_2 \in [-100, 100]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0)`.
+
+    """
+
+    def __init__(self, name='Bohachevsky3', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Bohachevsky3, self).__init__(name, dims, continuous,
+                                           convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Bohachevsky's 3rd function
+        f = x[0] ** 2 + 2 * x[1] ** 2 - 0.3 * \
+            np.cos(3 * np.pi * x[0] + 4 * np.pi * x[1]) + 0.3
+
+        return f
+
+
+class Booth(Benchmark):
+    """Booth class implements the Booth's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = (x_1 + 2x_2 - 7)^2 + (2x_1 + x_2 - 5)^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-10, 10], x_2 \in [-10, 10]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (1, 3)`.
+
+    """
+
+    def __init__(self, name='Booth', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=False, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Booth, self).__init__(name, dims, continuous,
+                                    convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Booth's function
+        f = (x[0] + 2 * x[1] - 7) ** 2 + (2 * x[0] + x[1] - 5) ** 2
+
+        return f
+
+
+class BraninHoo(Benchmark):
+    """BraninHoo class implements the Branin Hoo's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = (x_2 - \\frac{5.1x_1^2}{4\\pi^2} + \\frac{5x_1}{\\pi} - 6)^2 + 10(1 - \\frac{1}{8\\pi})cos(x_1) + 10
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-5, 10], x_2 \in [0, 15]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0.39788735775266204 \mid \mathbf{x^*} = (-\\pi, 12.275) or (\\pi, 2.275) or (3\\pi, 2.425)`.
+
+    """
+
+    def __init__(self, name='BraninHoo', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(BraninHoo, self).__init__(name, dims, continuous,
+                                        convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Branin Hoo's function
+        f = (x[1] - ((5.1 * x[0] ** 2) / (4 * np.pi ** 2)) + ((5 * x[0]) / np.pi) - 6) ** 2 + 10 * (1 - (1 / (8 * np.pi))) * np.cos(x[0]) + 10
 
         return f
