@@ -182,3 +182,53 @@ def test_camel6():
     y = f(x)
 
     assert y == -1.0316284229280819
+
+
+def test_chen_bird():
+    f = two_dimensional.ChenBird()
+
+    x = np.array([0.5, 0.5])
+
+    y = f(x)
+
+    assert y == -2000.0039999840003
+
+
+def test_chen_v():
+    f = two_dimensional.ChenV()
+
+    x = np.array([0.388888888888889, 0.722222222222222])
+
+    y = f(x)
+
+    assert y == 2000.0000000000002
+
+
+def test_chichinadze():
+    f = two_dimensional.Chichinadze()
+
+    x = np.array([6.189866586965680, 0.5])
+
+    y = f(x)
+
+    assert y == -42.94438701899099
+
+
+def test_cross_tray():
+    f = two_dimensional.CrossTray()
+
+    x = np.array([1.349406685353340, 1.349406608602084])
+
+    y = f(x)
+
+    assert y == -2.062611870822739
+
+
+def test_cube():
+    f = two_dimensional.Cube()
+
+    x = np.array([1, 1])
+
+    y = f(x)
+
+    assert y == 0

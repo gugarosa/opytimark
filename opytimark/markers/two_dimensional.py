@@ -919,3 +919,253 @@ class Camel6(Benchmark):
         f = (4 - 2.1 * x[0] ** 2 + x[0] ** 4 / 3) * x[0] ** 2 + x[0] * x[1] + (4 * x[1] ** 2 - 4) * x[1] ** 2
 
         return f
+
+
+class ChenBird(Benchmark):
+    """ChenBird class implements the Chen Bird's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = -\\frac{0.001}{0.001^2 + (x_1^2 + x_2^2 - 1)^2} - \\frac{0.001}{0.001^2 + (x_1^2 + x_2^2 - 0.5)^2} - \\frac{0.001}{0.001^2 + (x_1^2 - x_2^2)^2}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-500, 500], x_2 \in [-500, 500]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 2000.0039999840003 \mid \mathbf{x^*} = (0.5, 0.5)`.
+
+    """
+
+    def __init__(self, name='ChenBird', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(ChenBird, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Chen Bird's function
+        f = -((0.001) / (0.001 ** 2 + (x[0] ** 2 + x[1] ** 2 - 1) ** 2)) - ((0.001) / (0.001 ** 2 + (x[0] ** 2 + x[1] ** 2 - 0.5) ** 2)) - ((0.001) / (0.001 ** 2 + (x[0] ** 2 - x[1] ** 2) ** 2))
+
+        return f
+
+
+class ChenV(Benchmark):
+    """ChenV class implements the Chen V's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = \\frac{0.001}{0.001^2 + (x_1 - 0.4x_2 - 0.1)^2} + \\frac{0.001}{0.001^2 + (2x_1 + x_2 - 1.5)^2}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-500, 500], x_2 \in [-500, 500]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 2000.0000000000002 \mid \mathbf{x^*} = (0.5, 0.5)`.
+
+    """
+
+    def __init__(self, name='ChenV', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(ChenV, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Chen V's function
+        f = ((0.001) / (0.001 ** 2 + (x[0] - 0.4 * x[1] - 0.1) ** 2)) + ((0.001) / (0.001 ** 2 + (2 * x[0] + x[1] - 1.5) ** 2)) 
+
+        return f
+
+
+class Chichinadze(Benchmark):
+    """Chichinadze class implements the Chichinadze's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = x_1^2 - 12x_1 + 11 + 10cos(\\frac{\\pi x_1}{2}) + 8sin(\\frac{5\\pi x_1}{2}) - \\frac{1}{5}^{0.5} e^{-0.5(x_2-0.5)^2}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-30, 30], x_2 \in [-30, 30]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = −43.3159 \mid \mathbf{x^*} = (5.90133, 0.5)`.
+
+    """
+
+    def __init__(self, name='Chichinadze', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Chichinadze, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Chichinadze's function
+        f = x[0] ** 2 - 12 * x[0] + 11 + 10 * np.cos((np.pi * x[0]) / 2) + 8 * np.sin((5 * np.pi * x[0]) / 2) - (1 / 5) ** 0.5 * np.exp(-0.5 * (x[1] - 0.5) ** 2)
+
+        return f
+
+
+class CrossTray(Benchmark):
+    """CrossTray class implements the CrossTray's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = -0.0001(|sin(x_1)sin(x_2)e^{|100-\\frac{sqrt{x_1^2 + x_2^2}}{\\pi}|}| + 1)^0.1
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-10, 10], x_2 \in [-10, 10]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = −2.06261218 \mid \mathbf{x^*} = (\pm 1.349406685353340, \pm 1.349406608602084)`.
+
+    """
+
+    def __init__(self, name='CrossTray', dims=2, continuous=True, convex=False,
+                 differentiable=False, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(CrossTray, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the CrossTray's function
+        f = -0.0001 * (np.fabs(np.sin(x[0]) * np.sin(x[1]) * np.exp(np.fabs(100 - (np.sqrt(x[0] ** 2 + x[1] ** 2) / np.pi)))) + 1) ** 0.1
+
+        return f
+
+
+class Cube(Benchmark):
+    """Cube class implements the Cube's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = 100(x_2 - x_1^3)^2 + (1 - x_1)^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-10, 10], x_2 \in [-10, 10]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (-1, 1)`.
+
+    """
+
+    def __init__(self, name='Cube', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=False, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Cube, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Cube's function
+        f = 100 * (x[1] - x[0] ** 3) ** 2 + (1 - x[0]) ** 2
+
+        return f
