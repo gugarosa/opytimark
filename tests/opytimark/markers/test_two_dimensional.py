@@ -232,3 +232,53 @@ def test_cube():
     y = f(x)
 
     assert y == 0
+
+
+def test_damavandi():
+    f = two_dimensional.Damavandi()
+
+    x = np.array([2.00000001, 2.00000001])
+
+    y = f(x)
+
+    assert np.round(y) == 0
+
+
+def test_deckkers_aarts():
+    f = two_dimensional.DeckkersAarts()
+
+    x = np.array([0, 15])
+
+    y = f(x)
+
+    assert y == -24771.093749999996
+
+
+def test_drop_wave():
+    f = two_dimensional.DropWave()
+
+    x = np.array([0, 0])
+
+    y = f(x)
+
+    assert y == -1
+
+
+def test_easom():
+    f = two_dimensional.Easom()
+
+    x = np.array([np.pi, np.pi])
+
+    y = f(x)
+
+    assert y == -1
+
+
+def test_el_attar_vidyasagar_dutta():
+    f = two_dimensional.ElAttarVidyasagarDutta()
+
+    x = np.array([3.4091868222, -2.1714330361])
+
+    y = f(x)
+
+    assert y == 1.7127803548622027

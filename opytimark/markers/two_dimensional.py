@@ -1,5 +1,6 @@
 import numpy as np
 
+import opytimark.utils.constants as c
 import opytimark.utils.decorator as d
 from opytimark.core import Benchmark
 
@@ -1167,5 +1168,256 @@ class Cube(Benchmark):
 
         # Calculating the Cube's function
         f = 100 * (x[1] - x[0] ** 3) ** 2 + (1 - x[0]) ** 2
+
+        return f
+
+
+class Damavandi(Benchmark):
+    """Damavandi class implements the Damavandi's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = (1 - |\\frac{sin(\\pi (x_1-2))sin(\\pi (x_2-2))}{\\pi^2 (x_1-2)(x2_2)}|^5)(2 + (x_1-7)^2 + 2(x_2-7)^2)
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [0, 14], x_2 \in [0, 14]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (2.00000001, 2.00000001)`.
+
+    """
+
+    def __init__(self, name='Damavandi', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Damavandi, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Damavandi's function
+        # f = (1 - np.fabs((np.sin(np.pi * (x[0] - 2)) * np.sin(np.pi * (x[1] - 2))) / (np.pi ** 2 * (x[0] - 2) * (x[1] - 2)) + c.EPSILON) ** 5) * (2 + (x[0] - 7) ** 2 + 2 * (x[1] - 7) ** 2)
+        f = (1 - np.fabs((np.sin(np.pi * (x[0] - 2)) * np.sin(np.pi * (x[1] - 2))) / (np.pi ** 2 * (x[0] - 2) * (x[1] - 2) + c.EPSILON)) ** 5) * (2 + (x[0] - 7) ** 2 + 2 * (x[1] - 7) ** 2)
+
+        return f
+
+
+class DeckkersAarts(Benchmark):
+    """DeckkersAarts class implements the Deckkers Aarts' benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = 10^5x_1^2 + x_2^2 - (x_1^2 + x_2^2)^2 + 10^{-5}(x_1^2 + x_2^2)^4
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-20, 20], x_2 \in [-20, 20]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -24771.093749999996 \mid \mathbf{x^*} = (0, \pm 15)`.
+
+    """
+
+    def __init__(self, name='DeckkersAarts', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(DeckkersAarts, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Deckkers Aarts' function
+        f = 10 ** 5 * x[0] ** 2 + x[1] ** 2 - (x[0] ** 2 + x[1] ** 2) ** 2 + 10 ** -5 * (x[0] ** 2 + x[1] ** 2) ** 4
+
+        return f
+
+
+class DropWave(Benchmark):
+    """DropWave class implements the Drop Wave's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = - \\frac{1 + cos(12\sqrt{x_1^2+x_2^2})}{0.5(x_1^2+x_2^2) + 2}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-5.2, 5.2], x_2 \in [-5.2, 5.2]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -1 \mid \mathbf{x^*} = (0, 0)`.
+
+    """
+
+    def __init__(self, name='DropWave', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(DropWave, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Drop Wave's function
+        f = - (1 + np.cos(12 * np.sqrt(x[0] ** 2 + x[1] ** 2))) / (0.5 * (x[0] ** 2 + x[1] ** 2) + 2)
+
+        return f
+
+
+class Easom(Benchmark):
+    """Easom class implements the Easom's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = -cos(x_1)cos(x_2)e^{-(x_1-\\pi)^2 -(x_2-\\pi)^2}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-100, 100], x_2 \in [-100, 100]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -1 \mid \mathbf{x^*} = (\\pi, \\pi)`.
+
+    """
+
+    def __init__(self, name='Easom', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Easom, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Easom's function
+        f = -np.cos(x[0]) * np.cos(x[1]) * np.exp(-(x[0] - np.pi) ** 2 - (x[1] - np.pi) ** 2)
+
+        return f
+
+
+class ElAttarVidyasagarDutta(Benchmark):
+    """ElAttarVidyasagarDutta class implements the El-Attar-Vidyasagar-Dutta's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = (x_1^2 + x_2 - 10)^2 + (x_1 + x_2^2 - 7)^2 + (x_1^2 + x_2^3 - 1)^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-500, 500], x_2 \in [-500, 500]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 1.7127803548622027 \mid \mathbf{x^*} = (3.4091868222, −2.1714330361)`.
+
+    """
+
+    def __init__(self, name='ElAttarVidyasagarDutta', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=False, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(ElAttarVidyasagarDutta, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the El-Attar-Vidyasagar-Dutta's function
+        f = (x[0] ** 2 + x[1] - 10) ** 2 + (x[0] + x[1] ** 2 - 7) ** 2 + (x[0] ** 2 + x[1] ** 3 - 1) ** 2
 
         return f
