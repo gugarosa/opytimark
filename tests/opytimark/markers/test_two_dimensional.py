@@ -352,3 +352,73 @@ def test_holder_table():
     y = f(x)
 
     assert y == -19.208502567767606
+
+
+def test_hosaki():
+    f = two_dimensional.Hosaki()
+
+    x = np.array([4, 2])
+
+    y = f(x)
+
+    assert y == -2.345811576101292
+
+
+def test_jennrich_sampson():
+    f = two_dimensional.JennrichSampson()
+
+    x = np.array([0.257825, 0.257825])
+
+    y = f(x)
+
+    assert y == 124.36218236181409
+
+
+def test_keane():
+    f = two_dimensional.Keane()
+
+    x = np.array([1.393249070031784, 0])
+
+    y = f(x)
+
+    assert y == 0.6736675211468548
+
+
+def test_leon():
+    f = two_dimensional.Leon()
+
+    x = np.array([1, 1])
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_levy13():
+    f = two_dimensional.Levy13()
+
+    x = np.array([1, 1])
+
+    y = f(x)
+
+    assert np.round(y) == 0
+
+
+def test_matyas():
+    f = two_dimensional.Matyas()
+
+    x = np.array([0, 0])
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_mc_cormick():
+    f = two_dimensional.McCormick()
+
+    x = np.array([-0.547, -1.547])
+
+    y = f(x)
+
+    assert y == -1.9132228873800594

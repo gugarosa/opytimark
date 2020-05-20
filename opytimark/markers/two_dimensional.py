@@ -1799,3 +1799,358 @@ class HolderTable(Benchmark):
                      np.exp(np.fabs(1 - (np.sqrt(x[0] ** 2 + x[1] ** 2) / np.pi))))
 
         return f
+
+
+class Hosaki(Benchmark):
+    """Hosaki class implements the Hosaki's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = (1 - 8x_1 + 7x_1^2 - \\frac{7}{3x_1^3} + \\frac{1}{4x_1^4})x_2^2e^{-x_2}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [0, 5], x_2 \in [0, 6]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -2.345811576101292 \mid \mathbf{x^*} = (4, 2)`.
+
+    """
+
+    def __init__(self, name='Hosaki', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Hosaki, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Hosaki's function
+        f = (1 - 8 * x[0] + 7 * x[0] ** 2 - 7 / 3 * x[0] ** 3 + 1 / 4 * x[0] ** 4) * x[1] ** 2 * np.exp(-x[1])
+
+        return f
+
+
+class JennrichSampson(Benchmark):
+    """JennrichSampson class implements the Jennrich Sampson's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = \sum_{i=1}^{10}(2 + 2i - (e^{ix_1} + e^{ix_2}))^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-1, 1], x_2 \in [-1, 1]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 124.36218236181409 \mid \mathbf{x^*} = (0.257825, 0.257825)`.
+
+    """
+
+    def __init__(self, name='JennrichSampson', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(JennrichSampson, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Instantiating function
+        f = 0
+
+        # For `i` ranging from 1 to 10
+        for i in range(1, 11):
+            # Calculating the Jennrich Sampson's function
+            f += (2 + 2 * i - (np.exp(i * x[0]) + np.exp(i * x[1]))) ** 2 
+
+        return f
+
+
+class Keane(Benchmark):
+    """Keane class implements the Keane's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = \\frac{sin^2(x_1-x_2)sin^2(x_1+x_2)}{sqrt{x_1^2+x_2^2}}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [0, 10], x_2 \in [0, 10]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0.6736675211468548 \mid \mathbf{x^*} = (1.393249070031784, 0) or (0, 1.393249070031784)`.
+
+    """
+
+    def __init__(self, name='Keane', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Keane, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Keane's function
+        f = (np.sin(x[0] - x[1]) ** 2 * np.sin(x[0] + x[1]) ** 2) / np.sqrt(x[0] ** 2 + x[1] ** 2)
+
+        return f
+
+
+class Leon(Benchmark):
+    """Leon class implements the Leon's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = 100(x_2 - x_1^2)^2 + (1 - x_1)^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-1.2, 1.2], x_2 \in [-1.2, 1.2]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (1, 1)`.
+
+    """
+
+    def __init__(self, name='Leon', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=False, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Leon, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Leon's function
+        f = 100 * (x[1] - x[0] ** 2) ** 2 + (1 - x[0]) ** 2
+
+        return f
+
+
+class Levy13(Benchmark):
+    """Levy13 class implements the Levy's 13th benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = sin^2(3\pi x_1)+(x_1-1)^2(1+sin^2(3\pi x_2))+(x_2-1)^2(1+sin^2(2\pi x_2))
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-10, 10], x_2 \in [-10, 10]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (1, 1)`.
+
+    """
+
+    def __init__(self, name='Levy13', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Levy13, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Levy's 13th function
+        f = np.sin(3 * np.pi * x[0]) ** 2 + (x[0] - 1) ** 2 * (1 + np.sin(3 * np.pi * x[1]) ** 2) + (x[1] - 1) ** 2 * (1 + np.sin(2 * np.pi * x[1]) ** 2)
+
+        return f
+
+
+class Matyas(Benchmark):
+    """Matyas class implements the Matyas' benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = 0.26(x_1^2 + x_2^2) - 0.48x_1x_2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-10, 10], x_2 \in [-10, 10]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0)`.
+
+    """
+
+    def __init__(self, name='Matyas', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=False, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Matyas, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Matyas' function
+        f = 0.26 * (x[0] ** 2 + x[1] ** 2) - 0.48 * x[0] * x[1]
+
+        return f
+
+
+class McCormick(Benchmark):
+    """McCormick class implements the McCormick's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = sin(x_1 + x_2) + (x_1 - x_2)^2 - \\frac{3}{2}x_1 + \\frac{5}{2}x_2 + 1
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-1.5, 4], x_2 \in [-3, 3]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -1.9132228873800594 \mid \mathbf{x^*} = (−0.547, −1.547)`.
+
+    """
+
+    def __init__(self, name='McCormick', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(McCormick, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the McCormick's function
+        f = np.sin(x[0] + x[1]) + (x[0] - x[1]) ** 2 - 3 / 2 * x[0] + 5 / 2 * x[1] + 1
+
+        return f
