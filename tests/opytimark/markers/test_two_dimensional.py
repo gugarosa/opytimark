@@ -282,3 +282,73 @@ def test_el_attar_vidyasagar_dutta():
     y = f(x)
 
     assert y == 1.7127803548622027
+
+
+def test_egg_crate():
+    f = two_dimensional.EggCrate()
+
+    x = np.array([0, 0])
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_egg_holder():
+    f = two_dimensional.EggHolder()
+
+    x = np.array([512, 404.2319])
+
+    y = f(x)
+
+    assert y == -959.6406627106155
+
+
+def test_freudenstein_roth():
+    f = two_dimensional.FreudensteinRoth()
+
+    x = np.array([5, 4])
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_giunta():
+    f = two_dimensional.Giunta()
+
+    x = np.array([0.4673200277395354, 0.4673200169591304])
+
+    y = f(x)
+
+    assert y == 0.06447042053690571
+
+
+def test_goldenstein_price():
+    f = two_dimensional.GoldsteinPrice()
+
+    x = np.array([0, -1])
+
+    y = f(x)
+
+    assert y == 3
+
+
+def test_himmelblau():
+    f = two_dimensional.Himmelblau()
+
+    x = np.array([3, 2])
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_holder_table():
+    f = two_dimensional.HolderTable()
+
+    x = np.array([8.05502, 9.66459])
+
+    y = f(x)
+
+    assert y == -19.208502567767606
