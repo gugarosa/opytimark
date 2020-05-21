@@ -2154,3 +2154,259 @@ class McCormick(Benchmark):
         f = np.sin(x[0] + x[1]) + (x[0] - x[1]) ** 2 - 3 / 2 * x[0] + 5 / 2 * x[1] + 1
 
         return f
+
+
+class Mishra3(Benchmark):
+    """Mishra3 class implements the Mishra's 3rd benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = |cos(sqrt{|x_1^2+x_2|})|^{0.5} + 0.01(x_1+x_2)
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-10, 10], x_2 \in [-10, 10]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -0.18465133334298883 \mid \mathbf{x^*} = (−8.466613775046579, −9.998521308999999)`.
+
+    """
+
+    def __init__(self, name='Mishra3', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Mishra3, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Mishra's 3rd function
+        f = np.fabs(np.cos(np.sqrt(np.fabs(x[0] ** 2 + x[1])))) ** 0.5 + 0.01 * (x[0] + x[1])
+
+        return f
+
+
+class Mishra4(Benchmark):
+    """Mishra4 class implements the Mishra's 4th benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = |sin(sqrt{|x_1^2+x_2|})|^{0.5} + 0.01(x_1+x_2)
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-10, 10], x_2 \in [-10, 10]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -0.1994069700888328 \mid \mathbf{x^*} = (−9.941127263635860, −9.999571661999983)`.
+
+    """
+
+    def __init__(self, name='Mishra4', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Mishra4, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Mishra's 4th function
+        f = np.fabs(np.sin(np.sqrt(np.fabs(x[0] ** 2 + x[1])))) ** 0.5 + 0.01 * (x[0] + x[1])
+
+        return f
+
+
+class Mishra5(Benchmark):
+    """Mishra5 class implements the Mishra's 5th benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = [sin^2(cos(x_1)+cos(x_2))^2 + cos^2(sin(x_1)+sin(x_2)) + x_1]^2 + 0.01x_1 + 0.1x_2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-10, 10], x_2 \in [-10, 10]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -1.019829519930943 \mid \mathbf{x^*} = (−1.986820662153768, −10)`.
+
+    """
+
+    def __init__(self, name='Mishra5', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Mishra5, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Mishra's 5th function
+        f = (np.sin((np.cos(x[0]) + np.cos(x[1])) ** 2) ** 2 + np.cos((np.sin(x[0]) + np.sin(x[1])) ** 2) ** 2 + x[0]) ** 2 + 0.01 * x[0] + 0.1 * x[1]
+
+        return f
+
+
+class Mishra6(Benchmark):
+    """Mishra6 class implements the Mishra's 6th benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = -log[sin^2(cos(x_1)+cos(x_2))^2 - cos^2(sin(x_1)+sin(x_2)) + x_1]^2 + 0.1((x_1-1)^2 + (x_2-1)^2)
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-10, 10], x_2 \in [-10, 10]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -2.2839498384747587 \mid \mathbf{x^*} = (2.886307215440481, 1.823260331422321)`.
+
+    """
+
+    def __init__(self, name='Mishra6', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Mishra6, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Mishra's 6th function
+        f = -np.log((np.sin((np.cos(x[0]) + np.cos(x[1])) ** 2) ** 2 - np.cos((np.sin(x[0]) + np.sin(x[1])) ** 2) ** 2 + x[0]) ** 2) + 0.1 * ((x[0] - 1) ** 2 + (x[1] - 1) ** 2)
+
+        return f
+
+
+class Mishra8(Benchmark):
+    """Mishra8 class implements the Mishra's 8th benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = 0.001(|g(x_1)| + |h(x_2)|)^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-10, 10], x_2 \in [-10, 10]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (2, -3)`.
+
+    """
+
+    def __init__(self, name='Mishra8', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Mishra8, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating partial `g`
+        g = x[0] ** 10 - 20 * x[0] ** 9 + 180 * x[0] ** 8 - 960 * x[0] ** 7 + 3360 * x[0] ** 6 - 8064 * x[0] ** 5 + 13340 * x[0] ** 4 - 15360 * x[0] ** 3 + 11520 * x[0] ** 2 - 5120 * x[0] + 2624
+
+        # Calculating partial `h`
+        h = x[1] ** 4 + 12 * x[1] ** 3 + 54 * x[1] ** 2 + 108 * x[1] + 81
+
+        # Calculating the Mishra's 8th function
+        f = 0.001 * (np.fabs(g) + np.fabs(h)) ** 2
+
+        return f

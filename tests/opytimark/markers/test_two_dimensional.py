@@ -422,3 +422,53 @@ def test_mc_cormick():
     y = f(x)
 
     assert y == -1.9132228873800594
+
+
+def test_mishra3():
+    f = two_dimensional.Mishra3()
+
+    x = np.array([-8.466613775046579, -9.998521308999999])
+
+    y = f(x)
+
+    assert y == -0.18465133334298883
+
+
+def test_mishra4():
+    f = two_dimensional.Mishra4()
+
+    x = np.array([-9.941127263635860, -9.999571661999983])
+
+    y = f(x)
+
+    assert y == -0.1994069700888328
+
+
+def test_mishra5():
+    f = two_dimensional.Mishra5()
+
+    x = np.array([-1.986820662153768, -10])
+
+    y = f(x)
+
+    assert y == -1.019829519930943
+
+
+def test_mishra6():
+    f = two_dimensional.Mishra6()
+
+    x = np.array([2.886307215440481, 1.823260331422321])
+
+    y = f(x)
+
+    assert y == -2.2839498384747587
+
+
+def test_mishra8():
+    f = two_dimensional.Mishra8()
+
+    x = np.array([2, -3])
+
+    y = f(x)
+
+    assert y == 0
