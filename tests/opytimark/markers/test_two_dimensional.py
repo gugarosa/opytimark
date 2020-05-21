@@ -472,3 +472,83 @@ def test_mishra8():
     y = f(x)
 
     assert y == 0
+
+
+def test_parsopoulos():
+    f = two_dimensional.Parsopoulos()
+
+    x = np.array([np.pi / 2, np.pi])
+
+    y = f(x)
+
+    assert np.round(y) == 0
+
+
+def test_pen_holder():
+    f = two_dimensional.PenHolder()
+
+    x = np.array([-9.646167671043401, -9.646167671043401])
+
+    y = f(x)
+
+    assert y == -0.9635348327265058
+
+
+def test_periodic():
+    f = two_dimensional.Periodic()
+
+    x = np.array([0, 0])
+
+    y = f(x)
+
+    assert y == 0.9
+
+
+def test_price1():
+    f = two_dimensional.Price1()
+
+    x = np.array([-5, -5])
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_price2():
+    f = two_dimensional.Price2()
+
+    x = np.array([0, 0])
+
+    y = f(x)
+
+    assert y == 0.9
+
+
+def test_price3():
+    f = two_dimensional.Price3()
+
+    x = np.array([0.341307503353524, 0.116490811845416])
+
+    y = f(x)
+
+    assert np.round(y) == 0
+
+
+def test_price4():
+    f = two_dimensional.Price4()
+
+    x = np.array([2, 4])
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_quadratic():
+    f = two_dimensional.Quadratic()
+
+    x = np.array([0.19388, 0.48513])
+
+    y = f(x)
+
+    assert y == -3873.7241821830326

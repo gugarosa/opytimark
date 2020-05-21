@@ -1831,7 +1831,7 @@ class Hosaki(Benchmark):
 
         # Override its parent class
         super(Hosaki, self).__init__(name, dims, continuous,
-                                   convex, differentiable, multimodal, separable)
+                                     convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -1846,7 +1846,8 @@ class Hosaki(Benchmark):
         """
 
         # Calculating the Hosaki's function
-        f = (1 - 8 * x[0] + 7 * x[0] ** 2 - 7 / 3 * x[0] ** 3 + 1 / 4 * x[0] ** 4) * x[1] ** 2 * np.exp(-x[1])
+        f = (1 - 8 * x[0] + 7 * x[0] ** 2 - 7 / 3 * x[0] **
+             3 + 1 / 4 * x[0] ** 4) * x[1] ** 2 * np.exp(-x[1])
 
         return f
 
@@ -1881,7 +1882,7 @@ class JennrichSampson(Benchmark):
 
         # Override its parent class
         super(JennrichSampson, self).__init__(name, dims, continuous,
-                                   convex, differentiable, multimodal, separable)
+                                              convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -1901,7 +1902,7 @@ class JennrichSampson(Benchmark):
         # For `i` ranging from 1 to 10
         for i in range(1, 11):
             # Calculating the Jennrich Sampson's function
-            f += (2 + 2 * i - (np.exp(i * x[0]) + np.exp(i * x[1]))) ** 2 
+            f += (2 + 2 * i - (np.exp(i * x[0]) + np.exp(i * x[1]))) ** 2
 
         return f
 
@@ -1936,7 +1937,7 @@ class Keane(Benchmark):
 
         # Override its parent class
         super(Keane, self).__init__(name, dims, continuous,
-                                   convex, differentiable, multimodal, separable)
+                                    convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -1951,7 +1952,8 @@ class Keane(Benchmark):
         """
 
         # Calculating the Keane's function
-        f = (np.sin(x[0] - x[1]) ** 2 * np.sin(x[0] + x[1]) ** 2) / np.sqrt(x[0] ** 2 + x[1] ** 2)
+        f = (np.sin(x[0] - x[1]) ** 2 * np.sin(x[0] + x[1])
+             ** 2) / np.sqrt(x[0] ** 2 + x[1] ** 2)
 
         return f
 
@@ -2036,7 +2038,7 @@ class Levy13(Benchmark):
 
         # Override its parent class
         super(Levy13, self).__init__(name, dims, continuous,
-                                   convex, differentiable, multimodal, separable)
+                                     convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -2051,7 +2053,8 @@ class Levy13(Benchmark):
         """
 
         # Calculating the Levy's 13th function
-        f = np.sin(3 * np.pi * x[0]) ** 2 + (x[0] - 1) ** 2 * (1 + np.sin(3 * np.pi * x[1]) ** 2) + (x[1] - 1) ** 2 * (1 + np.sin(2 * np.pi * x[1]) ** 2)
+        f = np.sin(3 * np.pi * x[0]) ** 2 + (x[0] - 1) ** 2 * (1 + np.sin(
+            3 * np.pi * x[1]) ** 2) + (x[1] - 1) ** 2 * (1 + np.sin(2 * np.pi * x[1]) ** 2)
 
         return f
 
@@ -2086,7 +2089,7 @@ class Matyas(Benchmark):
 
         # Override its parent class
         super(Matyas, self).__init__(name, dims, continuous,
-                                   convex, differentiable, multimodal, separable)
+                                     convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -2136,7 +2139,7 @@ class McCormick(Benchmark):
 
         # Override its parent class
         super(McCormick, self).__init__(name, dims, continuous,
-                                   convex, differentiable, multimodal, separable)
+                                        convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -2151,7 +2154,8 @@ class McCormick(Benchmark):
         """
 
         # Calculating the McCormick's function
-        f = np.sin(x[0] + x[1]) + (x[0] - x[1]) ** 2 - 3 / 2 * x[0] + 5 / 2 * x[1] + 1
+        f = np.sin(x[0] + x[1]) + (x[0] - x[1]) ** 2 - \
+            3 / 2 * x[0] + 5 / 2 * x[1] + 1
 
         return f
 
@@ -2186,7 +2190,7 @@ class Mishra3(Benchmark):
 
         # Override its parent class
         super(Mishra3, self).__init__(name, dims, continuous,
-                                   convex, differentiable, multimodal, separable)
+                                      convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -2201,7 +2205,8 @@ class Mishra3(Benchmark):
         """
 
         # Calculating the Mishra's 3rd function
-        f = np.fabs(np.cos(np.sqrt(np.fabs(x[0] ** 2 + x[1])))) ** 0.5 + 0.01 * (x[0] + x[1])
+        f = np.fabs(
+            np.cos(np.sqrt(np.fabs(x[0] ** 2 + x[1])))) ** 0.5 + 0.01 * (x[0] + x[1])
 
         return f
 
@@ -2236,7 +2241,7 @@ class Mishra4(Benchmark):
 
         # Override its parent class
         super(Mishra4, self).__init__(name, dims, continuous,
-                                   convex, differentiable, multimodal, separable)
+                                      convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -2251,7 +2256,8 @@ class Mishra4(Benchmark):
         """
 
         # Calculating the Mishra's 4th function
-        f = np.fabs(np.sin(np.sqrt(np.fabs(x[0] ** 2 + x[1])))) ** 0.5 + 0.01 * (x[0] + x[1])
+        f = np.fabs(
+            np.sin(np.sqrt(np.fabs(x[0] ** 2 + x[1])))) ** 0.5 + 0.01 * (x[0] + x[1])
 
         return f
 
@@ -2286,7 +2292,7 @@ class Mishra5(Benchmark):
 
         # Override its parent class
         super(Mishra5, self).__init__(name, dims, continuous,
-                                   convex, differentiable, multimodal, separable)
+                                      convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -2301,7 +2307,8 @@ class Mishra5(Benchmark):
         """
 
         # Calculating the Mishra's 5th function
-        f = (np.sin((np.cos(x[0]) + np.cos(x[1])) ** 2) ** 2 + np.cos((np.sin(x[0]) + np.sin(x[1])) ** 2) ** 2 + x[0]) ** 2 + 0.01 * x[0] + 0.1 * x[1]
+        f = (np.sin((np.cos(x[0]) + np.cos(x[1])) ** 2) ** 2 + np.cos(
+            (np.sin(x[0]) + np.sin(x[1])) ** 2) ** 2 + x[0]) ** 2 + 0.01 * x[0] + 0.1 * x[1]
 
         return f
 
@@ -2336,7 +2343,7 @@ class Mishra6(Benchmark):
 
         # Override its parent class
         super(Mishra6, self).__init__(name, dims, continuous,
-                                   convex, differentiable, multimodal, separable)
+                                      convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -2351,7 +2358,8 @@ class Mishra6(Benchmark):
         """
 
         # Calculating the Mishra's 6th function
-        f = -np.log((np.sin((np.cos(x[0]) + np.cos(x[1])) ** 2) ** 2 - np.cos((np.sin(x[0]) + np.sin(x[1])) ** 2) ** 2 + x[0]) ** 2) + 0.1 * ((x[0] - 1) ** 2 + (x[1] - 1) ** 2)
+        f = -np.log((np.sin((np.cos(x[0]) + np.cos(x[1])) ** 2) ** 2 - np.cos((np.sin(
+            x[0]) + np.sin(x[1])) ** 2) ** 2 + x[0]) ** 2) + 0.1 * ((x[0] - 1) ** 2 + (x[1] - 1) ** 2)
 
         return f
 
@@ -2386,7 +2394,7 @@ class Mishra8(Benchmark):
 
         # Override its parent class
         super(Mishra8, self).__init__(name, dims, continuous,
-                                   convex, differentiable, multimodal, separable)
+                                      convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -2401,12 +2409,420 @@ class Mishra8(Benchmark):
         """
 
         # Calculating partial `g`
-        g = x[0] ** 10 - 20 * x[0] ** 9 + 180 * x[0] ** 8 - 960 * x[0] ** 7 + 3360 * x[0] ** 6 - 8064 * x[0] ** 5 + 13340 * x[0] ** 4 - 15360 * x[0] ** 3 + 11520 * x[0] ** 2 - 5120 * x[0] + 2624
+        g = x[0] ** 10 - 20 * x[0] ** 9 + 180 * x[0] ** 8 - 960 * x[0] ** 7 + 3360 * x[0] ** 6 - 8064 * \
+            x[0] ** 5 + 13340 * x[0] ** 4 - 15360 * x[0] ** 3 + \
+            11520 * x[0] ** 2 - 5120 * x[0] + 2624
 
         # Calculating partial `h`
         h = x[1] ** 4 + 12 * x[1] ** 3 + 54 * x[1] ** 2 + 108 * x[1] + 81
 
         # Calculating the Mishra's 8th function
         f = 0.001 * (np.fabs(g) + np.fabs(h)) ** 2
+
+        return f
+
+
+class Parsopoulos(Benchmark):
+    """Parsopoulos class implements the Parsopoulos' benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = cos(x_1)^2 + sin(x_2)^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-5, 5], x_2 \in [-5, 5]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (k\\frac{\\pi}{2}, \lambda \\pi)`.
+
+    """
+
+    def __init__(self, name='Parsopoulos', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Parsopoulos, self).__init__(name, dims, continuous,
+                                          convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Parsopoulos' function
+        f = np.cos(x[0]) ** 2 + np.sin(x[1]) ** 2
+
+        return f
+
+
+class PenHolder(Benchmark):
+    """PenHolder class implements the Pen Holder's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = -e^{[cos(x_1)cos(x_2)e^{|1-[(x_1^2+x_2^2)]^{0.5} / \\pi|}|]^{-1}}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-11, 11], x_2 \in [-11, 11]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -0.9635348327265058 \mid \mathbf{x^*} = (\pm 9.646167671043401, \pm 9.646167671043401)`.
+
+    """
+
+    def __init__(self, name='PenHolder', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(PenHolder, self).__init__(name, dims, continuous,
+                                        convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Pen Holder's function
+        f = -np.exp(-1 / np.fabs(np.cos(x[0]) * np.cos(x[1]) * np.exp(
+            np.fabs(1 - (x[0] ** 2 + x[1] ** 2) ** 0.5 / np.pi))))
+
+        return f
+
+
+class Periodic(Benchmark):
+    """Periodic class implements the Periodic's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = 1 + sin^2(x_1) + sin^2(x_2) - 0.1e^{-(x_1^2+x_2^2)}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-10, 10], x_2 \in [-10, 10]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0.9 \mid \mathbf{x^*} = (0, 0)`.
+
+    """
+
+    def __init__(self, name='Periodic', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Periodic, self).__init__(name, dims, continuous,
+                                       convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Periodic's function
+        f = 1 + np.sin(x[0]) ** 2 + np.sin(x[1]) ** 2 - \
+            0.1 * np.exp(-(x[0] ** 2 + x[1] ** 2))
+
+        return f
+
+
+class Price1(Benchmark):
+    """Price1 class implements the Price's 1st benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = (|x_1| - 5)^2 + (|x_2| - 5)^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-500, 500], x_2 \in [-500, 500]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (-5, -5) or (-5, 5) or (5, -5) or (5, 5)`.
+
+    """
+
+    def __init__(self, name='Price1', dims=2, continuous=True, convex=False,
+                 differentiable=False, multimodal=True, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Price1, self).__init__(name, dims, continuous,
+                                     convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Price's 1st function
+        f = (np.fabs(x[0]) - 5) ** 2 + (np.fabs(x[1]) - 5) ** 2
+
+        return f
+
+
+class Price2(Benchmark):
+    """Price2 class implements the Price's 2nd benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = 1 + sin^2(x_1) + sin^2(x_2) - 0.1e^{-x_1^2-x_2^2}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-10, 10], x_2 \in [-10, 10]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0.9 \mid \mathbf{x^*} = (0, 0)`.
+
+    """
+
+    def __init__(self, name='Price2', dims=2, continuous=True, convex=False,
+                 differentiable=False, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Price2, self).__init__(name, dims, continuous,
+                                     convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Price's 2nd function
+        f = 1 + np.sin(x[0]) ** 2 + np.sin(x[1]) ** 2 - \
+            0.1 * np.exp(-x[0] ** 2 - x[1] ** 2)
+
+        return f
+
+
+class Price3(Benchmark):
+    """Price3 class implements the Price's 3rd benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = 100(x_2 - x_1^2)^2 + [6.4(x_2 - 0.5)^2 - x_1 - 0.6]^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-5, 5], x_2 \in [-5, 5]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0.341307503353524, 0.116490811845416) or (1, 1)`.
+
+    """
+
+    def __init__(self, name='Price3', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Price3, self).__init__(name, dims, continuous,
+                                     convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Price's 3rd function
+        f = 100 * (x[1] - x[0] ** 2) ** 2 + \
+            (6.4 * (x[1] - 0.5) ** 2 - x[0] - 0.6) ** 2
+
+        return f
+
+
+class Price4(Benchmark):
+    """Price4 class implements the Price's 4th benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = (2x_1^3x_2 - x_2^3)^2 + (6x_1 - x_2^2 + x_2)^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-500, 500], x_2 \in [-500, 500]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0) or (2, 4) or (1.464, -2.506)`.
+
+    """
+
+    def __init__(self, name='Price4', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Price4, self).__init__(name, dims, continuous,
+                                     convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Price's 4th function
+        f = (2 * x[0] ** 3 * x[1] - x[1] ** 3) ** 2 + \
+            (6 * x[0] - x[1] ** 2 + x[1]) ** 2
+
+        return f
+
+
+class Quadratic(Benchmark):
+    """Quadratic class implements the Quadratic's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = -3803.84 - 138.08x_1 - 232.92x_2 + 128.08x_1^2 + 203.64x_2^2 + 182.25x_1x_2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-10, 10], x_2 \in [-10, 10]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -3873.7243 \mid \mathbf{x^*} = (0.19388, 0.48513)`.
+
+    """
+
+    def __init__(self, name='Quadratic', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Quadratic, self).__init__(name, dims, continuous,
+                                        convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Quadratic's function
+        f = -3803.84 - 138.08 * x[0] - 232.92 * x[1] + 128.08 * \
+            x[0] ** 2 + 203.64 * x[1] ** 2 + 182.25 * x[0] * x[1]
 
         return f
