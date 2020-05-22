@@ -642,3 +642,63 @@ def test_schwefel236():
     y = f(x)
 
     assert y == -3456
+
+
+def test_table1():
+    f = two_dimensional.Table1()
+
+    x = np.array([9.646168, 9.646168])
+
+    y = f(x)
+
+    assert y == -26.920335555515848
+
+
+def test_table2():
+    f = two_dimensional.Table2()
+
+    x = np.array([8.055023472141116, 9.664590028909654])
+
+    y = f(x)
+
+    assert y == -19.20850256788675
+
+
+def test_table3():
+    f = two_dimensional.Table3()
+
+    x = np.array([9.646157266348881, 9.646134286497169])
+
+    y = f(x)
+
+    assert y == -24.156815516506533
+
+
+def test_testtube_holder():
+    f = two_dimensional.TesttubeHolder()
+
+    x = np.array([np.pi / 2, 0])
+
+    y = f(x)
+
+    assert y == -10.872299901558
+
+
+def test_trecani():
+    f = two_dimensional.Trecani()
+
+    x = np.array([0, 0])
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_trefethen():
+    f = two_dimensional.Trefethen()
+
+    x = np.array([-0.024403, 0.210612])
+
+    y = f(x)
+
+    assert y == -3.3068686465567008

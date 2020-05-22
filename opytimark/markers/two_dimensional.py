@@ -2858,7 +2858,7 @@ class RotatedEllipse1(Benchmark):
 
         # Override its parent class
         super(RotatedEllipse1, self).__init__(name, dims, continuous,
-                                   convex, differentiable, multimodal, separable)
+                                              convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -2908,7 +2908,7 @@ class RotatedEllipse2(Benchmark):
 
         # Override its parent class
         super(RotatedEllipse2, self).__init__(name, dims, continuous,
-                                   convex, differentiable, multimodal, separable)
+                                              convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -2973,7 +2973,8 @@ class Rump(Benchmark):
         """
 
         # Calculating the Rump's function
-        f = (333.75 - x[0] ** 2) * x[1] ** 6 + x[0] ** 2 * (11 * x[0] ** 2 * x[1] ** 2 - 121 * x[1] ** 4 - 2) + 5.5 * x[1] ** 8 + x[0] / (2 * x[1] + c.EPSILON)
+        f = (333.75 - x[0] ** 2) * x[1] ** 6 + x[0] ** 2 * (11 * x[0] ** 2 * x[1] **
+                                                            2 - 121 * x[1] ** 4 - 2) + 5.5 * x[1] ** 8 + x[0] / (2 * x[1] + c.EPSILON)
 
         return f
 
@@ -3008,7 +3009,7 @@ class Schaffer1(Benchmark):
 
         # Override its parent class
         super(Schaffer1, self).__init__(name, dims, continuous,
-                                   convex, differentiable, multimodal, separable)
+                                        convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -3023,7 +3024,8 @@ class Schaffer1(Benchmark):
         """
 
         # Calculating the Schaffer's 1st function
-        f = 0.5 + (np.sin((x[0] ** 2 + x[1] ** 2) ** 2) ** 2 - 0.5) / (1 + 0.001 * (x[0] ** 2 + x[1] ** 2) ** 2)
+        f = 0.5 + (np.sin((x[0] ** 2 + x[1] ** 2) ** 2) **
+                   2 - 0.5) / (1 + 0.001 * (x[0] ** 2 + x[1] ** 2) ** 2)
 
         return f
 
@@ -3058,7 +3060,7 @@ class Schaffer2(Benchmark):
 
         # Override its parent class
         super(Schaffer2, self).__init__(name, dims, continuous,
-                                   convex, differentiable, multimodal, separable)
+                                        convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -3073,7 +3075,8 @@ class Schaffer2(Benchmark):
         """
 
         # Calculating the Schaffer's 1st function
-        f = 0.5 + (np.sin((x[0] ** 2 - x[1] ** 2) ** 2) ** 2 - 0.5) / (1 + 0.001 * (x[0] ** 2 + x[1] ** 2) ** 2)
+        f = 0.5 + (np.sin((x[0] ** 2 - x[1] ** 2) ** 2) **
+                   2 - 0.5) / (1 + 0.001 * (x[0] ** 2 + x[1] ** 2) ** 2)
 
         return f
 
@@ -3108,7 +3111,7 @@ class Schaffer3(Benchmark):
 
         # Override its parent class
         super(Schaffer3, self).__init__(name, dims, continuous,
-                                   convex, differentiable, multimodal, separable)
+                                        convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -3123,7 +3126,8 @@ class Schaffer3(Benchmark):
         """
 
         # Calculating the Schaffer's 3rd function
-        f = 0.5 + (np.sin(np.cos(np.fabs(x[0] ** 2 + x[1] ** 2))) ** 2 - 0.5) / (1 + 0.001 * (x[0] ** 2 + x[1] ** 2)) ** 2
+        f = 0.5 + (np.sin(np.cos(np.fabs(x[0] ** 2 + x[1] ** 2)))
+                   ** 2 - 0.5) / (1 + 0.001 * (x[0] ** 2 + x[1] ** 2)) ** 2
 
         return f
 
@@ -3158,7 +3162,7 @@ class Schaffer4(Benchmark):
 
         # Override its parent class
         super(Schaffer4, self).__init__(name, dims, continuous,
-                                   convex, differentiable, multimodal, separable)
+                                        convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -3173,7 +3177,8 @@ class Schaffer4(Benchmark):
         """
 
         # Calculating the Schaffer's 4th function
-        f = 0.5 + (np.cos(np.sin(x[0] ** 2 - x[1] ** 2)) ** 2 - 0.5) / (1 + 0.001 * (x[0] ** 2 + x[1] ** 2) ** 2)
+        f = 0.5 + (np.cos(np.sin(x[0] ** 2 - x[1] ** 2)) **
+                   2 - 0.5) / (1 + 0.001 * (x[0] ** 2 + x[1] ** 2) ** 2)
 
         return f
 
@@ -3208,7 +3213,7 @@ class Schwefel26(Benchmark):
 
         # Override its parent class
         super(Schwefel26, self).__init__(name, dims, continuous,
-                                   convex, differentiable, multimodal, separable)
+                                         convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -3258,7 +3263,7 @@ class Schwefel236(Benchmark):
 
         # Override its parent class
         super(Schwefel236, self).__init__(name, dims, continuous,
-                                   convex, differentiable, multimodal, separable)
+                                          convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -3274,5 +3279,310 @@ class Schwefel236(Benchmark):
 
         # Calculating the Schwefel's 2.36 function
         f = -x[0] * x[1] * (72 - 2 * x[0] - 2 * x[1])
+
+        return f
+
+
+class Table1(Benchmark):
+    """Table1 class implements the Table's 1st benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = -|cos(x_1)cos(x_2)e^{|1-(x_1+x_2)^{0.5}/\\pi|}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-10, 10], x_2 \in [-10, 10]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -26.920335555515848 \mid \mathbf{x^*} = (\pm 9.646168, \pm 9.646168)`.
+
+    """
+
+    def __init__(self, name='Table1', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Table1, self).__init__(name, dims, continuous,
+                                     convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Table's 1st function
+        f = -np.fabs(np.cos(x[0]) * np.cos(x[1]) *
+                     np.exp(np.fabs(1 - np.sqrt(x[0] ** 2 + x[1] ** 2) / np.pi)))
+
+        return f
+
+
+class Table2(Benchmark):
+    """Table2 class implements the Table's 2nd benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = -|cos(x_1)cos(x_2)e^{|1-(x_1+x_2)^{0.5}/\\pi|}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-10, 10], x_2 \in [-10, 10]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -19.20850256788675 \mid \mathbf{x^*} = (\pm 8.055023472141116, \pm 9.664590028909654)`.
+
+    """
+
+    def __init__(self, name='Table2', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Table2, self).__init__(name, dims, continuous,
+                                     convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Table's 2nd function
+        f = -np.fabs(np.sin(x[0]) * np.cos(x[1]) *
+                     np.exp(np.fabs(1 - np.sqrt(x[0] ** 2 + x[1] ** 2) / np.pi)))
+
+        return f
+
+
+class Table3(Benchmark):
+    """Table3 class implements the Table's 3rd benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = -\\frac{1}{30}e^{2|1 - \\frac{sqrt{x_1^2+x_2^2}{\\pi}}}cos^2(x_1)cos^2(x_2)
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-10, 10], x_2 \in [-10, 10]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -19.20850256788675 \mid \mathbf{x^*} = (\pm 9.646157266348881, \pm 9.646134286497169)`.
+
+    """
+
+    def __init__(self, name='Table3', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Table3, self).__init__(name, dims, continuous,
+                                     convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Table's 3rd function
+        f = -np.cos(x[0]) ** 2 * np.cos(x[1]) ** 2 * np.exp(2 *
+                                                            np.fabs(1 - np.sqrt(x[0] ** 2 + x[1] ** 2) / np.pi)) / 30
+
+        return f
+
+
+class TesttubeHolder(Benchmark):
+    """TesttubeHolder class implements the Testtube Holder's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = -4[(sin(x_1)cos(x_2)e^{|cos[(x_1^2+x_2^2)/200]|})]
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-10, 10], x_2 \in [-10, 10]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -10.872299901558 \mid \mathbf{x^*} = (\pm \\frac{\\pi}{2}, 0)`.
+
+    """
+
+    def __init__(self, name='TesttubeHolder', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(TesttubeHolder, self).__init__(name, dims, continuous,
+                                             convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Testtube Holder's function
+        f = -4 * (np.sin(x[0]) * np.cos(x[1]) *
+                  np.exp(np.fabs(np.cos((x[0] ** 2 + x[1] ** 2) / 200))))
+
+        return f
+
+
+class Trecani(Benchmark):
+    """Trecani class implements the Trecani's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = x_1^4 - 4x_1^3 + 4x_1 + x_2^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-5, 5], x_2 \in [-5, 5]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0) or (-2, 0)`.
+
+    """
+
+    def __init__(self, name='Trecani', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=False, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Trecani, self).__init__(name, dims, continuous,
+                                      convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Trecani's function
+        f = x[0] ** 4 - 4 * x[0] ** 3 + 4 * x[0] + x[1] ** 2
+
+        return f
+
+
+class Trefethen(Benchmark):
+    """Trefethen class implements the Trefethen's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = e^{sin(50x_1)} + sin(60e^{x^2}) + sin(70sin(x_1)) + sin(sin(80x_2)) - sin(10(x_1 + x_2)) + \\frac{1}{4}(x_1^2 + x_2^2)
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-10, 10], x_2 \in [-10, 10]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -3.3068686465567008 \mid \mathbf{x^*} = (−0.024403, 0.210612)`.
+
+    """
+
+    def __init__(self, name='Trefethen', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Trefethen, self).__init__(name, dims, continuous,
+                                        convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Trefethen's function
+        f = np.exp(np.sin(50 * x[0])) + np.sin(60 * np.exp(x[1])) + np.sin(70 * np.sin(x[0])) + np.sin(
+            np.sin(80 * x[1])) - np.sin(10 * (x[0] + x[1])) + (1 / 4) * (x[0] ** 2 + x[1] ** 2)
 
         return f
