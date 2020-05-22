@@ -328,7 +328,7 @@ class Bird(Benchmark):
         The function is commonly evaluated using :math:`x_1 \in [-2\\pi, 2\\pi], x_2 \in [-2\\pi, 2\\pi]`.
 
     Global Minima:
-        :math:`f(\mathbf{x^*}) = -106.764537 \mid \mathbf{x^*} = (4.70104, 3.15294) or (−1.58214, −3.13024)`.
+        :math:`f(\mathbf{x^*}) = -106.764537 \mid \mathbf{x^*} = (4.70104, 3.15294) \: or \: (−1.58214, −3.13024)`.
 
     """
 
@@ -582,7 +582,7 @@ class BraninHoo(Benchmark):
         The function is commonly evaluated using :math:`x_1 \in [-5, 10], x_2 \in [0, 15]`.
 
     Global Minima:
-        :math:`f(\mathbf{x^*}) = 0.39788735775266204 \mid \mathbf{x^*} = (-\\pi, 12.275) or (\\pi, 2.275) or (3\\pi, 2.425)`.
+        :math:`f(\mathbf{x^*}) = 0.39788735775266204 \mid \mathbf{x^*} = (-\\pi, 12.275) \: or \: (\\pi, 2.275) \: or \: (3\\pi, 2.425)`.
 
     """
 
@@ -886,7 +886,7 @@ class Camel6(Benchmark):
         The function is commonly evaluated using :math:`x_1 \in [-5, 5], x_2 \in [-5, 5]`.
 
     Global Minima:
-        :math:`f(\mathbf{x^*}) = -1.0316284229280819 \mid \mathbf{x^*} = (−0.0898, 0.7126) or (0.0898,−0.7126)`.
+        :math:`f(\mathbf{x^*}) = -1.0316284229280819 \mid \mathbf{x^*} = (−0.0898, 0.7126) \: or \: (0.0898,−0.7126)`.
 
     """
 
@@ -1916,7 +1916,7 @@ class Keane(Benchmark):
         The function is commonly evaluated using :math:`x_1 \in [0, 10], x_2 \in [0, 10]`.
 
     Global Minima:
-        :math:`f(\mathbf{x^*}) = 0.6736675211468548 \mid \mathbf{x^*} = (1.393249070031784, 0) or (0, 1.393249070031784)`.
+        :math:`f(\mathbf{x^*}) = 0.6736675211468548 \mid \mathbf{x^*} = (1.393249070031784, 0) \: or \: (0, 1.393249070031784)`.
 
     """
 
@@ -2583,7 +2583,7 @@ class Price1(Benchmark):
         The function is commonly evaluated using :math:`x_1 \in [-500, 500], x_2 \in [-500, 500]`.
 
     Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (-5, -5) or (-5, 5) or (5, -5) or (5, 5)`.
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (-5, -5) \: or \: (-5, 5) \: or \: (5, -5) \: or \: (5, 5)`.
 
     """
 
@@ -2684,7 +2684,7 @@ class Price3(Benchmark):
         The function is commonly evaluated using :math:`x_1 \in [-5, 5], x_2 \in [-5, 5]`.
 
     Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0.341307503353524, 0.116490811845416) or (1, 1)`.
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0.341307503353524, 0.116490811845416) \: or \: (1, 1)`.
 
     """
 
@@ -2735,7 +2735,7 @@ class Price4(Benchmark):
         The function is commonly evaluated using :math:`x_1 \in [-500, 500], x_2 \in [-500, 500]`.
 
     Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0) or (2, 4) or (1.464, -2.506)`.
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0) \: or \: (2, 4) \: or \: (1.464, -2.506)`.
 
     """
 
@@ -3496,7 +3496,7 @@ class Trecani(Benchmark):
         The function is commonly evaluated using :math:`x_1 \in [-5, 5], x_2 \in [-5, 5]`.
 
     Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0) or (-2, 0)`.
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0) \: or \: (-2, 0)`.
 
     """
 
@@ -3648,7 +3648,7 @@ class WayburnSeader1(Benchmark):
         The function is commonly evaluated using :math:`x_1 \in [-500, 500], x_2 \in [-500, 500]`.
 
     Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (1, 2) or (1.596804153876933, 0.806391692246134)`.
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (1, 2) \: or \: (1.596804153876933, 0.806391692246134)`.
 
     """
 
@@ -3698,7 +3698,7 @@ class WayburnSeader2(Benchmark):
         The function is commonly evaluated using :math:`x_1 \in [-500, 500], x_2 \in [-500, 500]`.
 
     Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0.200138974728779, 1) or (0.424861025271221, 1)`.
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0.200138974728779, 1) \: or \: (0.424861025271221, 1)`.
 
     """
 
