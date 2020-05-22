@@ -552,3 +552,73 @@ def test_quadratic():
     y = f(x)
 
     assert y == -3873.7241821830326
+
+
+def test_rotated_ellipse1():
+    f = two_dimensional.RotatedEllipse1()
+
+    x = np.array([0, 0])
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_rotated_ellipse2():
+    f = two_dimensional.RotatedEllipse2()
+
+    x = np.array([0, 0])
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_rump():
+    f = two_dimensional.Rump()
+
+    x = np.array([0, 0])
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_schaffer1():
+    f = two_dimensional.Schaffer1()
+
+    x = np.array([0, 0])
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_schaffer2():
+    f = two_dimensional.Schaffer2()
+
+    x = np.array([0, 0])
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_schaffer3():
+    f = two_dimensional.Schaffer3()
+
+    x = np.array([0, 1.253115])
+
+    y = f(x)
+
+    assert y == 0.0015668545260126288
+
+
+def test_schaffer4():
+    f = two_dimensional.Schaffer4()
+
+    x = np.array([0, 1.253115])
+
+    y = f(x)
+
+    assert y == 0.29243850703298857

@@ -2826,3 +2826,353 @@ class Quadratic(Benchmark):
             x[0] ** 2 + 203.64 * x[1] ** 2 + 182.25 * x[0] * x[1]
 
         return f
+
+
+class RotatedEllipse1(Benchmark):
+    """RotatedEllipse1 class implements the Rotated Ellipse's 1st benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = 7x_1^2 - 6\sqrt{3}x_1x_2 + 13x_2^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-500, 500], x_2 \in [-500, 500]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0)`.
+
+    """
+
+    def __init__(self, name='RotatedEllipse1', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=False, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(RotatedEllipse1, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Rotated Ellipse's 1st function
+        f = 7 * x[0] ** 2 - 6 * np.sqrt(3) * x[0] * x[1] + 13 * x[1] ** 2
+
+        return f
+
+
+class RotatedEllipse2(Benchmark):
+    """RotatedEllipse2 class implements the Rotated Ellipse's 2nd benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = x_1^2 - x_1x_2 + x_2^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-500, 500], x_2 \in [-500, 500]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0)`.
+
+    """
+
+    def __init__(self, name='RotatedEllipse2', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=False, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(RotatedEllipse2, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Rotated Ellipse's 2nd function
+        f = x[0] ** 2 - x[0] * x[1] + x[1] ** 2
+
+        return f
+
+
+class Rump(Benchmark):
+    """Rump class implements the Rump's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = (333.75 - x_1^2)x_2^6 + x_1^2(11x_1^2x_2^2 - 121x_2^4 - 2) + 5.5x_2^8 + \\frac{x_1}{2x_2}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-500, 500], x_2 \in [-500, 500]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0)`.
+
+    """
+
+    def __init__(self, name='Rump', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Rump, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Rump's function
+        f = (333.75 - x[0] ** 2) * x[1] ** 6 + x[0] ** 2 * (11 * x[0] ** 2 * x[1] ** 2 - 121 * x[1] ** 4 - 2) + 5.5 * x[1] ** 8 + x[0] / (2 * x[1] + c.EPSILON)
+
+        return f
+
+
+class Schaffer1(Benchmark):
+    """Schaffer1 class implements the Schaffer's 1st benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = 0.5 + \\frac{sin^2(x_1^2 + x_2^2)^2 - 0.5}{1 + 0.001(x_1^2 + x_2^2)^2}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-100, 100], x_2 \in [-100, 100]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0)`.
+
+    """
+
+    def __init__(self, name='Schaffer1', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=False, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Schaffer1, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Schaffer's 1st function
+        f = 0.5 + (np.sin((x[0] ** 2 + x[1] ** 2) ** 2) ** 2 - 0.5) / (1 + 0.001 * (x[0] ** 2 + x[1] ** 2) ** 2)
+
+        return f
+
+
+class Schaffer2(Benchmark):
+    """Schaffer2 class implements the Schaffer's 2nd benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = 0.5 + \\frac{sin^2(x_1^2 - x_2^2)^2 - 0.5}{1 + 0.001(x_1^2 + x_2^2)^2}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-100, 100], x_2 \in [-100, 100]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0)`.
+
+    """
+
+    def __init__(self, name='Schaffer2', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=False, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Schaffer2, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Schaffer's 1st function
+        f = 0.5 + (np.sin((x[0] ** 2 - x[1] ** 2) ** 2) ** 2 - 0.5) / (1 + 0.001 * (x[0] ** 2 + x[1] ** 2) ** 2)
+
+        return f
+
+
+class Schaffer3(Benchmark):
+    """Schaffer3 class implements the Schaffer's 3rd benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = 0.5 + \\frac{sin^2(cos|x_1^2 + x_2^2|) - 0.5}{(1 + 0.001(x_1^2 + x_2^2))^2}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-100, 100], x_2 \in [-100, 100]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0.0015668545260126288 \mid \mathbf{x^*} = (0, 1.253115)`.
+
+    """
+
+    def __init__(self, name='Schaffer3', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=False, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Schaffer3, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Schaffer's 3rd function
+        f = 0.5 + (np.sin(np.cos(np.fabs(x[0] ** 2 + x[1] ** 2))) ** 2 - 0.5) / (1 + 0.001 * (x[0] ** 2 + x[1] ** 2)) ** 2
+
+        return f
+
+
+class Schaffer4(Benchmark):
+    """Schaffer4 class implements the Schaffer's 4th benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = 0.5 + \\frac{cos^2(sin(x_1^2 - x_2^2)) - 0.5}{1 + 0.001(x_1^2 + x_2^2)^2}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-100, 100], x_2 \in [-100, 100]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0.29243850703298857 \mid \mathbf{x^*} = (0, 1.253115)`.
+
+    """
+
+    def __init__(self, name='Schaffer4', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=False, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Schaffer4, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Schaffer's 4th function
+        f = 0.5 + (np.cos(np.sin(x[0] ** 2 - x[1] ** 2)) ** 2 - 0.5) / (1 + 0.001 * (x[0] ** 2 + x[1] ** 2) ** 2)
+
+        return f
