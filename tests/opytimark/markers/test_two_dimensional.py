@@ -702,3 +702,53 @@ def test_trefethen():
     y = f(x)
 
     assert y == -3.3068686465567008
+
+
+def test_wayburn_seader1():
+    f = two_dimensional.WayburnSeader1()
+
+    x = np.array([1, 2])
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_wayburn_seader2():
+    f = two_dimensional.WayburnSeader2()
+
+    x = np.array([0.200138974728779, 1])
+
+    y = f(x)
+
+    assert np.round(y) == 0
+
+
+def test_wayburn_seader3():
+    f = two_dimensional.WayburnSeader3()
+
+    x = np.array([5.146896745324582, 6.839589743000071])
+
+    y = f(x)
+
+    assert y == 19.105879794568
+
+
+def test_zettl():
+    f = two_dimensional.Zettl()
+
+    x = np.array([-0.0299, 0])
+
+    y = f(x)
+
+    assert y == -0.0037912371501199
+
+
+def test_zirilli():
+    f = two_dimensional.Zirilli()
+
+    x = np.array([-1.0465, 0])
+
+    y = f(x)
+
+    assert y == -0.3523860365437344

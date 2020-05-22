@@ -3586,3 +3586,306 @@ class Trefethen(Benchmark):
             np.sin(80 * x[1])) - np.sin(10 * (x[0] + x[1])) + (1 / 4) * (x[0] ** 2 + x[1] ** 2)
 
         return f
+
+
+class VenterSobiezcczanskiSobieski(Benchmark):
+    """VenterSobiezcczanskiSobieski class implements the Venter Sobiezcczanski-Sobieski's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = x_1^2 - 100cos(x_1)^2 - 100cos(\\frac{x_1^2}{30}) + x_2^2 - 100cos(x_2)^2 - 100cos(\\frac{x_2^2}{30})
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-50, 50], x_2 \in [-50, 50]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -400 \mid \mathbf{x^*} = (0, 0)`.
+
+    """
+
+    def __init__(self, name='VenterSobiezcczanskiSobieski', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(VenterSobiezcczanskiSobieski, self).__init__(name, dims, continuous,
+                                                           convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Venter Sobiezcczanski-Sobieski's function
+        f = x[0] ** 2 - 100 * np.cos(x[0]) ** 2 - 100 * np.cos(x[0] ** 2 / 30) + \
+            x[1] ** 2 - 100 * np.cos(x[1]) ** 2 - 100 * np.cos(x[1] ** 2 / 30)
+
+        return f
+
+
+class WayburnSeader1(Benchmark):
+    """WayburnSeader1 class implements the WayburnSeader's 1st benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = (x_1^6 + x_2^4 - 17)^2 + (2x_1 + x_2 - 4)^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-500, 500], x_2 \in [-500, 500]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (1, 2) or (1.596804153876933, 0.806391692246134)`.
+
+    """
+
+    def __init__(self, name='WayburnSeader1', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(WayburnSeader1, self).__init__(name, dims, continuous,
+                                             convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the WayburnSeader's 1st function
+        f = (x[0] ** 6 + x[1] ** 4 - 17) ** 2 + (2 * x[0] + x[1] - 4) ** 2
+
+        return f
+
+
+class WayburnSeader2(Benchmark):
+    """WayburnSeader2 class implements the WayburnSeader's 2nd benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = [1.613 - 4(x_1 - 0.3125)^2 - 4(x_2 - 1.625)^2]^2 + (x_2 - 1)^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-500, 500], x_2 \in [-500, 500]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0.200138974728779, 1) or (0.424861025271221, 1)`.
+
+    """
+
+    def __init__(self, name='WayburnSeader2', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=False, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(WayburnSeader2, self).__init__(name, dims, continuous,
+                                             convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the WayburnSeader's 2nd function
+        f = (1.613 - 4 * (x[0] - 0.3125) ** 2 - 4 *
+             (x[1] - 1.625) ** 2) ** 2 + (x[1] - 1) ** 2
+
+        return f
+
+
+class WayburnSeader3(Benchmark):
+    """WayburnSeader3 class implements the WayburnSeader's 3rd benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = \\frac{2}{3}x_1^3 - 8x_1^2 + 33x_1 - x_1x_2 + 5 + [(x_1 - 4)^2 + (x_2 - 5)^2 - 4]^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-500, 500], x_2 \in [-500, 500]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 19.105879794568 \mid \mathbf{x^*} = (5.146896745324582, 6.839589743000071)`.
+
+    """
+
+    def __init__(self, name='WayburnSeader3', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=False, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(WayburnSeader3, self).__init__(name, dims, continuous,
+                                             convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the WayburnSeader's 3rd function
+        f = (2 / 3) * x[0] ** 3 - 8 * x[0] ** 2 + 33 * x[0] - x[0] * \
+            x[1] + 5 + ((x[0] - 4) ** 2 + (x[1] - 5) ** 2 - 4) ** 2
+
+        return f
+
+
+class Zettl(Benchmark):
+    """Zettl class implements the Zettl's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = (x_1^2 + x_2^2 - 2x_1)^2 + 0.25x_1
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-5, 10], x_2 \in [-5, 10]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -0.0037912371501199 \mid \mathbf{x^*} = (−0.0299, 0)`.
+
+    """
+
+    def __init__(self, name='Zettl', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=False, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Zettl, self).__init__(name, dims, continuous,
+                                    convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Zettl's function
+        f = (x[0] ** 2 + x[1] ** 2 - 2 * x[0]) ** 2 + 0.25 * x[0]
+
+        return f
+
+
+class Zirilli(Benchmark):
+    """Zirilli class implements the Zirilli's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = 0.25x_1^4 - 0.5x_1^2 + 0.1x_1 + 0.5x_2^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-10, 10], x_2 \in [-10, 10]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -0.3523860365437344 \mid \mathbf{x^*} = (-1.0465, 0)`.
+
+    """
+
+    def __init__(self, name='Zirilli', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=False, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Zirilli, self).__init__(name, dims, continuous,
+                                      convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Zirilli's function
+        f = 0.25 * x[0] ** 4 - 0.5 * x[0] ** 2 + 0.1 * x[0] + 0.5 * x[1] ** 2
+
+        return f
