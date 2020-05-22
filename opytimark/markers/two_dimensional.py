@@ -3176,3 +3176,103 @@ class Schaffer4(Benchmark):
         f = 0.5 + (np.cos(np.sin(x[0] ** 2 - x[1] ** 2)) ** 2 - 0.5) / (1 + 0.001 * (x[0] ** 2 + x[1] ** 2) ** 2)
 
         return f
+
+
+class Schwefel26(Benchmark):
+    """Schwefel26 class implements the Schwefel's 2.6 benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = \max(|x_1 + 2x_2 - 7|, |2x_1 + x_2 - 5|)
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [-100, 100], x_2 \in [-100, 100]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (1, 3)`.
+
+    """
+
+    def __init__(self, name='Schwefel26', dims=2, continuous=True, convex=False,
+                 differentiable=False, multimodal=False, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Schwefel26, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Schwefel's 2.6 function
+        f = max(np.fabs(x[0] + 2 * x[1] - 7), np.fabs(2 * x[0] + x[1] - 5))
+
+        return f
+
+
+class Schwefel236(Benchmark):
+    """Schwefel236 class implements the Schwefel's 2.36 benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = -x_1x_2(72 - 2x_1 - 2x_2)
+
+    Domain:
+        The function is commonly evaluated using :math:`x_1 \in [0, 500], x_2 \in [0, 500]`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -3456 \mid \mathbf{x^*} = (12, 12)`.
+
+    """
+
+    def __init__(self, name='Schwefel236', dims=2, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Schwefel236, self).__init__(name, dims, continuous,
+                                   convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Schwefel's 2.36 function
+        f = -x[0] * x[1] * (72 - 2 * x[0] - 2 * x[1])
+
+        return f

@@ -622,3 +622,23 @@ def test_schaffer4():
     y = f(x)
 
     assert y == 0.29243850703298857
+
+
+def test_schwefel26():
+    f = two_dimensional.Schwefel26()
+
+    x = np.array([1, 3])
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_schwefel236():
+    f = two_dimensional.Schwefel236()
+
+    x = np.array([12, 12])
+
+    y = f(x)
+
+    assert y == -3456
