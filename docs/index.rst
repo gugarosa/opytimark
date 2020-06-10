@@ -5,8 +5,8 @@ Did you ever need a set of pre-defined functions in order to test your optimizat
 
 Use Opytimark if you need a library or wish to:
 
-* Create your benchmarking function.
-* Design or use pre-loaded benchmarking functions.
+* Create your benchmarking function;
+* Design or use pre-loaded benchmarking functions;
 * Because it is overwhelming to evaluate things.
 
 Opytimark is compatible with: **Python 3.6+**.
