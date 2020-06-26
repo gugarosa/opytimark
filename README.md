@@ -67,7 +67,6 @@ Opytimark is based on the following structure, and you should pay attention to i
         - constants
         - decorator
         - exception
-        - logging
 ```
 
 ### Core

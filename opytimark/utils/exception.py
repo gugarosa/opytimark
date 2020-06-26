@@ -1,8 +1,3 @@
-import opytimark.utils.logging as l
-
-logger = l.get_logger(__name__)
-
-
 class Error(Exception):
     """A generic Error class derived from Exception.
 
@@ -19,7 +14,7 @@ class Error(Exception):
         """
 
         # Logs the error in a formatted way
-        logger.error(f'{cls}: {msg}.')
+        print(f'{cls}: {msg}.')
 
 
 class SizeError(Error):
