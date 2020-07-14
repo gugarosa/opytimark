@@ -1,5 +1,4 @@
 import numpy as np
-import pytest
 
 from opytimark.markers import two_dimensional
 
@@ -702,6 +701,16 @@ def test_trefethen():
     y = f(x)
 
     assert y == -3.3068686465567008
+
+
+def test_venter_sobiezcczanski_sobieski():
+    f = two_dimensional.VenterSobiezcczanskiSobieski()
+
+    x = np.array([0, 0])
+
+    y = f(x)
+
+    assert y == -400
 
 
 def test_wayburn_seader1():

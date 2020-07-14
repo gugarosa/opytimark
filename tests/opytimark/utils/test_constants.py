@@ -1,7 +1,5 @@
 import sys
 
-import pytest
-
 from opytimark.utils import constants
 
 

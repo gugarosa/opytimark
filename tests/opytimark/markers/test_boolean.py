@@ -1,5 +1,4 @@
 import numpy as np
-import pytest
 
 from opytimark.markers import boolean
 from opytimark.utils import constants

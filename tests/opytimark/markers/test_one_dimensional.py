@@ -1,5 +1,4 @@
 import numpy as np
-import pytest
 
 from opytimark.markers import one_dimensional
 

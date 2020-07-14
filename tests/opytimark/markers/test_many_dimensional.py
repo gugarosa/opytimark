@@ -1,5 +1,4 @@
 import numpy as np
-import pytest
 
 from opytimark.markers import many_dimensional
 
@@ -82,6 +81,12 @@ def test_helical_valley():
     y = f(x)
 
     assert y == 0
+
+    x = np.array([-1, 0, 0])
+
+    y = f(x)
+
+    assert y == 98696.04401089359
 
 
 def test_miele_cantrell():

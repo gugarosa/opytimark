@@ -1,5 +1,3 @@
-import pytest
-
 from opytimark.utils import exception
 
 
