@@ -1,3 +1,6 @@
+"""N-dimensional benchmarking functions.
+"""
+
 import numpy as np
 
 import opytimark.utils.constants as c
@@ -768,7 +771,7 @@ class HappyCat(Benchmark):
 class Levy(Benchmark):
     """Levy class implements the Levy's benchmarking function.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = sin^2(\\pi w_1) + \sum_{i=1}^{n-1}(w_i-1)^2 [1+10sin^2(\\pi w_i + 1)] 
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = sin^2(\\pi w_1) + \sum_{i=1}^{n-1}(w_i-1)^2 [1+10sin^2(\\pi w_i + 1)]
     .. math:: + (w_n - 1)^2 [1 + sin^2(2 \\pi w_n)] \mid w_i = 1 + \\frac{x_i - 1}{4}
 
     Domain:
@@ -861,7 +864,7 @@ class Michalewicz(Benchmark):
 
         # Override its parent class
         super(Michalewicz, self).__init__(name, dims, continuous,
-                                     convex, differentiable, multimodal, separable)
+                                          convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -1022,7 +1025,7 @@ class Perm0DBeta(Benchmark):
 
         # Override its parent class
         super(Perm0DBeta, self).__init__(name, dims, continuous,
-                                     convex, differentiable, multimodal, separable)
+                                         convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -1078,7 +1081,7 @@ class PermDBeta(Benchmark):
 
         # Override its parent class
         super(PermDBeta, self).__init__(name, dims, continuous,
-                                     convex, differentiable, multimodal, separable)
+                                        convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -1135,7 +1138,7 @@ class PowellSingular2(Benchmark):
 
         # Override its parent class
         super(PowellSingular2, self).__init__(name, dims, continuous,
-                                        convex, differentiable, multimodal, separable)
+                                              convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -1405,7 +1408,7 @@ class Rana(Benchmark):
 
         # Override its parent class
         super(Rana, self).__init__(name, dims, continuous,
-                                        convex, differentiable, multimodal, separable)
+                                   convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -1620,7 +1623,7 @@ class RotatedHyperEllipsoid(Benchmark):
 
         # Override its parent class
         super(RotatedHyperEllipsoid, self).__init__(name, dims, continuous,
-                                     convex, differentiable, multimodal, separable)
+                                                    convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -1778,7 +1781,7 @@ class Schwefel(Benchmark):
 
         # Override its parent class
         super(Schwefel, self).__init__(name, dims, continuous,
-                                          convex, differentiable, multimodal, separable)
+                                       convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -2304,7 +2307,7 @@ class SchafferF6(Benchmark):
 
         # Override its parent class
         super(SchafferF6, self).__init__(name, dims, continuous,
-                                       convex, differentiable, multimodal, separable)
+                                         convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -2410,7 +2413,7 @@ class Step(Benchmark):
 
         # Override its parent class
         super(Step, self).__init__(name, dims, continuous,
-                                     convex, differentiable, multimodal, separable)
+                                   convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -2460,7 +2463,7 @@ class Step2(Benchmark):
 
         # Override its parent class
         super(Step2, self).__init__(name, dims, continuous,
-                                     convex, differentiable, multimodal, separable)
+                                    convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -2510,7 +2513,7 @@ class Step3(Benchmark):
 
         # Override its parent class
         super(Step3, self).__init__(name, dims, continuous,
-                                     convex, differentiable, multimodal, separable)
+                                    convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -2560,7 +2563,7 @@ class StrechedVSineWave(Benchmark):
 
         # Override its parent class
         super(StrechedVSineWave, self).__init__(name, dims, continuous,
-                                     convex, differentiable, multimodal, separable)
+                                                convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -2573,7 +2576,7 @@ class StrechedVSineWave(Benchmark):
             The benchmarking function output `f(x)`.
 
         """
-        
+
         # Instantiating function
         f = 0
 
@@ -2614,7 +2617,7 @@ class StyblinskiTang(Benchmark):
 
         # Override its parent class
         super(StyblinskiTang, self).__init__(name, dims, continuous,
-                                     convex, differentiable, multimodal, separable)
+                                             convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -2663,7 +2666,7 @@ class SumDifferentPowers(Benchmark):
 
         # Override its parent class
         super(SumDifferentPowers, self).__init__(name, dims, continuous,
-                                     convex, differentiable, multimodal, separable)
+                                                 convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -2717,7 +2720,7 @@ class SumSquares(Benchmark):
 
         # Override its parent class
         super(SumSquares, self).__init__(name, dims, continuous,
-                                     convex, differentiable, multimodal, separable)
+                                         convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -2772,7 +2775,7 @@ class Trid(Benchmark):
 
         # Override its parent class
         super(Trid, self).__init__(name, dims, continuous,
-                                     convex, differentiable, multimodal, separable)
+                                   convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -2827,7 +2830,7 @@ class Trigonometric1(Benchmark):
 
         # Override its parent class
         super(Trigonometric1, self).__init__(name, dims, continuous,
-                                     convex, differentiable, multimodal, separable)
+                                             convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -2892,7 +2895,7 @@ class Trigonometric2(Benchmark):
 
         # Override its parent class
         super(Trigonometric2, self).__init__(name, dims, continuous,
-                                     convex, differentiable, multimodal, separable)
+                                             convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -2947,7 +2950,7 @@ class Wavy(Benchmark):
 
         # Override its parent class
         super(Wavy, self).__init__(name, dims, continuous,
-                                     convex, differentiable, multimodal, separable)
+                                   convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -2997,7 +3000,7 @@ class XinSheYang(Benchmark):
 
         # Override its parent class
         super(XinSheYang, self).__init__(name, dims, continuous,
-                                     convex, differentiable, multimodal, separable)
+                                         convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -3052,7 +3055,7 @@ class XinSheYang2(Benchmark):
 
         # Override its parent class
         super(XinSheYang2, self).__init__(name, dims, continuous,
-                                     convex, differentiable, multimodal, separable)
+                                          convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -3101,7 +3104,7 @@ class XinSheYang3(Benchmark):
 
         # Override its parent class
         super(XinSheYang3, self).__init__(name, dims, continuous,
-                                     convex, differentiable, multimodal, separable)
+                                          convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -3150,7 +3153,7 @@ class XinSheYang4(Benchmark):
 
         # Override its parent class
         super(XinSheYang4, self).__init__(name, dims, continuous,
-                                     convex, differentiable, multimodal, separable)
+                                          convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):
@@ -3200,7 +3203,7 @@ class Zakharov(Benchmark):
 
         # Override its parent class
         super(Zakharov, self).__init__(name, dims, continuous,
-                                     convex, differentiable, multimodal, separable)
+                                       convex, differentiable, multimodal, separable)
 
     @d.check_dimension
     def __call__(self, x):

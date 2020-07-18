@@ -1,3 +1,6 @@
+"""One-dimensional benchmarking functions.
+"""
+
 import numpy as np
 
 import opytimark.utils.constants as c

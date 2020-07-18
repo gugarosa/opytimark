@@ -1,4 +1,6 @@
-import opytimark.utils.decorator as d
+"""Benchmark-based class.
+"""
+
 import opytimark.utils.exception as e
 
 

@@ -1,3 +1,6 @@
+"""Decorators.
+"""
+
 import numpy as np
 
 import opytimark.utils.exception as e
@@ -29,9 +32,9 @@ def check_dimension(f):
         try:
             # Squeezes the array
             x = np.squeeze(x, axis=1)
-        
+
         # If squeeze could not be performed, it means that there is no extra dimension
-        except:
+        except ValueError:
             pass
 
         # If the function's number of dimensions is equal to `-1` (n-dimensional)
@@ -46,7 +49,8 @@ def check_dimension(f):
         # If the input dimensions is different from function's allowed dimensions
         if x.shape[0] != obj.dims:
             # Raises an error
-            raise e.SizeError(f'{obj.name} input should be {obj.dims}-dimensional')
+            raise e.SizeError(
+                f'{obj.name} input should be {obj.dims}-dimensional')
 
         return f(obj, x)
 

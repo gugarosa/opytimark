@@ -1,6 +1,8 @@
+"""Many-dimensional benchmarking functions.
+"""
+
 import numpy as np
 
-import opytimark.utils.constants as c
 import opytimark.utils.decorator as d
 from opytimark.core import Benchmark
 
@@ -710,7 +712,7 @@ class SchmidtVetters(Benchmark):
 class Watson(Benchmark):
     """Watson class implements the Watson's benchmarking function.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3, x_4, x_5, x_6) = 
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3, x_4, x_5, x_6) =
 
     Domain:
         The function is commonly evaluated using :math:`|x_i| \leq 10 \mid i = \{1, 2, 3, 4, 5, 6\}`.

@@ -1,3 +1,6 @@
+"""Boolean-based benchmarking functions.
+"""
+
 import itertools as it
 
 import numpy as np
@@ -18,7 +21,7 @@ class Knapsack(Benchmark):
     .. math:: \sum_{i=1}^{n}w_i x_i \leq b
 
     Domain:
-        The function is evaluated using :math:`x_i \in \{0, 1\} \mid i = \{1, 2, \ldots, n\}`.        
+        The function is evaluated using :math:`x_i \in \{0, 1\} \mid i = \{1, 2, \ldots, n\}`.
 
     """
 
@@ -47,8 +50,7 @@ class Knapsack(Benchmark):
 
         # Checking if values and weights have the same length
         if len(values) != len(weights):
-            raise e.SizeError(
-                '`values` and `weights` needs to have the same size')
+            raise e.SizeError('`values` and `weights` needs to have the same size')
 
         # Items values
         self.values = values
@@ -102,9 +104,9 @@ class Knapsack(Benchmark):
 
     @max_capacity.setter
     def max_capacity(self, max_capacity):
-        if not (isinstance(max_capacity, float) or isinstance(max_capacity, int)):
+        if not isinstance(max_capacity, (float, int)):
             raise e.TypeError('`max_capacity` should be a float or integer')
-        if (max_capacity < 0):
+        if max_capacity < 0:
             raise e.ValueError('`max_capacity` should be >= 0')
 
         self._max_capacity = max_capacity
@@ -131,8 +133,6 @@ class Knapsack(Benchmark):
         if np.sum(w) > self.max_capacity:
             # Returns the maximum number possible
             return c.FLOAT_MAX
-        
-        # If the sum of weights is allowed
-        else:
-            # Returns its negative sum as it is a minimization problem
-            return -np.sum(v)
+
+        # Returns its negative sum as it is a minimization problem
+        return -np.sum(v)

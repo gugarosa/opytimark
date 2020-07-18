@@ -1,3 +1,6 @@
+"""Exceptions.
+"""
+
 class Error(Exception):
     """A generic Error class derived from Exception.
 
@@ -13,8 +16,11 @@ class Error(Exception):
             msg (str): Message to be logged.
         """
 
+        # Override its parent class
+        super(Error, self).__init__()
+
         # Logs the error in a formatted way
-        print(f'{cls}: {msg}.')
+        print('%s: %s.', cls, msg)
 
 
 class SizeError(Error):
