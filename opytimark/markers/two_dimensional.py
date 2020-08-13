@@ -67,7 +67,7 @@ class Ackley3(Benchmark):
         The function is commonly evaluated using :math:`x_1 \in [-32, 32], x_2 \in [-32, 32]`.
 
     Global Minima:
-        :math:`f(\mathbf{x^*}) \\approx −195.629028238419 \mid \mathbf{x^*} \\approx (\pm 0.682584587365898, -0.36075325513719)`.
+        :math:`f(\mathbf{x^*}) \\approx -186.4112127112689 \mid \mathbf{x^*} \\approx (4.79108613e-11, -6.77345749e-03)`.
 
     """
 
