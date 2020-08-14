@@ -16,11 +16,11 @@ def test_ackley2():
 def test_ackley3():
     f = two_dimensional.Ackley3()
 
-    x = np.array([4.79108613e-11, -6.77345749e-03])
+    x = np.array([0.682584587365898, -0.36075325513719])
 
     y = f(x)
 
-    assert y == -186.4112127112689
+    assert y == -195.62902823841935
 
 
 def test_adjiman():

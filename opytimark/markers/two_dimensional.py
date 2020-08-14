@@ -61,7 +61,7 @@ class Ackley2(Benchmark):
 class Ackley3(Benchmark):
     """Ackley3 class implements the Ackley's 3rd benchmarking function.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2) = -200e^{-0.2\sqrt{x_1^2+x_2^2}} + 5e^{cos(3x_1) + sin(3x_2)}
+    .. math:: f(\mathbf{x}) = f(x_1, x_2) = -200e^{-0.02\sqrt{x_1^2+x_2^2}} + 5e^{cos(3x_1) + sin(3x_2)}
 
     Domain:
         The function is commonly evaluated using :math:`x_1 \in [-32, 32], x_2 \in [-32, 32]`.
@@ -103,7 +103,7 @@ class Ackley3(Benchmark):
         """
 
         # Calculating the Ackley's 3rd function
-        f = -200 * np.exp(-0.2 * np.sqrt(x[0] ** 2 + x[1] ** 2)) + \
+        f = -200 * np.exp(-0.02 * np.sqrt(x[0] ** 2 + x[1] ** 2)) + \
             5 * np.exp(np.cos(3 * x[0]) + np.sin(3 * x[1]))
 
         return f
