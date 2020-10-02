@@ -6,7 +6,7 @@ from opytimark.utils import constants
 
 def test_knapsack_values():
     try:
-        new_knapsack = boolean.Knapsack(values=[1, 2, 3], weights=[1, 2])
+        new_knapsack = boolean.Knapsack(values=(1, 2, 3), weights=(1, 2))
     except:
         new_knapsack = boolean.Knapsack()
 
@@ -19,7 +19,7 @@ def test_knapsack_values_setter():
     try:
         new_knapsack.values = 1
     except:
-        new_knapsack.values = [0]
+        new_knapsack.values = (0,)
 
     assert new_knapsack.values[0] == 0
 
@@ -36,7 +36,7 @@ def test_knapsack_weights_setter():
     try:
         new_knapsack.weights = 1
     except:
-        new_knapsack.weights = [0]
+        new_knapsack.weights = (0,)
 
     assert new_knapsack.weights[0] == 0
 
@@ -66,7 +66,7 @@ def test_knapsack_max_capacity_setter():
 
 
 def test_knapsack():
-    new_knapsack = boolean.Knapsack(values=[1, 2, 3], weights=[1, 2, 3], max_capacity=2)
+    new_knapsack = boolean.Knapsack(values=(1, 2, 3), weights=(1, 2, 3), max_capacity=2)
 
     assert new_knapsack(np.array([1, 0, 0])) == -1
 

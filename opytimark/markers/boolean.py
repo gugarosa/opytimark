@@ -27,7 +27,7 @@ class Knapsack(Benchmark):
 
     def __init__(self, name='Knapsack', dims=-1, continuous=False, convex=False,
                  differentiable=False, multimodal=False, separable=False,
-                 values=[0], weights=[0], max_capacity=0.0):
+                 values=(0,), weights=(0,), max_capacity=0.0):
         """Initialization method.
 
         Args:
@@ -38,8 +38,8 @@ class Knapsack(Benchmark):
             differentiable (bool): Whether the function is differentiable.
             multimodal (bool): Whether the function is multimodal.
             separable (bool): Whether the function is separable.
-            values (list): List of items values.
-            weights (list): List of items weights.
+            values (tuple): Tuple of items values.
+            weights (tuple): Tuple of items weights.
             max_capacity: Maximum capacity of the knapsack.
 
         """
@@ -66,7 +66,7 @@ class Knapsack(Benchmark):
 
     @property
     def values(self):
-        """list: values of items in the knapsack.
+        """tuple: values of items in the knapsack.
 
         """
 
@@ -74,14 +74,14 @@ class Knapsack(Benchmark):
 
     @values.setter
     def values(self, values):
-        if not isinstance(values, list):
-            raise e.TypeError('`values` should be a list')
+        if not isinstance(values, tuple):
+            raise e.TypeError('`values` should be a tuple')
 
         self._values = values
 
     @property
     def weights(self):
-        """list: Weights of items in the knapsack.
+        """tuple: Weights of items in the knapsack.
 
         """
 
@@ -89,8 +89,8 @@ class Knapsack(Benchmark):
 
     @weights.setter
     def weights(self, weights):
-        if not isinstance(weights, list):
-            raise e.TypeError('`weights` should be a list')
+        if not isinstance(weights, tuple):
+            raise e.TypeError('`weights` should be a tuple')
 
         self._weights = weights
 
