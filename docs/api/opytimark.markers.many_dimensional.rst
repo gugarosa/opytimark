@@ -49,6 +49,10 @@ opytimark.markers.many_dimensional
    :members:
    :show-inheritance:
 
+.. autoapiclass:: opytimark.markers.many_dimensional.Simpleton
+   :members:
+   :show-inheritance:
+
 .. autoapiclass:: opytimark.markers.many_dimensional.Watson
    :members:
    :show-inheritance:

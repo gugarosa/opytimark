@@ -709,10 +709,60 @@ class SchmidtVetters(Benchmark):
         return f
 
 
+class Simpleton(Benchmark):
+    """Simpleton class implements the Simpleton's Problem benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3, x_4, x_5, x_6, x_7, x_8, x_9, x_10) = \\frac{x_1 x_2 x_3 x_4 x_5}{x_6 x_7 x_8 x_9 x_10}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [1, 10] \mid i = \{1, 2, \ldots, 10\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 10^5 \mid \mathbf{x^*} = (10, 10, 10, 10, 10, 1, 1, 1, 1, 1)`.
+
+    """
+
+    def __init__(self, name='Simpleton', dims=10, continuous=True, convex=False,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(Simpleton, self).__init__(name, dims, continuous,
+                                        convex, differentiable, multimodal, separable)
+
+    @d.check_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Simpleton's Problem's function
+        f = (x[0] * x[1] * x[2] * x[3] * x[4]) / (x[5] * x[6] * x[7] * x[8] * x[9])
+       
+        return f
+
+
 class Watson(Benchmark):
     """Watson class implements the Watson's benchmarking function.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3, x_4, x_5, x_6) =
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3, x_4, x_5, x_6) = \sum_{i=0}^{29}{\sum_{j=0}^{4}((j-1)a_i^j x_{j+1}) - [\sum_{j=0}^{5}a_i^j x_{j+1}]^2 - 1}^2 + x_1^2
 
     Domain:
         The function is commonly evaluated using :math:`|x_i| \leq 10 \mid i = \{1, 2, 3, 4, 5, 6\}`.
@@ -776,8 +826,6 @@ class Watson(Benchmark):
 
             # Calculating partial Watson's function
             f += (outer_sum - inner_sum ** 2 - 1) ** 2
-
-            print(f)
 
         # Calculating final Watson's function
         f += x[0] ** 2

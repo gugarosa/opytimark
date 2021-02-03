@@ -129,6 +129,16 @@ def test_schmidt_vetters():
     assert np.round(y) == 3
 
 
+def test_simpleton():
+    f = many_dimensional.Simpleton()
+
+    x = np.array([10, 10, 10, 10, 10, 1, 1, 1, 1, 1])
+
+    y = f(x)
+
+    assert np.round(y) == 1e5
+
+
 def test_watson():
     f = many_dimensional.Watson()
 
