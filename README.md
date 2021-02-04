@@ -58,6 +58,8 @@ Opytimark is based on the following structure, and you should pay attention to i
     - core
         - benchmark
     - markers
+        - cec
+            - year_2005
         - boolean
         - one_dimensional
         - two_dimensional

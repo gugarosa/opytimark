@@ -53,6 +53,9 @@ class F1(Benchmark):
         """
 
         #
+        l.load_cec_auxiliary('F1_2005.txt')
+
+        #
         # o = 
 
         # Calculating the Shifted Sphere's function

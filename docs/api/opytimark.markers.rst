@@ -2,6 +2,7 @@ opytimark.markers
 ==================
 
 .. toctree::
+   opytimark.markers.cec
    opytimark.markers.boolean
    opytimark.markers.one_dimensional
    opytimark.markers.two_dimensional
