@@ -40,6 +40,9 @@ class F1(Benchmark):
         super(F1, self).__init__(name, dims, continuous,
                                  convex, differentiable, multimodal, separable)
 
+        # Loads auxiliary data and define it as a property
+        self.o = l.load_cec_auxiliary('F1', '2005')
+
     @d.check_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
@@ -52,13 +55,10 @@ class F1(Benchmark):
 
         """
 
-        #
-        l.load_cec_auxiliary('F1_2005.txt')
-
-        #
-        # o = 
+        # Re-calculates the input
+        z = x - self.o[:x.shape[0]]
 
         # Calculating the Shifted Sphere's function
-        f = x ** 2
+        f = z ** 2
 
-        return np.sum(f)
+        return np.sum(f) - 450
