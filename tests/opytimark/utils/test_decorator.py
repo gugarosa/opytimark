@@ -25,6 +25,22 @@ def test_check_exact_dimension():
         call(f, np.array([1]))
 
 
+def test_check_exact_dimension_and_auxiliary_matrix():
+    @decorator.check_exact_dimension_and_auxiliary_matrix
+    def call(obj, x):
+        return x
+
+    f = year_2005.F3()
+
+    try:
+        call(f, np.zeros(51))
+    except:
+        call(f, np.zeros(2))
+        call(f, np.zeros(10))
+        call(f, np.zeros(30))
+        call(f, np.zeros(50))
+
+
 def test_check_less_equal_dimension():
     @decorator.check_less_equal_dimension
     def call(obj, x):
