@@ -21,7 +21,7 @@ class F1(Benchmark):
 
     """
 
-    def __init__(self, name='F1', dims=-1, continuous=True, convex=False,
+    def __init__(self, name='F1', dims=100, continuous=True, convex=False,
                  differentiable=True, multimodal=False, separable=True):
         """Initialization method.
 
@@ -43,7 +43,7 @@ class F1(Benchmark):
         # Loads auxiliary data and define it as a property
         self.o = l.load_cec_auxiliary('F1', '2005')
 
-    @d.check_exact_dimension
+    @d.check_less_equal_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 

@@ -55,3 +55,45 @@ def check_exact_dimension(f):
         return f(obj, x)
 
     return _check_exact_dimension
+
+
+def check_less_equal_dimension(f):
+    """Checks whether the input dimension is less or equal to the demanded by the evaluated function.
+
+    Args:
+        f (callable): Function to be checked.
+
+    Returns:
+        The function output or an error depending whether the check is valid.
+
+    """
+
+    def _check_less_equal_dimension(*args):
+        """Wraps the dimension checking in order to provide additional logic.
+
+        Returns:
+            The wrapped function output.
+
+        """
+
+        # Retrieving the object and the input from arguments
+        obj, x = args[0], args[1]
+
+        # Tries to squeeze the last dimension of `x` as it might be an array of (dim, 1)
+        try:
+            # Squeezes the array
+            x = np.squeeze(x, axis=1)
+
+        # If squeeze could not be performed, it means that there is no extra dimension
+        except ValueError:
+            pass
+
+        # If the input dimensions is different from function's allowed dimensions
+        if x.shape[0] > obj.dims:
+            # Raises an error
+            raise e.SizeError(
+                f'{obj.name} input should be less or equal to {obj.dims}-dimensional')
+
+        return f(obj, x)
+
+    return _check_less_equal_dimension

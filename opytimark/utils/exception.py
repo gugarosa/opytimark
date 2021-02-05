@@ -20,7 +20,7 @@ class Error(Exception):
         super(Error, self).__init__()
 
         # Logs the error in a formatted way
-        print('%s: %s.', cls, msg)
+        print(f'{cls}: {msg}.')
 
 
 class SizeError(Error):
