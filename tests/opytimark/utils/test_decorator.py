@@ -4,8 +4,8 @@ from opytimark.markers import n_dimensional
 from opytimark.utils import decorator
 
 
-def test_check_dimension():
-    @decorator.check_dimension
+def test_check_exact_dimension():
+    @decorator.check_exact_dimension
     def call(obj, x):
         return x
 

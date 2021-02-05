@@ -40,7 +40,7 @@ class Ackley2(Benchmark):
         super(Ackley2, self).__init__(name, dims, continuous,
                                       convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -90,7 +90,7 @@ class Ackley3(Benchmark):
         super(Ackley3, self).__init__(name, dims, continuous,
                                       convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -141,7 +141,7 @@ class Adjiman(Benchmark):
         super(Adjiman, self).__init__(name, dims, continuous,
                                       convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -191,7 +191,7 @@ class BartelsConn(Benchmark):
         super(BartelsConn, self).__init__(name, dims, continuous,
                                           convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -242,7 +242,7 @@ class Beale(Benchmark):
         super(Beale, self).__init__(name, dims, continuous,
                                     convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -293,7 +293,7 @@ class BiggsExponential2(Benchmark):
         super(BiggsExponential2, self).__init__(name, dims, continuous,
                                                 convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -354,7 +354,7 @@ class Bird(Benchmark):
         super(Bird, self).__init__(name, dims, continuous,
                                    convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -405,7 +405,7 @@ class Bohachevsky1(Benchmark):
         super(Bohachevsky1, self).__init__(name, dims, continuous,
                                            convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -456,7 +456,7 @@ class Bohachevsky2(Benchmark):
         super(Bohachevsky2, self).__init__(name, dims, continuous,
                                            convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -507,7 +507,7 @@ class Bohachevsky3(Benchmark):
         super(Bohachevsky3, self).__init__(name, dims, continuous,
                                            convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -558,7 +558,7 @@ class Booth(Benchmark):
         super(Booth, self).__init__(name, dims, continuous,
                                     convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -608,7 +608,7 @@ class BraninHoo(Benchmark):
         super(BraninHoo, self).__init__(name, dims, continuous,
                                         convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -659,7 +659,7 @@ class Brent(Benchmark):
         super(Brent, self).__init__(name, dims, continuous,
                                     convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -710,7 +710,7 @@ class Bukin2(Benchmark):
         super(Bukin2, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -760,7 +760,7 @@ class Bukin4(Benchmark):
         super(Bukin4, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -810,7 +810,7 @@ class Bukin6(Benchmark):
         super(Bukin6, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -861,7 +861,7 @@ class Camel3(Benchmark):
         super(Camel3, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -912,7 +912,7 @@ class Camel6(Benchmark):
         super(Camel6, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -963,7 +963,7 @@ class ChenBird(Benchmark):
         super(ChenBird, self).__init__(name, dims, continuous,
                                        convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -1014,7 +1014,7 @@ class ChenV(Benchmark):
         super(ChenV, self).__init__(name, dims, continuous,
                                     convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -1065,7 +1065,7 @@ class Chichinadze(Benchmark):
         super(Chichinadze, self).__init__(name, dims, continuous,
                                           convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -1116,7 +1116,7 @@ class CrossTray(Benchmark):
         super(CrossTray, self).__init__(name, dims, continuous,
                                         convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -1167,7 +1167,7 @@ class Cube(Benchmark):
         super(Cube, self).__init__(name, dims, continuous,
                                    convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -1217,7 +1217,7 @@ class Damavandi(Benchmark):
         super(Damavandi, self).__init__(name, dims, continuous,
                                         convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -1269,7 +1269,7 @@ class DeckkersAarts(Benchmark):
         super(DeckkersAarts, self).__init__(name, dims, continuous,
                                             convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -1321,7 +1321,7 @@ class DropWave(Benchmark):
         super(DropWave, self).__init__(name, dims, continuous,
                                        convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -1372,7 +1372,7 @@ class Easom(Benchmark):
         super(Easom, self).__init__(name, dims, continuous,
                                     convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -1423,7 +1423,7 @@ class ElAttarVidyasagarDutta(Benchmark):
         super(ElAttarVidyasagarDutta, self).__init__(name, dims, continuous,
                                                      convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -1474,7 +1474,7 @@ class EggCrate(Benchmark):
         super(EggCrate, self).__init__(name, dims, continuous,
                                        convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -1525,7 +1525,7 @@ class EggHolder(Benchmark):
         super(EggHolder, self).__init__(name, dims, continuous,
                                         convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -1576,7 +1576,7 @@ class FreudensteinRoth(Benchmark):
         super(FreudensteinRoth, self).__init__(name, dims, continuous,
                                                convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -1627,7 +1627,7 @@ class Giunta(Benchmark):
         super(Giunta, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -1683,7 +1683,7 @@ class GoldsteinPrice(Benchmark):
         super(GoldsteinPrice, self).__init__(name, dims, continuous,
                                              convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -1735,7 +1735,7 @@ class Himmelblau(Benchmark):
         super(Himmelblau, self).__init__(name, dims, continuous,
                                          convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -1785,7 +1785,7 @@ class HolderTable(Benchmark):
         super(HolderTable, self).__init__(name, dims, continuous,
                                           convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -1836,7 +1836,7 @@ class Hosaki(Benchmark):
         super(Hosaki, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -1887,7 +1887,7 @@ class JennrichSampson(Benchmark):
         super(JennrichSampson, self).__init__(name, dims, continuous,
                                               convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -1942,7 +1942,7 @@ class Keane(Benchmark):
         super(Keane, self).__init__(name, dims, continuous,
                                     convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -1993,7 +1993,7 @@ class Leon(Benchmark):
         super(Leon, self).__init__(name, dims, continuous,
                                    convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -2043,7 +2043,7 @@ class Levy13(Benchmark):
         super(Levy13, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -2094,7 +2094,7 @@ class Matyas(Benchmark):
         super(Matyas, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -2144,7 +2144,7 @@ class McCormick(Benchmark):
         super(McCormick, self).__init__(name, dims, continuous,
                                         convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -2195,7 +2195,7 @@ class Mishra3(Benchmark):
         super(Mishra3, self).__init__(name, dims, continuous,
                                       convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -2246,7 +2246,7 @@ class Mishra4(Benchmark):
         super(Mishra4, self).__init__(name, dims, continuous,
                                       convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -2297,7 +2297,7 @@ class Mishra5(Benchmark):
         super(Mishra5, self).__init__(name, dims, continuous,
                                       convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -2348,7 +2348,7 @@ class Mishra6(Benchmark):
         super(Mishra6, self).__init__(name, dims, continuous,
                                       convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -2399,7 +2399,7 @@ class Mishra8(Benchmark):
         super(Mishra8, self).__init__(name, dims, continuous,
                                       convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -2457,7 +2457,7 @@ class Parsopoulos(Benchmark):
         super(Parsopoulos, self).__init__(name, dims, continuous,
                                           convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -2507,7 +2507,7 @@ class PenHolder(Benchmark):
         super(PenHolder, self).__init__(name, dims, continuous,
                                         convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -2558,7 +2558,7 @@ class Periodic(Benchmark):
         super(Periodic, self).__init__(name, dims, continuous,
                                        convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -2609,7 +2609,7 @@ class Price1(Benchmark):
         super(Price1, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -2659,7 +2659,7 @@ class Price2(Benchmark):
         super(Price2, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -2710,7 +2710,7 @@ class Price3(Benchmark):
         super(Price3, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -2761,7 +2761,7 @@ class Price4(Benchmark):
         super(Price4, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -2812,7 +2812,7 @@ class Quadratic(Benchmark):
         super(Quadratic, self).__init__(name, dims, continuous,
                                         convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -2863,7 +2863,7 @@ class RotatedEllipse1(Benchmark):
         super(RotatedEllipse1, self).__init__(name, dims, continuous,
                                               convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -2913,7 +2913,7 @@ class RotatedEllipse2(Benchmark):
         super(RotatedEllipse2, self).__init__(name, dims, continuous,
                                               convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -2963,7 +2963,7 @@ class Rump(Benchmark):
         super(Rump, self).__init__(name, dims, continuous,
                                    convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -3014,7 +3014,7 @@ class Schaffer1(Benchmark):
         super(Schaffer1, self).__init__(name, dims, continuous,
                                         convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -3065,7 +3065,7 @@ class Schaffer2(Benchmark):
         super(Schaffer2, self).__init__(name, dims, continuous,
                                         convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -3116,7 +3116,7 @@ class Schaffer3(Benchmark):
         super(Schaffer3, self).__init__(name, dims, continuous,
                                         convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -3167,7 +3167,7 @@ class Schaffer4(Benchmark):
         super(Schaffer4, self).__init__(name, dims, continuous,
                                         convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -3218,7 +3218,7 @@ class Schwefel26(Benchmark):
         super(Schwefel26, self).__init__(name, dims, continuous,
                                          convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -3268,7 +3268,7 @@ class Schwefel236(Benchmark):
         super(Schwefel236, self).__init__(name, dims, continuous,
                                           convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -3318,7 +3318,7 @@ class Table1(Benchmark):
         super(Table1, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -3369,7 +3369,7 @@ class Table2(Benchmark):
         super(Table2, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -3420,7 +3420,7 @@ class Table3(Benchmark):
         super(Table3, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -3471,7 +3471,7 @@ class TesttubeHolder(Benchmark):
         super(TesttubeHolder, self).__init__(name, dims, continuous,
                                              convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -3522,7 +3522,7 @@ class Trecani(Benchmark):
         super(Trecani, self).__init__(name, dims, continuous,
                                       convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -3572,7 +3572,7 @@ class Trefethen(Benchmark):
         super(Trefethen, self).__init__(name, dims, continuous,
                                         convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -3623,7 +3623,7 @@ class VenterSobiezcczanskiSobieski(Benchmark):
         super(VenterSobiezcczanskiSobieski, self).__init__(name, dims, continuous,
                                                            convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -3674,7 +3674,7 @@ class WayburnSeader1(Benchmark):
         super(WayburnSeader1, self).__init__(name, dims, continuous,
                                              convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -3724,7 +3724,7 @@ class WayburnSeader2(Benchmark):
         super(WayburnSeader2, self).__init__(name, dims, continuous,
                                              convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -3775,7 +3775,7 @@ class WayburnSeader3(Benchmark):
         super(WayburnSeader3, self).__init__(name, dims, continuous,
                                              convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -3826,7 +3826,7 @@ class Zettl(Benchmark):
         super(Zettl, self).__init__(name, dims, continuous,
                                     convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -3876,7 +3876,7 @@ class Zirilli(Benchmark):
         super(Zirilli, self).__init__(name, dims, continuous,
                                       convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 

@@ -43,7 +43,7 @@ class F1(Benchmark):
         # Loads auxiliary data and define it as a property
         self.o = l.load_cec_auxiliary('F1', '2005')
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 

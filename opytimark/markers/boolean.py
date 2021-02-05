@@ -111,7 +111,7 @@ class Knapsack(Benchmark):
 
         self._max_capacity = max_capacity
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 

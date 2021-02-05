@@ -40,7 +40,7 @@ class Forrester(Benchmark):
         super(Forrester, self).__init__(name, dims, continuous,
                                         convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -90,7 +90,7 @@ class GramacyLee(Benchmark):
         super(GramacyLee, self).__init__(name, dims, continuous,
                                          convex, differentiable, multimodal, separable)
 
-    @d.check_dimension
+    @d.check_exact_dimension
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 

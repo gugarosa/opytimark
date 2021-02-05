@@ -6,8 +6,8 @@ import numpy as np
 import opytimark.utils.exception as e
 
 
-def check_dimension(f):
-    """Checks whether the input dimension is suitable for the evaluated function or not.
+def check_exact_dimension(f):
+    """Checks whether the input dimension is exact to the demanded by the evaluated function.
 
     Args:
         f (callable): Function to be checked.
@@ -17,7 +17,7 @@ def check_dimension(f):
 
     """
 
-    def _check_dimension(*args):
+    def _check_exact_dimension(*args):
         """Wraps the dimension checking in order to provide additional logic.
 
         Returns:
@@ -54,4 +54,4 @@ def check_dimension(f):
 
         return f(obj, x)
 
-    return _check_dimension
+    return _check_exact_dimension
