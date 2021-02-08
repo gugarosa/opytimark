@@ -198,3 +198,136 @@ class F3(Benchmark):
             f += 10e6 ** (i / (x.shape[0] - 1)) * z[i] ** 2
 
         return f - 450
+
+
+class F4(Benchmark):
+    """F4 class implements the Shifted Schwefel's 1.2 with Noise in Fitness benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (\sum_{j=1}^i z_j)^2 * (1 + 0.4|N(0,1)|) - 450 \mid z_i = x_i - o_i
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -450 \mid \mathbf{x^*} = \mathbf{o}`.
+
+    """
+
+    def __init__(self, name='F4', dims=100, continuous=True, convex=False,
+                 differentiable=True, multimodal=False, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(F4, self).__init__(name, dims, continuous,
+                                 convex, differentiable, multimodal, separable)
+
+        # Loads auxiliary data and define it as a property
+        self.o = l.load_cec_auxiliary('F4', '2005')
+
+    @d.check_less_equal_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Re-calculates the input
+        z = x - self.o[:x.shape[0]]
+
+        # Instantiating function
+        f = 0
+
+        # For every input dimension
+        for i in range(x.shape[0]):
+            # Resetting partial term
+            partial = 0
+
+            # For every dimension till `i`
+            for j in range(i):
+                # Sums up the partial term
+                partial += z[j]
+
+            # Calculating the Shifted Schwefel's 1.2 with Noise in Fitness function
+            f += partial ** 2
+
+        # Generates a random uniform noise
+        noise = np.random.uniform()
+
+        return f * (1 + 0.4 * noise) - 450
+
+
+class F6(Benchmark):
+    """F6 class implements the Shifted Rosenbrock's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n-1} (100(z_i^2-z_{i+1})^2 + (z_i - 1)^2) + 390 \mid z_i = x_i - o_i
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -450 \mid \mathbf{x^*} = \mathbf{o}`.
+
+    """
+
+    def __init__(self, name='F6', dims=100, continuous=True, convex=False,
+                 differentiable=True, multimodal=False, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(F6, self).__init__(name, dims, continuous,
+                                 convex, differentiable, multimodal, separable)
+
+        # Loads auxiliary data and define it as a property
+        self.o = l.load_cec_auxiliary('F6', '2005')
+
+    @d.check_less_equal_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Re-calculates the input
+        z = x - self.o[:x.shape[0]] + 1
+
+        # Instantiating function
+        f = 0
+
+        # For every input dimension
+        for i in range(x.shape[0] - 1):
+            # Calculating the Shifted Rosenbrock's function
+            f += (100 * (z[i] ** 2 - z[i+1]) ** 2 + (z[i] - 1) ** 2)
+
+        return f + 390
