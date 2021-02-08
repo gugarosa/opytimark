@@ -43,6 +43,16 @@ def test_F4():
     assert y == -450
 
 
+def test_F5():
+    f = year_2005.F5()
+
+    x = np.array([-5.5559000, 7.9470000, -1.5380000, 8.3897000, 7.7182000])
+
+    y = f(x)
+
+    assert y == -310
+
+
 def test_F6():
     f = year_2005.F6()
 

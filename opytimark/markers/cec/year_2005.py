@@ -272,6 +272,66 @@ class F4(Benchmark):
         return f * (1 + 0.4 * noise) - 450
 
 
+class F5(Benchmark):
+    """F5 class implements the Schwefel's Problem 2.6 with Global Optimum on Bounds benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \max{|A_i x - B_i|} - 310 \mid z_i = x_i - o_i
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -310 \mid \mathbf{x^*} = \mathbf{o}`.
+
+    """
+
+    def __init__(self, name='F5', dims=100, continuous=True, convex=False,
+                 differentiable=True, multimodal=False, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(F5, self).__init__(name, dims, continuous,
+                                 convex, differentiable, multimodal, separable)
+
+        # Loads auxiliary data and define it as a property
+        self.o = l.load_cec_auxiliary('F5', '2005')
+        self.A = l.load_cec_auxiliary('F5_D100', '2005')
+
+    @d.check_less_equal_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Gathers the correct input
+        A = self.A[:x.shape[0], :x.shape[0]]
+
+        # Calculates the `B` matrix
+        B = np.matmul(A, self.o[:x.shape[0]])
+
+        # Calculating the Schwefel's Problem 2.6 with Global Optimum on Bounds function
+        f = np.max(np.fabs(np.matmul(A, x) - B))
+
+        return f - 310
+
+
 class F6(Benchmark):
     """F6 class implements the Shifted Rosenbrock's benchmarking function.
 

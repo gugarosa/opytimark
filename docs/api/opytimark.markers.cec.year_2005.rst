@@ -17,6 +17,10 @@ opytimark.markers.cec.year_2005
    :members:
    :show-inheritance:
 
+.. autoapiclass:: opytimark.markers.cec.year_2005.F5
+   :members:
+   :show-inheritance:
+
 .. autoapiclass:: opytimark.markers.cec.year_2005.F6
    :members:
    :show-inheritance:
