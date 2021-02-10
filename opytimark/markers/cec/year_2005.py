@@ -306,7 +306,7 @@ class F5(Benchmark):
 
         # Loads auxiliary data and define it as a property
         self.o = l.load_cec_auxiliary('F5', '2005')
-        self.A = l.load_cec_auxiliary('F5_D100', '2005')
+        self.A = l.load_cec_auxiliary('F5_A100', '2005')
 
     @d.check_less_equal_dimension
     def __call__(self, x):
@@ -727,3 +727,67 @@ class F11(Benchmark):
             f -= x.shape[0] * (0.5 ** k * np.cos(2 * np.pi * 3 ** k * 0.5))
 
         return f + 90
+
+
+class F12(Benchmark):
+    """F12 class implements the Schwefel's Problem 2.13 benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (A_i - B_i)^2 - 460 \mid A_i = \sum_{j=1}^{n} a_{ij} sin(\alpha_j) + b_{ij} cos(\alpha_j), A_i = \sum_{j=1}^{n} a_{ij} sin(x_j) + b_{ij} cos(x_j) 
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-\\pi, \\pi] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -460 \mid \mathbf{x^*} = \mathbf{\alpha}`.
+
+    """
+
+    def __init__(self, name='F12', dims=100, continuous=True, convex=True,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(F12, self).__init__(name, dims, continuous,
+                                 convex, differentiable, multimodal, separable)
+
+        # Loads auxiliary data and define it as a property
+        self.alpha = l.load_cec_auxiliary('F12', '2005')
+        self.a = l.load_cec_auxiliary('F12_A100', '2005')
+        self.b = l.load_cec_auxiliary('F12_B100', '2005')
+
+    @d.check_less_equal_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Gathers the correct input
+        alpha = self.alpha[:x.shape[0]]
+        a = self.a[:x.shape[0], :x.shape[0]]
+        b = self.b[:x.shape[0], :x.shape[0]]
+
+        # Calculates the `A` and `B` matrices
+        A = a * np.sin(alpha) + b * np.cos(alpha)
+        B = a * np.sin(x) + b * np.cos(x)
+
+        # Calculating the Schwefel's Problem 2.13 function
+        f = (A - B) ** 2
+
+        return np.sum(f) - 460
