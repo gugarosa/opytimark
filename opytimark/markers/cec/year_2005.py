@@ -546,7 +546,7 @@ class F9(Benchmark):
         The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
 
     Global Minima:
-        :math:`f(\mathbf{x^*}) = -450 \mid \mathbf{x^*} = \mathbf{o}`.
+        :math:`f(\mathbf{x^*}) = -330 \mid \mathbf{x^*} = \mathbf{o}`.
 
     """
 
@@ -586,6 +586,68 @@ class F9(Benchmark):
 
         # Re-calculates the input
         z = x - self.o[:x.shape[0]]
+
+        # Calculating the Shifted Rastrigin's function
+        f = z ** 2 - 10 * np.cos(2 * np.pi * z) + 10
+
+        return np.sum(f) - 330
+
+
+class F10(Benchmark):
+    """F10 class implements the Shifted Rotated Rastrigin's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (z_i^2 - 10cos(2 \\pi z_i) + 10) - 330 \mid z_i = x_i - o_i
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -330 \mid \mathbf{x^*} = \mathbf{o}`.
+
+    """
+
+    def __init__(self, name='F10', dims=100, continuous=True, convex=True,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(F10, self).__init__(name, dims, continuous,
+                                 convex, differentiable, multimodal, separable)
+
+        # Loads auxiliary data and define it as a property
+        self.o = l.load_cec_auxiliary('F10', '2005')
+
+        # Pre-loads every auxiliary matrix for faster computing
+        self.M_2 = l.load_cec_auxiliary('F10_D2', '2005')
+        self.M_10 = l.load_cec_auxiliary('F10_D10', '2005')
+        self.M_30 = l.load_cec_auxiliary('F10_D30', '2005')
+        self.M_50 = l.load_cec_auxiliary('F10_D50', '2005')
+
+    @d.check_exact_dimension_and_auxiliary_matrix
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Re-calculates the input
+        z = np.matmul(x - self.o[:x.shape[0]], self.M)
 
         # Calculating the Shifted Rastrigin's function
         f = z ** 2 - 10 * np.cos(2 * np.pi * z) + 10
