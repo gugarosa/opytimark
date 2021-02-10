@@ -275,7 +275,7 @@ class F4(Benchmark):
 class F5(Benchmark):
     """F5 class implements the Schwefel's Problem 2.6 with Global Optimum on Bounds benchmarking function.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \max{|A_i x - B_i|} - 310 \mid z_i = x_i - o_i
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \max{|A_i x - B_i|} - 310 \mid B_i = A_i - o_i
 
     Domain:
         The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
@@ -396,7 +396,7 @@ class F6(Benchmark):
 class F7(Benchmark):
     """F7 class implements the Shifted Rotated Griewank's Function without Bounds benchmarking function.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = 1 + \sum_{i=1}^{n}\\frac{x_i^2}{4000} - \prod cos(\\frac{x_i}{\sqrt{i}}) - 180 \mid z_i = x_i - o_i
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = 1 + \sum_{i=1}^{n}\\frac{x_i^2}{4000} - \prod cos(\\frac{x_i}{\sqrt{i}}) - 180 \mid z_i = (x_i - o_i) * M_i
 
     Domain:
         The function is commonly evaluated using :math:`x_i \in [0, 600] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
@@ -469,7 +469,7 @@ class F7(Benchmark):
 class F8(Benchmark):
     """F8 class implements the Shifted Rotated Ackley's Function with Global Optimum on Bounds benchmarking function.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = -20e^{-0.2\sqrt{\\frac{1}{n}\sum_{i=1}^{n}x_i^2}}-e^{\\frac{1}{n}\sum_{i=1}^{n}cos(2 \\pi x_i)}+ 20 + e - 180 \mid z_i = x_i - o_i
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = -20e^{-0.2\sqrt{\\frac{1}{n}\sum_{i=1}^{n}x_i^2}}-e^{\\frac{1}{n}\sum_{i=1}^{n}cos(2 \\pi x_i)}+ 20 + e - 180 \mid z_i = (x_i - o_i) * M_i
 
     Domain:
         The function is commonly evaluated using :math:`x_i \in [-32, 32] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
@@ -596,7 +596,7 @@ class F9(Benchmark):
 class F10(Benchmark):
     """F10 class implements the Shifted Rotated Rastrigin's benchmarking function.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (z_i^2 - 10cos(2 \\pi z_i) + 10) - 330 \mid z_i = x_i - o_i
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (z_i^2 - 10cos(2 \\pi z_i) + 10) - 330 \mid z_i = (x_i - o_i) * M_i
 
     Domain:
         The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
@@ -653,3 +653,77 @@ class F10(Benchmark):
         f = z ** 2 - 10 * np.cos(2 * np.pi * z) + 10
 
         return np.sum(f) - 330
+
+
+class F11(Benchmark):
+    """F11 class implements the Shifted Rotated Weierstrass's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (\sum_{k=0}^{20} [0.5^k cos(2\\pi 3^k(z_i+0.5))]) - n \sum_{k=0}^{20}[0.5^k cos(2\\pi 3^k 0.5)] \mid z_i = (x_i - o_i) * M_i
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-0.5, 0.5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 90 \mid \mathbf{x^*} = \mathbf{o}`.
+
+    """
+
+    def __init__(self, name='F11', dims=100, continuous=True, convex=True,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(F11, self).__init__(name, dims, continuous,
+                                 convex, differentiable, multimodal, separable)
+
+        # Loads auxiliary data and define it as a property
+        self.o = l.load_cec_auxiliary('F11', '2005')
+
+        # Pre-loads every auxiliary matrix for faster computing
+        self.M_2 = l.load_cec_auxiliary('F11_D2', '2005')
+        self.M_10 = l.load_cec_auxiliary('F11_D10', '2005')
+        self.M_30 = l.load_cec_auxiliary('F11_D30', '2005')
+        self.M_50 = l.load_cec_auxiliary('F11_D50', '2005')
+
+    @d.check_exact_dimension_and_auxiliary_matrix
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Re-calculates the input
+        z = np.matmul(x - self.o[:x.shape[0]], self.M)
+
+        # Instantiates the function
+        f = 0
+
+        # For every possible dimension of `x`
+        for i in range(x.shape[0]):
+            # Iterates until `k_max = 20`
+            for k in range(21):
+                # Adds the first term
+                f += 0.5 ** k * np.cos(2 * np.pi * 3 ** k * (z[i] + 0.5))
+
+        # Iterates again until `k_max = 20`
+        for k in range(21):
+            # Adds the second term
+            f -= x.shape[0] * (0.5 ** k * np.cos(2 * np.pi * 3 ** k * 0.5))
+
+        return f + 90
