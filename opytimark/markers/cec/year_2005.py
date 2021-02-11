@@ -791,3 +791,77 @@ class F12(Benchmark):
         f = (A - B) ** 2
 
         return np.sum(f) - 460
+
+
+class F13(Benchmark):
+    """F13 class implements the Shifted Expanded Griewank's plus Rosenbrock's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) =  f(x_1, x_2) + f(x_2, x_3) + \ldots + f(x_n, f_1) - 130 \mid z_i = x_i - o_i + 1
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-3, 1] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -130 \mid \mathbf{x^*} = \mathbf{\alpha}`.
+
+    """
+
+    def __init__(self, name='F13', dims=100, continuous=True, convex=True,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(F13, self).__init__(name, dims, continuous,
+                                  convex, differentiable, multimodal, separable)
+
+        # Loads auxiliary data and define it as a property
+        self.o = l.load_cec_auxiliary('F13', '2005')
+
+    @d.check_less_equal_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        def _griewank(x):
+            return x ** 2 / 4000 - np.cos(x / np.sqrt(1)) + 1
+
+        def _rosenbrock(x, y):
+            return 100 * (x ** 2 - y) ** 2 + (x - 1) ** 2
+
+        # Re-calculates the input
+        z = x - self.o[:x.shape[0]] + 1
+
+        # Instantiating function
+        f = 0
+
+        # Iterates through every dimension
+        for i in range(x.shape[0]):
+            # Checks if it is the last dimension
+            if i == (x.shape[0] - 1):
+                # Calculates the Shifted Expanded Griewank's plus Rosenbrock's function using indexes `n` and `0`
+                f += _griewank(_rosenbrock(z[i], z[0]))
+
+            # Checks if it is not the last dimension
+            else:
+                # Calculates the Shifted Expanded Griewank's plus Rosenbrock's function using indexes `i` and `i+1`
+                f += _griewank(_rosenbrock(z[i], z[i+1]))
+
+        return f - 130
