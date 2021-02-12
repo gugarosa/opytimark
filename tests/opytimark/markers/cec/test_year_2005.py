@@ -131,3 +131,13 @@ def test_F13():
     y = f(x)
 
     assert y == -130
+
+
+def test_F14():
+    f = year_2005.F14()
+
+    x = np.array([-73.602900, -23.549700])
+
+    y = f(x)
+
+    assert y == -300

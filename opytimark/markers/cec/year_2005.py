@@ -865,3 +865,80 @@ class F13(Benchmark):
                 f += _griewank(_rosenbrock(z[i], z[i+1]))
 
         return f - 130
+
+
+class F14(Benchmark):
+    """F14 class implements the Shifted Rotated Expanded Scaffer's F6 benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) =  f(x_1, x_2) + f(x_2, x_3) + \ldots + f(x_n, f_1) - 300 \mid z_i = x_i - o_i + 1
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = -300 \mid \mathbf{x^*} = \mathbf{o}`.
+
+    """
+
+    def __init__(self, name='F14', dims=100, continuous=True, convex=True,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(F14, self).__init__(name, dims, continuous,
+                                  convex, differentiable, multimodal, separable)
+
+        # Loads auxiliary data and define it as a property
+        self.o = l.load_cec_auxiliary('F14', '2005')
+
+        # Pre-loads every auxiliary matrix for faster computing
+        self.M_2 = l.load_cec_auxiliary('F14_D2', '2005')
+        self.M_10 = l.load_cec_auxiliary('F14_D10', '2005')
+        self.M_30 = l.load_cec_auxiliary('F14_D30', '2005')
+        self.M_50 = l.load_cec_auxiliary('F14_D50', '2005')
+
+    @d.check_exact_dimension_and_auxiliary_matrix
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        def _scaffer(x, y):
+            return 0.5 + (np.sin(np.sqrt(x ** 2 + y ** 2)) ** 2 - 0.5) / ((1 + 0.0001 * (x ** 2 + y ** 2)) ** 2)
+
+        # Re-calculates the input
+        z = np.matmul(x - self.o[:x.shape[0]], self.M)
+
+        # Instantiating function
+        f = 0
+
+        # Iterates through every dimension
+        for i in range(x.shape[0]):
+            # Checks if it is the last dimension
+            if i == (x.shape[0] - 1):
+                # Calculates the Shifted Rotated Expanded Scaffer's F6 function using indexes `n` and `0`
+                f += _scaffer(z[i], z[0])
+
+            # Checks if it is not the last dimension
+            else:
+                # Calculates the Shifted Rotated Expanded Scaffer's F6 function using indexes `i` and `i+1`
+                f += _scaffer(z[i], z[i+1])
+
+        return f - 300
