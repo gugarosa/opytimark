@@ -3,6 +3,7 @@
 
 import numpy as np
 
+import opytimark.markers.n_dimensional as n_dim
 import opytimark.utils.decorator as d
 import opytimark.utils.loader as l
 from opytimark.core import Benchmark
@@ -942,3 +943,73 @@ class F14(Benchmark):
                 f += _scaffer(z[i], z[i+1])
 
         return f - 300
+
+
+class F15(Benchmark):
+    """F15 class implements the Hybrid Composition Function benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) =  f(x_1, x_2) + f(x_2, x_3) + \ldots + f(x_n, f_1) - 300 \mid z_i = x_i - o_i + 1
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 120 \mid \mathbf{x^*} = \mathbf{o}`.
+
+    """
+
+    def __init__(self, name='F15', dims=100, continuous=True, convex=True,
+                 differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(F15, self).__init__(name, dims, continuous,
+                                  convex, differentiable, multimodal, separable)
+
+        # Loads auxiliary data and define it as a property
+        self.o = l.load_cec_auxiliary('F15', '2005')
+
+        # Pre-loads every auxiliary matrix for faster computing
+        self.M_2 = l.load_cec_auxiliary('F15_D2', '2005')
+        self.M_10 = l.load_cec_auxiliary('F15_D10', '2005')
+        self.M_30 = l.load_cec_auxiliary('F15_D30', '2005')
+        self.M_50 = l.load_cec_auxiliary('F15_D50', '2005')
+
+    @d.check_exact_dimension_and_auxiliary_matrix
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        print(self.o.shape)
+
+        D = x.shape[0]
+        sigma = 1
+        l = [1, 1, 10, 10, 5/60, 5/60, 5/32, 5/32, 5/100, 5/100]
+
+        for i in range(10):
+            f = n_dim.Rastrigin()
+            w = np.exp(-np.sum((x - self.o[i][:D]) ** 2) / 2 * D * sigma ** 2)
+            fit = f(x - self.o[i][:D] / l[i])
+            f_max = f(5 / l[i])
+
+
+
+        return 100
