@@ -95,20 +95,20 @@ def check_exact_dimension_and_auxiliary_matrix(f):
 
         # If the input dimension is equal to 2
         if x.shape[0] == 2:
-            # Defines the auxiliary matrix `M` as `M_2`
-            setattr(obj, 'M', obj.M_2)
+            # Defines the auxiliary matrix `M` as `M2`
+            setattr(obj, 'M', obj.M2)
         # If the input dimension is equal to 10
         elif x.shape[0] == 10:
-            # Defines the auxiliary matrix `M` as `M_10`
-            setattr(obj, 'M', obj.M_10)
+            # Defines the auxiliary matrix `M` as `M10`
+            setattr(obj, 'M', obj.M10)
         # If the input dimension is equal to 30
         elif x.shape[0] == 30:
-            # Defines the auxiliary matrix `M` as `M_30`
-            setattr(obj, 'M', obj.M_30)
+            # Defines the auxiliary matrix `M` as `M30`
+            setattr(obj, 'M', obj.M30)
         # If the input dimension is equal to 50
         elif x.shape[0] == 50:
-            # Defines the auxiliary matrix `M` as `M_50`
-            setattr(obj, 'M', obj.M_50)
+            # Defines the auxiliary matrix `M` as `M50`
+            setattr(obj, 'M', obj.M50)
 
         return f(obj, x)
 

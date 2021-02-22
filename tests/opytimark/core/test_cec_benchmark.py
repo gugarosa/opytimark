@@ -147,23 +147,6 @@ def test_cec_benchmark_separable_setter():
     assert new_cec_benchmark.separable == True
 
 
-def test_cec_benchmark_o():
-    new_cec_benchmark = cec_benchmark.CECBenchmark('F1', '2005')
-
-    assert new_cec_benchmark.o.shape == (100,)
-
-
-def test_cec_benchmark_o_setter():
-    new_cec_benchmark = cec_benchmark.CECBenchmark('F1', '2005')
-
-    try:
-        new_cec_benchmark.o = 1
-    except:
-        new_cec_benchmark.o = np.array([1])
-
-    assert new_cec_benchmark.o.shape == (1,)
-
-
 def test_cec_benchmark_call():
     new_cec_benchmark = cec_benchmark.CECBenchmark('F1', '2005')
 

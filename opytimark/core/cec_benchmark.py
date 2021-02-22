@@ -1,8 +1,6 @@
 """CEC Benchmark-based class.
 """
 
-import numpy as np
-
 import opytimark.utils.exception as e
 import opytimark.utils.loader as l
 
@@ -54,9 +52,6 @@ class CECBenchmark:
 
         # Separability
         self.separable = separable
-
-        # Auxiliary data
-        self.o = l.load_cec_auxiliary(name, year)
 
     @property
     def name(self):
@@ -180,21 +175,6 @@ class CECBenchmark:
 
         self._separable = separable
 
-    @property
-    def o(self):
-        """np.array: Array that holds the auxiliary data.
-
-        """
-
-        return self._o
-
-    @o.setter
-    def o(self, o):
-        if not isinstance(o, np.ndarray):
-            raise e.TypeError('`o` should be a numpy array')
-
-        self._o = o
-
     def __call__(self, x):
         """This method returns the function's output when the class is called.
 
@@ -210,3 +190,25 @@ class CECBenchmark:
         """
 
         raise NotImplementedError
+
+    def load_auxiliary_data(self, name, year, data):
+        """Loads auxiliary data from a set of files.
+
+        Args:
+            name (str): Name of the function.
+            year (str): Year of the function.
+            data (list): List holding the variables to be loaded.
+
+        """
+
+        # Iterates over the `data` list
+        for d in data:
+            # Constructs the data file
+            # Note that it will always be NAME_VARIABLE
+            data_file = f'{name}_{d}'
+
+            # Loads the data to a temporary variable
+            tmp = l.load_cec_auxiliary(data_file, year)
+
+            # Sets the temporary variable as a property
+            setattr(self, d, tmp)
