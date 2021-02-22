@@ -23,6 +23,6 @@ def test_untar_file():
 
 
 def test_load_cec_auxiliary():
-    data = loader.load_cec_auxiliary('F1', '2005')
+    data = loader.load_cec_auxiliary('F1_o', '2005')
 
     assert data.shape[0] == 100
