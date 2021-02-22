@@ -6,10 +6,10 @@ import numpy as np
 import opytimark.markers.n_dimensional as n_dim
 import opytimark.utils.decorator as d
 import opytimark.utils.loader as l
-from opytimark.core import Benchmark
+from opytimark.core import Benchmark, CECBenchmark
 
 
-class F1(Benchmark):
+class F1(CECBenchmark):
     """F1 class implements the Shifted Sphere's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} z_i^2 - 450 \mid z_i = x_i - o_i
@@ -22,27 +22,27 @@ class F1(Benchmark):
 
     """
 
-    def __init__(self, name='F1', dims=100, continuous=True, convex=True,
-                 differentiable=True, multimodal=False, separable=True):
+    def __init__(self, name='F1', year='2005', dims=100, continuous=True, convex=True,
+                 differentiable=True, multimodal=False, separable=True,
+                 extra_matrices=False):
         """Initialization method.
 
         Args:
             name (str): Name of the function.
+            year (str): Year of the function.
             dims (int): Number of allowed dimensions.
             continuous (bool): Whether the function is continuous.
             convex (bool): Whether the function is convex.
             differentiable (bool): Whether the function is differentiable.
             multimodal (bool): Whether the function is multimodal.
             separable (bool): Whether the function is separable.
+            extra_matrices (bool): Whether the function uses auxiliary matrices.
 
         """
 
         # Override its parent class
-        super(F1, self).__init__(name, dims, continuous,
-                                 convex, differentiable, multimodal, separable)
-
-        # Loads auxiliary data and define it as a property
-        self.o = l.load_cec_auxiliary('F1', '2005')
+        super(F1, self).__init__(name, year, dims, continuous, convex,
+                                 differentiable, multimodal, separable, extra_matrices)
 
     @d.check_less_equal_dimension
     def __call__(self, x):
