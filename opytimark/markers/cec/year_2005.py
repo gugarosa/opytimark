@@ -23,8 +23,7 @@ class F1(CECBenchmark):
     """
 
     def __init__(self, name='F1', year='2005', dims=100, continuous=True, convex=True,
-                 differentiable=True, multimodal=False, separable=True,
-                 extra_matrices=False):
+                 differentiable=True, multimodal=False, separable=True):
         """Initialization method.
 
         Args:
@@ -36,13 +35,12 @@ class F1(CECBenchmark):
             differentiable (bool): Whether the function is differentiable.
             multimodal (bool): Whether the function is multimodal.
             separable (bool): Whether the function is separable.
-            extra_matrices (bool): Whether the function uses auxiliary matrices.
 
         """
 
         # Override its parent class
-        super(F1, self).__init__(name, year, dims, continuous, convex,
-                                 differentiable, multimodal, separable, extra_matrices)
+        super(F1, self).__init__(name, year, dims, continuous,
+                                 convex, differentiable, multimodal, separable)
 
     @d.check_less_equal_dimension
     def __call__(self, x):
@@ -65,7 +63,7 @@ class F1(CECBenchmark):
         return np.sum(f) - 450
 
 
-class F2(Benchmark):
+class F2(CECBenchmark):
     """F2 class implements the Shifted Schwefel's 1.2 benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (\sum_{j=1}^i z_j)^2 - 450 \mid z_i = x_i - o_i
@@ -78,7 +76,7 @@ class F2(Benchmark):
 
     """
 
-    def __init__(self, name='F2', dims=100, continuous=True, convex=True,
+    def __init__(self, name='F2', year='2005', dims=100, continuous=True, convex=True,
                  differentiable=True, multimodal=False, separable=False):
         """Initialization method.
 
@@ -94,11 +92,8 @@ class F2(Benchmark):
         """
 
         # Override its parent class
-        super(F2, self).__init__(name, dims, continuous,
+        super(F2, self).__init__(name, year, dims, continuous,
                                  convex, differentiable, multimodal, separable)
-
-        # Loads auxiliary data and define it as a property
-        self.o = l.load_cec_auxiliary('F2', '2005')
 
     @d.check_less_equal_dimension
     def __call__(self, x):
@@ -134,7 +129,7 @@ class F2(Benchmark):
         return f - 450
 
 
-class F3(Benchmark):
+class F3(CECBenchmark):
     """F3 class implements the Shifted Rotated High Conditioned Elliptic's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (10^6)^\\frac{i-1}{n-1} z_i^2 - 450 \mid z_i = (x_i - o_i) * M_i
@@ -147,7 +142,7 @@ class F3(Benchmark):
 
     """
 
-    def __init__(self, name='F3', dims=-1, continuous=True, convex=True,
+    def __init__(self, name='F3', year='2005', dims=-1, continuous=True, convex=True,
                  differentiable=True, multimodal=False, separable=False):
         """Initialization method.
 
@@ -163,11 +158,8 @@ class F3(Benchmark):
         """
 
         # Override its parent class
-        super(F3, self).__init__(name, dims, continuous,
+        super(F3, self).__init__(name, year, dims, continuous,
                                  convex, differentiable, multimodal, separable)
-
-        # Loads auxiliary data and define it as a property
-        self.o = l.load_cec_auxiliary('F3', '2005')
 
         # Pre-loads every auxiliary matrix for faster computing
         self.M_2 = l.load_cec_auxiliary('F3_D2', '2005')
@@ -201,7 +193,7 @@ class F3(Benchmark):
         return f - 450
 
 
-class F4(Benchmark):
+class F4(CECBenchmark):
     """F4 class implements the Shifted Schwefel's 1.2 with Noise in Fitness benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (\sum_{j=1}^i z_j)^2 * (1 + 0.4|N(0,1)|) - 450 \mid z_i = x_i - o_i
@@ -214,7 +206,7 @@ class F4(Benchmark):
 
     """
 
-    def __init__(self, name='F4', dims=100, continuous=True, convex=True,
+    def __init__(self, name='F4', year='2005', dims=100, continuous=True, convex=True,
                  differentiable=True, multimodal=False, separable=False):
         """Initialization method.
 
@@ -230,11 +222,8 @@ class F4(Benchmark):
         """
 
         # Override its parent class
-        super(F4, self).__init__(name, dims, continuous,
+        super(F4, self).__init__(name, year, dims, continuous,
                                  convex, differentiable, multimodal, separable)
-
-        # Loads auxiliary data and define it as a property
-        self.o = l.load_cec_auxiliary('F4', '2005')
 
     @d.check_less_equal_dimension
     def __call__(self, x):
@@ -273,7 +262,7 @@ class F4(Benchmark):
         return f * (1 + 0.4 * noise) - 450
 
 
-class F5(Benchmark):
+class F5(CECBenchmark):
     """F5 class implements the Schwefel's Problem 2.6 with Global Optimum on Bounds benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \max{|A_i x - B_i|} - 310 \mid B_i = A_i - o_i
@@ -286,7 +275,7 @@ class F5(Benchmark):
 
     """
 
-    def __init__(self, name='F5', dims=100, continuous=True, convex=True,
+    def __init__(self, name='F5', year='2005', dims=100, continuous=True, convex=True,
                  differentiable=True, multimodal=False, separable=False):
         """Initialization method.
 
@@ -302,11 +291,10 @@ class F5(Benchmark):
         """
 
         # Override its parent class
-        super(F5, self).__init__(name, dims, continuous,
+        super(F5, self).__init__(name, year, dims, continuous,
                                  convex, differentiable, multimodal, separable)
 
         # Loads auxiliary data and define it as a property
-        self.o = l.load_cec_auxiliary('F5', '2005')
         self.A = l.load_cec_auxiliary('F5_A100', '2005')
 
     @d.check_less_equal_dimension
@@ -333,7 +321,7 @@ class F5(Benchmark):
         return f - 310
 
 
-class F6(Benchmark):
+class F6(CECBenchmark):
     """F6 class implements the Shifted Rosenbrock's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n-1} (100(z_i^2-z_{i+1})^2 + (z_i - 1)^2) + 390 \mid z_i = x_i - o_i
@@ -346,7 +334,7 @@ class F6(Benchmark):
 
     """
 
-    def __init__(self, name='F6', dims=100, continuous=True, convex=True,
+    def __init__(self, name='F6', year='2005', dims=100, continuous=True, convex=True,
                  differentiable=True, multimodal=True, separable=False):
         """Initialization method.
 
@@ -362,11 +350,8 @@ class F6(Benchmark):
         """
 
         # Override its parent class
-        super(F6, self).__init__(name, dims, continuous,
+        super(F6, self).__init__(name, year, dims, continuous,
                                  convex, differentiable, multimodal, separable)
-
-        # Loads auxiliary data and define it as a property
-        self.o = l.load_cec_auxiliary('F6', '2005')
 
     @d.check_less_equal_dimension
     def __call__(self, x):
@@ -394,7 +379,7 @@ class F6(Benchmark):
         return f + 390
 
 
-class F7(Benchmark):
+class F7(CECBenchmark):
     """F7 class implements the Shifted Rotated Griewank's Function without Bounds benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = 1 + \sum_{i=1}^{n}\\frac{x_i^2}{4000} - \prod cos(\\frac{x_i}{\sqrt{i}}) - 180 \mid z_i = (x_i - o_i) * M_i
@@ -407,7 +392,7 @@ class F7(Benchmark):
 
     """
 
-    def __init__(self, name='F7', dims=-1, continuous=True, convex=True,
+    def __init__(self, name='F7', year='2005', dims=-1, continuous=True, convex=True,
                  differentiable=True, multimodal=True, separable=False):
         """Initialization method.
 
@@ -423,11 +408,8 @@ class F7(Benchmark):
         """
 
         # Override its parent class
-        super(F7, self).__init__(name, dims, continuous,
+        super(F7, self).__init__(name, year, dims, continuous,
                                  convex, differentiable, multimodal, separable)
-
-        # Loads auxiliary data and define it as a property
-        self.o = l.load_cec_auxiliary('F7', '2005')
 
         # Pre-loads every auxiliary matrix for faster computing
         self.M_2 = l.load_cec_auxiliary('F7_D2', '2005')
@@ -467,7 +449,7 @@ class F7(Benchmark):
         return f - 180
 
 
-class F8(Benchmark):
+class F8(CECBenchmark):
     """F8 class implements the Shifted Rotated Ackley's Function with Global Optimum on Bounds benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = -20e^{-0.2\sqrt{\\frac{1}{n}\sum_{i=1}^{n}x_i^2}}-e^{\\frac{1}{n}\sum_{i=1}^{n}cos(2 \\pi x_i)}+ 20 + e - 180 \mid z_i = (x_i - o_i) * M_i
@@ -480,7 +462,7 @@ class F8(Benchmark):
 
     """
 
-    def __init__(self, name='F8', dims=-1, continuous=True, convex=True,
+    def __init__(self, name='F8', year='2005', dims=-1, continuous=True, convex=True,
                  differentiable=True, multimodal=True, separable=False):
         """Initialization method.
 
@@ -496,11 +478,8 @@ class F8(Benchmark):
         """
 
         # Override its parent class
-        super(F8, self).__init__(name, dims, continuous,
+        super(F8, self).__init__(name, year, dims, continuous,
                                  convex, differentiable, multimodal, separable)
-
-        # Loads auxiliary data and define it as a property
-        self.o = l.load_cec_auxiliary('F8', '2005')
 
         # Pre-loads every auxiliary matrix for faster computing
         self.M_2 = l.load_cec_auxiliary('F8_D2', '2005')
@@ -538,7 +517,7 @@ class F8(Benchmark):
         return np.sum(f) - 140
 
 
-class F9(Benchmark):
+class F9(CECBenchmark):
     """F9 class implements the Shifted Rastrigin's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (z_i^2 - 10cos(2 \\pi z_i) + 10) - 330 \mid z_i = x_i - o_i
@@ -551,7 +530,7 @@ class F9(Benchmark):
 
     """
 
-    def __init__(self, name='F9', dims=100, continuous=True, convex=True,
+    def __init__(self, name='F9', year='2005', dims=100, continuous=True, convex=True,
                  differentiable=True, multimodal=True, separable=True):
         """Initialization method.
 
@@ -567,11 +546,8 @@ class F9(Benchmark):
         """
 
         # Override its parent class
-        super(F9, self).__init__(name, dims, continuous,
+        super(F9, self).__init__(name, year, dims, continuous,
                                  convex, differentiable, multimodal, separable)
-
-        # Loads auxiliary data and define it as a property
-        self.o = l.load_cec_auxiliary('F9', '2005')
 
     @d.check_less_equal_dimension
     def __call__(self, x):
@@ -594,7 +570,7 @@ class F9(Benchmark):
         return np.sum(f) - 330
 
 
-class F10(Benchmark):
+class F10(CECBenchmark):
     """F10 class implements the Shifted Rotated Rastrigin's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (z_i^2 - 10cos(2 \\pi z_i) + 10) - 330 \mid z_i = (x_i - o_i) * M_i
@@ -607,7 +583,7 @@ class F10(Benchmark):
 
     """
 
-    def __init__(self, name='F10', dims=100, continuous=True, convex=True,
+    def __init__(self, name='F10', year='2005', dims=100, continuous=True, convex=True,
                  differentiable=True, multimodal=True, separable=False):
         """Initialization method.
 
@@ -623,11 +599,8 @@ class F10(Benchmark):
         """
 
         # Override its parent class
-        super(F10, self).__init__(name, dims, continuous,
-                                 convex, differentiable, multimodal, separable)
-
-        # Loads auxiliary data and define it as a property
-        self.o = l.load_cec_auxiliary('F10', '2005')
+        super(F10, self).__init__(name, year, dims, continuous,
+                                  convex, differentiable, multimodal, separable)
 
         # Pre-loads every auxiliary matrix for faster computing
         self.M_2 = l.load_cec_auxiliary('F10_D2', '2005')
@@ -656,7 +629,7 @@ class F10(Benchmark):
         return np.sum(f) - 330
 
 
-class F11(Benchmark):
+class F11(CECBenchmark):
     """F11 class implements the Shifted Rotated Weierstrass's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (\sum_{k=0}^{20} [0.5^k cos(2\\pi 3^k(z_i+0.5))]) - n \sum_{k=0}^{20}[0.5^k cos(2\\pi 3^k 0.5)] \mid z_i = (x_i - o_i) * M_i
@@ -669,7 +642,7 @@ class F11(Benchmark):
 
     """
 
-    def __init__(self, name='F11', dims=100, continuous=True, convex=True,
+    def __init__(self, name='F11', year='2005', dims=100, continuous=True, convex=True,
                  differentiable=True, multimodal=True, separable=False):
         """Initialization method.
 
@@ -685,11 +658,8 @@ class F11(Benchmark):
         """
 
         # Override its parent class
-        super(F11, self).__init__(name, dims, continuous,
-                                 convex, differentiable, multimodal, separable)
-
-        # Loads auxiliary data and define it as a property
-        self.o = l.load_cec_auxiliary('F11', '2005')
+        super(F11, self).__init__(name, year, dims, continuous,
+                                  convex, differentiable, multimodal, separable)
 
         # Pre-loads every auxiliary matrix for faster computing
         self.M_2 = l.load_cec_auxiliary('F11_D2', '2005')
@@ -730,7 +700,7 @@ class F11(Benchmark):
         return f + 90
 
 
-class F12(Benchmark):
+class F12(CECBenchmark):
     """F12 class implements the Schwefel's Problem 2.13 benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (A_i - B_i)^2 - 460 \mid A_i = \sum_{j=1}^{n} a_{ij} sin(\alpha_j) + b_{ij} cos(\alpha_j), A_i = \sum_{j=1}^{n} a_{ij} sin(x_j) + b_{ij} cos(x_j) 
@@ -743,7 +713,7 @@ class F12(Benchmark):
 
     """
 
-    def __init__(self, name='F12', dims=100, continuous=True, convex=True,
+    def __init__(self, name='F12', year='2005', dims=100, continuous=True, convex=True,
                  differentiable=True, multimodal=True, separable=False):
         """Initialization method.
 
@@ -759,8 +729,8 @@ class F12(Benchmark):
         """
 
         # Override its parent class
-        super(F12, self).__init__(name, dims, continuous,
-                                 convex, differentiable, multimodal, separable)
+        super(F12, self).__init__(name, year, dims, continuous,
+                                  convex, differentiable, multimodal, separable)
 
         # Loads auxiliary data and define it as a property
         self.alpha = l.load_cec_auxiliary('F12', '2005')
@@ -794,7 +764,7 @@ class F12(Benchmark):
         return np.sum(f) - 460
 
 
-class F13(Benchmark):
+class F13(CECBenchmark):
     """F13 class implements the Shifted Expanded Griewank's plus Rosenbrock's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) =  f(x_1, x_2) + f(x_2, x_3) + \ldots + f(x_n, f_1) - 130 \mid z_i = x_i - o_i + 1
@@ -807,7 +777,7 @@ class F13(Benchmark):
 
     """
 
-    def __init__(self, name='F13', dims=100, continuous=True, convex=True,
+    def __init__(self, name='F13', year='2005', dims=100, continuous=True, convex=True,
                  differentiable=True, multimodal=True, separable=False):
         """Initialization method.
 
@@ -823,11 +793,8 @@ class F13(Benchmark):
         """
 
         # Override its parent class
-        super(F13, self).__init__(name, dims, continuous,
+        super(F13, self).__init__(name, year, dims, continuous,
                                   convex, differentiable, multimodal, separable)
-
-        # Loads auxiliary data and define it as a property
-        self.o = l.load_cec_auxiliary('F13', '2005')
 
     @d.check_less_equal_dimension
     def __call__(self, x):
@@ -868,7 +835,7 @@ class F13(Benchmark):
         return f - 130
 
 
-class F14(Benchmark):
+class F14(CECBenchmark):
     """F14 class implements the Shifted Rotated Expanded Scaffer's F6 benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) =  f(x_1, x_2) + f(x_2, x_3) + \ldots + f(x_n, f_1) - 300 \mid z_i = x_i - o_i + 1
@@ -881,7 +848,7 @@ class F14(Benchmark):
 
     """
 
-    def __init__(self, name='F14', dims=100, continuous=True, convex=True,
+    def __init__(self, name='F14', year='2005', dims=100, continuous=True, convex=True,
                  differentiable=True, multimodal=True, separable=False):
         """Initialization method.
 
@@ -897,11 +864,8 @@ class F14(Benchmark):
         """
 
         # Override its parent class
-        super(F14, self).__init__(name, dims, continuous,
+        super(F14, self).__init__(name, year, dims, continuous,
                                   convex, differentiable, multimodal, separable)
-
-        # Loads auxiliary data and define it as a property
-        self.o = l.load_cec_auxiliary('F14', '2005')
 
         # Pre-loads every auxiliary matrix for faster computing
         self.M_2 = l.load_cec_auxiliary('F14_D2', '2005')
@@ -945,7 +909,7 @@ class F14(Benchmark):
         return f - 300
 
 
-class F15(Benchmark):
+class F15(CECBenchmark):
     """F15 class implements the Hybrid Composition Function benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) =  f(x_1, x_2) + f(x_2, x_3) + \ldots + f(x_n, f_1) - 300 \mid z_i = x_i - o_i + 1
@@ -958,7 +922,7 @@ class F15(Benchmark):
 
     """
 
-    def __init__(self, name='F15', dims=100, continuous=True, convex=True,
+    def __init__(self, name='F15', year='2005', dims=100, continuous=True, convex=True,
                  differentiable=True, multimodal=True, separable=False):
         """Initialization method.
 
@@ -974,11 +938,8 @@ class F15(Benchmark):
         """
 
         # Override its parent class
-        super(F15, self).__init__(name, dims, continuous,
+        super(F15, self).__init__(name, year, dims, continuous,
                                   convex, differentiable, multimodal, separable)
-
-        # Loads auxiliary data and define it as a property
-        self.o = l.load_cec_auxiliary('F15', '2005')
 
         # Pre-loads every auxiliary matrix for faster computing
         self.M_2 = l.load_cec_auxiliary('F15_D2', '2005')

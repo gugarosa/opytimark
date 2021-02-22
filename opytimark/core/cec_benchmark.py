@@ -1,6 +1,8 @@
 """CEC Benchmark-based class.
 """
 
+import numpy as np
+
 import opytimark.utils.exception as e
 import opytimark.utils.loader as l
 
@@ -14,8 +16,7 @@ class CECBenchmark:
     """
 
     def __init__(self, name, year, dims=1, continuous=False, convex=False,
-                 differentiable=False, multimodal=False, separable=False,
-                 extra_matrices=False):
+                 differentiable=False, multimodal=False, separable=False):
         """Initialization method.
 
         Args:
@@ -27,7 +28,6 @@ class CECBenchmark:
             differentiable (bool): Whether the function is differentiable.
             multimodal (bool): Whether the function is multimodal.
             separable (bool): Whether the function is separable.
-            extra_matrices (bool): Whether the function uses auxiliary matrices.
 
         """
 
@@ -57,14 +57,6 @@ class CECBenchmark:
 
         # Auxiliary data
         self.o = l.load_cec_auxiliary(name, year)
-
-        # Checks if function uses auxiliary matrices:
-        if extra_matrices:
-            # Loads the matrices (D2, D10, D30 and D50)
-            self.M_2 = l.load_cec_auxiliary(name + '_D2', year)
-            self.M_10 = l.load_cec_auxiliary(name + '_D10', year)
-            self.M_30 = l.load_cec_auxiliary(name + '_D30', year)
-            self.M_50 = l.load_cec_auxiliary(name + '_D50', year)
 
     @property
     def name(self):
@@ -187,6 +179,21 @@ class CECBenchmark:
             raise e.TypeError('`separable` should be a boolean')
 
         self._separable = separable
+
+    @property
+    def o(self):
+        """np.array: Array that holds the auxiliary data.
+
+        """
+
+        return self._o
+
+    @o.setter
+    def o(self, o):
+        if not isinstance(o, np.ndarray):
+            raise e.TypeError('`o` should be a numpy array')
+
+        self._o = o
 
     def __call__(self, x):
         """This method returns the function's output when the class is called.
