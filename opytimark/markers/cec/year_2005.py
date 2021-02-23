@@ -955,6 +955,18 @@ class F15(CECBenchmark):
         # Loads the auxiliary data
         self.load_auxiliary_data(name, year, ['o', 'M2', 'M10', 'M30', 'M50'])
 
+        # 
+        self.C = 2000
+        self.sigma = 1
+        # self.y = 5 * np.ones(2)
+        self.l = np.array([1, 1, 10, 10, 5/60, 5/60, 5/32, 5/32, 5/100, 5/100])
+        self.bias = np.array([0, 100, 200, 300, 400, 500, 600, 700, 800, 900])
+
+        #
+        self.f = [n_dim.Rastrigin(), n_dim.Rastrigin(), n_dim.Weierstrass(), n_dim.Weierstrass(),
+                  n_dim.Griewank(), n_dim.Griewank(), n_dim.Ackley1(), n_dim.Ackley1(),
+                  n_dim.Sphere(), n_dim.Sphere()]
+
     @d.check_exact_dimension_and_auxiliary_matrix
     def __call__(self, x):
         """This method returns the function's output when the class is called.
@@ -967,16 +979,49 @@ class F15(CECBenchmark):
 
         """
 
-        print(self.o.shape)
-
+        # Defines the number of composition functions and current dimensions
+        n_composition = len(self.f)
         D = x.shape[0]
-        sigma = 1
-        l = [1, 1, 10, 10, 5/60, 5/60, 5/32, 5/32, 5/100, 5/100]
+        self.y = 5 * np.ones(x.shape[0])
 
-        for i in range(10):
-            f = n_dim.Rastrigin()
-            w = np.exp(-np.sum((x - self.o[i][:D]) ** 2) / 2 * D * sigma ** 2)
-            fit = f(x - self.o[i][:D] / l[i])
-            f_max = f(5 / l[i])
+        # Defines the array of `w` and fitness
+        w = np.zeros(n_composition)
+        f_max = np.zeros(n_composition)
+        fit = np.zeros(n_composition)
 
-        return 100
+        # print(self.M.shape)
+
+        # Iterates through every possible composition function
+        for i, f in enumerate(self.f):
+            #
+            start, end = i * x.shape[0], (i + 1) * x.shape[0]
+
+            # print(idx)
+            #
+            z = x - self.o[i][:D]
+            
+            # Calculates the `w`
+            w[i] = np.exp(-np.sum(z ** 2) / (2 * D * self.sigma ** 2))
+
+            # print(w)
+
+            # Calculates the maximum fitness
+            f_max[i] = f(np.matmul(self.y / self.l[i], self.M[start:end]))
+            # f_max[i] = f(np.matmul(np.array([5 / self.l[i]]), self.M[:self.M.shape[1]]))
+
+            # Calculates the fitness
+            fit[i] = self.C * f(np.matmul(z / self.l[i], self.M[start:end])) / f_max[i]
+
+        # Calculates the sum of `w` and the maximum `w`
+        w_sum = np.sum(w)
+        w_max = np.max(w)
+
+        # Iterates through the number of composition functions
+        for i in range(n_composition):
+            if w[i] != w_max:
+                w[i] *= (1 - w_max ** 10)
+            w[i] /= w_sum
+
+        f = np.sum(np.matmul(w, (fit + self.bias)))
+
+        return f + 120

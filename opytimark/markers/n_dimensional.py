@@ -3022,7 +3022,7 @@ class Weierstrass(Benchmark):
             # Iterates until `k_max = 20`
             for k in range(21):
                 # Adds the first term
-                f += 0.5 ** k * np.cos(2 * np.pi * 3 ** k * (x[i] + 0.5)) 
+                f += 0.5 ** k * np.cos(2 * np.pi * 3 ** k * (x[i] + 0.5))
 
         # Iterates again until `k_max = 20`
         for k in range(21):
