@@ -955,14 +955,13 @@ class F15(CECBenchmark):
         # Loads the auxiliary data
         self.load_auxiliary_data(name, year, ['o', 'M2', 'M10', 'M30', 'M50'])
 
-        # 
+        # Defines the constants
         self.C = 2000
         self.sigma = 1
-        # self.y = 5 * np.ones(2)
-        self.l = np.array([1, 1, 10, 10, 5/60, 5/60, 5/32, 5/32, 5/100, 5/100])
         self.bias = np.array([0, 100, 200, 300, 400, 500, 600, 700, 800, 900])
+        self.l = np.array([1, 1, 10, 10, 5/60, 5/60, 5/32, 5/32, 5/100, 5/100])
 
-        #
+        # Defines the composite functions to be used
         self.f = [n_dim.Rastrigin(), n_dim.Rastrigin(), n_dim.Weierstrass(), n_dim.Weierstrass(),
                   n_dim.Griewank(), n_dim.Griewank(), n_dim.Ackley1(), n_dim.Ackley1(),
                   n_dim.Sphere(), n_dim.Sphere()]
@@ -979,35 +978,29 @@ class F15(CECBenchmark):
 
         """
 
-        # Defines the number of composition functions and current dimensions
-        n_composition = len(self.f)
+        # Defines some constants used throughout the method
         D = x.shape[0]
-        self.y = 5 * np.ones(x.shape[0])
+        n_composition = len(self.f)
+        y = 5 * np.ones(x.shape[0])
 
-        # Defines the array of `w` and fitness
+        # Defines the array of `w`, fitness and maximum fitness
         w = np.zeros(n_composition)
         f_max = np.zeros(n_composition)
         fit = np.zeros(n_composition)
 
-        # print(self.M.shape)
-
         # Iterates through every possible composition function
         for i, f in enumerate(self.f):
-            #
-            start, end = i * x.shape[0], (i + 1) * x.shape[0]
-
-            # print(idx)
-            #
+            # Re-calculates the solution
             z = x - self.o[i][:D]
-            
+
             # Calculates the `w`
             w[i] = np.exp(-np.sum(z ** 2) / (2 * D * self.sigma ** 2))
 
-            # print(w)
+            # Calculates the start and end indexes of the shift matrix
+            start, end = i * x.shape[0], (i + 1) * x.shape[0]
 
             # Calculates the maximum fitness
-            f_max[i] = f(np.matmul(self.y / self.l[i], self.M[start:end]))
-            # f_max[i] = f(np.matmul(np.array([5 / self.l[i]]), self.M[:self.M.shape[1]]))
+            f_max[i] = f(np.matmul(y / self.l[i], self.M[start:end]))
 
             # Calculates the fitness
             fit[i] = self.C * f(np.matmul(z / self.l[i], self.M[start:end])) / f_max[i]
@@ -1018,10 +1011,15 @@ class F15(CECBenchmark):
 
         # Iterates through the number of composition functions
         for i in range(n_composition):
+            # If current `w` is different than `w_max`
             if w[i] != w_max:
+                # Re-scales its value
                 w[i] *= (1 - w_max ** 10)
+
+            # Normalizes `w`
             w[i] /= w_sum
 
+        # Calculates the final fitness
         f = np.sum(np.matmul(w, (fit + self.bias)))
 
         return f + 120
