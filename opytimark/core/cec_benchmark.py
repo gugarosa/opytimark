@@ -13,8 +13,8 @@ class CECBenchmark:
 
     """
 
-    def __init__(self, name, year, auxiliary_data=(), dims=1, continuous=False, convex=False,
-                 differentiable=False, multimodal=False, separable=False):
+    def __init__(self, name, year, auxiliary_data=(), dims=1, continuous=False,
+                 convex=False, differentiable=False, multimodal=False, separable=False):
         """Initialization method.
 
         Args:
@@ -226,13 +226,14 @@ class CECCompositeBenchmark:
 
     """
 
-    def __init__(self, name, year, dims=1, continuous=False, convex=False,
-                 differentiable=False, multimodal=False, separable=False):
+    def __init__(self, name, year, auxiliary_data=(), dims=1, continuous=False,
+                 convex=False, differentiable=False, multimodal=False, separable=False):
         """Initialization method.
 
         Args:
             name (str): Name of the function.
             year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
             dims (int): Number of allowed dimensions.
             continuous (bool): Whether the function is continuous.
             convex (bool): Whether the function is convex.
@@ -243,7 +244,7 @@ class CECCompositeBenchmark:
         """
 
         # Overrides the parent class
-        super(CECCompositeBenchmark).__init__(name, year, dims, continuous,
+        super(CECCompositeBenchmark).__init__(name, year, auxiliary_data, dims, continuous,
                                               convex, differentiable, multimodal, separable)
 
     def __call__(self, x):
@@ -261,5 +262,3 @@ class CECCompositeBenchmark:
         """
 
         raise NotImplementedError
-
-    
