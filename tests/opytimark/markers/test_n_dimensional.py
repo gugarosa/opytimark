@@ -559,6 +559,16 @@ def test_wavy():
     assert y == 0
 
 
+def test_weierstrass():
+    f = n_dimensional.Weierstrass()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
 def test_xin_she_yang():
     f = n_dimensional.XinSheYang()
 
