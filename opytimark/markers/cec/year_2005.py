@@ -21,13 +21,14 @@ class F1(CECBenchmark):
 
     """
 
-    def __init__(self, name='F1', year='2005', dims=100, continuous=True, convex=True,
-                 differentiable=True, multimodal=False, separable=True):
+    def __init__(self, name='F1', year='2005', auxiliary_data=('o'), dims=100,
+                 continuous=True, convex=True, differentiable=True, multimodal=False, separable=True):
         """Initialization method.
 
         Args:
             name (str): Name of the function.
             year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
             dims (int): Number of allowed dimensions.
             continuous (bool): Whether the function is continuous.
             convex (bool): Whether the function is convex.
@@ -38,11 +39,8 @@ class F1(CECBenchmark):
         """
 
         # Override its parent class
-        super(F1, self).__init__(name, year, dims, continuous,
+        super(F1, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
-
-        # Loads the auxiliary data
-        self.load_auxiliary_data(name, year, ['o'])
 
     @d.check_less_equal_dimension
     def __call__(self, x):
@@ -78,13 +76,14 @@ class F2(CECBenchmark):
 
     """
 
-    def __init__(self, name='F2', year='2005', dims=100, continuous=True, convex=True,
-                 differentiable=True, multimodal=False, separable=False):
+    def __init__(self, name='F2', year='2005', auxiliary_data=('o'), dims=100,
+                 continuous=True, convex=True, differentiable=True, multimodal=False, separable=False):
         """Initialization method.
 
         Args:
             name (str): Name of the function.
             year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
             dims (int): Number of allowed dimensions.
             continuous (bool): Whether the function is continuous.
             convex (bool): Whether the function is convex.
@@ -95,11 +94,8 @@ class F2(CECBenchmark):
         """
 
         # Override its parent class
-        super(F2, self).__init__(name, year, dims, continuous,
+        super(F2, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
-
-        # Loads the auxiliary data
-        self.load_auxiliary_data(name, year, ['o'])
 
     @d.check_less_equal_dimension
     def __call__(self, x):
@@ -148,13 +144,14 @@ class F3(CECBenchmark):
 
     """
 
-    def __init__(self, name='F3', year='2005', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=False, separable=False):
+    def __init__(self, name='F3', year='2005', auxiliary_data=('o', 'M2', 'M10', 'M30', 'M50'), dims=-1,
+                 continuous=True, convex=True, differentiable=True, multimodal=False, separable=False):
         """Initialization method.
 
         Args:
             name (str): Name of the function.
             year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
             dims (int): Number of allowed dimensions.
             continuous (bool): Whether the function is continuous.
             convex (bool): Whether the function is convex.
@@ -165,11 +162,8 @@ class F3(CECBenchmark):
         """
 
         # Override its parent class
-        super(F3, self).__init__(name, year, dims, continuous,
+        super(F3, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
-
-        # Loads the auxiliary data
-        self.load_auxiliary_data(name, year, ['o', 'M2', 'M10', 'M30', 'M50'])
 
     @d.check_exact_dimension_and_auxiliary_matrix
     def __call__(self, x):
@@ -210,13 +204,14 @@ class F4(CECBenchmark):
 
     """
 
-    def __init__(self, name='F4', year='2005', dims=100, continuous=True, convex=True,
-                 differentiable=True, multimodal=False, separable=False):
+    def __init__(self, name='F4', year='2005', auxiliary_data=('o'), dims=100,
+                 continuous=True, convex=True, differentiable=True, multimodal=False, separable=False):
         """Initialization method.
 
         Args:
             name (str): Name of the function.
             year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
             dims (int): Number of allowed dimensions.
             continuous (bool): Whether the function is continuous.
             convex (bool): Whether the function is convex.
@@ -227,11 +222,8 @@ class F4(CECBenchmark):
         """
 
         # Override its parent class
-        super(F4, self).__init__(name, year, dims, continuous,
+        super(F4, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
-
-        # Loads the auxiliary data
-        self.load_auxiliary_data(name, year, ['o'])
 
     @d.check_less_equal_dimension
     def __call__(self, x):
@@ -283,13 +275,14 @@ class F5(CECBenchmark):
 
     """
 
-    def __init__(self, name='F5', year='2005', dims=100, continuous=True, convex=True,
-                 differentiable=True, multimodal=False, separable=False):
+    def __init__(self, name='F5', year='2005', auxiliary_data=('o', 'A'), dims=100,
+                 continuous=True, convex=True, differentiable=True, multimodal=False, separable=False):
         """Initialization method.
 
         Args:
             name (str): Name of the function.
             year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
             dims (int): Number of allowed dimensions.
             continuous (bool): Whether the function is continuous.
             convex (bool): Whether the function is convex.
@@ -300,11 +293,8 @@ class F5(CECBenchmark):
         """
 
         # Override its parent class
-        super(F5, self).__init__(name, year, dims, continuous,
+        super(F5, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
-
-        # Loads the auxiliary data
-        self.load_auxiliary_data(name, year, ['o', 'A'])
 
     @d.check_less_equal_dimension
     def __call__(self, x):
@@ -343,13 +333,14 @@ class F6(CECBenchmark):
 
     """
 
-    def __init__(self, name='F6', year='2005', dims=100, continuous=True, convex=True,
-                 differentiable=True, multimodal=True, separable=False):
+    def __init__(self, name='F6', year='2005', auxiliary_data=('o'), dims=100,
+                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
         """Initialization method.
 
         Args:
             name (str): Name of the function.
             year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
             dims (int): Number of allowed dimensions.
             continuous (bool): Whether the function is continuous.
             convex (bool): Whether the function is convex.
@@ -360,11 +351,8 @@ class F6(CECBenchmark):
         """
 
         # Override its parent class
-        super(F6, self).__init__(name, year, dims, continuous,
+        super(F6, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
-
-        # Loads the auxiliary data
-        self.load_auxiliary_data(name, year, ['o'])
 
     @d.check_less_equal_dimension
     def __call__(self, x):
@@ -405,13 +393,14 @@ class F7(CECBenchmark):
 
     """
 
-    def __init__(self, name='F7', year='2005', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=True, separable=False):
+    def __init__(self, name='F7', year='2005', auxiliary_data=('o', 'M2', 'M10', 'M30', 'M50'), dims=-1,
+                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
         """Initialization method.
 
         Args:
             name (str): Name of the function.
             year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
             dims (int): Number of allowed dimensions.
             continuous (bool): Whether the function is continuous.
             convex (bool): Whether the function is convex.
@@ -422,11 +411,8 @@ class F7(CECBenchmark):
         """
 
         # Override its parent class
-        super(F7, self).__init__(name, year, dims, continuous,
+        super(F7, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
-
-        # Loads the auxiliary data
-        self.load_auxiliary_data(name, year, ['o', 'M2', 'M10', 'M30', 'M50'])
 
     @d.check_exact_dimension_and_auxiliary_matrix
     def __call__(self, x):
@@ -473,13 +459,14 @@ class F8(CECBenchmark):
 
     """
 
-    def __init__(self, name='F8', year='2005', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=True, separable=False):
+    def __init__(self, name='F8', year='2005', auxiliary_data=('o', 'M2', 'M10', 'M30', 'M50'), dims=-1,
+                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
         """Initialization method.
 
         Args:
             name (str): Name of the function.
             year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
             dims (int): Number of allowed dimensions.
             continuous (bool): Whether the function is continuous.
             convex (bool): Whether the function is convex.
@@ -490,11 +477,8 @@ class F8(CECBenchmark):
         """
 
         # Override its parent class
-        super(F8, self).__init__(name, year, dims, continuous,
+        super(F8, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
-
-        # Loads the auxiliary data
-        self.load_auxiliary_data(name, year, ['o', 'M2', 'M10', 'M30', 'M50'])
 
     @d.check_exact_dimension_and_auxiliary_matrix
     def __call__(self, x):
@@ -539,13 +523,14 @@ class F9(CECBenchmark):
 
     """
 
-    def __init__(self, name='F9', year='2005', dims=100, continuous=True, convex=True,
-                 differentiable=True, multimodal=True, separable=True):
+    def __init__(self, name='F9', year='2005', auxiliary_data=('o'), dims=100,
+                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=True):
         """Initialization method.
 
         Args:
             name (str): Name of the function.
             year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
             dims (int): Number of allowed dimensions.
             continuous (bool): Whether the function is continuous.
             convex (bool): Whether the function is convex.
@@ -556,11 +541,8 @@ class F9(CECBenchmark):
         """
 
         # Override its parent class
-        super(F9, self).__init__(name, year, dims, continuous,
+        super(F9, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
-
-        # Loads the auxiliary data
-        self.load_auxiliary_data(name, year, ['o'])
 
     @d.check_less_equal_dimension
     def __call__(self, x):
@@ -596,13 +578,14 @@ class F10(CECBenchmark):
 
     """
 
-    def __init__(self, name='F10', year='2005', dims=100, continuous=True, convex=True,
-                 differentiable=True, multimodal=True, separable=False):
+    def __init__(self, name='F10', year='2005', auxiliary_data=('o', 'M2', 'M10', 'M30', 'M50'), dims=100,
+                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
         """Initialization method.
 
         Args:
             name (str): Name of the function.
             year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
             dims (int): Number of allowed dimensions.
             continuous (bool): Whether the function is continuous.
             convex (bool): Whether the function is convex.
@@ -613,11 +596,8 @@ class F10(CECBenchmark):
         """
 
         # Override its parent class
-        super(F10, self).__init__(name, year, dims, continuous,
+        super(F10, self).__init__(name, year, auxiliary_data, dims, continuous,
                                   convex, differentiable, multimodal, separable)
-
-        # Loads the auxiliary data
-        self.load_auxiliary_data(name, year, ['o', 'M2', 'M10', 'M30', 'M50'])
 
     @d.check_exact_dimension_and_auxiliary_matrix
     def __call__(self, x):
@@ -653,13 +633,14 @@ class F11(CECBenchmark):
 
     """
 
-    def __init__(self, name='F11', year='2005', dims=100, continuous=True, convex=True,
-                 differentiable=True, multimodal=True, separable=False):
+    def __init__(self, name='F11', year='2005', auxiliary_data=('o', 'M2', 'M10', 'M30', 'M50'), dims=100,
+                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
         """Initialization method.
 
         Args:
             name (str): Name of the function.
             year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
             dims (int): Number of allowed dimensions.
             continuous (bool): Whether the function is continuous.
             convex (bool): Whether the function is convex.
@@ -670,11 +651,8 @@ class F11(CECBenchmark):
         """
 
         # Override its parent class
-        super(F11, self).__init__(name, year, dims, continuous,
+        super(F11, self).__init__(name, year, auxiliary_data, dims, continuous,
                                   convex, differentiable, multimodal, separable)
-
-        # Loads the auxiliary data
-        self.load_auxiliary_data(name, year, ['o', 'M2', 'M10', 'M30', 'M50'])
 
     @d.check_exact_dimension_and_auxiliary_matrix
     def __call__(self, x):
@@ -722,13 +700,14 @@ class F12(CECBenchmark):
 
     """
 
-    def __init__(self, name='F12', year='2005', dims=100, continuous=True, convex=True,
-                 differentiable=True, multimodal=True, separable=False):
+    def __init__(self, name='F12', year='2005', auxiliary_data=('alpha', 'a', 'b'), dims=100,
+                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
         """Initialization method.
 
         Args:
             name (str): Name of the function.
             year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
             dims (int): Number of allowed dimensions.
             continuous (bool): Whether the function is continuous.
             convex (bool): Whether the function is convex.
@@ -739,11 +718,8 @@ class F12(CECBenchmark):
         """
 
         # Override its parent class
-        super(F12, self).__init__(name, year, dims, continuous,
+        super(F12, self).__init__(name, year, auxiliary_data, dims, continuous,
                                   convex, differentiable, multimodal, separable)
-
-        # Loads the auxiliary data
-        self.load_auxiliary_data(name, year, ['alpha', 'a', 'b'])
 
     @d.check_less_equal_dimension
     def __call__(self, x):
@@ -785,13 +761,14 @@ class F13(CECBenchmark):
 
     """
 
-    def __init__(self, name='F13', year='2005', dims=100, continuous=True, convex=True,
-                 differentiable=True, multimodal=True, separable=False):
+    def __init__(self, name='F13', year='2005', auxiliary_data=('o'), dims=100,
+                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
         """Initialization method.
 
         Args:
             name (str): Name of the function.
             year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
             dims (int): Number of allowed dimensions.
             continuous (bool): Whether the function is continuous.
             convex (bool): Whether the function is convex.
@@ -802,11 +779,8 @@ class F13(CECBenchmark):
         """
 
         # Override its parent class
-        super(F13, self).__init__(name, year, dims, continuous,
+        super(F13, self).__init__(name, year, auxiliary_data, dims, continuous,
                                   convex, differentiable, multimodal, separable)
-
-        # Loads the auxiliary data
-        self.load_auxiliary_data(name, year, ['o'])
 
     @d.check_less_equal_dimension
     def __call__(self, x):
@@ -860,13 +834,14 @@ class F14(CECBenchmark):
 
     """
 
-    def __init__(self, name='F14', year='2005', dims=100, continuous=True, convex=True,
-                 differentiable=True, multimodal=True, separable=False):
+    def __init__(self, name='F14', year='2005', auxiliary_data=('o', 'M2', 'M10', 'M30', 'M50'), dims=100,
+                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
         """Initialization method.
 
         Args:
             name (str): Name of the function.
             year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
             dims (int): Number of allowed dimensions.
             continuous (bool): Whether the function is continuous.
             convex (bool): Whether the function is convex.
@@ -877,11 +852,8 @@ class F14(CECBenchmark):
         """
 
         # Override its parent class
-        super(F14, self).__init__(name, year, dims, continuous,
+        super(F14, self).__init__(name, year, auxiliary_data, dims, continuous,
                                   convex, differentiable, multimodal, separable)
-
-        # Loads the auxiliary data
-        self.load_auxiliary_data(name, year, ['o', 'M2', 'M10', 'M30', 'M50'])
 
     @d.check_exact_dimension_and_auxiliary_matrix
     def __call__(self, x):
@@ -932,13 +904,14 @@ class F15(CECBenchmark):
 
     """
 
-    def __init__(self, name='F15', year='2005', dims=100, continuous=True, convex=True,
-                 differentiable=True, multimodal=True, separable=False):
+    def __init__(self, name='F15', year='2005', auxiliary_data=('o', 'M2', 'M10', 'M30', 'M50'), dims=100,
+                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
         """Initialization method.
 
         Args:
             name (str): Name of the function.
             year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
             dims (int): Number of allowed dimensions.
             continuous (bool): Whether the function is continuous.
             convex (bool): Whether the function is convex.
@@ -949,11 +922,8 @@ class F15(CECBenchmark):
         """
 
         # Override its parent class
-        super(F15, self).__init__(name, year, dims, continuous,
+        super(F15, self).__init__(name, year, auxiliary_data, dims, continuous,
                                   convex, differentiable, multimodal, separable)
-
-        # Loads the auxiliary data
-        self.load_auxiliary_data(name, year, ['o', 'M2', 'M10', 'M30', 'M50'])
 
         # Defines the constants
         self.C = 2000
@@ -1003,7 +973,8 @@ class F15(CECBenchmark):
             f_max[i] = f(np.matmul(y / self.l[i], self.M[start:end]))
 
             # Calculates the fitness
-            fit[i] = self.C * f(np.matmul(z / self.l[i], self.M[start:end])) / f_max[i]
+            fit[i] = self.C * \
+                f(np.matmul(z / self.l[i], self.M[start:end])) / f_max[i]
 
         # Calculates the sum of `w` and the maximum `w`
         w_sum = np.sum(w)

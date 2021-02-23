@@ -152,3 +152,11 @@ def test_cec_benchmark_call():
 
     with pytest.raises(NotImplementedError):
         new_cec_benchmark(None)
+
+
+def test_cec_benchmark_load_auxiliary_data():
+    new_cec_benchmark = cec_benchmark.CECBenchmark('F1', '2005')
+
+    new_cec_benchmark._load_auxiliary_data('F1', '2005', 'o')
+
+    assert new_cec_benchmark.o.shape == (100,)

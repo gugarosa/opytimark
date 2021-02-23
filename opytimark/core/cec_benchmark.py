@@ -13,13 +13,14 @@ class CECBenchmark:
 
     """
 
-    def __init__(self, name, year, dims=1, continuous=False, convex=False,
+    def __init__(self, name, year, auxiliary_data=(), dims=1, continuous=False, convex=False,
                  differentiable=False, multimodal=False, separable=False):
         """Initialization method.
 
         Args:
             name (str): Name of the function.
             year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
             dims (int): Number of allowed dimensions.
             continuous (bool): Whether the function is continuous.
             convex (bool): Whether the function is convex.
@@ -52,6 +53,9 @@ class CECBenchmark:
 
         # Separability
         self.separable = separable
+
+        # Loads the auxiliary data
+        self._load_auxiliary_data(name, year, auxiliary_data)
 
     @property
     def name(self):
@@ -191,7 +195,7 @@ class CECBenchmark:
 
         raise NotImplementedError
 
-    def load_auxiliary_data(self, name, year, data):
+    def _load_auxiliary_data(self, name, year, data):
         """Loads auxiliary data from a set of files.
 
         Args:
@@ -212,3 +216,50 @@ class CECBenchmark:
 
             # Sets the temporary variable as a property
             setattr(self, d, tmp)
+
+
+class CECCompositeBenchmark:
+    """A CECCompositeBenchmark class is the root of CEC-based composite benchmarking function.
+
+    It is composed by several properties that defines the traits of a function,
+    as well as a non-implemented __call__ method.
+
+    """
+
+    def __init__(self, name, year, dims=1, continuous=False, convex=False,
+                 differentiable=False, multimodal=False, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            year (str): Year of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Overrides the parent class
+        super(CECCompositeBenchmark).__init__(name, year, dims, continuous,
+                                              convex, differentiable, multimodal, separable)
+
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Note that it needs to be implemented in every child class as it is the
+        one to hold the benchmarking function logic.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        raise NotImplementedError
+
+    
