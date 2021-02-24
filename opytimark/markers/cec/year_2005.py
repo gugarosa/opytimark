@@ -894,7 +894,7 @@ class F14(CECBenchmark):
 class F15(CECCompositeBenchmark):
     """F15 class implements the Hybrid Composition Function benchmarking function.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) =  \sum_{i=1}^{n}{w_i \ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \ast \mathbf{M_i}) + bias_i]} + f_{bias}
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) =  \sum_{i=1}^{n}{w_i \\ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \\ast \mathbf{M_i}) + bias_i]} + f_{bias}
 
     Domain:
         The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
@@ -905,7 +905,7 @@ class F15(CECCompositeBenchmark):
     """
 
     def __init__(self, name='F15', year='2005', auxiliary_data=('o', 'M2', 'M10', 'M30', 'M50'), bias=120, dims=100,
-                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
+                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=True):
         """Initialization method.
 
         Args:
@@ -939,7 +939,7 @@ class F15(CECCompositeBenchmark):
 class F16(CECCompositeBenchmark):
     """F16 class implements the Rotated Hybrid Composition Function benchmarking function.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) =  \sum_{i=1}^{n}{w_i \ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \ast \mathbf{M_i}) + bias_i]} + f_{bias}
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) =  \sum_{i=1}^{n}{w_i \\ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \\ast \mathbf{M_i}) + bias_i]} + f_{bias}
 
     Domain:
         The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
