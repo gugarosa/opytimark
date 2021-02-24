@@ -2,4 +2,4 @@
 """
 
 from opytimark.core.benchmark import Benchmark
-from opytimark.core.cec_benchmark import CECBenchmark
+from opytimark.core.cec_benchmark import CECBenchmark, CECCompositeBenchmark

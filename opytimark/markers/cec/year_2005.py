@@ -5,7 +5,7 @@ import numpy as np
 
 import opytimark.markers.n_dimensional as n_dim
 import opytimark.utils.decorator as d
-from opytimark.core import CECBenchmark
+from opytimark.core import CECBenchmark, CECCompositeBenchmark
 
 
 class F1(CECBenchmark):
@@ -891,8 +891,53 @@ class F14(CECBenchmark):
         return f - 300
 
 
-class F15(CECBenchmark):
+class F15(CECCompositeBenchmark):
     """F15 class implements the Hybrid Composition Function benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) =  \sum_{i=1}^{n}{w_i[f_i'((x-o_i)/ \\lambda_i M_i) + bias_i]} + f_{bias}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 120 \mid \mathbf{x^*} = \mathbf{o}`.
+
+    """
+
+    def __init__(self, name='F15', year='2005', auxiliary_data=('o', 'M2', 'M10', 'M30', 'M50'), bias=120, dims=100,
+                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
+            bias (int): Composite function bias.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Defines `sigma` and `lambda` parameters
+        sigma = (1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+        l = (1, 1, 10, 10, 5/60, 5/60, 5/32, 5/32, 5/100, 5/100)
+
+        # Defines the composite functions
+        functions = (n_dim.Rastrigin(), n_dim.Rastrigin(), n_dim.Weierstrass(), n_dim.Weierstrass(),
+                     n_dim.Griewank(), n_dim.Griewank(), n_dim.Ackley1(), n_dim.Ackley1(),
+                     n_dim.Sphere(), n_dim.Sphere())
+
+        # Override its parent class
+        super(F15, self).__init__(name, year, auxiliary_data, sigma, l, functions, bias,
+                                  dims, continuous, convex, differentiable, multimodal, separable)
+
+
+class F16(CECCompositeBenchmark):
+    """F16 class implements the Rotated Hybrid Composition Function benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) =  f(x_1, x_2) + f(x_2, x_3) + \ldots + f(x_n, f_1) - 300 \mid z_i = x_i - o_i + 1
 
@@ -904,7 +949,7 @@ class F15(CECBenchmark):
 
     """
 
-    def __init__(self, name='F15', year='2005', auxiliary_data=('o', 'M2', 'M10', 'M30', 'M50'), dims=100,
+    def __init__(self, name='F16', year='2005', auxiliary_data=('o', 'M2', 'M10', 'M30', 'M50'), bias=120, dims=100,
                  continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
         """Initialization method.
 
@@ -912,6 +957,7 @@ class F15(CECBenchmark):
             name (str): Name of the function.
             year (str): Year of the function.
             auxiliary_data (tuple): Auxiliary variables to be externally loaded.
+            bias (int): Composite function bias.
             dims (int): Number of allowed dimensions.
             continuous (bool): Whether the function is continuous.
             convex (bool): Whether the function is convex.
@@ -921,76 +967,15 @@ class F15(CECBenchmark):
 
         """
 
+        # Defines `sigma` and `lambda` parameters
+        sigma = (1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+        l = (1, 1, 10, 10, 5/60, 5/60, 5/32, 5/32, 5/100, 5/100)
+
+        # Defines the composite functions
+        functions = (n_dim.Rastrigin(), n_dim.Rastrigin(), n_dim.Weierstrass(), n_dim.Weierstrass(),
+                     n_dim.Griewank(), n_dim.Griewank(), n_dim.Ackley1(), n_dim.Ackley1(),
+                     n_dim.Sphere(), n_dim.Sphere())
+
         # Override its parent class
-        super(F15, self).__init__(name, year, auxiliary_data, dims, continuous,
-                                  convex, differentiable, multimodal, separable)
-
-        # Defines the constants
-        self.C = 2000
-        self.sigma = 1
-        self.bias = np.array([0, 100, 200, 300, 400, 500, 600, 700, 800, 900])
-        self.l = np.array([1, 1, 10, 10, 5/60, 5/60, 5/32, 5/32, 5/100, 5/100])
-
-        # Defines the composite functions to be used
-        self.f = [n_dim.Rastrigin(), n_dim.Rastrigin(), n_dim.Weierstrass(), n_dim.Weierstrass(),
-                  n_dim.Griewank(), n_dim.Griewank(), n_dim.Ackley1(), n_dim.Ackley1(),
-                  n_dim.Sphere(), n_dim.Sphere()]
-
-    @d.check_exact_dimension_and_auxiliary_matrix
-    def __call__(self, x):
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x (np.array): An input array for calculating the function's output.
-
-        Returns:
-            The benchmarking function output `f(x)`.
-
-        """
-
-        # Defines some constants used throughout the method
-        D = x.shape[0]
-        n_composition = len(self.f)
-        y = 5 * np.ones(x.shape[0])
-
-        # Defines the array of `w`, fitness and maximum fitness
-        w = np.zeros(n_composition)
-        f_max = np.zeros(n_composition)
-        fit = np.zeros(n_composition)
-
-        # Iterates through every possible composition function
-        for i, f in enumerate(self.f):
-            # Re-calculates the solution
-            z = x - self.o[i][:D]
-
-            # Calculates the `w`
-            w[i] = np.exp(-np.sum(z ** 2) / (2 * D * self.sigma ** 2))
-
-            # Calculates the start and end indexes of the shift matrix
-            start, end = i * x.shape[0], (i + 1) * x.shape[0]
-
-            # Calculates the maximum fitness
-            f_max[i] = f(np.matmul(y / self.l[i], self.M[start:end]))
-
-            # Calculates the fitness
-            fit[i] = self.C * \
-                f(np.matmul(z / self.l[i], self.M[start:end])) / f_max[i]
-
-        # Calculates the sum of `w` and the maximum `w`
-        w_sum = np.sum(w)
-        w_max = np.max(w)
-
-        # Iterates through the number of composition functions
-        for i in range(n_composition):
-            # If current `w` is different than `w_max`
-            if w[i] != w_max:
-                # Re-scales its value
-                w[i] *= (1 - w_max ** 10)
-
-            # Normalizes `w`
-            w[i] /= w_sum
-
-        # Calculates the final fitness
-        f = np.sum(np.matmul(w, (fit + self.bias)))
-
-        return f + 120
+        super(F16, self).__init__(name, year, auxiliary_data, sigma, l, functions, bias,
+                                  dims, continuous, convex, differentiable, multimodal, separable)
