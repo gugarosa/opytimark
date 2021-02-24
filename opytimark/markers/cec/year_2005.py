@@ -894,13 +894,13 @@ class F14(CECBenchmark):
 class F15(CECCompositeBenchmark):
     """F15 class implements the Hybrid Composition Function benchmarking function.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) =  \sum_{i=1}^{n}{w_i[f_i'((x-o_i)/ \\lambda_i M_i) + bias_i]} + f_{bias}
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) =  \sum_{i=1}^{n}{w_i \ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \ast \mathbf{M_i}) + bias_i]} + f_{bias}
 
     Domain:
         The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
 
     Global Minima:
-        :math:`f(\mathbf{x^*}) = 120 \mid \mathbf{x^*} = \mathbf{o}`.
+        :math:`f(\mathbf{x^*}) = 120 \mid \mathbf{x^*} = \mathbf{o_1}`.
 
     """
 
@@ -939,13 +939,13 @@ class F15(CECCompositeBenchmark):
 class F16(CECCompositeBenchmark):
     """F16 class implements the Rotated Hybrid Composition Function benchmarking function.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) =  f(x_1, x_2) + f(x_2, x_3) + \ldots + f(x_n, f_1) - 300 \mid z_i = x_i - o_i + 1
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) =  \sum_{i=1}^{n}{w_i \ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \ast \mathbf{M_i}) + bias_i]} + f_{bias}
 
     Domain:
         The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
 
     Global Minima:
-        :math:`f(\mathbf{x^*}) = 120 \mid \mathbf{x^*} = \mathbf{o}`.
+        :math:`f(\mathbf{x^*}) = 120 \mid \mathbf{x^*} = \mathbf{o_1}`.
 
     """
 
