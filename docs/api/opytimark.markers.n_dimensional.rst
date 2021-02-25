@@ -49,6 +49,10 @@ opytimark.markers.n_dimensional
    :members:
    :show-inheritance:
 
+.. autoapiclass:: opytimark.markers.n_dimensional.F8F2
+   :members:
+   :show-inheritance:
+
 .. autoapiclass:: opytimark.markers.n_dimensional.Griewank
    :members:
    :show-inheritance:

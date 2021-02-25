@@ -123,6 +123,16 @@ def test_exponential():
     assert y == 1
 
 
+def test_f8f2():
+    f = n_dimensional.F8F2()
+
+    x = np.ones(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
 def test_griewank():
     f = n_dimensional.Griewank()
 
