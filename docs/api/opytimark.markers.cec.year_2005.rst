@@ -64,3 +64,19 @@ opytimark.markers.cec.year_2005
 .. autoapiclass:: opytimark.markers.cec.year_2005.F16
    :members:
    :show-inheritance:
+
+.. autoapiclass:: opytimark.markers.cec.year_2005.F17
+   :members:
+   :show-inheritance:
+
+.. autoapiclass:: opytimark.markers.cec.year_2005.F18
+   :members:
+   :show-inheritance:
+
+.. autoapiclass:: opytimark.markers.cec.year_2005.F19
+   :members:
+   :show-inheritance:
+
+.. autoapiclass:: opytimark.markers.cec.year_2005.F20
+   :members:
+   :show-inheritance:

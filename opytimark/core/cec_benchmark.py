@@ -209,16 +209,16 @@ class CECBenchmark:
         """
 
         # Iterates over the `data` list
-        for d in data:
+        for dt in data:
             # Constructs the data file
             # Note that it will always be NAME_VARIABLE
-            data_file = f'{name}_{d}'
+            data_file = f'{name}_{dt}'
 
             # Loads the data to a temporary variable
             tmp = l.load_cec_auxiliary(data_file, year)
 
             # Sets the temporary variable as a property
-            setattr(self, d, tmp)
+            setattr(self, dt, tmp)
 
 
 class CECCompositeBenchmark(CECBenchmark):
