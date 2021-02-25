@@ -183,6 +183,26 @@ def test_michalewicz():
     assert np.round(y, 4) == -1.8011
 
 
+def test_non_continous_expanded_scaffer_f6():
+    f = n_dimensional.NonContinuousExpandedScafferF6()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_non_continous_rastrigin():
+    f = n_dimensional.NonContinuousRastrigin()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
 def test_pathological():
     f = n_dimensional.Pathological()
 

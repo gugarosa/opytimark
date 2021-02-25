@@ -1012,6 +1012,129 @@ class Michalewicz(Benchmark):
         return -f
 
 
+class NonContinuousExpandedScafferF6(Benchmark):
+    """NonContinuousExpandedScafferF6 class implements the Non-Continuous Expanded Scaffer's F6 benchmarking function.
+
+    .. math:: f(\mathbf{y}) = f(y_1, y_2, \ldots, y_n) =  f(y_1, y_2) + f(y_2, y_3) + \ldots + f(y_n, y_1) \mid y_i = round(2x_i)/2, |x_i| >= 0.5
+
+    Domain:
+        The function is commonly evaluated using :math:`y_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{y^*}) = 0 \mid \mathbf{y^*} = (0, 0, \ldots, 0)`.
+
+    """
+
+    def __init__(self, name='NonContinuousExpandedScafferF6', dims=-1, continuous=False, convex=False,
+                 differentiable=False, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(NonContinuousExpandedScafferF6, self).__init__(name, dims, continuous,
+                                                             convex, differentiable, multimodal, separable)
+
+    @d.check_exact_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        def _scaffer(x, y):
+            return 0.5 + (np.sin(np.sqrt(x ** 2 + y ** 2)) ** 2 - 0.5) / ((1 + 0.0001 * (x ** 2 + y ** 2)) ** 2)
+
+        # Instantiating function
+        f = 0
+
+        # Iterates through every dimension
+        for i in range(x.shape[0]):
+            # Checks if absolute value is bigger or equal than 0.5
+            if np.fabs(x[i]) >= 0.5:
+                # Re-defines its value
+                x[i] = np.round(2 * x[i]) / 2
+
+            # Checks if it is the last dimension
+            if i == (x.shape[0] - 1):
+                # Calculates the Non-Continuous Expanded Scaffer's F6 function using indexes `n` and `0`
+                f += _scaffer(x[i], x[0])
+
+            # Checks if it is not the last dimension
+            else:
+                # Calculates the Non-Continuous Expanded Scaffer's F6 function using indexes `i` and `i+1`
+                f += _scaffer(x[i], x[i+1])
+
+        return f
+
+
+class NonContinuousRastrigin(Benchmark):
+    """NonContinuousRastrigin class implements the Non-Continuous Rastrigin's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(y_1, y_2, \ldots, y_n) = 10n + \sum_{i=1}^{n}(y_i^2 - 10cos(2 \\pi y_i)) \mid y_i = round(2x_i)/2, |x_i| >= 0.5
+
+    Domain:
+        The function is commonly evaluated using :math:`y_i \in [-5.12, 5.12] \mid i = \{1, 2, \ldots, n\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{y^*}) = 0 \mid \mathbf{y^*} = (0, 0, \ldots, 0)`.
+
+    """
+
+    def __init__(self, name='NonContinuousRastrigin', dims=-1, continuous=False, convex=True,
+                 differentiable=False, multimodal=True, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(NonContinuousRastrigin, self).__init__(name, dims, continuous,
+                                                     convex, differentiable, multimodal, separable)
+
+    @d.check_exact_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Creates the discontinuity
+        x = np.where(np.fabs(x) < 0.5, x, np.round(2 * x) / 2)
+
+        # Calculating the Non-Continuous Rastrigin's function
+        f = x ** 2 - 10 * np.cos(2 * np.pi * x)
+
+        return 10 * x.shape[0] + np.sum(f)
+
+
 class Pathological(Benchmark):
     """Pathological class implements the Pathological's benchmarking function.
 
@@ -1720,7 +1843,7 @@ class Rosenbrock(Benchmark):
 class RotatedExpandedScafferF6(Benchmark):
     """RotatedExpandedScafferF6 class implements the Rotated Expanded Scaffer's F6 benchmarking function.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) =  f(x_1, x_2) + f(x_2, x_3) + \ldots + f(x_n, f_1)
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) =  f(x_1, x_2) + f(x_2, x_3) + \ldots + f(x_n, x_1)
 
     Domain:
         The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
@@ -1771,7 +1894,7 @@ class RotatedExpandedScafferF6(Benchmark):
         for i in range(x.shape[0]):
             # Checks if it is the last dimension
             if i == (x.shape[0] - 1):
-                # Calculates the otated Expanded Scaffer's F6 function using indexes `n` and `0`
+                # Calculates the Rotated Expanded Scaffer's F6 function using indexes `n` and `0`
                 f += _scaffer(x[i], x[0])
 
             # Checks if it is not the last dimension
