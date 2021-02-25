@@ -836,6 +836,61 @@ class HappyCat(Benchmark):
         return f
 
 
+class HighConditionedElliptic(Benchmark):
+    """HighConditionedElliptic class implements the High Conditioned Elliptic's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (10^6)^\\frac{i-1}{n-1} x_i^2
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+
+    """
+
+    def __init__(self, name='HighConditionedElliptic', dims=-1, continuous=True, convex=True,
+                 differentiable=True, multimodal=False, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(HighConditionedElliptic, self).__init__(name, dims, continuous,
+                                                      convex, differentiable, multimodal, separable)
+
+    @d.check_exact_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Instantiates the function
+        f = 0
+
+        # Iterates through every dimension
+        for i in range(x.shape[0]):
+            # Calculates the High Conditioned Elliptic's function
+            f += (10 ** 6) ** ((i-2) / (x.shape[0] - 1)) * x[i] ** 2
+
+        return f
+
+
 class Levy(Benchmark):
     """Levy class implements the Levy's benchmarking function.
 
@@ -2515,6 +2570,59 @@ class Sphere(Benchmark):
         f = x ** 2
 
         return np.sum(f)
+
+
+class SphereWithNoise(Benchmark):
+    """SphereWithNoise class implements the Sphere with Noise's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = (\sum_{i=1}^{n} x_i^2)(1 + 0.1|N(0,1)|)
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-5.12, 5.12] \mid i = \{1, 2, \ldots, n\}`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+
+    """
+
+    def __init__(self, name='SphereWithNoise', dims=-1, continuous=True, convex=True,
+                 differentiable=True, multimodal=False, separable=True):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(SphereWithNoise, self).__init__(name, dims, continuous,
+                                              convex, differentiable, multimodal, separable)
+
+    @d.check_exact_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Calculating the Sphere 's function
+        f = x ** 2
+
+        # Defines the noise to be added in the final fitness
+        noise = 1 + 0.1 * np.fabs(np.random.normal())
+
+        return np.sum(f) * noise
 
 
 class Step(Benchmark):

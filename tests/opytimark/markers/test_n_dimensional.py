@@ -153,6 +153,16 @@ def test_happy_cat():
     assert y == 0
 
 
+def test_high_conditioned_elliptic():
+    f = n_dimensional.HighConditionedElliptic()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
 def test_levy():
     f = n_dimensional.Levy()
 
@@ -461,6 +471,16 @@ def test_schaffer_f6():
 
 def test_sphere():
     f = n_dimensional.Sphere()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_sphere_with_noise():
+    f = n_dimensional.SphereWithNoise()
 
     x = np.zeros(50)
 

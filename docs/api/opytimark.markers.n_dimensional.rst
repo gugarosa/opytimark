@@ -61,6 +61,10 @@ opytimark.markers.n_dimensional
    :members:
    :show-inheritance:
 
+.. autoapiclass:: opytimark.markers.n_dimensional.HighConditionedElliptic
+   :members:
+   :show-inheritance:
+
 .. autoapiclass:: opytimark.markers.n_dimensional.Levy
    :members:
    :show-inheritance:
@@ -190,6 +194,10 @@ opytimark.markers.n_dimensional
    :show-inheritance:
 
 .. autoapiclass:: opytimark.markers.n_dimensional.Sphere
+   :members:
+   :show-inheritance:
+
+.. autoapiclass:: opytimark.markers.n_dimensional.SphereWithNoise
    :members:
    :show-inheritance:
 
