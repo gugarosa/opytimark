@@ -308,6 +308,14 @@ class F5(CECBenchmark):
 
         """
 
+        # Defines the shift re-arrangement points
+        shift_1 = int(x.shape[0] / 4)
+        shift_2 = int(3 * x.shape[0] / 4)
+
+        # Re-sets `o` values
+        self.o[:shift_1] = -100
+        self.o[shift_2:] = 100
+
         # Gathers the correct input
         A = self.A[:x.shape[0], :x.shape[0]]
 
@@ -491,6 +499,14 @@ class F8(CECBenchmark):
             The benchmarking function output `f(x)`.
 
         """
+
+        # Defines the shift point for re-arrangement
+        shift = int(x.shape[0] / 2)
+
+        # Iterates till reach the shift point
+        for j in range(shift):
+            # Re-sets the value of `o`
+            self.o[2*j] = -32 * self.o[2*j+1]
 
         # Re-calculates the input
         z = np.matmul(x - self.o[:x.shape[0]], self.M)
