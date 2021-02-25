@@ -1259,7 +1259,7 @@ class F20(CECCompositeBenchmark):
         # Iterates through half of available dimensions
         for j in range(int(D/2)):
             # Re-arranges the values in `o`
-            self.o[0][2*j] = 5
+            self.o[0][2*j+1] = 5
 
         # Iterates through every possible composition function
         for i, f in enumerate(self.f):

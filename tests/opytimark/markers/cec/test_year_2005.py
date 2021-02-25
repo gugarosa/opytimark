@@ -196,7 +196,7 @@ def test_F19():
 def test_F20():
     f = year_2005.F20()
 
-    x = np.array([5, 2.6440000])
+    x = np.array([1.5953000, 5])
 
     y = f(x)
 
