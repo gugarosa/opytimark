@@ -121,6 +121,10 @@ opytimark.markers.n_dimensional
    :members:
    :show-inheritance:
 
+.. autoapiclass:: opytimark.markers.n_dimensional.RotatedExpandedScafferF6
+   :members:
+   :show-inheritance:
+
 .. autoapiclass:: opytimark.markers.n_dimensional.RotatedHyperEllipsoid
    :members:
    :show-inheritance:

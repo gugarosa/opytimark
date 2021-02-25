@@ -309,6 +309,16 @@ def test_rosenbrock():
     assert y == 0
 
 
+def test_rotated_expanded_scaffer_f6():
+    f = n_dimensional.RotatedExpandedScafferF6()
+
+    x = np.zeros(50)
+
+    y = f(x)
+
+    assert y == 0
+
+
 def test_rotated_hyper_ellipsoid():
     f = n_dimensional.RotatedHyperEllipsoid()
 
