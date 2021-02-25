@@ -1078,7 +1078,8 @@ class F17(CECCompositeBenchmark):
             f_max[i] = f(np.matmul(y / self.l[i], self.M[start:end]))
 
             # Calculates the fitness
-            fit[i] = self.C * f(np.matmul(z / self.l[i], self.M[start:end])) / f_max[i]
+            fit[i] = self.C * \
+                f(np.matmul(z / self.l[i], self.M[start:end])) / f_max[i]
 
         # Calculates the sum of `w` and the maximum `w`
         w_sum = np.sum(w)
@@ -1276,7 +1277,8 @@ class F20(CECCompositeBenchmark):
             f_max[i] = f(np.matmul(y / self.l[i], self.M[start:end]))
 
             # Calculates the fitness
-            fit[i] = self.C * f(np.matmul(z / self.l[i], self.M[start:end])) / f_max[i]
+            fit[i] = self.C * \
+                f(np.matmul(z / self.l[i], self.M[start:end])) / f_max[i]
 
         # Calculates the sum of `w` and the maximum `w`
         w_sum = np.sum(w)
@@ -1296,3 +1298,93 @@ class F20(CECCompositeBenchmark):
         f = np.sum(np.matmul(w, (fit + self.f_bias)))
 
         return f + self.bias
+
+
+class F21(CECCompositeBenchmark):
+    """F21 class implements the Rotated Hybrid Composition Function 3 benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \\ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \\ast \mathbf{M_i}) + bias_i]} + f_{bias}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 360 \mid \mathbf{x^*} = \mathbf{o_1}`.
+
+    """
+
+    def __init__(self, name='F21', year='2005', auxiliary_data=('o', 'M2', 'M10', 'M30', 'M50'), bias=360, dims=100,
+                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
+            bias (int): Composite function bias.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Defines `sigma` and `lambda` parameters
+        sigma = (1, 1, 1, 1, 1, 2, 2, 2, 2, 2)
+        l = (1/4, 5/100, 5, 1, 5, 1, 50, 10, 1/8, 5/200)
+
+        # Defines the composite functions
+        functions = (n_dim.RotatedExpandedScafferF6(), n_dim.RotatedExpandedScafferF6(),
+                     n_dim.Rastrigin(), n_dim.Rastrigin(), n_dim.F8F2(), n_dim.F8F2(),
+                     n_dim.Weierstrass(), n_dim.Weierstrass(), n_dim.Griewank(), n_dim.Griewank())
+
+        # Override its parent class
+        super(F21, self).__init__(name, year, auxiliary_data, sigma, l, functions, bias,
+                                  dims, continuous, convex, differentiable, multimodal, separable)
+
+
+class F22(CECCompositeBenchmark):
+    """F22 class implements the Rotated Hybrid Composition Function 3 with High Condition Number Matrix benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \\ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \\ast \mathbf{M_i}) + bias_i]} + f_{bias}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 360 \mid \mathbf{x^*} = \mathbf{o_1}`.
+
+    """
+
+    def __init__(self, name='F22', year='2005', auxiliary_data=('o', 'M2', 'M10', 'M30', 'M50'), bias=360, dims=100,
+                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
+            bias (int): Composite function bias.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Defines `sigma` and `lambda` parameters
+        sigma = (1, 1, 1, 1, 1, 2, 2, 2, 2, 2)
+        l = (1/4, 5/100, 5, 1, 5, 1, 50, 10, 1/8, 5/200)
+
+        # Defines the composite functions
+        functions = (n_dim.RotatedExpandedScafferF6(), n_dim.RotatedExpandedScafferF6(),
+                     n_dim.Rastrigin(), n_dim.Rastrigin(), n_dim.F8F2(), n_dim.F8F2(),
+                     n_dim.Weierstrass(), n_dim.Weierstrass(), n_dim.Griewank(), n_dim.Griewank())
+
+        # Override its parent class
+        super(F22, self).__init__(name, year, auxiliary_data, sigma, l, functions, bias,
+                                  dims, continuous, convex, differentiable, multimodal, separable)

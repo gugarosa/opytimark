@@ -201,3 +201,23 @@ def test_F20():
     y = f(x)
 
     assert y == 10
+
+
+def test_F21():
+    f = year_2005.F21()
+
+    x = np.array([1.2141000, -0.0100000])
+
+    y = f(x)
+
+    assert y == 360
+
+
+def test_F22():
+    f = year_2005.F22()
+
+    x = np.array([1.2141000, -0.0100000])
+
+    y = f(x)
+
+    assert y == 360

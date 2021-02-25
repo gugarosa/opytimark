@@ -1671,7 +1671,7 @@ class RotatedExpandedScafferF6(Benchmark):
         The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
 
     Global Minima:
-        :math:`f(\mathbf{x^*}) = 0\mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
@@ -1692,7 +1692,7 @@ class RotatedExpandedScafferF6(Benchmark):
 
         # Override its parent class
         super(RotatedExpandedScafferF6, self).__init__(name, dims, continuous,
-                                    convex, differentiable, multimodal, separable)
+                                                       convex, differentiable, multimodal, separable)
 
     @d.check_exact_dimension
     def __call__(self, x):
