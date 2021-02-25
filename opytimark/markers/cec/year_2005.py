@@ -1388,3 +1388,95 @@ class F22(CECCompositeBenchmark):
         # Override its parent class
         super(F22, self).__init__(name, year, auxiliary_data, sigma, l, functions, bias,
                                   dims, continuous, convex, differentiable, multimodal, separable)
+
+
+class F24(CECCompositeBenchmark):
+    """F24 class implements the Rotated Hybrid Composition Function 4 benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \\ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \\ast \mathbf{M_i}) + bias_i]} + f_{bias}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 260 \mid \mathbf{x^*} = \mathbf{o_1}`.
+
+    """
+
+    def __init__(self, name='F24', year='2005', auxiliary_data=('o', 'M2', 'M10', 'M30', 'M50'), bias=260, dims=100,
+                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
+            bias (int): Composite function bias.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Defines `sigma` and `lambda` parameters
+        sigma = (2, 2, 2, 2, 2, 2, 2, 2, 2, 2)
+        l = (10, 1/4, 1, 5/32, 1, 5/100, 1/10, 1, 5/100, 5/100)
+
+        # Defines the composite functions
+        functions = (n_dim.Weierstrass(), n_dim.RotatedExpandedScafferF6(),
+                     n_dim.F8F2(), n_dim.Ackley1(), n_dim.Rastrigin(), n_dim.Griewank(),
+                     n_dim.NonContinuousExpandedScafferF6(), n_dim.NonContinuousRastrigin(),
+                     n_dim.HighConditionedElliptic(), n_dim.SphereWithNoise())
+
+        # Override its parent class
+        super(F24, self).__init__(name, year, auxiliary_data, sigma, l, functions, bias,
+                                  dims, continuous, convex, differentiable, multimodal, separable)
+
+
+class F25(CECCompositeBenchmark):
+    """F25 class implements the Rotated Hybrid Composition Function 4 without Bounds benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \\ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \\ast \mathbf{M_i}) + bias_i]} + f_{bias}
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [?, ?] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 260 \mid \mathbf{x^*} = \mathbf{o_1}`.
+
+    """
+
+    def __init__(self, name='F25', year='2005', auxiliary_data=('o', 'M2', 'M10', 'M30', 'M50'), bias=260, dims=100,
+                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
+            bias (int): Composite function bias.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Defines `sigma` and `lambda` parameters
+        sigma = (2, 2, 2, 2, 2, 2, 2, 2, 2, 2)
+        l = (10, 1/4, 1, 5/32, 1, 5/100, 1/10, 1, 5/100, 5/100)
+
+        # Defines the composite functions
+        functions = (n_dim.Weierstrass(), n_dim.RotatedExpandedScafferF6(),
+                     n_dim.F8F2(), n_dim.Ackley1(), n_dim.Rastrigin(), n_dim.Griewank(),
+                     n_dim.NonContinuousExpandedScafferF6(), n_dim.NonContinuousRastrigin(),
+                     n_dim.HighConditionedElliptic(), n_dim.SphereWithNoise())
+
+        # Override its parent class
+        super(F25, self).__init__(name, year, auxiliary_data, sigma, l, functions, bias,
+                                  dims, continuous, convex, differentiable, multimodal, separable)

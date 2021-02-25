@@ -221,3 +221,22 @@ def test_F22():
     y = f(x)
 
     assert y == 360
+
+
+def test_F24():
+    f = year_2005.F24()
+
+    x = np.array([-2.9330000, -3.0340000])
+
+    y = f(x)
+
+    assert y == 260
+
+def test_F25():
+    f = year_2005.F25()
+
+    x = np.array([-2.9330000, -3.0340000])
+
+    y = f(x)
+
+    assert y == 260
