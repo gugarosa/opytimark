@@ -1059,16 +1059,14 @@ class NonContinuousExpandedScafferF6(Benchmark):
         def _scaffer(x, y):
             return 0.5 + (np.sin(np.sqrt(x ** 2 + y ** 2)) ** 2 - 0.5) / ((1 + 0.0001 * (x ** 2 + y ** 2)) ** 2)
 
+        # Creates the discontinuity
+        x = np.where(np.fabs(x) < 0.5, x, np.round(2 * x) / 2)
+
         # Instantiating function
         f = 0
 
         # Iterates through every dimension
         for i in range(x.shape[0]):
-            # Checks if absolute value is bigger or equal than 0.5
-            if np.fabs(x[i]) >= 0.5:
-                # Re-defines its value
-                x[i] = np.round(2 * x[i]) / 2
-
             # Checks if it is the last dimension
             if i == (x.shape[0] - 1):
                 # Calculates the Non-Continuous Expanded Scaffer's F6 function using indexes `n` and `0`
