@@ -389,7 +389,7 @@ class F6(CECBenchmark):
 
 
 class F7(CECBenchmark):
-    """F7 class implements the Shifted Rotated Griewank's Function without Bounds benchmarking function.
+    """F7 class implements the Shifted Rotated Griewank's without Bounds benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = 1 + \sum_{i=1}^{n}\\frac{x_i^2}{4000} - \prod cos(\\frac{x_i}{\sqrt{i}}) - 180 \mid z_i = (x_i - o_i) * M_i
 
@@ -448,16 +448,16 @@ class F7(CECBenchmark):
             # Calculating second term
             term2 *= np.cos(z[i] / np.sqrt(i + 1))
 
-        # Calculating the Shifted Rotated Griewank's Function without Bounds function
+        # Calculating the Shifted Rotated Griewank's without Bounds function
         f = 1 + term1 - term2
 
         return f - 180
 
 
 class F8(CECBenchmark):
-    """F8 class implements the Shifted Rotated Ackley's Function with Global Optimum on Bounds benchmarking function.
+    """F8 class implements the Shifted Rotated Ackley's with Global Optimum on Bounds benchmarking function.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = -20e^{-0.2\sqrt{\\frac{1}{n}\sum_{i=1}^{n}x_i^2}}-e^{\\frac{1}{n}\sum_{i=1}^{n}cos(2 \\pi x_i)}+ 20 + e - 180 \mid z_i = (x_i - o_i) * M_i
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = -20e^{-0.2\sqrt{\\frac{1}{n}\sum_{i=1}^{n}x_i^2}}-e^{\\frac{1}{n}\sum_{i=1}^{n}cos(2 \\pi x_i)}+ 20 + e - 140 \mid z_i = (x_i - o_i) * M_i
 
     Domain:
         The function is commonly evaluated using :math:`x_i \in [-32, 32] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
@@ -908,7 +908,7 @@ class F14(CECBenchmark):
 
 
 class F15(CECCompositeBenchmark):
-    """F15 class implements the Hybrid Composition Function benchmarking function.
+    """F15 class implements the Hybrid Composition 1 benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \\ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \\ast \mathbf{M_i}) + bias_i]} + f_{bias}
 
@@ -953,7 +953,7 @@ class F15(CECCompositeBenchmark):
 
 
 class F16(CECCompositeBenchmark):
-    """F16 class implements the Rotated Hybrid Composition Function benchmarking function.
+    """F16 class implements the Rotated Hybrid Composition 1 benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \\ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \\ast \mathbf{M_i}) + bias_i]} + f_{bias}
 
@@ -998,7 +998,7 @@ class F16(CECCompositeBenchmark):
 
 
 class F17(CECCompositeBenchmark):
-    """F17 class implements the Rotated Hybrid Composition Function with Noise benchmarking function.
+    """F17 class implements the Rotated Hybrid Composition 1 with Noise benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \\ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \\ast \mathbf{M_i}) + bias_i]} + f_{bias}
 
@@ -1102,7 +1102,7 @@ class F17(CECCompositeBenchmark):
 
 
 class F18(CECCompositeBenchmark):
-    """F18 class implements the Rotated Hybrid Composition Function 2 benchmarking function.
+    """F18 class implements the Rotated Hybrid Composition 2 benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \\ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \\ast \mathbf{M_i}) + bias_i]} + f_{bias}
 
@@ -1147,7 +1147,7 @@ class F18(CECCompositeBenchmark):
 
 
 class F19(CECCompositeBenchmark):
-    """F19 class implements the Rotated Hybrid Composition Function 2 with Narrow Basin Global Optimum benchmarking function.
+    """F19 class implements the Rotated Hybrid Composition 2 with Narrow Basin Global Optimum benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \\ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \\ast \mathbf{M_i}) + bias_i]} + f_{bias}
 
@@ -1192,7 +1192,7 @@ class F19(CECCompositeBenchmark):
 
 
 class F20(CECCompositeBenchmark):
-    """F20 class implements the Rotated Hybrid Composition Function 2 with Global Optimum on the Bounds benchmarking function.
+    """F20 class implements the Rotated Hybrid Composition 2 with Global Optimum on the Bounds benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \\ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \\ast \mathbf{M_i}) + bias_i]} + f_{bias}
 
@@ -1301,7 +1301,7 @@ class F20(CECCompositeBenchmark):
 
 
 class F21(CECCompositeBenchmark):
-    """F21 class implements the Rotated Hybrid Composition Function 3 benchmarking function.
+    """F21 class implements the Rotated Hybrid Composition 3 benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \\ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \\ast \mathbf{M_i}) + bias_i]} + f_{bias}
 
@@ -1346,7 +1346,7 @@ class F21(CECCompositeBenchmark):
 
 
 class F22(CECCompositeBenchmark):
-    """F22 class implements the Rotated Hybrid Composition Function 3 with High Condition Number Matrix benchmarking function.
+    """F22 class implements the Rotated Hybrid Composition 3 with High Condition Number Matrix benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \\ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \\ast \mathbf{M_i}) + bias_i]} + f_{bias}
 
@@ -1391,7 +1391,7 @@ class F22(CECCompositeBenchmark):
 
 
 class F23(CECCompositeBenchmark):
-    """F23 class implements the Non-Continuous Rotated Hybrid Composition Function 3 benchmarking function.
+    """F23 class implements the Non-Continuous Rotated Hybrid Composition 3 benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \\ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \\ast \mathbf{M_i}) + bias_i]} + f_{bias}
 
@@ -1498,7 +1498,7 @@ class F23(CECCompositeBenchmark):
 
 
 class F24(CECCompositeBenchmark):
-    """F24 class implements the Rotated Hybrid Composition Function 4 benchmarking function.
+    """F24 class implements the Rotated Hybrid Composition 4 benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \\ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \\ast \mathbf{M_i}) + bias_i]} + f_{bias}
 
@@ -1544,7 +1544,7 @@ class F24(CECCompositeBenchmark):
 
 
 class F25(CECCompositeBenchmark):
-    """F25 class implements the Rotated Hybrid Composition Function 4 without Bounds benchmarking function.
+    """F25 class implements the Rotated Hybrid Composition 4 without Bounds benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \\ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \\ast \mathbf{M_i}) + bias_i]} + f_{bias}
 
