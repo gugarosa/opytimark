@@ -365,13 +365,13 @@ class F6(CECBenchmark):
 class F7(CECBenchmark):
     """F7 class implements the Fast Fractal Double Dip's benchmarking function.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = -20e^{-0.2\sqrt{\\frac{1}{n}\sum_{i=1}^{n}x_i^2}}-e^{\\frac{1}{n}\sum_{i=1}^{n}cos(2 \\pi x_i)}+ 20 + e - 140 \mid z_i = x_i - o_i
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} fractal1D(x_i + twist(x_{(i mod n) + 1}))
 
     Domain:
         The function is commonly evaluated using :math:`x_i \in [-1, 1] \mid i = \{1, 2, \ldots, n\}, n \leq 1000`.
 
     Global Minima:
-        :math:`f(\mathbf{x^*}) = ? \mid \mathbf{x^*} = \mathbf{o}`.
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (1, 1, \ldots, 1)`.
 
     """
 
@@ -397,45 +397,68 @@ class F7(CECBenchmark):
                                  convex, differentiable, multimodal, separable)
 
     def _double_dip(self, x, c, s):
-        """
+        """Calculates the Double Dip's function.
+
+        Args:
+            x (float): Float-valued point.
+            c (float): Float-valued point.
+            s (float): Float-valued point.
+
+        Returns:
+            The value over the function.
+
         """
 
-        #
+        # If `x` is between -0.5 and 0.5
         if -0.5 < x < 0.5:
-            #
+            # Calculates the Double Dip's function.
             return (-6144 * (x - c) ** 6 + 3088 * (x - c) ** 4 - 392 * (x - c) ** 2 + 1) * s
 
         return 0
 
     def _twist(self, y):
-        """
+        """Twists the function.
+
+        Args:
+            y (float): Float-valued point.
+
+        Returns:
+            The value over the twisted function.
+
         """
 
         return 4 * (y ** 4 - 2 * y ** 3 + y ** 2)
 
     def _fractal_1d(self, x):
-        """
+        """Calculates the 1-dimensional fractal function.
+
+        Args:
+            x (float): Float-valued point.
+
+        Returns:
+            The value over the function.
+
         """
 
-        #
+        # Instantiates the function
         f = 0
 
-        #
+        # Iterates through 1 to 3
         for k in range(1, 4):
-            #
+            # Calculates the upper limit
             upper_limit = 2 ** (k - 1)
 
-            #
+            # Iterates through 1 to `upper_limit`
             for _ in range(1, upper_limit):
-                #
+                # Makes a random choice between an integer {0, 1, 2}
                 r2 = np.random.choice([0, 1, 2])
 
-                #
+                # Iterates through 1 to `r2`
                 for _ in range(1, r2):
-                    #
+                    # Calculates a uniform random number between 0 and 1
                     r1 = np.random.uniform()
 
-                    #
+                    # Calculates the Double Dip's function
                     f += self._double_dip(x, r1, 1 / (2 ** (k - 1) * (2 - r1)))
 
         return f
@@ -452,15 +475,15 @@ class F7(CECBenchmark):
 
         """
 
-        #
+        # Instantiates the function
         f = 0
 
-        #
+        # Iterates through every dimension
         for i in range(x.shape[0]):
-            #
+            # Calculates the twist output over `x[i mod D]`
             t = self._twist(x[i % x.shape[0]])
 
-            #
+            # Calculates the one-dimensional fractal function.
             f += self._fractal_1d(x[i] + t)
 
         return f
