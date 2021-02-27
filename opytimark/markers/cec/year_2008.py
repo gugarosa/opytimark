@@ -360,3 +360,107 @@ class F6(CECBenchmark):
         f = 20 + np.e - np.exp(term2) - 20 * np.exp(term1)
 
         return np.sum(f) - 140
+
+
+class F7(CECBenchmark):
+    """F7 class implements the Fast Fractal Double Dip's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = -20e^{-0.2\sqrt{\\frac{1}{n}\sum_{i=1}^{n}x_i^2}}-e^{\\frac{1}{n}\sum_{i=1}^{n}cos(2 \\pi x_i)}+ 20 + e - 140 \mid z_i = x_i - o_i
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-1, 1] \mid i = \{1, 2, \ldots, n\}, n \leq 1000`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = ? \mid \mathbf{x^*} = \mathbf{o}`.
+
+    """
+
+    def __init__(self, name='F7', year='2008', auxiliary_data=(), dims=1000,
+                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(F7, self).__init__(name, year, auxiliary_data, dims, continuous,
+                                 convex, differentiable, multimodal, separable)
+
+    def _double_dip(self, x, c, s):
+        """
+        """
+
+        #
+        if -0.5 < x < 0.5:
+            #
+            return (-6144 * (x - c) ** 6 + 3088 * (x - c) ** 4 - 392 * (x - c) ** 2 + 1) * s
+
+        return 0
+
+    def _twist(self, y):
+        """
+        """
+
+        return 4 * (y ** 4 - 2 * y ** 3 + y ** 2)
+
+    def _fractal_1d(self, x):
+        """
+        """
+
+        #
+        f = 0
+
+        #
+        for k in range(1, 4):
+            #
+            upper_limit = 2 ** (k - 1)
+
+            #
+            for _ in range(1, upper_limit):
+                #
+                r2 = np.random.choice([0, 1, 2])
+
+                #
+                for _ in range(1, r2):
+                    #
+                    r1 = np.random.uniform()
+
+                    #
+                    f += self._double_dip(x, r1, 1 / (2 ** (k - 1) * (2 - r1)))
+
+        return f
+
+    @d.check_less_equal_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        #
+        f = 0
+
+        #
+        for i in range(x.shape[0]):
+            #
+            t = self._twist(x[i % x.shape[0]])
+
+            #
+            f += self._fractal_1d(x[i] + t)
+
+        return f

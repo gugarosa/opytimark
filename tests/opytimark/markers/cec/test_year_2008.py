@@ -61,3 +61,13 @@ def test_F6():
     y = f(x)
 
     assert y == -140
+
+
+def test_F7():
+    f = year_2008.F7()
+
+    x = np.ones(50)
+
+    y = f(x)
+
+    assert y == 0
