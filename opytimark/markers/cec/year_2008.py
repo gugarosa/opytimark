@@ -130,7 +130,7 @@ class F3(CECBenchmark):
 
     """
 
-    def __init__(self, name='F3', year='2008', auxiliary_data=('o'), dims=100,
+    def __init__(self, name='F3', year='2008', auxiliary_data=('o'), dims=1000,
                  continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
         """Initialization method.
 
@@ -190,7 +190,7 @@ class F4(CECBenchmark):
 
     """
 
-    def __init__(self, name='F4', year='2008', auxiliary_data=('o'), dims=100,
+    def __init__(self, name='F4', year='2008', auxiliary_data=('o'), dims=1000,
                  continuous=True, convex=True, differentiable=True, multimodal=True, separable=True):
         """Initialization method.
 
