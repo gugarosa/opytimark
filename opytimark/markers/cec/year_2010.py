@@ -191,7 +191,7 @@ class F3(CECBenchmark):
 class F4(CECBenchmark):
     """F4 class implements the Single-group Shifted and m-rotated Elliptic Function benchmarking function.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = f_{rot\_elliptic}[z(P_1:P_m)] * 10^6 + f_{elliptic}[z(P_{m+1}:P_n)] \mid z_i = x_i - o_i and z_i = (x_i - o_i) \\ast M_i
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = f_{rot\_elliptic}[z(P_1:P_m)] * 10^6 + f_{elliptic}[z(P_{m+1}:P_n)] \mid z_i = x_i - o_i, z_i = (x_i - o_i) \\ast M_i
 
     Domain:
         The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}, n \leq 1000`.
@@ -201,7 +201,7 @@ class F4(CECBenchmark):
 
     """
 
-    def __init__(self, name='F4', year='2010', auxiliary_data=('o', 'p', 'M'), dims=1000, group_size=50,
+    def __init__(self, name='F4', year='2010', auxiliary_data=('o', 'M'), dims=1000, group_size=50,
                  continuous=True, convex=True, differentiable=True, multimodal=True, separable=True):
         """Initialization method.
 
@@ -242,8 +242,9 @@ class F4(CECBenchmark):
         D = x.shape[0]
         f = n_dim.HighConditionedElliptic()
 
-        #
+        # If group size is bigger or equal to number of dimensions
         if self.m >= D:
+            # Raises an error
             raise e.SizeError('`group_size` should be smaller than number of input dimensions')
 
         # Calculates an array of permutations and defines both groups' indexes
