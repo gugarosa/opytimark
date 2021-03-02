@@ -41,3 +41,13 @@ def test_F4():
     y = f(x)
 
     assert y == 0
+
+
+def test_F5():
+    f = year_2010.F5(group_size=3)
+
+    x = np.array([-4.11740908, 4.88998416, 3.66810078, 1.38579175, -3.05399570])
+
+    y = f(x)
+
+    assert y == 0

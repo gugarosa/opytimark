@@ -886,7 +886,7 @@ class HighConditionedElliptic(Benchmark):
         # Iterates through every dimension
         for i in range(x.shape[0]):
             # Calculates the High Conditioned Elliptic's function
-            f += (10 ** 6) ** ((i-2) / (x.shape[0] - 1)) * x[i] ** 2
+            f += (10e6) ** ((i-2) / (x.shape[0] - 1)) * x[i] ** 2
 
         return f
 
