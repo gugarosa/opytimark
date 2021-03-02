@@ -7,6 +7,9 @@ import opytimark.utils.constants as c
 import opytimark.utils.decorator as d
 from opytimark.core import Benchmark
 
+# Fixes Numpy's random seed
+np.random.seed(0)
+
 
 class Ackley1(Benchmark):
     """Ackley1 class implements the Ackley's 1st benchmarking function.

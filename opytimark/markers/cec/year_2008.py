@@ -6,6 +6,9 @@ import numpy as np
 import opytimark.utils.decorator as d
 from opytimark.core import CECBenchmark
 
+# Fixes Numpy's random seed
+np.random.seed(0)
+
 
 class F1(CECBenchmark):
     """F1 class implements the Shifted Sphere's benchmarking function.

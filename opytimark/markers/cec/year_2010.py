@@ -8,6 +8,9 @@ import opytimark.utils.decorator as d
 import opytimark.utils.exception as e
 from opytimark.core import CECBenchmark
 
+# Fixes Numpy's random seed
+np.random.seed(0)
+
 
 class F1(CECBenchmark):
     """F1 class implements the Shifted Elliptic's benchmarking function.
@@ -189,7 +192,7 @@ class F3(CECBenchmark):
 
 
 class F4(CECBenchmark):
-    """F4 class implements the Single-group Shifted and m-rotated Elliptic Function benchmarking function.
+    """F4 class implements the Single-group Shifted and m-rotated Elliptic's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = f_{rot\_elliptic}[z(P_1:P_m)] * 10^6 + f_{elliptic}[z(P_{m+1}:P_n)] \mid z_i = x_i - o_i, z_i = (x_i - o_i) \\ast M_i
 
@@ -202,7 +205,7 @@ class F4(CECBenchmark):
     """
 
     def __init__(self, name='F4', year='2010', auxiliary_data=('o', 'M'), dims=1000, group_size=50,
-                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=True):
+                 continuous=True, convex=True, differentiable=True, multimodal=False, separable=False):
         """Initialization method.
 
         Args:
@@ -223,8 +226,9 @@ class F4(CECBenchmark):
         super(F4, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
 
-        # Defines the size of the group
+        # Defines the size of the group and benchmarking function
         self.m = group_size
+        self.f = n_dim.HighConditionedElliptic()
 
     @d.check_less_equal_dimension
     def __call__(self, x):
@@ -238,14 +242,14 @@ class F4(CECBenchmark):
 
         """
 
-        # Defines the number of dimensions and the benchmarking function
+        # Defines the number of dimensions
         D = x.shape[0]
-        f = n_dim.HighConditionedElliptic()
 
         # If group size is bigger or equal to number of dimensions
         if self.m >= D:
             # Raises an error
-            raise e.SizeError('`group_size` should be smaller than number of input dimensions')
+            raise e.SizeError(
+                '`group_size` should be smaller than number of input dimensions')
 
         # Calculates an array of permutations and defines both groups' indexes
         p = np.random.permutation(D)
@@ -259,11 +263,11 @@ class F4(CECBenchmark):
         z_rot = np.dot(s[p_1], self.M[D][D])
         z = s[p_2]
 
-        return f(z_rot) * 10e6 + f(z)
+        return self.f(z_rot) * 10e6 + self.f(z)
 
 
 class F5(CECBenchmark):
-    """F5 class implements the Single-group Shifted and m-rotated Rastrigin Function benchmarking function.
+    """F5 class implements the Single-group Shifted and m-rotated Rastrigin's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = f_{rot\_rastrigin}[z(P_1:P_m)] * 10^6 + f_{rastrigin}[z(P_{m+1}:P_n)] \mid z_i = x_i - o_i, z_i = (x_i - o_i) \\ast M_i
 
@@ -276,7 +280,7 @@ class F5(CECBenchmark):
     """
 
     def __init__(self, name='F5', year='2010', auxiliary_data=('o', 'M'), dims=1000, group_size=50,
-                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=True):
+                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
         """Initialization method.
 
         Args:
@@ -297,8 +301,9 @@ class F5(CECBenchmark):
         super(F5, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
 
-        # Defines the size of the group
+        # Defines the size of the group and benchmarking function
         self.m = group_size
+        self.f = n_dim.Rastrigin()
 
     @d.check_less_equal_dimension
     def __call__(self, x):
@@ -312,14 +317,14 @@ class F5(CECBenchmark):
 
         """
 
-        # Defines the number of dimensions and the benchmarking function
+        # Defines the number of dimensions
         D = x.shape[0]
-        f = n_dim.Rastrigin()
 
         # If group size is bigger or equal to number of dimensions
         if self.m >= D:
             # Raises an error
-            raise e.SizeError('`group_size` should be smaller than number of input dimensions')
+            raise e.SizeError(
+                '`group_size` should be smaller than number of input dimensions')
 
         # Calculates an array of permutations and defines both groups' indexes
         p = np.random.permutation(D)
@@ -333,4 +338,231 @@ class F5(CECBenchmark):
         z_rot = np.dot(s[p_1], self.M[D][D])
         z = s[p_2]
 
-        return f(z_rot) * 10e6 + f(z)
+        return self.f(z_rot) * 10e6 + self.f(z)
+
+
+class F6(CECBenchmark):
+    """F6 class implements the Single-group Shifted and m-rotated Ackley's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = f_{rot\_ackley}[z(P_1:P_m)] * 10^6 + f_{ackley}[z(P_{m+1}:P_n)] \mid z_i = x_i - o_i, z_i = (x_i - o_i) \\ast M_i
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-32, 32] \mid i = \{1, 2, \ldots, n\}, n \leq 1000`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = \mathbf{o}`.
+
+    """
+
+    def __init__(self, name='F6', year='2010', auxiliary_data=('o', 'M'), dims=1000, group_size=50,
+                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
+            dims (int): Number of allowed dimensions.
+            group_size (int): Size of function's group, i.e., `m` variable.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(F6, self).__init__(name, year, auxiliary_data, dims, continuous,
+                                 convex, differentiable, multimodal, separable)
+
+        # Defines the size of the group and benchmarking function
+        self.m = group_size
+        self.f = n_dim.Ackley1()
+
+    @d.check_less_equal_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Defines the number of dimensions
+        D = x.shape[0]
+
+        # If group size is bigger or equal to number of dimensions
+        if self.m >= D:
+            # Raises an error
+            raise e.SizeError(
+                '`group_size` should be smaller than number of input dimensions')
+
+        # Calculates an array of permutations and defines both groups' indexes
+        p = np.random.permutation(D)
+        p_1 = p[:self.m]
+        p_2 = p[self.m:]
+
+        # Shifts the input data
+        s = x - self.o[:D]
+
+        # Re-calculates both groups' inputs
+        z_rot = np.dot(s[p_1], self.M[D][D])
+        z = s[p_2]
+
+        return self.f(z_rot) * 10e6 + self.f(z)
+
+
+class F7(CECBenchmark):
+    """F7 class implements the Single-group Shifted and m-rotated Schwefel's Problem 1.2 benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = f_{schwefel}[z(P_1:P_m)] * 10^6 + f_{sphere}[z(P_{m+1}:P_n)] \mid z_i = x_i - o_i, z_i = (x_i - o_i) \\ast M_i
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}, n \leq 1000`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = \mathbf{o}`.
+
+    """
+
+    def __init__(self, name='F7', year='2010', auxiliary_data=('o'), dims=1000, group_size=50,
+                 continuous=True, convex=True, differentiable=True, multimodal=False, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
+            dims (int): Number of allowed dimensions.
+            group_size (int): Size of function's group, i.e., `m` variable.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(F7, self).__init__(name, year, auxiliary_data, dims, continuous,
+                                 convex, differentiable, multimodal, separable)
+
+        # Defines the size of the group and benchmarking function
+        self.m = group_size
+        self.f_1 = n_dim.RotatedHyperEllipsoid()
+        self.f_2 = n_dim.Sphere()
+
+    @d.check_less_equal_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Defines the number of dimensions
+        D = x.shape[0]
+
+        # If group size is bigger or equal to number of dimensions
+        if self.m >= D:
+            # Raises an error
+            raise e.SizeError(
+                '`group_size` should be smaller than number of input dimensions')
+
+        # Calculates an array of permutations and defines both groups' indexes
+        p = np.random.permutation(D)
+        p_1 = p[:self.m]
+        p_2 = p[self.m:]
+
+        # Shifts the input data
+        s = x - self.o[:D]
+
+        # Re-calculates both groups' inputs
+        z_1 = s[p_1]
+        z_2 = s[p_2]
+
+        return self.f_1(z_1) * 10e6 + self.f_2(z_2)
+
+
+class F8(CECBenchmark):
+    """F8 class implements the Single-group Shifted and m-rotated Rosenbrock's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = f_{rosenbrock}[z(P_1:P_m)] * 10^6 + f_{sphere}[z(P_{m+1}:P_n)] \mid z_i = x_i - o_i, z_i = (x_i - o_i) \\ast M_i
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}, n \leq 1000`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = \mathbf{o}`.
+
+    """
+
+    def __init__(self, name='F8', year='2010', auxiliary_data=('o'), dims=1000, group_size=50,
+                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
+            dims (int): Number of allowed dimensions.
+            group_size (int): Size of function's group, i.e., `m` variable.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(F8, self).__init__(name, year, auxiliary_data, dims, continuous,
+                                 convex, differentiable, multimodal, separable)
+
+        # Defines the size of the group and benchmarking function
+        self.m = group_size
+        self.f_1 = n_dim.Rosenbrock()
+        self.f_2 = n_dim.Sphere()
+
+    @d.check_less_equal_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Defines the number of dimensions
+        D = x.shape[0]
+
+        # If group size is bigger or equal to number of dimensions
+        if self.m >= D:
+            # Raises an error
+            raise e.SizeError(
+                '`group_size` should be smaller than number of input dimensions')
+
+        # Calculates an array of permutations and defines both groups' indexes
+        p = np.random.permutation(D)
+        p_1 = p[:self.m]
+        p_2 = p[self.m:]
+
+        # Shifts the input data
+        s = x - self.o[:D]
+
+        # Re-calculates both groups' inputs
+        z_1 = s[p_1]
+        z_2 = s[p_2]
+
+        return self.f_1(z_1) * 10e6 + self.f_2(z_2)

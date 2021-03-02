@@ -51,3 +51,30 @@ def test_F5():
     y = f(x)
 
     assert y == 0
+
+def test_F6():
+    f = year_2010.F6(group_size=3)
+
+    x = np.array([19.7711343, 24.0654493, -3.35055413, 0.896206766, 25.9506031])
+
+    y = f(x)
+
+    assert y == 0
+
+def test_F7():
+    f = year_2010.F7(group_size=3)
+
+    x = np.array([38.4601100, -10.8592936, -93.9407186, 97.5466996, 5.69178553])
+
+    y = f(x)
+
+    assert y == 0
+
+def test_F8():
+    f = year_2010.F8(group_size=3)
+
+    x = np.array([56.8153286, 77.6415951, -62.6235968, -13.9831963, 91.5341041])
+
+    y = f(x)
+
+    assert y == 0
