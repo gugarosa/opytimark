@@ -1,6 +1,8 @@
 opytimark.markers.cec.year_2005
 ================================
 
+Please refer to the technical report for more information: http://www.cmap.polytechnique.fr/~nikolaus.hansen/Tech-Report-May-30-05.pdf
+
 .. autoapiclass:: opytimark.markers.cec.year_2005.F1
    :members:
    :show-inheritance:

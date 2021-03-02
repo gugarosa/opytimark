@@ -1,6 +1,8 @@
 opytimark.markers.cec.year_2008
 ================================
 
+Please refer to the technical report for more information: https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.515.821&rep=rep1&type=pdf
+
 .. autoapiclass:: opytimark.markers.cec.year_2008.F1
    :members:
    :show-inheritance:
