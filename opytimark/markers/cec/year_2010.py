@@ -566,3 +566,90 @@ class F8(CECBenchmark):
         z_2 = s[p_2]
 
         return self.f_1(z_1) * 10e6 + self.f_2(z_2)
+
+
+class F9(CECBenchmark):
+    """F9 class implements the D/2m-group Shifted and m-rotated Elliptic's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{k=1}^{\\frac{n}{2m}} f_{rot\_elliptic}[z(P_{(k-1)*m+1}:P_{k*m})] * 10^6 + f_{elliptic}[z(P_{\\frac{n}{2}+1}:P_n)] \mid z_i = x_i - o_i, z_i = (x_i - o_i) \\ast M_i
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}, n \leq 1000`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = \mathbf{o}`.
+
+    """
+
+    def __init__(self, name='F9', year='2010', auxiliary_data=('o', 'M'), dims=1000, group_size=50,
+                 continuous=True, convex=True, differentiable=True, multimodal=False, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
+            dims (int): Number of allowed dimensions.
+            group_size (int): Size of function's group, i.e., `m` variable.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(F9, self).__init__(name, year, auxiliary_data, dims, continuous,
+                                 convex, differentiable, multimodal, separable)
+
+        # Defines the size of the group and benchmarking function
+        self.m = group_size
+        self.f = n_dim.HighConditionedElliptic()
+
+    @d.check_less_equal_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Defines the number of dimensions, instantiates the function and calculates the number of groups
+        D = x.shape[0]
+        f = 0
+        n_groups = int(D / (2 * self.m))
+
+        # If group size is bigger or equal to number of dimensions
+        if self.m >= D:
+            # Raises an error
+            raise e.SizeError(
+                '`group_size` should be smaller than number of input dimensions')
+
+        # Calculates an array of permutations
+        p = np.random.permutation(D)
+
+        # Shifts the input data
+        s = x - self.o[:D]
+
+        # Iterates through all groups
+        for i in range(n_groups):
+            # Re-calculates the first group input
+            p_1 = p[i*self.m:(i+1)*self.m]
+            z_rot = np.dot(s[p_1], self.M[D][D])
+
+            # Sums up the first group output
+            f += self.f(z_rot)
+
+        # Re-calculates the second group input
+        p_2 = p[int(D/2):]
+        z = s[p_2]
+
+        # Sums up the second group output
+        f += self.f(z)
+
+        return f

@@ -78,3 +78,12 @@ def test_F8():
     y = f(x)
 
     assert y == 0
+
+def test_F9():
+    f = year_2010.F9(group_size=3)
+
+    x = np.array([89.2431653, 1.83310145, 88.8133159, 53.3132770, -82.4244899])
+
+    y = f(x)
+
+    assert y == 0
