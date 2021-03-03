@@ -378,7 +378,7 @@ class F6(CECBenchmark):
         """
 
         # Re-calculates the input
-        z = x - self.o[:x.shape[0]] + 1
+        z = x - self.o[:x.shape[0]]
 
         # Instantiating function
         f = 0

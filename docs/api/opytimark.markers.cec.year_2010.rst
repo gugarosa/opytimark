@@ -74,3 +74,11 @@ Please refer to the technical report for more information: http://titan.csit.rmi
 .. autoapiclass:: opytimark.markers.cec.year_2010.F18
    :members:
    :show-inheritance:
+
+.. autoapiclass:: opytimark.markers.cec.year_2010.F19
+   :members:
+   :show-inheritance:
+
+.. autoapiclass:: opytimark.markers.cec.year_2010.F20
+   :members:
+   :show-inheritance:

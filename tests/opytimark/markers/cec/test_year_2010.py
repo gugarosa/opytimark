@@ -52,6 +52,7 @@ def test_F5():
 
     assert y == 0
 
+
 def test_F6():
     f = year_2010.F6(group_size=3)
 
@@ -60,6 +61,7 @@ def test_F6():
     y = f(x)
 
     assert y == 0
+
 
 def test_F7():
     f = year_2010.F7(group_size=3)
@@ -70,6 +72,7 @@ def test_F7():
 
     assert y == 0
 
+
 def test_F8():
     f = year_2010.F8(group_size=3)
 
@@ -78,6 +81,7 @@ def test_F8():
     y = f(x)
 
     assert y == 0
+
 
 def test_F9():
     f = year_2010.F9(group_size=3)
@@ -88,6 +92,7 @@ def test_F9():
 
     assert y == 0
 
+
 def test_F10():
     f = year_2010.F10(group_size=3)
 
@@ -96,6 +101,7 @@ def test_F10():
     y = f(x)
 
     assert y == 0
+
 
 def test_F11():
     f = year_2010.F11(group_size=3)
@@ -106,6 +112,7 @@ def test_F11():
 
     assert y == 0
 
+
 def test_F12():
     f = year_2010.F12(group_size=3)
 
@@ -114,6 +121,7 @@ def test_F12():
     y = f(x)
 
     assert y == 0
+
 
 def test_F13():
     f = year_2010.F13(group_size=3)
@@ -124,6 +132,7 @@ def test_F13():
 
     assert y == 0
 
+
 def test_F14():
     f = year_2010.F14(group_size=3)
 
@@ -132,6 +141,7 @@ def test_F14():
     y = f(x)
 
     assert y == 0
+
 
 def test_F15():
     f = year_2010.F15(group_size=3)
@@ -142,6 +152,7 @@ def test_F15():
 
     assert y == 0
 
+
 def test_F16():
     f = year_2010.F16(group_size=3)
 
@@ -150,6 +161,7 @@ def test_F16():
     y = f(x)
 
     assert y == 0
+
 
 def test_F17():
     f = year_2010.F17(group_size=3)
@@ -160,10 +172,31 @@ def test_F17():
 
     assert y == 0
 
+
 def test_F18():
     f = year_2010.F18(group_size=3)
 
     x = np.array([-82.1766825, -43.6583360, 67.4227545, 3.04409842, -99.6584289])
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_F19():
+    f = year_2010.F19()
+
+    x = np.array([49.1220666, 52.6338455, -19.3629226, -78.4253961, -23.9628921])
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_F20():
+    f = year_2010.F20()
+
+    x = np.array([-9.9157449, 38.8319221, -8.93767406, 1.744686103, 17.3243610])
 
     y = f(x)
 
