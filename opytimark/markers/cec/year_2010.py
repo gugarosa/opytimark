@@ -653,3 +653,353 @@ class F9(CECBenchmark):
         f += self.f(z)
 
         return f
+
+
+class F10(CECBenchmark):
+    """F10 class implements the D/2m-group Shifted and m-rotated Rastrigin's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{k=1}^{\\frac{n}{2m}} f_{rot\_rastrigin}[z(P_{(k-1)*m+1}:P_{k*m})] * 10^6 + f_{rastrigin}[z(P_{\\frac{n}{2}+1}:P_n)] \mid z_i = x_i - o_i, z_i = (x_i - o_i) \\ast M_i
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 1000`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = \mathbf{o}`.
+
+    """
+
+    def __init__(self, name='F10', year='2010', auxiliary_data=('o', 'M'), dims=1000, group_size=50,
+                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
+            dims (int): Number of allowed dimensions.
+            group_size (int): Size of function's group, i.e., `m` variable.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(F10, self).__init__(name, year, auxiliary_data, dims, continuous,
+                                  convex, differentiable, multimodal, separable)
+
+        # Defines the size of the group and benchmarking function
+        self.m = group_size
+        self.f = n_dim.Rastrigin()
+
+    @d.check_less_equal_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Defines the number of dimensions, instantiates the function and calculates the number of groups
+        D = x.shape[0]
+        f = 0
+        n_groups = int(D / (2 * self.m))
+
+        # If group size is bigger or equal to number of dimensions
+        if self.m >= D:
+            # Raises an error
+            raise e.SizeError(
+                '`group_size` should be smaller than number of input dimensions')
+
+        # Calculates an array of permutations
+        p = np.random.permutation(D)
+
+        # Shifts the input data
+        s = x - self.o[:D]
+
+        # Iterates through all groups
+        for i in range(n_groups):
+            # Re-calculates the first group input
+            p_1 = p[i*self.m:(i+1)*self.m]
+            z_rot = np.dot(s[p_1], self.M[D][D])
+
+            # Sums up the first group output
+            f += self.f(z_rot)
+
+        # Re-calculates the second group input
+        p_2 = p[int(D/2):]
+        z = s[p_2]
+
+        # Sums up the second group output
+        f += self.f(z)
+
+        return f
+
+
+class F11(CECBenchmark):
+    """F11 class implements the D/2m-group Shifted and m-rotated Ackley's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{k=1}^{\\frac{n}{2m}} f_{rot\_ackley}[z(P_{(k-1)*m+1}:P_{k*m})] * 10^6 + f_{ackley}[z(P_{\\frac{n}{2}+1}:P_n)] \mid z_i = x_i - o_i, z_i = (x_i - o_i) \\ast M_i
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-32, 32] \mid i = \{1, 2, \ldots, n\}, n \leq 1000`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = \mathbf{o}`.
+
+    """
+
+    def __init__(self, name='F11', year='2010', auxiliary_data=('o', 'M'), dims=1000, group_size=50,
+                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
+            dims (int): Number of allowed dimensions.
+            group_size (int): Size of function's group, i.e., `m` variable.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(F11, self).__init__(name, year, auxiliary_data, dims, continuous,
+                                  convex, differentiable, multimodal, separable)
+
+        # Defines the size of the group and benchmarking function
+        self.m = group_size
+        self.f = n_dim.Ackley1()
+
+    @d.check_less_equal_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Defines the number of dimensions, instantiates the function and calculates the number of groups
+        D = x.shape[0]
+        f = 0
+        n_groups = int(D / (2 * self.m))
+
+        # If group size is bigger or equal to number of dimensions
+        if self.m >= D:
+            # Raises an error
+            raise e.SizeError(
+                '`group_size` should be smaller than number of input dimensions')
+
+        # Calculates an array of permutations
+        p = np.random.permutation(D)
+
+        # Shifts the input data
+        s = x - self.o[:D]
+
+        # Iterates through all groups
+        for i in range(n_groups):
+            # Re-calculates the first group input
+            p_1 = p[i*self.m:(i+1)*self.m]
+            z_rot = np.dot(s[p_1], self.M[D][D])
+
+            # Sums up the first group output
+            f += self.f(z_rot)
+
+        # Re-calculates the second group input
+        p_2 = p[int(D/2):]
+        z = s[p_2]
+
+        # Sums up the second group output
+        f += self.f(z)
+
+        return f
+
+
+class F12(CECBenchmark):
+    """F12 class implements the D/2m-group Shifted and m-rotated Schwefel's Problem 1.2 benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{k=1}^{\\frac{n}{2m}} f_{schwefel}[z(P_{(k-1)*m+1}:P_{k*m})] * 10^6 + f_{sphere}[z(P_{\\frac{n}{2}+1}:P_n)] \mid z_i = x_i - o_i, z_i = (x_i - o_i) \\ast M_i
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}, n \leq 1000`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = \mathbf{o}`.
+
+    """
+
+    def __init__(self, name='F12', year='2010', auxiliary_data=('o'), dims=1000, group_size=50,
+                 continuous=True, convex=True, differentiable=True, multimodal=False, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
+            dims (int): Number of allowed dimensions.
+            group_size (int): Size of function's group, i.e., `m` variable.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(F12, self).__init__(name, year, auxiliary_data, dims, continuous,
+                                  convex, differentiable, multimodal, separable)
+
+        # Defines the size of the group and benchmarking function
+        self.m = group_size
+        self.f_1 = n_dim.RotatedHyperEllipsoid()
+        self.f_2 = n_dim.Sphere()
+
+    @d.check_less_equal_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Defines the number of dimensions, instantiates the function and calculates the number of groups
+        D = x.shape[0]
+        f = 0
+        n_groups = int(D / (2 * self.m))
+
+        # If group size is bigger or equal to number of dimensions
+        if self.m >= D:
+            # Raises an error
+            raise e.SizeError(
+                '`group_size` should be smaller than number of input dimensions')
+
+        # Calculates an array of permutations
+        p = np.random.permutation(D)
+
+        # Shifts the input data
+        s = x - self.o[:D]
+
+        # Iterates through all groups
+        for i in range(n_groups):
+            # Re-calculates the first group input
+            p_1 = p[i*self.m:(i+1)*self.m]
+            z_1 = s[p_1]
+
+            # Sums up the first group output
+            f += self.f_1(z_1)
+
+        # Re-calculates the second group input
+        p_2 = p[int(D/2):]
+        z_2 = s[p_2]
+
+        # Sums up the second group output
+        f += self.f_2(z_2)
+
+        return f
+
+
+class F13(CECBenchmark):
+    """F13 class implements the D/2m-group Shifted and m-rotated Rosenbrock benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{k=1}^{\\frac{n}{2m}} f_{rosenbrock}[z(P_{(k-1)*m+1}:P_{k*m})] * 10^6 + f_{sphere}[z(P_{\\frac{n}{2}+1}:P_n)] \mid z_i = x_i - o_i, z_i = (x_i - o_i) \\ast M_i
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}, n \leq 1000`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = \mathbf{o}`.
+
+    """
+
+    def __init__(self, name='F13', year='2010', auxiliary_data=('o'), dims=1000, group_size=50,
+                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
+            dims (int): Number of allowed dimensions.
+            group_size (int): Size of function's group, i.e., `m` variable.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(F13, self).__init__(name, year, auxiliary_data, dims, continuous,
+                                  convex, differentiable, multimodal, separable)
+
+        # Defines the size of the group and benchmarking function
+        self.m = group_size
+        self.f_1 = n_dim.Rosenbrock()
+        self.f_2 = n_dim.Sphere()
+
+    @d.check_less_equal_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Defines the number of dimensions, instantiates the function and calculates the number of groups
+        D = x.shape[0]
+        f = 0
+        n_groups = int(D / (2 * self.m))
+
+        # If group size is bigger or equal to number of dimensions
+        if self.m >= D:
+            # Raises an error
+            raise e.SizeError(
+                '`group_size` should be smaller than number of input dimensions')
+
+        # Calculates an array of permutations
+        p = np.random.permutation(D)
+
+        # Shifts the input data
+        s = x - self.o[:D]
+
+        # Iterates through all groups
+        for i in range(n_groups):
+            # Re-calculates the first group input
+            p_1 = p[i*self.m:(i+1)*self.m]
+            z_1 = s[p_1]
+
+            # Sums up the first group output
+            f += self.f_1(z_1)
+
+        # Re-calculates the second group input
+        p_2 = p[int(D/2):]
+        z_2 = s[p_2]
+
+        # Sums up the second group output
+        f += self.f_2(z_2)
+
+        return f
