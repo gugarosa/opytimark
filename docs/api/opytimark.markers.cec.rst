@@ -6,8 +6,6 @@ opytimark.markers.cec
    opytimark.markers.cec.year_2008
    opytimark.markers.cec.year_2010
    opytimark.markers.cec.year_2013
-   opytimark.markers.cec.year_2014
-   opytimark.markers.cec.year_2015
 
 .. autoapimodule:: opytimark.markers.cec
    :members:

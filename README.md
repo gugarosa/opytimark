@@ -64,8 +64,6 @@ Opytimark is based on the following structure, and you should pay attention to i
             - year_2008
             - year_2010
             - year_2013
-            - year_2014
-            - year_2015
         - boolean
         - one_dimensional
         - two_dimensional
