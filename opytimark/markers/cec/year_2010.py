@@ -260,7 +260,7 @@ class F4(CECBenchmark):
         s = x - self.o[:D]
 
         # Re-calculates both groups' inputs
-        z_rot = np.dot(s[p_1], self.M[D][D])
+        z_rot = np.dot(s[p_1], self.M[:self.m][:self.m])
         z = s[p_2]
 
         return self.f(z_rot) * 10e6 + self.f(z)
@@ -335,7 +335,7 @@ class F5(CECBenchmark):
         s = x - self.o[:D]
 
         # Re-calculates both groups' inputs
-        z_rot = np.dot(s[p_1], self.M[D][D])
+        z_rot = np.dot(s[p_1], self.M[:self.m][:self.m])
         z = s[p_2]
 
         return self.f(z_rot) * 10e6 + self.f(z)
@@ -410,7 +410,7 @@ class F6(CECBenchmark):
         s = x - self.o[:D]
 
         # Re-calculates both groups' inputs
-        z_rot = np.dot(s[p_1], self.M[D][D])
+        z_rot = np.dot(s[p_1], self.M[:self.m][:self.m])
         z = s[p_2]
 
         return self.f(z_rot) * 10e6 + self.f(z)
@@ -640,7 +640,7 @@ class F9(CECBenchmark):
         for i in range(n_groups):
             # Re-calculates the first group input
             p_1 = p[i*self.m:(i+1)*self.m]
-            z_rot = np.dot(s[p_1], self.M[D][D])
+            z_rot = np.dot(s[p_1], self.M[:self.m][:self.m])
 
             # Sums up the first group output
             f += self.f(z_rot)
@@ -727,7 +727,7 @@ class F10(CECBenchmark):
         for i in range(n_groups):
             # Re-calculates the first group input
             p_1 = p[i*self.m:(i+1)*self.m]
-            z_rot = np.dot(s[p_1], self.M[D][D])
+            z_rot = np.dot(s[p_1], self.M[:self.m][:self.m])
 
             # Sums up the first group output
             f += self.f(z_rot)
@@ -814,7 +814,7 @@ class F11(CECBenchmark):
         for i in range(n_groups):
             # Re-calculates the first group input
             p_1 = p[i*self.m:(i+1)*self.m]
-            z_rot = np.dot(s[p_1], self.M[D][D])
+            z_rot = np.dot(s[p_1], self.M[:self.m][:self.m])
 
             # Sums up the first group output
             f += self.f(z_rot)
@@ -1077,7 +1077,7 @@ class F14(CECBenchmark):
         for i in range(n_groups):
             # Re-calculates the first group input
             p = P[i*self.m:(i+1)*self.m]
-            z = np.dot(s[p], self.M[D][D])
+            z = np.dot(s[p], self.M[:self.m][:self.m])
 
             # Sums up the group output
             f += self.f(z)
@@ -1157,7 +1157,7 @@ class F15(CECBenchmark):
         for i in range(n_groups):
             # Re-calculates the first group input
             p = P[i*self.m:(i+1)*self.m]
-            z = np.dot(s[p], self.M[D][D])
+            z = np.dot(s[p], self.M[:self.m][:self.m])
 
             # Sums up the group output
             f += self.f(z)
@@ -1237,7 +1237,7 @@ class F16(CECBenchmark):
         for i in range(n_groups):
             # Re-calculates the first group input
             p = P[i*self.m:(i+1)*self.m]
-            z = np.dot(s[p], self.M[D][D])
+            z = np.dot(s[p], self.M[:self.m][:self.m])
 
             # Sums up the group output
             f += self.f(z)
