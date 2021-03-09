@@ -3,8 +3,6 @@ import numpy as np
 import opytimark.utils.loader as l
 from opytimark.markers.cec import year_2010
 
-np.random.seed(0)
-
 
 def test_F1():
     f = year_2010.F1()
