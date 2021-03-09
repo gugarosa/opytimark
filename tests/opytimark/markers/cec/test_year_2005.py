@@ -1,12 +1,11 @@
-import numpy as np
-
+import opytimark.utils.loader as l
 from opytimark.markers.cec import year_2005
 
 
 def test_F1():
     f = year_2005.F1()
 
-    x = np.array([-39.311900, 58.899900, -46.322400, -74.651500, -16.799700])
+    x = l.load_cec_auxiliary('F1_o', '2005')
 
     y = f(x)
 
@@ -16,7 +15,7 @@ def test_F1():
 def test_F2():
     f = year_2005.F2()
 
-    x = np.array([35.626700, -82.912300, -10.642300, -83.581500, 83.155200])
+    x = l.load_cec_auxiliary('F2_o', '2005')
 
     y = f(x)
 
@@ -26,7 +25,8 @@ def test_F2():
 def test_F3():
     f = year_2005.F3()
 
-    x = np.array([-32.201300, 64.977600])
+    x = l.load_cec_auxiliary('F3_o', '2005')
+    x = x[:50]
 
     y = f(x)
 
@@ -36,7 +36,7 @@ def test_F3():
 def test_F4():
     f = year_2005.F4()
 
-    x = np.array([35.626700, -82.912300, -10.642300, -83.581500, 83.155200])
+    x = l.load_cec_auxiliary('F4_o', '2005')
 
     y = f(x)
 
@@ -46,7 +46,9 @@ def test_F4():
 def test_F5():
     f = year_2005.F5()
 
-    x = np.array([-100, 7.9470000, -1.5380000, 100, 100])
+    x = l.load_cec_auxiliary('F5_o', '2005')
+    x[:int(x.shape[0]/4)] = -100
+    x[int(3*x.shape[0]/4):] = 100
 
     y = f(x)
 
@@ -56,7 +58,8 @@ def test_F5():
 def test_F6():
     f = year_2005.F6()
 
-    x = np.array([82.023200, -47.395000, 20.231600, -1.5231000, 71.433800])
+    x = l.load_cec_auxiliary('F6_o', '2005')
+    x += 1
 
     y = f(x)
 
@@ -66,7 +69,8 @@ def test_F6():
 def test_F7():
     f = year_2005.F7()
 
-    x = np.array([-276.26840, -11.911000])
+    x = l.load_cec_auxiliary('F7_o', '2005')
+    x = x[:50]
 
     y = f(x)
 
@@ -76,7 +80,11 @@ def test_F7():
 def test_F8():
     f = year_2005.F8()
 
-    x = np.array([-479.2608, 14.976900])
+    x = l.load_cec_auxiliary('F8_o', '2005')
+    x = x[:50]
+
+    for j in range(int(x.shape[0]/2)):
+        x[2*j] = -32 * x[2*j+1]
 
     y = f(x)
 
@@ -86,7 +94,7 @@ def test_F8():
 def test_F9():
     f = year_2005.F9()
 
-    x = np.array([1.9005000, -1.5644000, -0.97880000, -2.2536000, 2.4990000])
+    x = l.load_cec_auxiliary('F9_o', '2005')
 
     y = f(x)
 
@@ -96,7 +104,8 @@ def test_F9():
 def test_F10():
     f = year_2005.F10()
 
-    x = np.array([1.9005000, -1.5644000])
+    x = l.load_cec_auxiliary('F10_o', '2005')
+    x = x[:50]
 
     y = f(x)
 
@@ -106,7 +115,8 @@ def test_F10():
 def test_F11():
     f = year_2005.F11()
 
-    x = np.array([-0.13670000, 0.11860000])
+    x = l.load_cec_auxiliary('F11_o', '2005')
+    x = x[:50]
 
     y = f(x)
 
@@ -116,7 +126,7 @@ def test_F11():
 def test_F12():
     f = year_2005.F12()
 
-    x = np.array([-2.0280000, -1.5589000, 0.77740000, -2.0752000, -0.16010000])
+    x = l.load_cec_auxiliary('F12_alpha', '2005')
 
     y = f(x)
 
@@ -126,7 +136,7 @@ def test_F12():
 def test_F13():
     f = year_2005.F13()
 
-    x = np.array([0.24710000, -0.84970000, 0.56290000, 0.26730000, 0.68740000])
+    x = l.load_cec_auxiliary('F13_o', '2005')
 
     y = f(x)
 
@@ -136,7 +146,8 @@ def test_F13():
 def test_F14():
     f = year_2005.F14()
 
-    x = np.array([-73.602900, -23.549700])
+    x = l.load_cec_auxiliary('F14_o', '2005')
+    x = x[:50]
 
     y = f(x)
 
@@ -146,7 +157,8 @@ def test_F14():
 def test_F15():
     f = year_2005.F15()
 
-    x = np.array([3.3253000, -1.2835000])
+    x = l.load_cec_auxiliary('F15_o', '2005')
+    x = x[0][:50]
 
     y = f(x)
 
@@ -156,7 +168,8 @@ def test_F15():
 def test_F16():
     f = year_2005.F16()
 
-    x = np.array([3.3253000, -1.2835000])
+    x = l.load_cec_auxiliary('F16_o', '2005')
+    x = x[0][:50]
 
     y = f(x)
 
@@ -166,7 +179,8 @@ def test_F16():
 def test_F17():
     f = year_2005.F17()
 
-    x = np.array([3.3253000, -1.2835000])
+    x = l.load_cec_auxiliary('F17_o', '2005')
+    x = x[0][:50]
 
     y = f(x)
 
@@ -176,7 +190,8 @@ def test_F17():
 def test_F18():
     f = year_2005.F18()
 
-    x = np.array([1.5953000, 2.6440000])
+    x = l.load_cec_auxiliary('F18_o', '2005')
+    x = x[0][:50]
 
     y = f(x)
 
@@ -186,7 +201,8 @@ def test_F18():
 def test_F19():
     f = year_2005.F19()
 
-    x = np.array([1.5953000, 2.6440000])
+    x = l.load_cec_auxiliary('F19_o', '2005')
+    x = x[0][:50]
 
     y = f(x)
 
@@ -196,7 +212,11 @@ def test_F19():
 def test_F20():
     f = year_2005.F20()
 
-    x = np.array([1.5953000, 5])
+    x = l.load_cec_auxiliary('F20_o', '2005')
+    x = x[0][:50]
+
+    for j in range(int(x.shape[0]/2)):
+        x[2*j+1] = 5
 
     y = f(x)
 
@@ -206,7 +226,8 @@ def test_F20():
 def test_F21():
     f = year_2005.F21()
 
-    x = np.array([1.2141000, -0.0100000])
+    x = l.load_cec_auxiliary('F21_o', '2005')
+    x = x[0][:50]
 
     y = f(x)
 
@@ -216,7 +237,8 @@ def test_F21():
 def test_F22():
     f = year_2005.F22()
 
-    x = np.array([1.2141000, -0.0100000])
+    x = l.load_cec_auxiliary('F22_o', '2005')
+    x = x[0][:50]
 
     y = f(x)
 
@@ -226,7 +248,8 @@ def test_F22():
 def test_F23():
     f = year_2005.F23()
 
-    x = np.array([1.2141000, -0.0100000])
+    x = l.load_cec_auxiliary('F23_o', '2005')
+    x = x[0][:50]
 
     y = f(x)
 
@@ -236,7 +259,8 @@ def test_F23():
 def test_F24():
     f = year_2005.F24()
 
-    x = np.array([-2.9330000, -3.0340000])
+    x = l.load_cec_auxiliary('F24_o', '2005')
+    x = x[0][:50]
 
     y = f(x)
 
@@ -246,7 +270,8 @@ def test_F24():
 def test_F25():
     f = year_2005.F25()
 
-    x = np.array([-2.9330000, -3.0340000])
+    x = l.load_cec_auxiliary('F25_o', '2005')
+    x = x[0][:50]
 
     y = f(x)
 
