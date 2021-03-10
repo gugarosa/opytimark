@@ -106,6 +106,36 @@ def test_F8():
     assert y == 0
 
 
+def test_F9():
+    f = year_2013.F9()
+
+    x = l.load_cec_auxiliary('F9_o', '2013')
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_F10():
+    f = year_2013.F10()
+
+    x = l.load_cec_auxiliary('F10_o', '2013')
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_F11():
+    f = year_2013.F11()
+
+    x = l.load_cec_auxiliary('F11_o', '2013')
+
+    y = f(x)
+
+    assert y == 0
+
+
 def test_F12():
     f = year_2013.F12()
 
@@ -115,3 +145,33 @@ def test_F12():
     y = f(x)
 
     assert round(y) == 0
+
+
+def test_F13():
+    f = year_2013.F13()
+
+    x = l.load_cec_auxiliary('F13_o', '2013')
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_F14():
+    f = year_2013.F14()
+
+    x = l.load_cec_auxiliary('F14_o', '2013')
+    
+    y = f(x)
+
+    assert y == 2.740367969652882e+20
+
+
+def test_F15():
+    f = year_2013.F15()
+
+    x = l.load_cec_auxiliary('F15_o', '2013')
+
+    y = f(x)
+
+    assert y == 0

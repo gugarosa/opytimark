@@ -35,6 +35,30 @@ Please refer to the technical report for more information: https://titan.csit.rm
    :members:
    :show-inheritance:
 
+.. autoapiclass:: opytimark.markers.cec.year_2013.F9
+   :members:
+   :show-inheritance:
+
+.. autoapiclass:: opytimark.markers.cec.year_2013.F10
+   :members:
+   :show-inheritance:
+
+.. autoapiclass:: opytimark.markers.cec.year_2013.F11
+   :members:
+   :show-inheritance:
+
 .. autoapiclass:: opytimark.markers.cec.year_2013.F12
+   :members:
+   :show-inheritance:
+
+.. autoapiclass:: opytimark.markers.cec.year_2013.F13
+   :members:
+   :show-inheritance:
+
+.. autoapiclass:: opytimark.markers.cec.year_2013.F14
+   :members:
+   :show-inheritance:
+
+.. autoapiclass:: opytimark.markers.cec.year_2013.F15
    :members:
    :show-inheritance:
