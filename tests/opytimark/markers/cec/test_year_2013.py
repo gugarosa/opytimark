@@ -1,5 +1,29 @@
+import numpy as np
+
 import opytimark.utils.loader as l
 from opytimark.markers.cec import year_2013
+
+
+def test_T_irregularity():
+    x = np.asarray([1, 2, 3, 4, 5])
+
+    x_t = year_2013.T_irregularity(x)
+
+    assert np.sum(x_t) == 14.878553613491857
+
+
+def test_T_asymmetry():
+    x = np.asarray([1, 2, 3, 4, 5])
+
+    x_t = year_2013.T_asymmetry(x, 0.2)
+
+    assert np.sum(x_t) == 23.061844625640674
+
+
+def test_T_diagonal():
+    M = year_2013.T_diagonal(5, 10)
+
+    assert np.sum(M) == 7.905694150420949
 
 
 def test_F1():

@@ -50,11 +50,9 @@ def T_asymmetry(x, beta):
 
     """
 
-    # Gathers the amount of dimensions
+    # Gathers the amount of dimensions and calculates an equally-spaced interval between 0 and D-1
     D = x.shape[0]
-
-    # Calculates an equally-spaced interval between 0 and D-1
-    dims = np.linspace(0, D - 1, D - 1)
+    dims = np.linspace(1, D, D) - 1
 
     # Activates the context manager for catching warnings
     with warnings.catch_warnings():
@@ -66,6 +64,30 @@ def T_asymmetry(x, beta):
         x_t = np.where(x > 0, x ** (1 + beta * (dims / (D - 1)) * np.sqrt(x)), x)
 
     return x_t
+
+
+def T_diagonal(D, alpha):
+    """Creates a transformed diagonal matrix used to provide ill-conditioning.
+
+    Args:
+        D (int): Amount of dimensions.
+        beta (float): Exponential value used to produce the ill-conditioning.
+
+    Returns:
+        The transformed diagonal matrix
+
+    """
+
+    # Calculates an equally-spaced interval between 0 and D-1
+    dims = np.linspace(1, D, D) - 1
+
+    # Creates an empty matrix
+    M = np.zeros((D, D))
+
+    # Fill the diagonal matrix with the ill-condition
+    np.fill_diagonal(M, alpha ** 0.5 * (dims / (D - 1)))
+
+    return M
 
 
 class F1(CECBenchmark):
