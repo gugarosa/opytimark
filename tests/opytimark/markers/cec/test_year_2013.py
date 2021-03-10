@@ -40,3 +40,33 @@ def test_F4():
     y = f(x)
 
     assert y == 0
+
+
+def test_F5():
+    f = year_2013.F5()
+
+    x = l.load_cec_auxiliary('F5_o', '2013')
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_F6():
+    f = year_2013.F6()
+
+    x = l.load_cec_auxiliary('F6_o', '2013')
+
+    y = f(x)
+
+    assert y == 0
+
+
+def test_F7():
+    f = year_2013.F7()
+
+    x = l.load_cec_auxiliary('F7_o', '2013')
+
+    y = f(x)
+
+    assert y == 0
