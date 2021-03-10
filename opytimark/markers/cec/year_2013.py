@@ -1,4 +1,4 @@
-"""CEC2014 benchmarking functions.
+"""CEC2013 benchmarking functions.
 """
 
 import numpy as np
@@ -192,9 +192,9 @@ class F3(CECBenchmark):
 
 
 class F4(CECBenchmark):
-    """F4 class implements the Shifted Elliptic's benchmarking function.
+    """F4 class implements the 7-separable, 1-separable Shifted and Rotated Elliptic's benchmarking function.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (10^6)^\\frac{i-1}{n-1} z_i^2 \mid z_i = x_i - o_i
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{|S|-1}w_i f_{elliptic}(z_i) + f_{elliptic}(z_{|S|})
 
     Domain:
         The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}, n \leq 1000`.
@@ -225,10 +225,9 @@ class F4(CECBenchmark):
         super(F4, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
 
-        #
+        # Defines the subsets, weights and the benchmarking to be evaluated
         self.S = [50, 25, 25, 100, 50, 25, 25]
-        self.W = [45.6996306147733, 1.56461588893232, 18465.3234457619,
-                  0.0110894989182919, 13.6259848988855, 0.301515061772251, 59.6078373100912]
+        self.W = [45.6996, 1.5646, 18465.3234, 0.0110, 13.6259, 0.3015, 59.6078]
         self.f = n_dim.HighConditionedElliptic()
 
     @d.check_less_equal_dimension
@@ -243,41 +242,49 @@ class F4(CECBenchmark):
 
         """
 
-        # Defines the number of dimensions
+        # Defines the number of dimensions, an array of permutations, a counter
+        # and the function itself
         D = x.shape[0]
-
-        # If group size is bigger or equal to number of dimensions
-        if D < 300:
-            # Raises an error
-            raise e.SizeError('`D` should be greater than 300')
-
-        # Calculates an array of permutations and defines groups' indexes
         P = np.random.permutation(D)
-        p = 0
-
-        # Re-calculates the input
-        y = x - self.o[:D]
-
-        #
+        n = 0
         f = 0
 
-        #
-        for s, w in zip(self.S, self.W):
-            if s == 25:
-                z = np.matmul(self.R25, y[P[p:p+s]])
-                fit = self.f(z)
-            elif s == 50:
-                z = np.matmul(self.R50, y[P[p:p+s]])
-                fit = self.f(z)
-            elif s == 100:
-                z = np.matmul(self.R100, y[P[p:p+s]])
-                fit = self.f(z)
-            p += s
-            f += w * fit
+        # Checks if number of dimensions is valid
+        if D < 302:
+            # Raises an error
+            raise e.SizeError('`D` should be greater than 302')
 
-        if D >= 302:
-            z = y[P[p:]]
-            fit = self.f(z)
-            f += fit
+        # Re-calculates the input and permutes its input
+        y = x - self.o[:D]
+        y = y[P]
+
+        # Iterates through every possible subset and weight
+        for s, w in zip(self.S, self.W):
+            # Checks if the subset has 25 features
+            if s == 25:
+                # Rotates the input based on rotation matrix
+                z = np.matmul(self.R25, y[n:n+s])
+
+            # Checks if the subset has 50 features
+            elif s == 50:
+                # Rotates the input based on rotation matrix
+                z = np.matmul(self.R50, y[n:n+s])
+
+            # Checks if the subset has 100 features
+            elif s == 100:
+                # Rotates the input based on rotation matrix
+                z = np.matmul(self.R100, y[n:n+s])
+
+            # Sums up the calculated fitness multiplied by its corresponding weight
+            f += w * self.f(z)
+
+            # Also increments the dimension counter
+            n += s
+
+        # Lastly, gathers the remaining positions
+        z = y[n:]
+
+        # Calculates their fitness and sums up to produce the final result
+        f += self.f(z)
 
         return f
