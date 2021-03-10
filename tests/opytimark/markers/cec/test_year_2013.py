@@ -80,3 +80,14 @@ def test_F8():
     y = f(x)
 
     assert y == 0
+
+
+def test_F12():
+    f = year_2013.F12()
+
+    x = l.load_cec_auxiliary('F12_o', '2013')
+    x += 1
+
+    y = f(x)
+
+    assert round(y) == 0

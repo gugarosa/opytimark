@@ -1,5 +1,3 @@
-import numpy as np
-
 import opytimark.utils.loader as l
 from opytimark.markers.cec import year_2010
 
@@ -184,7 +182,7 @@ def test_F18():
 
     y = f(x)
 
-    assert np.round(y) == 0
+    assert round(y) == 0
 
 
 def test_F19():
@@ -205,4 +203,4 @@ def test_F20():
 
     y = f(x)
 
-    assert np.round(y) == 0
+    assert round(y) == 0

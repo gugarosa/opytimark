@@ -340,7 +340,7 @@ class F6(CECBenchmark):
         The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
 
     Global Minima:
-        :math:`f(\mathbf{x^*}) = -390 \mid \mathbf{x^*} = \mathbf{o}`.
+        :math:`f(\mathbf{x^*}) = -390 \mid \mathbf{x^*} = \mathbf{o} + 1`.
 
     """
 
