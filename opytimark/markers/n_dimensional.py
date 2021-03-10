@@ -883,15 +883,13 @@ class HighConditionedElliptic(Benchmark):
 
         """
 
-        # Instantiates the function
-        f = 0
+        # Calculates an equally-spaced interval between 0 and D-1
+        dims = np.linspace(1, x.shape[0], x.shape[0]) - 1
 
-        # Iterates through every dimension
-        for i in range(x.shape[0]):
-            # Calculates the High Conditioned Elliptic's function
-            f += (10e6) ** ((i-2) / (x.shape[0] - 1)) * x[i] ** 2
+        # Calculating the HighConditionedElliptic's function
+        x = 10e6 ** (dims / (x.shape[0] - 1)) * x ** 2
 
-        return f
+        return np.sum(x)
 
 
 class Levy(Benchmark):

@@ -58,18 +58,17 @@ class F1(CECBenchmark):
 
         """
 
+        # Defines the number of dimensions and an equally-spaced interval between 0 and D-1
+        D = x.shape[0]
+        dims = np.linspace(1, D, D) - 1
+
         # Re-calculates the input
-        z = x - self.o[:x.shape[0]]
+        z = x - self.o[:D]
 
-        # Instantiating function
-        f = 0
+        # Calculating the Shifted Elliptic's function
+        z = 10e6 ** (dims / (D - 1)) * z ** 2
 
-        # For every input dimension
-        for i in range(x.shape[0]):
-            # Calculating the Shifted Elliptic's function
-            f += 10e6 ** (i / (x.shape[0] - 1)) * z[i] ** 2
-
-        return f
+        return np.sum(z)
 
 
 class F2(CECBenchmark):

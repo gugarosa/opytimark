@@ -180,18 +180,17 @@ class F3(CECBenchmark):
 
         """
 
+        # Defines the number of dimensions and an equally-spaced interval between 0 and D-1
+        D = x.shape[0]
+        dims = np.linspace(1, D, D) - 1
+
         # Re-calculates the input
-        z = np.matmul(x - self.o[:x.shape[0]], self.M)
+        z = np.matmul(x - self.o[:D], self.M)
 
-        # Instantiating function
-        f = 0
+        # Calculating the Shifted Rotated High Conditioned Elliptic's function
+        z = 10e6 ** (dims / (D - 1)) * z ** 2
 
-        # For every input dimension
-        for i in range(x.shape[0]):
-            # Calculating the Shifted Rotated High Conditioned Elliptic's function
-            f += 10e6 ** (i / (x.shape[0] - 1)) * z[i] ** 2
-
-        return f - 450
+        return np.sum(z) - 450
 
 
 class F4(CECBenchmark):
