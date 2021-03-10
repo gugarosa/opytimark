@@ -164,7 +164,7 @@ def test_F14():
 
     y = f(x)
 
-    assert y == 2.740367969652882e+20
+    assert y == 1.7291552588102748e+19
 
 
 def test_F15():
