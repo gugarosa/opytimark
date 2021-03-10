@@ -161,7 +161,7 @@ def test_F14():
     f = year_2013.F14()
 
     x = l.load_cec_auxiliary('F14_o', '2013')
-    
+
     y = f(x)
 
     assert y == 2.740367969652882e+20
