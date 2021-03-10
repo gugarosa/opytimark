@@ -140,7 +140,7 @@ class F1(CECBenchmark):
         D = x.shape[0]
         dims = np.linspace(1, D, D) - 1
 
-        # Re-calculates the input
+        # Re-calculates the input using the proposed transform
         z = T_irregularity(x - self.o[:x.shape[0]])
 
         # Calculating the Shifted Elliptic's function
@@ -195,8 +195,8 @@ class F2(CECBenchmark):
 
         """
 
-        # Re-calculates the input
-        z = x - self.o[:x.shape[0]]
+        # Re-calculates the input using the proposed transforms
+        z = np.matmul(T_asymmetry(T_irregularity(x - self.o[:x.shape[0]]), 0.2), T_diagonal(x.shape[0], 10))
 
         # Calculating the Shifted Rastrigin's function
         f = z ** 2 - 10 * np.cos(2 * np.pi * z) + 10
@@ -250,8 +250,8 @@ class F3(CECBenchmark):
 
         """
 
-        # Re-calculates the input
-        z = x - self.o[:x.shape[0]]
+        # Re-calculates the input using the proposed transforms
+        z = np.matmul(T_asymmetry(T_irregularity(x - self.o[:x.shape[0]]), 0.2), T_diagonal(x.shape[0], 10))
 
         # Calculating the 1 / n term
         inv = 1 / x.shape[0]
@@ -453,6 +453,9 @@ class F5(CECBenchmark):
                 # Rotates the input based on rotation matrix
                 z = np.matmul(self.R100, y[n:n+s])
 
+            # Applies the irregulary, asymmetry and diagonal transforms
+            z = np.matmul(T_asymmetry(T_irregularity(z), 0.2), T_diagonal(z.shape[0], 10))
+
             # Sums up the calculated fitness multiplied by its corresponding weight
             f += w * self.f(z)
 
@@ -461,6 +464,9 @@ class F5(CECBenchmark):
 
         # Lastly, gathers the remaining positions
         z = y[n:]
+
+        # Applies the irregulary, asymmetry and diagonal transforms
+        z = np.matmul(T_asymmetry(T_irregularity(z), 0.2), T_diagonal(z.shape[0], 10))
 
         # Calculates their fitness and sums up to produce the final result
         f += self.f(z)
@@ -553,6 +559,9 @@ class F6(CECBenchmark):
                 # Rotates the input based on rotation matrix
                 z = np.matmul(self.R100, y[n:n+s])
 
+            # Applies the irregulary, asymmetry and diagonal transforms
+            z = np.matmul(T_asymmetry(T_irregularity(z), 0.2), T_diagonal(z.shape[0], 10))
+
             # Sums up the calculated fitness multiplied by its corresponding weight
             f += w * self.f(z)
 
@@ -561,6 +570,9 @@ class F6(CECBenchmark):
 
         # Lastly, gathers the remaining positions
         z = y[n:]
+
+        # Applies the irregulary, asymmetry and diagonal transforms
+        z = np.matmul(T_asymmetry(T_irregularity(z), 0.2), T_diagonal(z.shape[0], 10))
 
         # Calculates their fitness and sums up to produce the final result
         f += self.f(z)
@@ -654,6 +666,9 @@ class F7(CECBenchmark):
                 # Rotates the input based on rotation matrix
                 z = np.matmul(self.R100, y[n:n+s])
 
+            # Applies the irregulary and asymmetry transforms
+            z = T_asymmetry(T_irregularity(z), 0.2)
+
             # Sums up the calculated fitness multiplied by its corresponding weight
             f += w * self.f_1(z)
 
@@ -662,6 +677,9 @@ class F7(CECBenchmark):
 
         # Lastly, gathers the remaining positions
         z = y[n:]
+
+        # Applies the irregulary and asymmetry transforms
+        z = T_asymmetry(T_irregularity(z), 0.2)
 
         # Calculates their fitness and sums up to produce the final result
         f += self.f_2(z)
