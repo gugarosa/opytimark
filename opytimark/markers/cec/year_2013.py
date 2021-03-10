@@ -227,7 +227,8 @@ class F4(CECBenchmark):
 
         # Defines the subsets, weights and the benchmarking to be evaluated
         self.S = [50, 25, 25, 100, 50, 25, 25]
-        self.W = [45.6996, 1.5646, 18465.3234, 0.0110, 13.6259, 0.3015, 59.6078]
+        self.W = [45.6996, 1.5646, 18465.3234,
+                  0.0110, 13.6259, 0.3015, 59.6078]
         self.f = n_dim.HighConditionedElliptic()
 
     @d.check_less_equal_dimension
@@ -326,7 +327,8 @@ class F5(CECBenchmark):
 
         # Defines the subsets, weights and the benchmarking to be evaluated
         self.S = [50, 25, 25, 100, 50, 25, 25]
-        self.W = [0.1807, 9081.1379, 24.2718, 1.8630e-06, 17698.0807, 0.0002, 0.0152]
+        self.W = [0.1807, 9081.1379, 24.2718,
+                  1.8630e-06, 17698.0807, 0.0002, 0.0152]
         self.f = n_dim.Rastrigin()
 
     @d.check_less_equal_dimension
@@ -425,7 +427,8 @@ class F6(CECBenchmark):
 
         # Defines the subsets, weights and the benchmarking to be evaluated
         self.S = [50, 25, 25, 100, 50, 25, 25]
-        self.W = [0.0352, 5.3156e-05, 0.8707, 49513.7420, 0.0831, 3.4764e-05, 282.2934]
+        self.W = [0.0352, 5.3156e-05, 0.8707,
+                  49513.7420, 0.0831, 3.4764e-05, 282.2934]
         self.f = n_dim.Ackley1()
 
     @d.check_less_equal_dimension
@@ -524,7 +527,8 @@ class F7(CECBenchmark):
 
         # Defines the subsets, weights and the benchmarking to be evaluated
         self.S = [50, 25, 25, 100, 50, 25, 25]
-        self.W = [679.9025, 0.9321, 2122.8501, 0.5060, 434.5961, 33389.6244, 2.5692]
+        self.W = [679.9025, 0.9321, 2122.8501,
+                  0.5060, 434.5961, 33389.6244, 2.5692]
         self.f_1 = n_dim.RotatedHyperEllipsoid()
         self.f_2 = n_dim.Sphere()
 
@@ -584,5 +588,95 @@ class F7(CECBenchmark):
 
         # Calculates their fitness and sums up to produce the final result
         f += self.f_2(z)
+
+        return f
+
+
+class F8(CECBenchmark):
+    """F8 class implements the 20-nonseparable Shifted and Rotated Elliptic's benchmarking function.
+
+    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{|S|}w_i f_{elliptic}(z_i)
+
+    Domain:
+        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}, n \leq 1000`.
+
+    Global Minima:
+        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = \mathbf{o}`.
+
+    """
+
+    def __init__(self, name='F8', year='2013', auxiliary_data=('o', 'R25', 'R50', 'R100'), dims=1000,
+                 continuous=True, convex=True, differentiable=True, multimodal=False, separable=False):
+        """Initialization method.
+
+        Args:
+            name (str): Name of the function.
+            year (str): Year of the function.
+            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
+            dims (int): Number of allowed dimensions.
+            continuous (bool): Whether the function is continuous.
+            convex (bool): Whether the function is convex.
+            differentiable (bool): Whether the function is differentiable.
+            multimodal (bool): Whether the function is multimodal.
+            separable (bool): Whether the function is separable.
+
+        """
+
+        # Override its parent class
+        super(F8, self).__init__(name, year, auxiliary_data, dims, continuous,
+                                 convex, differentiable, multimodal, separable)
+
+        # Defines the subsets, weights and the benchmarking to be evaluated
+        self.S = [50, 50, 25, 25, 100, 100, 25, 25, 50,
+                  25, 100, 25, 100, 50, 25, 25, 25, 100, 50, 25]
+        self.W = [4.6303, 0.6864, 1143756360.0887, 2.0077, 789.3671, 16.3332, 6.0749, 0.0646, 0.0756,
+                  35.6725, 7.9725e-06, 10.7822, 4.1999e-06, 0.0019, 0.0016, 686.7975, 0.1571, 0.0441, 0.3543, 0.0060]
+        self.f = n_dim.HighConditionedElliptic()
+
+    @d.check_exact_dimension
+    def __call__(self, x):
+        """This method returns the function's output when the class is called.
+
+        Args:
+            x (np.array): An input array for calculating the function's output.
+
+        Returns:
+            The benchmarking function output `f(x)`.
+
+        """
+
+        # Defines the number of dimensions, an array of permutations, a counter
+        # and the function itself
+        D = x.shape[0]
+        P = np.random.permutation(D)
+        n = 0
+        f = 0
+
+        # Re-calculates the input and permutes its input
+        y = x - self.o[:D]
+        y = y[P]
+
+        # Iterates through every possible subset and weight
+        for s, w in zip(self.S, self.W):
+            # Checks if the subset has 25 features
+            if s == 25:
+                # Rotates the input based on rotation matrix
+                z = np.matmul(self.R25, y[n:n+s])
+
+            # Checks if the subset has 50 features
+            elif s == 50:
+                # Rotates the input based on rotation matrix
+                z = np.matmul(self.R50, y[n:n+s])
+
+            # Checks if the subset has 100 features
+            elif s == 100:
+                # Rotates the input based on rotation matrix
+                z = np.matmul(self.R100, y[n:n+s])
+
+            # Sums up the calculated fitness multiplied by its corresponding weight
+            f += w * self.f(z)
+
+            # Also increments the dimension counter
+            n += s
 
         return f

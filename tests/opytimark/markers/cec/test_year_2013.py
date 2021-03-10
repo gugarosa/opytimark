@@ -70,3 +70,13 @@ def test_F7():
     y = f(x)
 
     assert y == 0
+
+
+def test_F8():
+    f = year_2013.F8()
+
+    x = l.load_cec_auxiliary('F8_o', '2013')
+
+    y = f(x)
+
+    assert y == 0
