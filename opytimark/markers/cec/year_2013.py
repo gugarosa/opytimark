@@ -1,15 +1,70 @@
 """CEC2013 benchmarking functions.
 """
 
+import warnings
 import numpy as np
 
 import opytimark.markers.n_dimensional as n_dim
+import opytimark.utils.constants as c
 import opytimark.utils.decorator as d
 import opytimark.utils.exception as e
 from opytimark.core import CECBenchmark
 
 # Fixes Numpy's random seed
 np.random.seed(0)
+
+
+def T_irregularity(x):
+    """Performs a transformation over the input to create smooth local irregularities.
+
+    Args:
+        x (np.array): An array holding the input to be transformed.
+
+    Returns:
+        The transformed input.
+
+    """
+
+    # Defines the x_hat transformation
+    x_hat = np.where(x != 0, np.log(np.fabs(x + c.EPSILON)), 0)
+
+    # Defines both c_1 and c_2 transformations
+    c_1 = np.where(x > 0, 10, 5.5)
+    c_2 = np.where(x > 0, 7.9, 3.1)
+
+    # Re-calculates the input
+    x_t = np.sign(x) * np.exp(x_hat + 0.049 * (np.sin(c_1 * x_hat) + np.sin(c_2 * x_hat)))
+
+    return x_t
+
+
+def T_asymmetry(x, beta):
+    """Performs a transformation over the input to break the symmetry of the symmetric functions.
+
+    Args:
+        x (np.array): An array holding the input to be transformed.
+
+    Returns:
+        The transformed input.
+
+    """
+
+    # Gathers the amount of dimensions
+    D = x.shape[0]
+
+    # Calculates an equally-spaced interval between 0 and D-1
+    dims = np.linspace(0, D - 1, D - 1)
+
+    # Activates the context manager for catching warnings
+    with warnings.catch_warnings():
+        # Ignores whenever the np.where raises an invalid square root value
+        # This will ensure that no warnings will be raised when calculating the line below
+        warnings.filterwarnings('ignore', r'invalid value encountered in sqrt')
+
+        # Re-calculates the input
+        x_t = np.where(x > 0, x ** (1 + beta * (dims / (D - 1)) * np.sqrt(x)), x)
+
+    return x_t
 
 
 class F1(CECBenchmark):
@@ -59,7 +114,7 @@ class F1(CECBenchmark):
         """
 
         # Re-calculates the input
-        z = x - self.o[:x.shape[0]]
+        z = T_irregularity(x - self.o[:x.shape[0]])
 
         # Instantiating function
         f = 0
@@ -277,7 +332,7 @@ class F4(CECBenchmark):
                 z = np.matmul(self.R100, y[n:n+s])
 
             # Sums up the calculated fitness multiplied by its corresponding weight
-            f += w * self.f(z)
+            f += w * self.f(T_irregularity(z))
 
             # Also increments the dimension counter
             n += s
@@ -286,7 +341,7 @@ class F4(CECBenchmark):
         z = y[n:]
 
         # Calculates their fitness and sums up to produce the final result
-        f += self.f(z)
+        f += self.f(T_irregularity(z))
 
         return f
 
@@ -674,7 +729,7 @@ class F8(CECBenchmark):
                 z = np.matmul(self.R100, y[n:n+s])
 
             # Sums up the calculated fitness multiplied by its corresponding weight
-            f += w * self.f(z)
+            f += w * self.f(T_irregularity(z))
 
             # Also increments the dimension counter
             n += s
