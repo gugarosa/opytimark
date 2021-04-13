@@ -2,6 +2,7 @@
 """
 
 import warnings
+
 import numpy as np
 
 import opytimark.markers.n_dimensional as n_dim
