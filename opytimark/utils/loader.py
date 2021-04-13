@@ -49,11 +49,14 @@ def untar_file(file_path):
 
     # Opens a .tar.gz file with `file_path`
     with tarfile.open(file_path, "r:gz") as tar:
-        # Defines the path to the folder
+        # Defines the path to the folder and check if it exists
         folder_path = file_path.split('.tar.gz')[0]
+        folder_path_exists = os.path.exists(folder_path)
 
-        # Extracts all files
-        tar.extractall(path=folder_path)
+        # If path does not exists
+        if not folder_path_exists:
+            # Extracts all files
+            tar.extractall(path=folder_path)
 
     return folder_path
 
