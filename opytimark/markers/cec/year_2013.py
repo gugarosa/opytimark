@@ -270,7 +270,7 @@ class F3(CECBenchmark):
         # Calculating Shifted Ackley's function
         f = 20 + np.e - np.exp(term2) - 20 * np.exp(term1)
 
-        return np.sum(f)
+        return f
 
 
 class F4(CECBenchmark):
