@@ -77,7 +77,7 @@ def T_diagonal(D, alpha):
         alpha (float): Exponential value used to produce the ill-conditioning.
 
     Returns:
-        The transformed diagonal matrix
+        The transformed diagonal matrix.
 
     """
 
