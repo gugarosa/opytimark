@@ -74,7 +74,7 @@ def T_diagonal(D, alpha):
 
     Args:
         D (int): Amount of dimensions.
-        beta (float): Exponential value used to produce the ill-conditioning.
+        alpha (float): Exponential value used to produce the ill-conditioning.
 
     Returns:
         The transformed diagonal matrix
