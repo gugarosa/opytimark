@@ -5,7 +5,7 @@ import numpy as np
 
 import opytimark.utils.decorator as d
 import opytimark.utils.exception as e
-import opytimark.utils.loader as l
+import opytimark.utils.loader as ld
 
 
 class CECBenchmark:
@@ -215,7 +215,7 @@ class CECBenchmark:
             data_file = f'{name}_{dt}'
 
             # Loads the data to a temporary variable
-            tmp = l.load_cec_auxiliary(data_file, year)
+            tmp = ld.load_cec_auxiliary(data_file, year)
 
             # Sets the temporary variable as a property
             setattr(self, dt, tmp)
