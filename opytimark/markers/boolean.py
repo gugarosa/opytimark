@@ -44,11 +44,9 @@ class Knapsack(Benchmark):
 
         """
 
-        # Override its parent class
         super(Knapsack, self).__init__(name, dims, continuous,
                                        convex, differentiable, multimodal, separable)
 
-        # Checking if values and weights have the same length
         if len(values) != len(weights):
             raise e.SizeError('`values` and `weights` needs to have the same size')
 

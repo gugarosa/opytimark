@@ -208,7 +208,6 @@ class CECBenchmark:
 
         """
 
-        # Iterates over the `data` list
         for dt in data:
             # Constructs the data file
             # Note that it will always be NAME_VARIABLE
@@ -217,7 +216,6 @@ class CECBenchmark:
             # Loads the data to a temporary variable
             tmp = ld.load_cec_auxiliary(data_file, year)
 
-            # Sets the temporary variable as a property
             setattr(self, dt, tmp)
 
 
@@ -250,7 +248,6 @@ class CECCompositeBenchmark(CECBenchmark):
 
         """
 
-        # Overrides the parent class
         super(CECCompositeBenchmark, self).__init__(name, year, auxiliary_data, dims, continuous,
                                                     convex, differentiable, multimodal, separable)
 

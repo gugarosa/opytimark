@@ -41,7 +41,6 @@ class F1(CECBenchmark):
 
         """
 
-        # Override its parent class
         super(F1, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
 
@@ -96,7 +95,6 @@ class F2(CECBenchmark):
 
         """
 
-        # Override its parent class
         super(F2, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
 
@@ -164,7 +162,6 @@ class F3(CECBenchmark):
 
         """
 
-        # Override its parent class
         super(F3, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
 
@@ -223,7 +220,6 @@ class F4(CECBenchmark):
 
         """
 
-        # Override its parent class
         super(F4, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
 
@@ -294,7 +290,6 @@ class F5(CECBenchmark):
 
         """
 
-        # Override its parent class
         super(F5, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
 
@@ -360,7 +355,6 @@ class F6(CECBenchmark):
 
         """
 
-        # Override its parent class
         super(F6, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
 
@@ -420,7 +414,6 @@ class F7(CECBenchmark):
 
         """
 
-        # Override its parent class
         super(F7, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
 
@@ -486,7 +479,6 @@ class F8(CECBenchmark):
 
         """
 
-        # Override its parent class
         super(F8, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
 
@@ -558,7 +550,6 @@ class F9(CECBenchmark):
 
         """
 
-        # Override its parent class
         super(F9, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
 
@@ -613,7 +604,6 @@ class F10(CECBenchmark):
 
         """
 
-        # Override its parent class
         super(F10, self).__init__(name, year, auxiliary_data, dims, continuous,
                                   convex, differentiable, multimodal, separable)
 
@@ -668,7 +658,6 @@ class F11(CECBenchmark):
 
         """
 
-        # Override its parent class
         super(F11, self).__init__(name, year, auxiliary_data, dims, continuous,
                                   convex, differentiable, multimodal, separable)
 
@@ -735,7 +724,6 @@ class F12(CECBenchmark):
 
         """
 
-        # Override its parent class
         super(F12, self).__init__(name, year, auxiliary_data, dims, continuous,
                                   convex, differentiable, multimodal, separable)
 
@@ -796,7 +784,6 @@ class F13(CECBenchmark):
 
         """
 
-        # Override its parent class
         super(F13, self).__init__(name, year, auxiliary_data, dims, continuous,
                                   convex, differentiable, multimodal, separable)
 
@@ -869,7 +856,6 @@ class F14(CECBenchmark):
 
         """
 
-        # Override its parent class
         super(F14, self).__init__(name, year, auxiliary_data, dims, continuous,
                                   convex, differentiable, multimodal, separable)
 
@@ -949,7 +935,6 @@ class F15(CECCompositeBenchmark):
                      n_dim.Griewank(), n_dim.Griewank(), n_dim.Ackley1(), n_dim.Ackley1(),
                      n_dim.Sphere(), n_dim.Sphere())
 
-        # Override its parent class
         super(F15, self).__init__(name, year, auxiliary_data, sigma, l, functions, bias,
                                   dims, continuous, convex, differentiable, multimodal, separable)
 
@@ -994,7 +979,6 @@ class F16(CECCompositeBenchmark):
                      n_dim.Griewank(), n_dim.Griewank(), n_dim.Ackley1(), n_dim.Ackley1(),
                      n_dim.Sphere(), n_dim.Sphere())
 
-        # Override its parent class
         super(F16, self).__init__(name, year, auxiliary_data, sigma, l, functions, bias,
                                   dims, continuous, convex, differentiable, multimodal, separable)
 
@@ -1039,7 +1023,6 @@ class F17(CECCompositeBenchmark):
                      n_dim.Sphere(), n_dim.Sphere(), n_dim.Weierstrass(), n_dim.Weierstrass(),
                      n_dim.Griewank(), n_dim.Griewank())
 
-        # Override its parent class
         super(F17, self).__init__(name, year, auxiliary_data, sigma, l, functions, bias,
                                   dims, continuous, convex, differentiable, multimodal, separable)
 
@@ -1143,7 +1126,6 @@ class F18(CECCompositeBenchmark):
                      n_dim.Sphere(), n_dim.Sphere(), n_dim.Weierstrass(), n_dim.Weierstrass(),
                      n_dim.Griewank(), n_dim.Griewank())
 
-        # Override its parent class
         super(F18, self).__init__(name, year, auxiliary_data, sigma, l, functions, bias,
                                   dims, continuous, convex, differentiable, multimodal, separable)
 
@@ -1188,7 +1170,6 @@ class F19(CECCompositeBenchmark):
                      n_dim.Sphere(), n_dim.Sphere(), n_dim.Weierstrass(), n_dim.Weierstrass(),
                      n_dim.Griewank(), n_dim.Griewank())
 
-        # Override its parent class
         super(F19, self).__init__(name, year, auxiliary_data, sigma, l, functions, bias,
                                   dims, continuous, convex, differentiable, multimodal, separable)
 
@@ -1233,7 +1214,6 @@ class F20(CECCompositeBenchmark):
                      n_dim.Sphere(), n_dim.Sphere(), n_dim.Weierstrass(), n_dim.Weierstrass(),
                      n_dim.Griewank(), n_dim.Griewank())
 
-        # Override its parent class
         super(F20, self).__init__(name, year, auxiliary_data, sigma, l, functions, bias,
                                   dims, continuous, convex, differentiable, multimodal, separable)
 
@@ -1342,7 +1322,6 @@ class F21(CECCompositeBenchmark):
                      n_dim.Rastrigin(), n_dim.Rastrigin(), n_dim.F8F2(), n_dim.F8F2(),
                      n_dim.Weierstrass(), n_dim.Weierstrass(), n_dim.Griewank(), n_dim.Griewank())
 
-        # Override its parent class
         super(F21, self).__init__(name, year, auxiliary_data, sigma, l, functions, bias,
                                   dims, continuous, convex, differentiable, multimodal, separable)
 
@@ -1387,7 +1366,6 @@ class F22(CECCompositeBenchmark):
                      n_dim.Rastrigin(), n_dim.Rastrigin(), n_dim.F8F2(), n_dim.F8F2(),
                      n_dim.Weierstrass(), n_dim.Weierstrass(), n_dim.Griewank(), n_dim.Griewank())
 
-        # Override its parent class
         super(F22, self).__init__(name, year, auxiliary_data, sigma, l, functions, bias,
                                   dims, continuous, convex, differentiable, multimodal, separable)
 
@@ -1432,7 +1410,6 @@ class F23(CECCompositeBenchmark):
                      n_dim.Rastrigin(), n_dim.Rastrigin(), n_dim.F8F2(), n_dim.F8F2(),
                      n_dim.Weierstrass(), n_dim.Weierstrass(), n_dim.Griewank(), n_dim.Griewank())
 
-        # Override its parent class
         super(F23, self).__init__(name, year, auxiliary_data, sigma, l, functions, bias,
                                   dims, continuous, convex, differentiable, multimodal, separable)
 
@@ -1540,7 +1517,6 @@ class F24(CECCompositeBenchmark):
                      n_dim.NonContinuousExpandedScafferF6(), n_dim.NonContinuousRastrigin(),
                      n_dim.HighConditionedElliptic(), n_dim.SphereWithNoise())
 
-        # Override its parent class
         super(F24, self).__init__(name, year, auxiliary_data, sigma, l, functions, bias,
                                   dims, continuous, convex, differentiable, multimodal, separable)
 
@@ -1586,6 +1562,5 @@ class F25(CECCompositeBenchmark):
                      n_dim.NonContinuousExpandedScafferF6(), n_dim.NonContinuousRastrigin(),
                      n_dim.HighConditionedElliptic(), n_dim.SphereWithNoise())
 
-        # Override its parent class
         super(F25, self).__init__(name, year, auxiliary_data, sigma, l, functions, bias,
                                   dims, continuous, convex, differentiable, multimodal, separable)

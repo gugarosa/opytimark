@@ -123,7 +123,6 @@ class F1(CECBenchmark):
 
         """
 
-        # Override its parent class
         super(F1, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
 
@@ -182,7 +181,6 @@ class F2(CECBenchmark):
 
         """
 
-        # Override its parent class
         super(F2, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
 
@@ -238,7 +236,6 @@ class F3(CECBenchmark):
 
         """
 
-        # Override its parent class
         super(F3, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
 
@@ -303,7 +300,6 @@ class F4(CECBenchmark):
 
         """
 
-        # Override its parent class
         super(F4, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
 
@@ -403,7 +399,6 @@ class F5(CECBenchmark):
 
         """
 
-        # Override its parent class
         super(F5, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
 
@@ -511,7 +506,6 @@ class F6(CECBenchmark):
 
         """
 
-        # Override its parent class
         super(F6, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
 
@@ -619,7 +613,6 @@ class F7(CECBenchmark):
 
         """
 
-        # Override its parent class
         super(F7, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
 
@@ -726,7 +719,6 @@ class F8(CECBenchmark):
 
         """
 
-        # Override its parent class
         super(F8, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
 
@@ -816,7 +808,6 @@ class F9(CECBenchmark):
 
         """
 
-        # Override its parent class
         super(F9, self).__init__(name, year, auxiliary_data, dims, continuous,
                                  convex, differentiable, multimodal, separable)
 
@@ -910,7 +901,6 @@ class F10(CECBenchmark):
 
         """
 
-        # Override its parent class
         super(F10, self).__init__(name, year, auxiliary_data, dims, continuous,
                                   convex, differentiable, multimodal, separable)
 
@@ -1004,7 +994,6 @@ class F11(CECBenchmark):
 
         """
 
-        # Override its parent class
         super(F11, self).__init__(name, year, auxiliary_data, dims, continuous,
                                   convex, differentiable, multimodal, separable)
 
@@ -1097,7 +1086,6 @@ class F12(CECBenchmark):
 
         """
 
-        # Override its parent class
         super(F12, self).__init__(name, year, auxiliary_data, dims, continuous,
                                   convex, differentiable, multimodal, separable)
 
@@ -1157,7 +1145,6 @@ class F13(CECBenchmark):
 
         """
 
-        # Override its parent class
         super(F13, self).__init__(name, year, auxiliary_data, dims, continuous,
                                   convex, differentiable, multimodal, separable)
 
@@ -1261,7 +1248,6 @@ class F14(CECBenchmark):
 
         """
 
-        # Override its parent class
         super(F14, self).__init__(name, year, auxiliary_data, dims, continuous,
                                   convex, differentiable, multimodal, separable)
 
@@ -1370,7 +1356,6 @@ class F15(CECBenchmark):
 
         """
 
-        # Override its parent class
         super(F15, self).__init__(name, year, auxiliary_data, dims, continuous,
                                   convex, differentiable, multimodal, separable)
 

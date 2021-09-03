@@ -16,7 +16,6 @@ class Error(Exception):
             msg (str): Message to be logged.
         """
 
-        # Override its parent class
         super(Error, self).__init__()
 
         # Logs the error in a formatted way
@@ -36,7 +35,6 @@ class SizeError(Error):
 
         """
 
-        # Override its parent class with class name and error message
         super(SizeError, self).__init__('SizeError', error)
 
 
@@ -50,7 +48,6 @@ class TypeError(Error):
             error (str): Error message to be logged.
         """
 
-        # Override its parent class with class name and error message
         super(TypeError, self).__init__('TypeError', error)
 
 
@@ -64,5 +61,4 @@ class ValueError(Error):
             error (str): Error message to be logged.
         """
 
-        # Override its parent class with class name and error message
         super(ValueError, self).__init__('ValueError', error)

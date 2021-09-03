@@ -36,7 +36,6 @@ class Ackley2(Benchmark):
 
         """
 
-        # Override its parent class
         super(Ackley2, self).__init__(name, dims, continuous,
                                       convex, differentiable, multimodal, separable)
 
@@ -86,7 +85,6 @@ class Ackley3(Benchmark):
 
         """
 
-        # Override its parent class
         super(Ackley3, self).__init__(name, dims, continuous,
                                       convex, differentiable, multimodal, separable)
 
@@ -137,7 +135,6 @@ class Adjiman(Benchmark):
 
         """
 
-        # Override its parent class
         super(Adjiman, self).__init__(name, dims, continuous,
                                       convex, differentiable, multimodal, separable)
 
@@ -187,7 +184,6 @@ class BartelsConn(Benchmark):
 
         """
 
-        # Override its parent class
         super(BartelsConn, self).__init__(name, dims, continuous,
                                           convex, differentiable, multimodal, separable)
 
@@ -238,7 +234,6 @@ class Beale(Benchmark):
 
         """
 
-        # Override its parent class
         super(Beale, self).__init__(name, dims, continuous,
                                     convex, differentiable, multimodal, separable)
 
@@ -289,7 +284,6 @@ class BiggsExponential2(Benchmark):
 
         """
 
-        # Override its parent class
         super(BiggsExponential2, self).__init__(name, dims, continuous,
                                                 convex, differentiable, multimodal, separable)
 
@@ -350,7 +344,6 @@ class Bird(Benchmark):
 
         """
 
-        # Override its parent class
         super(Bird, self).__init__(name, dims, continuous,
                                    convex, differentiable, multimodal, separable)
 
@@ -401,7 +394,6 @@ class Bohachevsky1(Benchmark):
 
         """
 
-        # Override its parent class
         super(Bohachevsky1, self).__init__(name, dims, continuous,
                                            convex, differentiable, multimodal, separable)
 
@@ -452,7 +444,6 @@ class Bohachevsky2(Benchmark):
 
         """
 
-        # Override its parent class
         super(Bohachevsky2, self).__init__(name, dims, continuous,
                                            convex, differentiable, multimodal, separable)
 
@@ -503,7 +494,6 @@ class Bohachevsky3(Benchmark):
 
         """
 
-        # Override its parent class
         super(Bohachevsky3, self).__init__(name, dims, continuous,
                                            convex, differentiable, multimodal, separable)
 
@@ -554,7 +544,6 @@ class Booth(Benchmark):
 
         """
 
-        # Override its parent class
         super(Booth, self).__init__(name, dims, continuous,
                                     convex, differentiable, multimodal, separable)
 
@@ -604,7 +593,6 @@ class BraninHoo(Benchmark):
 
         """
 
-        # Override its parent class
         super(BraninHoo, self).__init__(name, dims, continuous,
                                         convex, differentiable, multimodal, separable)
 
@@ -655,7 +643,6 @@ class Brent(Benchmark):
 
         """
 
-        # Override its parent class
         super(Brent, self).__init__(name, dims, continuous,
                                     convex, differentiable, multimodal, separable)
 
@@ -706,7 +693,6 @@ class Bukin2(Benchmark):
 
         """
 
-        # Override its parent class
         super(Bukin2, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
@@ -756,7 +742,6 @@ class Bukin4(Benchmark):
 
         """
 
-        # Override its parent class
         super(Bukin4, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
@@ -806,7 +791,6 @@ class Bukin6(Benchmark):
 
         """
 
-        # Override its parent class
         super(Bukin6, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
@@ -857,7 +841,6 @@ class Camel3(Benchmark):
 
         """
 
-        # Override its parent class
         super(Camel3, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
@@ -908,7 +891,6 @@ class Camel6(Benchmark):
 
         """
 
-        # Override its parent class
         super(Camel6, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
@@ -959,7 +941,6 @@ class ChenBird(Benchmark):
 
         """
 
-        # Override its parent class
         super(ChenBird, self).__init__(name, dims, continuous,
                                        convex, differentiable, multimodal, separable)
 
@@ -1010,7 +991,6 @@ class ChenV(Benchmark):
 
         """
 
-        # Override its parent class
         super(ChenV, self).__init__(name, dims, continuous,
                                     convex, differentiable, multimodal, separable)
 
@@ -1061,7 +1041,6 @@ class Chichinadze(Benchmark):
 
         """
 
-        # Override its parent class
         super(Chichinadze, self).__init__(name, dims, continuous,
                                           convex, differentiable, multimodal, separable)
 
@@ -1112,7 +1091,6 @@ class CrossTray(Benchmark):
 
         """
 
-        # Override its parent class
         super(CrossTray, self).__init__(name, dims, continuous,
                                         convex, differentiable, multimodal, separable)
 
@@ -1163,7 +1141,6 @@ class Cube(Benchmark):
 
         """
 
-        # Override its parent class
         super(Cube, self).__init__(name, dims, continuous,
                                    convex, differentiable, multimodal, separable)
 
@@ -1213,7 +1190,6 @@ class Damavandi(Benchmark):
 
         """
 
-        # Override its parent class
         super(Damavandi, self).__init__(name, dims, continuous,
                                         convex, differentiable, multimodal, separable)
 
@@ -1265,7 +1241,6 @@ class DeckkersAarts(Benchmark):
 
         """
 
-        # Override its parent class
         super(DeckkersAarts, self).__init__(name, dims, continuous,
                                             convex, differentiable, multimodal, separable)
 
@@ -1317,7 +1292,6 @@ class DropWave(Benchmark):
 
         """
 
-        # Override its parent class
         super(DropWave, self).__init__(name, dims, continuous,
                                        convex, differentiable, multimodal, separable)
 
@@ -1368,7 +1342,6 @@ class Easom(Benchmark):
 
         """
 
-        # Override its parent class
         super(Easom, self).__init__(name, dims, continuous,
                                     convex, differentiable, multimodal, separable)
 
@@ -1419,7 +1392,6 @@ class ElAttarVidyasagarDutta(Benchmark):
 
         """
 
-        # Override its parent class
         super(ElAttarVidyasagarDutta, self).__init__(name, dims, continuous,
                                                      convex, differentiable, multimodal, separable)
 
@@ -1470,7 +1442,6 @@ class EggCrate(Benchmark):
 
         """
 
-        # Override its parent class
         super(EggCrate, self).__init__(name, dims, continuous,
                                        convex, differentiable, multimodal, separable)
 
@@ -1521,7 +1492,6 @@ class EggHolder(Benchmark):
 
         """
 
-        # Override its parent class
         super(EggHolder, self).__init__(name, dims, continuous,
                                         convex, differentiable, multimodal, separable)
 
@@ -1572,7 +1542,6 @@ class FreudensteinRoth(Benchmark):
 
         """
 
-        # Override its parent class
         super(FreudensteinRoth, self).__init__(name, dims, continuous,
                                                convex, differentiable, multimodal, separable)
 
@@ -1623,7 +1592,6 @@ class Giunta(Benchmark):
 
         """
 
-        # Override its parent class
         super(Giunta, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
@@ -1679,7 +1647,6 @@ class GoldsteinPrice(Benchmark):
 
         """
 
-        # Override its parent class
         super(GoldsteinPrice, self).__init__(name, dims, continuous,
                                              convex, differentiable, multimodal, separable)
 
@@ -1731,7 +1698,6 @@ class Himmelblau(Benchmark):
 
         """
 
-        # Override its parent class
         super(Himmelblau, self).__init__(name, dims, continuous,
                                          convex, differentiable, multimodal, separable)
 
@@ -1781,7 +1747,6 @@ class HolderTable(Benchmark):
 
         """
 
-        # Override its parent class
         super(HolderTable, self).__init__(name, dims, continuous,
                                           convex, differentiable, multimodal, separable)
 
@@ -1832,7 +1797,6 @@ class Hosaki(Benchmark):
 
         """
 
-        # Override its parent class
         super(Hosaki, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
@@ -1883,7 +1847,6 @@ class JennrichSampson(Benchmark):
 
         """
 
-        # Override its parent class
         super(JennrichSampson, self).__init__(name, dims, continuous,
                                               convex, differentiable, multimodal, separable)
 
@@ -1938,7 +1901,6 @@ class Keane(Benchmark):
 
         """
 
-        # Override its parent class
         super(Keane, self).__init__(name, dims, continuous,
                                     convex, differentiable, multimodal, separable)
 
@@ -1989,7 +1951,6 @@ class Leon(Benchmark):
 
         """
 
-        # Override its parent class
         super(Leon, self).__init__(name, dims, continuous,
                                    convex, differentiable, multimodal, separable)
 
@@ -2039,7 +2000,6 @@ class Levy13(Benchmark):
 
         """
 
-        # Override its parent class
         super(Levy13, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
@@ -2090,7 +2050,6 @@ class Matyas(Benchmark):
 
         """
 
-        # Override its parent class
         super(Matyas, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
@@ -2140,7 +2099,6 @@ class McCormick(Benchmark):
 
         """
 
-        # Override its parent class
         super(McCormick, self).__init__(name, dims, continuous,
                                         convex, differentiable, multimodal, separable)
 
@@ -2191,7 +2149,6 @@ class Mishra3(Benchmark):
 
         """
 
-        # Override its parent class
         super(Mishra3, self).__init__(name, dims, continuous,
                                       convex, differentiable, multimodal, separable)
 
@@ -2242,7 +2199,6 @@ class Mishra4(Benchmark):
 
         """
 
-        # Override its parent class
         super(Mishra4, self).__init__(name, dims, continuous,
                                       convex, differentiable, multimodal, separable)
 
@@ -2293,7 +2249,6 @@ class Mishra5(Benchmark):
 
         """
 
-        # Override its parent class
         super(Mishra5, self).__init__(name, dims, continuous,
                                       convex, differentiable, multimodal, separable)
 
@@ -2344,7 +2299,6 @@ class Mishra6(Benchmark):
 
         """
 
-        # Override its parent class
         super(Mishra6, self).__init__(name, dims, continuous,
                                       convex, differentiable, multimodal, separable)
 
@@ -2395,7 +2349,6 @@ class Mishra8(Benchmark):
 
         """
 
-        # Override its parent class
         super(Mishra8, self).__init__(name, dims, continuous,
                                       convex, differentiable, multimodal, separable)
 
@@ -2453,7 +2406,6 @@ class Parsopoulos(Benchmark):
 
         """
 
-        # Override its parent class
         super(Parsopoulos, self).__init__(name, dims, continuous,
                                           convex, differentiable, multimodal, separable)
 
@@ -2503,7 +2455,6 @@ class PenHolder(Benchmark):
 
         """
 
-        # Override its parent class
         super(PenHolder, self).__init__(name, dims, continuous,
                                         convex, differentiable, multimodal, separable)
 
@@ -2554,7 +2505,6 @@ class Periodic(Benchmark):
 
         """
 
-        # Override its parent class
         super(Periodic, self).__init__(name, dims, continuous,
                                        convex, differentiable, multimodal, separable)
 
@@ -2605,7 +2555,6 @@ class Price1(Benchmark):
 
         """
 
-        # Override its parent class
         super(Price1, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
@@ -2655,7 +2604,6 @@ class Price2(Benchmark):
 
         """
 
-        # Override its parent class
         super(Price2, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
@@ -2706,7 +2654,6 @@ class Price3(Benchmark):
 
         """
 
-        # Override its parent class
         super(Price3, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
@@ -2757,7 +2704,6 @@ class Price4(Benchmark):
 
         """
 
-        # Override its parent class
         super(Price4, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
@@ -2808,7 +2754,6 @@ class Quadratic(Benchmark):
 
         """
 
-        # Override its parent class
         super(Quadratic, self).__init__(name, dims, continuous,
                                         convex, differentiable, multimodal, separable)
 
@@ -2859,7 +2804,6 @@ class RotatedEllipse1(Benchmark):
 
         """
 
-        # Override its parent class
         super(RotatedEllipse1, self).__init__(name, dims, continuous,
                                               convex, differentiable, multimodal, separable)
 
@@ -2909,7 +2853,6 @@ class RotatedEllipse2(Benchmark):
 
         """
 
-        # Override its parent class
         super(RotatedEllipse2, self).__init__(name, dims, continuous,
                                               convex, differentiable, multimodal, separable)
 
@@ -2959,7 +2902,6 @@ class Rump(Benchmark):
 
         """
 
-        # Override its parent class
         super(Rump, self).__init__(name, dims, continuous,
                                    convex, differentiable, multimodal, separable)
 
@@ -3010,7 +2952,6 @@ class Schaffer1(Benchmark):
 
         """
 
-        # Override its parent class
         super(Schaffer1, self).__init__(name, dims, continuous,
                                         convex, differentiable, multimodal, separable)
 
@@ -3061,7 +3002,6 @@ class Schaffer2(Benchmark):
 
         """
 
-        # Override its parent class
         super(Schaffer2, self).__init__(name, dims, continuous,
                                         convex, differentiable, multimodal, separable)
 
@@ -3112,7 +3052,6 @@ class Schaffer3(Benchmark):
 
         """
 
-        # Override its parent class
         super(Schaffer3, self).__init__(name, dims, continuous,
                                         convex, differentiable, multimodal, separable)
 
@@ -3163,7 +3102,6 @@ class Schaffer4(Benchmark):
 
         """
 
-        # Override its parent class
         super(Schaffer4, self).__init__(name, dims, continuous,
                                         convex, differentiable, multimodal, separable)
 
@@ -3214,7 +3152,6 @@ class Schwefel26(Benchmark):
 
         """
 
-        # Override its parent class
         super(Schwefel26, self).__init__(name, dims, continuous,
                                          convex, differentiable, multimodal, separable)
 
@@ -3264,7 +3201,6 @@ class Schwefel236(Benchmark):
 
         """
 
-        # Override its parent class
         super(Schwefel236, self).__init__(name, dims, continuous,
                                           convex, differentiable, multimodal, separable)
 
@@ -3314,7 +3250,6 @@ class Table1(Benchmark):
 
         """
 
-        # Override its parent class
         super(Table1, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
@@ -3365,7 +3300,6 @@ class Table2(Benchmark):
 
         """
 
-        # Override its parent class
         super(Table2, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
@@ -3416,7 +3350,6 @@ class Table3(Benchmark):
 
         """
 
-        # Override its parent class
         super(Table3, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
@@ -3467,7 +3400,6 @@ class TesttubeHolder(Benchmark):
 
         """
 
-        # Override its parent class
         super(TesttubeHolder, self).__init__(name, dims, continuous,
                                              convex, differentiable, multimodal, separable)
 
@@ -3518,7 +3450,6 @@ class Trecani(Benchmark):
 
         """
 
-        # Override its parent class
         super(Trecani, self).__init__(name, dims, continuous,
                                       convex, differentiable, multimodal, separable)
 
@@ -3568,7 +3499,6 @@ class Trefethen(Benchmark):
 
         """
 
-        # Override its parent class
         super(Trefethen, self).__init__(name, dims, continuous,
                                         convex, differentiable, multimodal, separable)
 
@@ -3619,7 +3549,6 @@ class VenterSobiezcczanskiSobieski(Benchmark):
 
         """
 
-        # Override its parent class
         super(VenterSobiezcczanskiSobieski, self).__init__(name, dims, continuous,
                                                            convex, differentiable, multimodal, separable)
 
@@ -3670,7 +3599,6 @@ class WayburnSeader1(Benchmark):
 
         """
 
-        # Override its parent class
         super(WayburnSeader1, self).__init__(name, dims, continuous,
                                              convex, differentiable, multimodal, separable)
 
@@ -3720,7 +3648,6 @@ class WayburnSeader2(Benchmark):
 
         """
 
-        # Override its parent class
         super(WayburnSeader2, self).__init__(name, dims, continuous,
                                              convex, differentiable, multimodal, separable)
 
@@ -3771,7 +3698,6 @@ class WayburnSeader3(Benchmark):
 
         """
 
-        # Override its parent class
         super(WayburnSeader3, self).__init__(name, dims, continuous,
                                              convex, differentiable, multimodal, separable)
 
@@ -3822,7 +3748,6 @@ class Zettl(Benchmark):
 
         """
 
-        # Override its parent class
         super(Zettl, self).__init__(name, dims, continuous,
                                     convex, differentiable, multimodal, separable)
 
@@ -3872,7 +3797,6 @@ class Zirilli(Benchmark):
 
         """
 
-        # Override its parent class
         super(Zirilli, self).__init__(name, dims, continuous,
                                       convex, differentiable, multimodal, separable)
 

@@ -35,7 +35,6 @@ class BiggsExponential3(Benchmark):
 
         """
 
-        # Override its parent class
         super(BiggsExponential3, self).__init__(name, dims, continuous,
                                                 convex, differentiable, multimodal, separable)
 
@@ -96,7 +95,6 @@ class BiggsExponential4(Benchmark):
 
         """
 
-        # Override its parent class
         super(BiggsExponential4, self).__init__(name, dims, continuous,
                                                 convex, differentiable, multimodal, separable)
 
@@ -157,7 +155,6 @@ class BiggsExponential5(Benchmark):
 
         """
 
-        # Override its parent class
         super(BiggsExponential5, self).__init__(name, dims, continuous,
                                                 convex, differentiable, multimodal, separable)
 
@@ -219,7 +216,6 @@ class BiggsExponential6(Benchmark):
 
         """
 
-        # Override its parent class
         super(BiggsExponential6, self).__init__(name, dims, continuous,
                                                 convex, differentiable, multimodal, separable)
 
@@ -282,7 +278,6 @@ class BoxBetts(Benchmark):
 
         """
 
-        # Override its parent class
         super(BoxBetts, self).__init__(name, dims, continuous,
                                        convex, differentiable, multimodal, separable)
 
@@ -338,7 +333,6 @@ class Colville(Benchmark):
 
         """
 
-        # Override its parent class
         super(Colville, self).__init__(name, dims, continuous,
                                        convex, differentiable, multimodal, separable)
 
@@ -390,7 +384,6 @@ class GulfResearch(Benchmark):
 
         """
 
-        # Override its parent class
         super(GulfResearch, self).__init__(name, dims, continuous,
                                            convex, differentiable, multimodal, separable)
 
@@ -448,7 +441,6 @@ class HelicalValley(Benchmark):
 
         """
 
-        # Override its parent class
         super(HelicalValley, self).__init__(name, dims, continuous,
                                             convex, differentiable, multimodal, separable)
 
@@ -509,7 +501,6 @@ class MieleCantrell(Benchmark):
 
         """
 
-        # Override its parent class
         super(MieleCantrell, self).__init__(name, dims, continuous,
                                             convex, differentiable, multimodal, separable)
 
@@ -560,7 +551,6 @@ class Mishra9(Benchmark):
 
         """
 
-        # Override its parent class
         super(Mishra9, self).__init__(name, dims, continuous,
                                       convex, differentiable, multimodal, separable)
 
@@ -622,7 +612,6 @@ class Paviani(Benchmark):
 
         """
 
-        # Override its parent class
         super(Paviani, self).__init__(name, dims, continuous,
                                       convex, differentiable, multimodal, separable)
 
@@ -686,7 +675,6 @@ class SchmidtVetters(Benchmark):
 
         """
 
-        # Override its parent class
         super(SchmidtVetters, self).__init__(name, dims, continuous,
                                              convex, differentiable, multimodal, separable)
 
@@ -737,7 +725,6 @@ class Simpleton(Benchmark):
 
         """
 
-        # Override its parent class
         super(Simpleton, self).__init__(name, dims, continuous,
                                         convex, differentiable, multimodal, separable)
 
@@ -787,7 +774,6 @@ class Watson(Benchmark):
 
         """
 
-        # Override its parent class
         super(Watson, self).__init__(name, dims, continuous,
                                      convex, differentiable, multimodal, separable)
 
@@ -861,7 +847,6 @@ class Wolfe(Benchmark):
 
         """
 
-        # Override its parent class
         super(Wolfe, self).__init__(name, dims, continuous,
                                     convex, differentiable, multimodal, separable)
 

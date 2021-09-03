@@ -19,20 +19,14 @@ def download_file(url, output_path):
 
     """
 
-    # Checks if file exists
     file_exists = os.path.exists(output_path)
 
-    # If file does not exist
     if not file_exists:
-        # Checks if data folder exists
         folder_exists = os.path.exists(c.DATA_FOLDER)
 
-        # If data folder does not exist
         if not folder_exists:
-            # Creates the folder
             os.mkdir(c.DATA_FOLDER)
 
-        # Downloads the file
         urllib.request.urlretrieve(url, output_path)
 
 
@@ -47,15 +41,11 @@ def untar_file(file_path):
 
     """
 
-    # Opens a .tar.gz file with `file_path`
     with tarfile.open(file_path, "r:gz") as tar:
-        # Defines the path to the folder and check if it exists
         folder_path = file_path.split('.tar.gz')[0]
         folder_path_exists = os.path.exists(folder_path)
 
-        # If path does not exists
         if not folder_path_exists:
-            # Extracts all files
             tar.extractall(path=folder_path)
 
     return folder_path

@@ -36,7 +36,6 @@ class Forrester(Benchmark):
 
         """
 
-        # Override its parent class
         super(Forrester, self).__init__(name, dims, continuous,
                                         convex, differentiable, multimodal, separable)
 
@@ -86,7 +85,6 @@ class GramacyLee(Benchmark):
 
         """
 
-        # Override its parent class
         super(GramacyLee, self).__init__(name, dims, continuous,
                                          convex, differentiable, multimodal, separable)
 
