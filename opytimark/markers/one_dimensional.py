@@ -1,6 +1,8 @@
 """One-dimensional benchmarking functions.
 """
 
+from typing import Optional
+
 import numpy as np
 
 import opytimark.utils.constants as c
@@ -23,24 +25,24 @@ class Forrester(Benchmark):
 
     def __init__(
         self,
-        name="Forrester",
-        dims=1,
-        continuous=True,
-        convex=False,
-        differentiable=True,
-        multimodal=True,
-        separable=True,
+        name: Optional[str] = "Forrester",
+        dims: Optional[int] = 1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -49,14 +51,14 @@ class Forrester(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -81,24 +83,24 @@ class GramacyLee(Benchmark):
 
     def __init__(
         self,
-        name="GramacyLee",
-        dims=1,
-        continuous=True,
-        convex=False,
-        differentiable=True,
-        multimodal=False,
-        separable=True,
+        name: Optional[str] = "GramacyLee",
+        dims: Optional[int] = 1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -107,14 +109,14 @@ class GramacyLee(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 

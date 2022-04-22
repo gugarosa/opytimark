@@ -10,12 +10,12 @@ import numpy as np
 import opytimark.utils.constants as c
 
 
-def download_file(url, output_path):
+def download_file(url: str, output_path: str) -> None:
     """Downloads a file given its URL and the output path to be saved.
 
     Args:
-        url (str): URL to download the file.
-        output_path (str): Path to save the downloaded file.
+        url: URL to download the file.
+        output_path: Path to save the downloaded file.
 
     """
 
@@ -30,14 +30,14 @@ def download_file(url, output_path):
         urllib.request.urlretrieve(url, output_path)
 
 
-def untar_file(file_path):
+def untar_file(file_path: str) -> str:
     """De-compress a file with .tar.gz.
 
     Args:
-        file_path (str): Path of the file to be de-compressed.
+        file_path: Path of the file to be de-compressed.
 
     Returns:
-        The folder that has been de-compressed.
+        (str): The folder that has been de-compressed.
 
     """
 
@@ -51,15 +51,15 @@ def untar_file(file_path):
     return folder_path
 
 
-def load_cec_auxiliary(name, year):
+def load_cec_auxiliary(name: str, year: str) -> np.ndarray:
     """Loads auxiliary data for CEC-based benchmarking functions.
 
     Args:
-        name (str): Name of function to be loaded.
-        year (str): Year of function to be loaded.
+        name: Name of function to be loaded.
+        year: Year of function to be loaded.
 
     Returns:
-        An array holding the auxiliary data.
+        (np.ndarray): Auxiliary data.
 
     """
 

@@ -2,6 +2,7 @@
 """
 
 import itertools as it
+from typing import Optional, Tuple, Union
 
 import numpy as np
 
@@ -27,29 +28,29 @@ class Knapsack(Benchmark):
 
     def __init__(
         self,
-        name="Knapsack",
-        dims=-1,
-        continuous=False,
-        convex=False,
-        differentiable=False,
-        multimodal=False,
-        separable=False,
-        values=(0,),
-        weights=(0,),
-        max_capacity=0.0,
+        name: Optional[str] = "Knapsack",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = False,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = False,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = False,
+        values: Optional[Tuple[Union[float, int], ...]] = (0,),
+        weights: Optional[Tuple[Union[float, int], ...]] = (0,),
+        max_capacity: Optional[Union[float, int]] = 0.0,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
-            values (tuple): Tuple of items values.
-            weights (tuple): Tuple of items weights.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
+            values: Tuple of items values.
+            weights: Tuple of items weights.
             max_capacity: Maximum capacity of the knapsack.
 
         """
@@ -74,39 +75,39 @@ class Knapsack(Benchmark):
         self.dims = len(values)
 
     @property
-    def values(self):
-        """tuple: values of items in the knapsack."""
+    def values(self) -> Tuple[Union[float, int], ...]:
+        """Values of items in the knapsack."""
 
         return self._values
 
     @values.setter
-    def values(self, values):
+    def values(self, values: Tuple[Union[float, int], ...]) -> None:
         if not isinstance(values, tuple):
             raise e.TypeError("`values` should be a tuple")
 
         self._values = values
 
     @property
-    def weights(self):
-        """tuple: Weights of items in the knapsack."""
+    def weights(self) -> Tuple[Union[float, int], ...]:
+        """Weights of items in the knapsack."""
 
         return self._weights
 
     @weights.setter
-    def weights(self, weights):
+    def weights(self, weights: Tuple[Union[float, int], ...]) -> None:
         if not isinstance(weights, tuple):
             raise e.TypeError("`weights` should be a tuple")
 
         self._weights = weights
 
     @property
-    def max_capacity(self):
-        """float: Maximum capacity of the knapsack."""
+    def max_capacity(self) -> Union[float, int]:
+        """Maximum capacity of the knapsack."""
 
         return self._max_capacity
 
     @max_capacity.setter
-    def max_capacity(self, max_capacity):
+    def max_capacity(self, max_capacity: Union[float, int]) -> None:
         if not isinstance(max_capacity, (float, int)):
             raise e.TypeError("`max_capacity` should be a float or integer")
         if max_capacity < 0:
@@ -115,14 +116,14 @@ class Knapsack(Benchmark):
         self._max_capacity = max_capacity
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 

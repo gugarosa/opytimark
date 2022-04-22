@@ -1,6 +1,8 @@
 """CEC Benchmark-based class.
 """
 
+from typing import List, Optional, Tuple
+
 import numpy as np
 
 import opytimark.utils.decorator as d
@@ -18,28 +20,28 @@ class CECBenchmark:
 
     def __init__(
         self,
-        name,
-        year,
-        auxiliary_data=(),
-        dims=1,
-        continuous=False,
-        convex=False,
-        differentiable=False,
-        multimodal=False,
-        separable=False,
+        name: str,
+        year: str,
+        auxiliary_data: Optional[Tuple[str, ...]] = (),
+        dims: Optional[int] = 1,
+        continuous: Optional[bool] = False,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = False,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            year (str): Year of the function.
-            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            year: Year of the function.
+            auxiliary_data: Auxiliary variables to be externally loaded.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -71,39 +73,39 @@ class CECBenchmark:
         self._load_auxiliary_data(name, year, auxiliary_data)
 
     @property
-    def name(self):
-        """str: Name of the function."""
+    def name(self) -> str:
+        """Name of the function."""
 
         return self._name
 
     @name.setter
-    def name(self, name):
+    def name(self, name: str) -> None:
         if not isinstance(name, str):
             raise e.TypeError("`name` should be a string")
 
         self._name = name
 
     @property
-    def year(self):
-        """str: Year of the function."""
+    def year(self) -> str:
+        """Year of the function."""
 
         return self._year
 
     @year.setter
-    def year(self, year):
+    def year(self, year: str) -> None:
         if not isinstance(year, str):
             raise e.TypeError("`year` should be a string")
 
         self._year = year
 
     @property
-    def dims(self):
-        """int: Number of allowed dimensions."""
+    def dims(self) -> int:
+        """Number of allowed dimensions."""
 
         return self._dims
 
     @dims.setter
-    def dims(self, dims):
+    def dims(self, dims: int) -> None:
         if not isinstance(dims, int):
             raise e.TypeError("`dims` should be a integer")
         if dims < -1 or dims == 0:
@@ -112,93 +114,93 @@ class CECBenchmark:
         self._dims = dims
 
     @property
-    def continuous(self):
-        """bool: Whether function is continuous or not."""
+    def continuous(self) -> bool:
+        """Whether function is continuous or not."""
 
         return self._continuous
 
     @continuous.setter
-    def continuous(self, continuous):
+    def continuous(self, continuous: bool) -> None:
         if not isinstance(continuous, bool):
             raise e.TypeError("`continuous` should be a boolean")
 
         self._continuous = continuous
 
     @property
-    def convex(self):
-        """bool: Whether function is convex or not."""
+    def convex(self) -> bool:
+        """Whether function is convex or not."""
 
         return self._convex
 
     @convex.setter
-    def convex(self, convex):
+    def convex(self, convex: bool) -> None:
         if not isinstance(convex, bool):
             raise e.TypeError("`convex` should be a boolean")
 
         self._convex = convex
 
     @property
-    def differentiable(self):
-        """bool: Whether function is differentiable or not."""
+    def differentiable(self) -> bool:
+        """Whether function is differentiable or not."""
 
         return self._differentiable
 
     @differentiable.setter
-    def differentiable(self, differentiable):
+    def differentiable(self, differentiable: bool) -> None:
         if not isinstance(differentiable, bool):
             raise e.TypeError("`differentiable` should be a boolean")
 
         self._differentiable = differentiable
 
     @property
-    def multimodal(self):
-        """bool: Whether function is multimodal or not."""
+    def multimodal(self) -> bool:
+        """Whether function is multimodal or not."""
 
         return self._multimodal
 
     @multimodal.setter
-    def multimodal(self, multimodal):
+    def multimodal(self, multimodal: bool) -> None:
         if not isinstance(multimodal, bool):
             raise e.TypeError("`multimodal` should be a boolean")
 
         self._multimodal = multimodal
 
     @property
-    def separable(self):
-        """bool: Whether function is separable or not."""
+    def separable(self) -> bool:
+        """Whether function is separable or not."""
 
         return self._separable
 
     @separable.setter
-    def separable(self, separable):
+    def separable(self, separable: bool) -> None:
         if not isinstance(separable, bool):
             raise e.TypeError("`separable` should be a boolean")
 
         self._separable = separable
 
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Note that it needs to be implemented in every child class as it is the
         one to hold the benchmarking function logic.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
         raise NotImplementedError
 
-    def _load_auxiliary_data(self, name, year, data):
+    def _load_auxiliary_data(self, name: str, year: str, data: List[str]) -> None:
         """Loads auxiliary data from a set of files.
 
         Args:
-            name (str): Name of the function.
-            year (str): Year of the function.
-            data (list): List holding the variables to be loaded.
+            name: Name of the function.
+            year: Year of the function.
+            data: List holding the variables to be loaded.
 
         """
 
@@ -223,36 +225,36 @@ class CECCompositeBenchmark(CECBenchmark):
 
     def __init__(
         self,
-        name,
-        year,
-        auxiliary_data=(),
-        sigma=(),
-        l=(),
-        functions=(),
-        bias=1,
-        dims=1,
-        continuous=False,
-        convex=False,
-        differentiable=False,
-        multimodal=False,
-        separable=False,
+        name: str,
+        year: str,
+        auxiliary_data: Optional[Tuple[str, ...]] = (),
+        sigma: Optional[Tuple[float, ...]] = (),
+        l: Optional[Tuple[float, ...]] = (),
+        functions: Optional[Tuple[callable, ...]] = (),
+        bias: Optional[int] = 1,
+        dims: Optional[int] = 1,
+        continuous: Optional[bool] = False,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = False,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            year (str): Year of the function.
-            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
-            sigma (tuple): Controls the functions coverage range.
-            l (tuple): Streches or compresses the functions.
-            functions (tuple): Benchmarking functions to be composed.
-            bias (int): Composite function bias.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            year: Year of the function.
+            auxiliary_data: Auxiliary variables to be externally loaded.
+            sigma: Controls the functions coverage range.
+            l: Streches or compresses the functions.
+            functions: Benchmarking functions to be composed.
+            bias: Composite function bias.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -279,14 +281,14 @@ class CECCompositeBenchmark(CECBenchmark):
         self.f = functions
 
     @d.check_exact_dimension_and_auxiliary_matrix
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 

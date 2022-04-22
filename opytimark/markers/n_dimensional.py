@@ -1,6 +1,8 @@
 """N-dimensional benchmarking functions.
 """
 
+from typing import Optional
+
 import numpy as np
 
 import opytimark.utils.constants as c
@@ -26,24 +28,24 @@ class Ackley1(Benchmark):
 
     def __init__(
         self,
-        name="Ackley1",
-        dims=-1,
-        continuous=True,
-        convex=False,
-        differentiable=True,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "Ackley1",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -52,14 +54,14 @@ class Ackley1(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -93,24 +95,24 @@ class Ackley4(Benchmark):
 
     def __init__(
         self,
-        name="Ackley4",
-        dims=-1,
-        continuous=True,
-        convex=False,
-        differentiable=True,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "Ackley4",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -119,14 +121,14 @@ class Ackley4(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -158,24 +160,24 @@ class Alpine1(Benchmark):
 
     def __init__(
         self,
-        name="Alpine1",
-        dims=-1,
-        continuous=True,
-        convex=False,
-        differentiable=False,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "Alpine1",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = False,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -184,14 +186,14 @@ class Alpine1(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -216,24 +218,24 @@ class Alpine2(Benchmark):
 
     def __init__(
         self,
-        name="Alpine2",
-        dims=-1,
-        continuous=True,
-        convex=False,
-        differentiable=True,
-        multimodal=True,
-        separable=True,
+        name: Optional[str] = "Alpine2",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -242,14 +244,14 @@ class Alpine2(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -274,24 +276,24 @@ class Brown(Benchmark):
 
     def __init__(
         self,
-        name="Brown",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=False,
-        separable=False,
+        name: Optional[str] = "Brown",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -300,14 +302,14 @@ class Brown(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -338,24 +340,24 @@ class ChungReynolds(Benchmark):
 
     def __init__(
         self,
-        name="ChungReynolds",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=False,
-        separable=True,
+        name: Optional[str] = "ChungReynolds",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -364,14 +366,14 @@ class ChungReynolds(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -396,24 +398,24 @@ class CosineMixture(Benchmark):
 
     def __init__(
         self,
-        name="CosineMixture",
-        dims=-1,
-        continuous=False,
-        convex=False,
-        differentiable=False,
-        multimodal=False,
-        separable=False,
+        name: Optional[str] = "CosineMixture",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = False,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = False,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -422,14 +424,14 @@ class CosineMixture(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -460,24 +462,24 @@ class Csendes(Benchmark):
 
     def __init__(
         self,
-        name="Csendes",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=True,
+        name: Optional[str] = "Csendes",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -486,14 +488,14 @@ class Csendes(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -518,24 +520,24 @@ class Deb1(Benchmark):
 
     def __init__(
         self,
-        name="Deb1",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=True,
+        name: Optional[str] = "Deb1",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -544,14 +546,14 @@ class Deb1(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -579,24 +581,24 @@ class Deb3(Benchmark):
 
     def __init__(
         self,
-        name="Deb3",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=False,
-        separable=True,
+        name: Optional[str] = "Deb3",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -605,14 +607,14 @@ class Deb3(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -640,24 +642,24 @@ class DixonPrice(Benchmark):
 
     def __init__(
         self,
-        name="DixonPrice",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=False,
-        separable=False,
+        name: Optional[str] = "DixonPrice",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -666,14 +668,14 @@ class DixonPrice(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -709,24 +711,24 @@ class Exponential(Benchmark):
 
     def __init__(
         self,
-        name="Exponential",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=False,
-        separable=False,
+        name: Optional[str] = "Exponential",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -735,14 +737,14 @@ class Exponential(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -767,24 +769,24 @@ class F8F2(Benchmark):
 
     def __init__(
         self,
-        name="F8F2",
-        dims=-1,
-        continuous=True,
-        convex=False,
-        differentiable=True,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "F8F2",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -793,14 +795,14 @@ class F8F2(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -843,24 +845,24 @@ class Griewank(Benchmark):
 
     def __init__(
         self,
-        name="Griewank",
-        dims=-1,
-        continuous=True,
-        convex=False,
-        differentiable=True,
-        multimodal=False,
-        separable=False,
+        name: Optional[str] = "Griewank",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -869,14 +871,14 @@ class Griewank(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -912,24 +914,24 @@ class HappyCat(Benchmark):
 
     def __init__(
         self,
-        name="HappyCat",
-        dims=-1,
-        continuous=True,
-        convex=False,
-        differentiable=True,
-        multimodal=False,
-        separable=False,
+        name: Optional[str] = "HappyCat",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -938,14 +940,14 @@ class HappyCat(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -980,24 +982,24 @@ class HighConditionedElliptic(Benchmark):
 
     def __init__(
         self,
-        name="HighConditionedElliptic",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=False,
-        separable=False,
+        name: Optional[str] = "HighConditionedElliptic",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -1006,14 +1008,14 @@ class HighConditionedElliptic(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -1042,24 +1044,24 @@ class Levy(Benchmark):
 
     def __init__(
         self,
-        name="Levy",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=True,
+        name: Optional[str] = "Levy",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -1068,14 +1070,14 @@ class Levy(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -1115,24 +1117,24 @@ class Michalewicz(Benchmark):
 
     def __init__(
         self,
-        name="Michalewicz",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=True,
+        name: Optional[str] = "Michalewicz",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -1141,14 +1143,14 @@ class Michalewicz(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -1178,24 +1180,24 @@ class NonContinuousExpandedScafferF6(Benchmark):
 
     def __init__(
         self,
-        name="NonContinuousExpandedScafferF6",
-        dims=-1,
-        continuous=False,
-        convex=False,
-        differentiable=False,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "NonContinuousExpandedScafferF6",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = False,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = False,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -1204,14 +1206,14 @@ class NonContinuousExpandedScafferF6(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -1256,24 +1258,24 @@ class NonContinuousRastrigin(Benchmark):
 
     def __init__(
         self,
-        name="NonContinuousRastrigin",
-        dims=-1,
-        continuous=False,
-        convex=True,
-        differentiable=False,
-        multimodal=True,
-        separable=True,
+        name: Optional[str] = "NonContinuousRastrigin",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = False,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = False,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -1282,14 +1284,14 @@ class NonContinuousRastrigin(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -1317,24 +1319,24 @@ class Pathological(Benchmark):
 
     def __init__(
         self,
-        name="Pathological",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=False,
-        separable=False,
+        name: Optional[str] = "Pathological",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -1343,14 +1345,14 @@ class Pathological(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -1382,24 +1384,24 @@ class Periodic(Benchmark):
 
     def __init__(
         self,
-        name="Periodic",
-        dims=-1,
-        continuous=True,
-        convex=False,
-        differentiable=True,
-        multimodal=False,
-        separable=False,
+        name: Optional[str] = "Periodic",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -1408,14 +1410,14 @@ class Periodic(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -1440,24 +1442,24 @@ class Perm0DBeta(Benchmark):
 
     def __init__(
         self,
-        name="Perm0DBeta",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=False,
-        separable=True,
+        name: Optional[str] = "Perm0DBeta",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -1466,14 +1468,14 @@ class Perm0DBeta(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -1505,24 +1507,24 @@ class PermDBeta(Benchmark):
 
     def __init__(
         self,
-        name="PermDBeta",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=False,
-        separable=True,
+        name: Optional[str] = "PermDBeta",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -1531,14 +1533,14 @@ class PermDBeta(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -1572,24 +1574,24 @@ class PowellSingular2(Benchmark):
 
     def __init__(
         self,
-        name="PowellSingular2",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=False,
-        multimodal=False,
-        separable=True,
+        name: Optional[str] = "PowellSingular2",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = False,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -1598,14 +1600,14 @@ class PowellSingular2(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -1640,24 +1642,24 @@ class PowellSum(Benchmark):
 
     def __init__(
         self,
-        name="PowellSum",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=False,
-        multimodal=False,
-        separable=True,
+        name: Optional[str] = "PowellSum",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = False,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -1666,14 +1668,14 @@ class PowellSum(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -1703,24 +1705,24 @@ class Qing(Benchmark):
 
     def __init__(
         self,
-        name="Qing",
-        dims=-1,
-        continuous=True,
-        convex=False,
-        differentiable=True,
-        multimodal=True,
-        separable=True,
+        name: Optional[str] = "Qing",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -1729,14 +1731,14 @@ class Qing(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -1766,24 +1768,24 @@ class Quartic(Benchmark):
 
     def __init__(
         self,
-        name="Quartic",
-        dims=-1,
-        continuous=True,
-        convex=False,
-        differentiable=True,
-        multimodal=False,
-        separable=True,
+        name: Optional[str] = "Quartic",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -1792,14 +1794,14 @@ class Quartic(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -1829,24 +1831,24 @@ class Quintic(Benchmark):
 
     def __init__(
         self,
-        name="Quintic",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=True,
+        name: Optional[str] = "Quintic",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -1855,14 +1857,14 @@ class Quintic(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -1887,24 +1889,24 @@ class Rana(Benchmark):
 
     def __init__(
         self,
-        name="Rana",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "Rana",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -1913,14 +1915,14 @@ class Rana(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -1958,24 +1960,24 @@ class Rastrigin(Benchmark):
 
     def __init__(
         self,
-        name="Rastrigin",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=True,
+        name: Optional[str] = "Rastrigin",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -1984,14 +1986,14 @@ class Rastrigin(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -2016,24 +2018,24 @@ class Ridge(Benchmark):
 
     def __init__(
         self,
-        name="Ridge",
-        dims=-1,
-        continuous=True,
-        convex=False,
-        differentiable=True,
-        multimodal=False,
-        separable=False,
+        name: Optional[str] = "Ridge",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -2042,14 +2044,14 @@ class Ridge(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -2074,24 +2076,24 @@ class Rosenbrock(Benchmark):
 
     def __init__(
         self,
-        name="Rosenbrock",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=False,
-        separable=False,
+        name: Optional[str] = "Rosenbrock",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -2100,14 +2102,14 @@ class Rosenbrock(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -2137,24 +2139,24 @@ class RotatedExpandedScafferF6(Benchmark):
 
     def __init__(
         self,
-        name="RotatedExpandedScafferF6",
-        dims=-1,
-        continuous=True,
-        convex=False,
-        differentiable=True,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "RotatedExpandedScafferF6",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -2163,14 +2165,14 @@ class RotatedExpandedScafferF6(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -2212,24 +2214,24 @@ class RotatedHyperEllipsoid(Benchmark):
 
     def __init__(
         self,
-        name="RotatedHyperEllipsoid",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=False,
-        separable=True,
+        name: Optional[str] = "RotatedHyperEllipsoid",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -2238,14 +2240,14 @@ class RotatedHyperEllipsoid(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -2277,24 +2279,24 @@ class Salomon(Benchmark):
 
     def __init__(
         self,
-        name="Salomon",
-        dims=-1,
-        continuous=True,
-        convex=False,
-        differentiable=True,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "Salomon",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -2303,14 +2305,14 @@ class Salomon(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -2339,24 +2341,24 @@ class SchumerSteiglitz(Benchmark):
 
     def __init__(
         self,
-        name="SchumerSteiglitz",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=False,
-        separable=True,
+        name: Optional[str] = "SchumerSteiglitz",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -2365,14 +2367,14 @@ class SchumerSteiglitz(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -2397,24 +2399,24 @@ class Schwefel(Benchmark):
 
     def __init__(
         self,
-        name="Schwefel",
-        dims=-1,
-        continuous=True,
-        convex=False,
-        differentiable=False,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "Schwefel",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = False,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -2423,14 +2425,14 @@ class Schwefel(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -2455,24 +2457,24 @@ class Schwefel220(Benchmark):
 
     def __init__(
         self,
-        name="Schwefel220",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=False,
-        multimodal=False,
-        separable=True,
+        name: Optional[str] = "Schwefel220",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = False,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -2481,14 +2483,14 @@ class Schwefel220(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -2513,24 +2515,24 @@ class Schwefel221(Benchmark):
 
     def __init__(
         self,
-        name="Schwefel221",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=False,
-        multimodal=False,
-        separable=True,
+        name: Optional[str] = "Schwefel221",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = False,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -2539,14 +2541,14 @@ class Schwefel221(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -2571,24 +2573,24 @@ class Schwefel222(Benchmark):
 
     def __init__(
         self,
-        name="Schwefel222",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=False,
-        separable=False,
+        name: Optional[str] = "Schwefel222",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -2597,14 +2599,14 @@ class Schwefel222(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -2629,24 +2631,24 @@ class Schwefel223(Benchmark):
 
     def __init__(
         self,
-        name="Schwefel223",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=False,
-        separable=False,
+        name: Optional[str] = "Schwefel223",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -2655,14 +2657,14 @@ class Schwefel223(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -2687,24 +2689,24 @@ class Schwefel225(Benchmark):
 
     def __init__(
         self,
-        name="Schwefel225",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=True,
+        name: Optional[str] = "Schwefel225",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -2713,14 +2715,14 @@ class Schwefel225(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -2750,24 +2752,24 @@ class Schwefel226(Benchmark):
 
     def __init__(
         self,
-        name="Schwefel226",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=True,
+        name: Optional[str] = "Schwefel226",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -2776,14 +2778,14 @@ class Schwefel226(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -2808,24 +2810,24 @@ class Shubert(Benchmark):
 
     def __init__(
         self,
-        name="Shubert",
-        dims=-1,
-        continuous=True,
-        convex=False,
-        differentiable=True,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "Shubert",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -2834,14 +2836,14 @@ class Shubert(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -2873,24 +2875,24 @@ class Shubert3(Benchmark):
 
     def __init__(
         self,
-        name="Shubert3",
-        dims=-1,
-        continuous=True,
-        convex=False,
-        differentiable=True,
-        multimodal=True,
-        separable=True,
+        name: Optional[str] = "Shubert3",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -2899,14 +2901,14 @@ class Shubert3(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -2938,24 +2940,24 @@ class Shubert4(Benchmark):
 
     def __init__(
         self,
-        name="Shubert4",
-        dims=-1,
-        continuous=True,
-        convex=False,
-        differentiable=True,
-        multimodal=True,
-        separable=True,
+        name: Optional[str] = "Shubert4",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -2964,14 +2966,14 @@ class Shubert4(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -3003,24 +3005,24 @@ class SchafferF6(Benchmark):
 
     def __init__(
         self,
-        name="SchafferF6",
-        dims=-1,
-        continuous=True,
-        convex=False,
-        differentiable=True,
-        multimodal=True,
-        separable=True,
+        name: Optional[str] = "SchafferF6",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -3029,14 +3031,14 @@ class SchafferF6(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -3068,24 +3070,24 @@ class Sphere(Benchmark):
 
     def __init__(
         self,
-        name="Sphere",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=False,
-        separable=True,
+        name: Optional[str] = "Sphere",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -3094,14 +3096,14 @@ class Sphere(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -3126,24 +3128,24 @@ class SphereWithNoise(Benchmark):
 
     def __init__(
         self,
-        name="SphereWithNoise",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=False,
-        separable=True,
+        name: Optional[str] = "SphereWithNoise",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -3152,14 +3154,14 @@ class SphereWithNoise(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -3187,24 +3189,24 @@ class Step(Benchmark):
 
     def __init__(
         self,
-        name="Step",
-        dims=-1,
-        continuous=False,
-        convex=False,
-        differentiable=False,
-        multimodal=False,
-        separable=True,
+        name: Optional[str] = "Step",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = False,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = False,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -3213,14 +3215,14 @@ class Step(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -3245,24 +3247,24 @@ class Step2(Benchmark):
 
     def __init__(
         self,
-        name="Step2",
-        dims=-1,
-        continuous=False,
-        convex=False,
-        differentiable=False,
-        multimodal=False,
-        separable=True,
+        name: Optional[str] = "Step2",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = False,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = False,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -3271,14 +3273,14 @@ class Step2(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -3303,24 +3305,24 @@ class Step3(Benchmark):
 
     def __init__(
         self,
-        name="Step3",
-        dims=-1,
-        continuous=False,
-        convex=False,
-        differentiable=False,
-        multimodal=False,
-        separable=True,
+        name: Optional[str] = "Step3",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = False,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = False,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -3329,14 +3331,14 @@ class Step3(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -3361,24 +3363,24 @@ class StrechedVSineWave(Benchmark):
 
     def __init__(
         self,
-        name="StrechedVSineWave",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=False,
-        separable=False,
+        name: Optional[str] = "StrechedVSineWave",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -3387,14 +3389,14 @@ class StrechedVSineWave(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -3426,24 +3428,24 @@ class StyblinskiTang(Benchmark):
 
     def __init__(
         self,
-        name="StyblinskiTang",
-        dims=-1,
-        continuous=True,
-        convex=False,
-        differentiable=True,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "StyblinskiTang",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -3452,14 +3454,14 @@ class StyblinskiTang(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -3484,24 +3486,24 @@ class SumDifferentPowers(Benchmark):
 
     def __init__(
         self,
-        name="SumDifferentPowers",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=False,
-        separable=True,
+        name: Optional[str] = "SumDifferentPowers",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -3510,14 +3512,14 @@ class SumDifferentPowers(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -3547,24 +3549,24 @@ class SumSquares(Benchmark):
 
     def __init__(
         self,
-        name="SumSquares",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=False,
-        separable=True,
+        name: Optional[str] = "SumSquares",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -3573,14 +3575,14 @@ class SumSquares(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -3610,24 +3612,24 @@ class Trid(Benchmark):
 
     def __init__(
         self,
-        name="Trid",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "Trid",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -3636,14 +3638,14 @@ class Trid(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -3674,24 +3676,24 @@ class Trigonometric1(Benchmark):
 
     def __init__(
         self,
-        name="Trigonometric1",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=False,
-        separable=False,
+        name: Optional[str] = "Trigonometric1",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -3700,14 +3702,14 @@ class Trigonometric1(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -3748,24 +3750,24 @@ class Trigonometric2(Benchmark):
 
     def __init__(
         self,
-        name="Trigonometric2",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "Trigonometric2",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -3774,14 +3776,14 @@ class Trigonometric2(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -3815,24 +3817,24 @@ class Wavy(Benchmark):
 
     def __init__(
         self,
-        name="Wavy",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=True,
+        name: Optional[str] = "Wavy",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -3841,14 +3843,14 @@ class Wavy(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -3873,24 +3875,24 @@ class Weierstrass(Benchmark):
 
     def __init__(
         self,
-        name="Weierstrass",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "Weierstrass",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -3898,14 +3900,14 @@ class Weierstrass(Benchmark):
             name, dims, continuous, convex, differentiable, multimodal, separable
         )
 
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -3943,24 +3945,24 @@ class XinSheYang(Benchmark):
 
     def __init__(
         self,
-        name="XinSheYang",
-        dims=-1,
-        continuous=True,
-        convex=False,
-        differentiable=False,
-        multimodal=True,
-        separable=True,
+        name: Optional[str] = "XinSheYang",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = False,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -3969,14 +3971,14 @@ class XinSheYang(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -4006,24 +4008,24 @@ class XinSheYang2(Benchmark):
 
     def __init__(
         self,
-        name="XinSheYang2",
-        dims=-1,
-        continuous=True,
-        convex=False,
-        differentiable=False,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "XinSheYang2",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = False,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -4032,14 +4034,14 @@ class XinSheYang2(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -4064,24 +4066,24 @@ class XinSheYang3(Benchmark):
 
     def __init__(
         self,
-        name="XinSheYang3",
-        dims=-1,
-        continuous=True,
-        convex=False,
-        differentiable=True,
-        multimodal=False,
-        separable=False,
+        name: Optional[str] = "XinSheYang3",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -4090,14 +4092,14 @@ class XinSheYang3(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -4124,24 +4126,24 @@ class XinSheYang4(Benchmark):
 
     def __init__(
         self,
-        name="XinSheYang4",
-        dims=-1,
-        continuous=True,
-        convex=False,
-        differentiable=False,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "XinSheYang4",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = False,
+        differentiable: Optional[bool] = False,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -4150,14 +4152,14 @@ class XinSheYang4(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -4184,24 +4186,24 @@ class Zakharov(Benchmark):
 
     def __init__(
         self,
-        name="Zakharov",
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=False,
-        separable=False,
+        name: Optional[str] = "Zakharov",
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -4210,14 +4212,14 @@ class Zakharov(Benchmark):
         )
 
     @d.check_exact_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 

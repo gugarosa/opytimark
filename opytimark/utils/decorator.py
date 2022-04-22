@@ -1,27 +1,29 @@
 """Decorators.
 """
 
+from typing import Any
+
 import numpy as np
 
 import opytimark.utils.exception as e
 
 
-def check_exact_dimension(f):
+def check_exact_dimension(f: callable) -> Any:
     """Checks whether the input dimension is exact to the demanded by the evaluated function.
 
     Args:
-        f (callable): Function to be checked.
+        f: Function to be checked.
 
     Returns:
-        The function output or an error depending whether the check is valid.
+        (Any): The function output or an error depending whether the check is valid.
 
     """
 
-    def _check_exact_dimension(*args):
+    def _check_exact_dimension(*args) -> Any:
         """Wraps the dimension checking in order to provide additional logic.
 
         Returns:
-            The wrapped function output.
+            (Any): The wrapped function output.
 
         """
 
@@ -51,23 +53,23 @@ def check_exact_dimension(f):
     return _check_exact_dimension
 
 
-def check_exact_dimension_and_auxiliary_matrix(f):
+def check_exact_dimension_and_auxiliary_matrix(f: callable) -> Any:
     """Checks whether the input dimension is exact to the demanded by the evaluated function and defines
     a proper auxiliary matrix accordingly.
 
     Args:
-        f (callable): Function to be checked.
+        f: Function to be checked.
 
     Returns:
-        The function output or an error depending whether the check is valid.
+        (Any): The function output or an error depending whether the check is valid.
 
     """
 
-    def _check_exact_dimension_and_auxiliary_matrix(*args):
+    def _check_exact_dimension_and_auxiliary_matrix(*args) -> Any:
         """Wraps the dimension checking in order to provide additional logic.
 
         Returns:
-            The wrapped function output.
+            (Any): The wrapped function output.
 
         """
 
@@ -104,22 +106,22 @@ def check_exact_dimension_and_auxiliary_matrix(f):
     return _check_exact_dimension_and_auxiliary_matrix
 
 
-def check_less_equal_dimension(f):
+def check_less_equal_dimension(f: callable) -> Any:
     """Checks whether the input dimension is less or equal to the demanded by the evaluated function.
 
     Args:
-        f (callable): Function to be checked.
+        f: Function to be checked.
 
     Returns:
-        The function output or an error depending whether the check is valid.
+        (Any): The function output or an error depending whether the check is valid.
 
     """
 
-    def _check_less_equal_dimension(*args):
+    def _check_less_equal_dimension(*args) -> Any:
         """Wraps the dimension checking in order to provide additional logic.
 
         Returns:
-            The wrapped function output.
+            (Any): The wrapped function output.
 
         """
 

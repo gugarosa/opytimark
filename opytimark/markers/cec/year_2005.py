@@ -1,6 +1,8 @@
 """CEC2005 benchmarking functions.
 """
 
+from typing import Optional, Tuple
+
 import numpy as np
 
 import opytimark.markers.n_dimensional as n_dim
@@ -26,28 +28,28 @@ class F1(CECBenchmark):
 
     def __init__(
         self,
-        name="F1",
-        year="2005",
-        auxiliary_data=("o"),
-        dims=100,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=False,
-        separable=True,
+        name: Optional[str] = "F1",
+        year: Optional[str] = "2005",
+        auxiliary_data: Optional[Tuple[str, ...]] = ("o"),
+        dims: Optional[int] = 100,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            year (str): Year of the function.
-            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            year: Year of the function.
+            auxiliary_data: Auxiliary variables to be externally loaded.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -64,14 +66,14 @@ class F1(CECBenchmark):
         )
 
     @d.check_less_equal_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -99,28 +101,28 @@ class F2(CECBenchmark):
 
     def __init__(
         self,
-        name="F2",
-        year="2005",
-        auxiliary_data=("o"),
-        dims=100,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=False,
-        separable=False,
+        name: Optional[str] = "F2",
+        year: Optional[str] = "2005",
+        auxiliary_data: Optional[Tuple[str, ...]] = ("o"),
+        dims: Optional[int] = 100,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            year (str): Year of the function.
-            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            year: Year of the function.
+            auxiliary_data: Auxiliary variables to be externally loaded.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -137,14 +139,14 @@ class F2(CECBenchmark):
         )
 
     @d.check_less_equal_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -185,28 +187,28 @@ class F3(CECBenchmark):
 
     def __init__(
         self,
-        name="F3",
-        year="2005",
-        auxiliary_data=("o", "M2", "M10", "M30", "M50"),
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=False,
-        separable=False,
+        name: Optional[str] = "F3",
+        year: Optional[str] = "2005",
+        auxiliary_data: Optional[Tuple[str, ...]] = ("o", "M2", "M10", "M30", "M50"),
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            year (str): Year of the function.
-            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            year: Year of the function.
+            auxiliary_data: Auxiliary variables to be externally loaded.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -223,14 +225,14 @@ class F3(CECBenchmark):
         )
 
     @d.check_exact_dimension_and_auxiliary_matrix
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -262,28 +264,28 @@ class F4(CECBenchmark):
 
     def __init__(
         self,
-        name="F4",
-        year="2005",
-        auxiliary_data=("o"),
-        dims=100,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=False,
-        separable=False,
+        name: Optional[str] = "F4",
+        year: Optional[str] = "2005",
+        auxiliary_data: Optional[Tuple[str, ...]] = ("o"),
+        dims: Optional[int] = 100,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            year (str): Year of the function.
-            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            year: Year of the function.
+            auxiliary_data: Auxiliary variables to be externally loaded.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -300,14 +302,14 @@ class F4(CECBenchmark):
         )
 
     @d.check_less_equal_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -351,28 +353,28 @@ class F5(CECBenchmark):
 
     def __init__(
         self,
-        name="F5",
-        year="2005",
-        auxiliary_data=("o", "A"),
-        dims=100,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=False,
-        separable=False,
+        name: Optional[str] = "F5",
+        year: Optional[str] = "2005",
+        auxiliary_data: Optional[Tuple[str, ...]] = ("o", "A"),
+        dims: Optional[int] = 100,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = False,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            year (str): Year of the function.
-            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            year: Year of the function.
+            auxiliary_data: Auxiliary variables to be externally loaded.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -389,14 +391,14 @@ class F5(CECBenchmark):
         )
 
     @d.check_less_equal_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -435,28 +437,28 @@ class F6(CECBenchmark):
 
     def __init__(
         self,
-        name="F6",
-        year="2005",
-        auxiliary_data=("o"),
-        dims=100,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "F6",
+        year: Optional[str] = "2005",
+        auxiliary_data: Optional[Tuple[str, ...]] = ("o"),
+        dims: Optional[int] = 100,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            year (str): Year of the function.
-            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            year: Year of the function.
+            auxiliary_data: Auxiliary variables to be externally loaded.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -473,14 +475,14 @@ class F6(CECBenchmark):
         )
 
     @d.check_less_equal_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -513,28 +515,28 @@ class F7(CECBenchmark):
 
     def __init__(
         self,
-        name="F7",
-        year="2005",
-        auxiliary_data=("o", "M2", "M10", "M30", "M50"),
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "F7",
+        year: Optional[str] = "2005",
+        auxiliary_data: Optional[Tuple[str, ...]] = ("o", "M2", "M10", "M30", "M50"),
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            year (str): Year of the function.
-            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            year: Year of the function.
+            auxiliary_data: Auxiliary variables to be externally loaded.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -551,14 +553,14 @@ class F7(CECBenchmark):
         )
 
     @d.check_exact_dimension_and_auxiliary_matrix
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -597,28 +599,28 @@ class F8(CECBenchmark):
 
     def __init__(
         self,
-        name="F8",
-        year="2005",
-        auxiliary_data=("o", "M2", "M10", "M30", "M50"),
-        dims=-1,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "F8",
+        year: Optional[str] = "2005",
+        auxiliary_data: Optional[Tuple[str, ...]] = ("o", "M2", "M10", "M30", "M50"),
+        dims: Optional[int] = -1,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            year (str): Year of the function.
-            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            year: Year of the function.
+            auxiliary_data: Auxiliary variables to be externally loaded.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -635,14 +637,14 @@ class F8(CECBenchmark):
         )
 
     @d.check_exact_dimension_and_auxiliary_matrix
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -687,28 +689,28 @@ class F9(CECBenchmark):
 
     def __init__(
         self,
-        name="F9",
-        year="2005",
-        auxiliary_data=("o"),
-        dims=100,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=True,
+        name: Optional[str] = "F9",
+        year: Optional[str] = "2005",
+        auxiliary_data: Optional[Tuple[str, ...]] = ("o"),
+        dims: Optional[int] = 100,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            year (str): Year of the function.
-            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            year: Year of the function.
+            auxiliary_data: Auxiliary variables to be externally loaded.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -725,14 +727,14 @@ class F9(CECBenchmark):
         )
 
     @d.check_less_equal_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -760,28 +762,28 @@ class F10(CECBenchmark):
 
     def __init__(
         self,
-        name="F10",
-        year="2005",
-        auxiliary_data=("o", "M2", "M10", "M30", "M50"),
-        dims=100,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "F10",
+        year: Optional[str] = "2005",
+        auxiliary_data: Optional[Tuple[str, ...]] = ("o", "M2", "M10", "M30", "M50"),
+        dims: Optional[int] = 100,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            year (str): Year of the function.
-            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            year: Year of the function.
+            auxiliary_data: Auxiliary variables to be externally loaded.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -798,14 +800,14 @@ class F10(CECBenchmark):
         )
 
     @d.check_exact_dimension_and_auxiliary_matrix
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -833,28 +835,28 @@ class F11(CECBenchmark):
 
     def __init__(
         self,
-        name="F11",
-        year="2005",
-        auxiliary_data=("o", "M2", "M10", "M30", "M50"),
-        dims=100,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "F11",
+        year: Optional[str] = "2005",
+        auxiliary_data: Optional[Tuple[str, ...]] = ("o", "M2", "M10", "M30", "M50"),
+        dims: Optional[int] = 100,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            year (str): Year of the function.
-            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            year: Year of the function.
+            auxiliary_data: Auxiliary variables to be externally loaded.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -871,14 +873,14 @@ class F11(CECBenchmark):
         )
 
     @d.check_exact_dimension_and_auxiliary_matrix
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -918,28 +920,28 @@ class F12(CECBenchmark):
 
     def __init__(
         self,
-        name="F12",
-        year="2005",
-        auxiliary_data=("alpha", "a", "b"),
-        dims=100,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "F12",
+        year: Optional[str] = "2005",
+        auxiliary_data: Optional[Tuple[str, ...]] = ("alpha", "a", "b"),
+        dims: Optional[int] = 100,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            year (str): Year of the function.
-            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            year: Year of the function.
+            auxiliary_data: Auxiliary variables to be externally loaded.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -956,14 +958,14 @@ class F12(CECBenchmark):
         )
 
     @d.check_less_equal_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -997,28 +999,28 @@ class F13(CECBenchmark):
 
     def __init__(
         self,
-        name="F13",
-        year="2005",
-        auxiliary_data=("o"),
-        dims=100,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "F13",
+        year: Optional[str] = "2005",
+        auxiliary_data: Optional[Tuple[str, ...]] = ("o"),
+        dims: Optional[int] = 100,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            year (str): Year of the function.
-            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            year: Year of the function.
+            auxiliary_data: Auxiliary variables to be externally loaded.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -1035,14 +1037,14 @@ class F13(CECBenchmark):
         )
 
     @d.check_less_equal_dimension
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -1088,28 +1090,28 @@ class F14(CECBenchmark):
 
     def __init__(
         self,
-        name="F14",
-        year="2005",
-        auxiliary_data=("o", "M2", "M10", "M30", "M50"),
-        dims=100,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "F14",
+        year: Optional[str] = "2005",
+        auxiliary_data: Optional[Tuple[str, ...]] = ("o", "M2", "M10", "M30", "M50"),
+        dims: Optional[int] = 100,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            year (str): Year of the function.
-            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            year: Year of the function.
+            auxiliary_data: Auxiliary variables to be externally loaded.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -1126,14 +1128,14 @@ class F14(CECBenchmark):
         )
 
     @d.check_exact_dimension_and_auxiliary_matrix
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -1178,30 +1180,30 @@ class F15(CECCompositeBenchmark):
 
     def __init__(
         self,
-        name="F15",
-        year="2005",
-        auxiliary_data=("o", "M2", "M10", "M30", "M50"),
-        bias=120,
-        dims=100,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=True,
+        name: Optional[str] = "F15",
+        year: Optional[str] = "2005",
+        auxiliary_data: Optional[Tuple[str, ...]] = ("o", "M2", "M10", "M30", "M50"),
+        bias: Optional[int] = 120,
+        dims: Optional[int] = 100,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = True,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            year (str): Year of the function.
-            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
-            bias (int): Composite function bias.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            year: Year of the function.
+            auxiliary_data: Auxiliary variables to be externally loaded.
+            bias: Composite function bias.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -1255,30 +1257,30 @@ class F16(CECCompositeBenchmark):
 
     def __init__(
         self,
-        name="F16",
-        year="2005",
-        auxiliary_data=("o", "M2", "M10", "M30", "M50"),
-        bias=120,
-        dims=100,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "F16",
+        year: Optional[str] = "2005",
+        auxiliary_data: Optional[Tuple[str, ...]] = ("o", "M2", "M10", "M30", "M50"),
+        bias: Optional[int] = 120,
+        dims: Optional[int] = 100,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            year (str): Year of the function.
-            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
-            bias (int): Composite function bias.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            year: Year of the function.
+            auxiliary_data: Auxiliary variables to be externally loaded.
+            bias: Composite function bias.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -1332,30 +1334,30 @@ class F17(CECCompositeBenchmark):
 
     def __init__(
         self,
-        name="F17",
-        year="2005",
-        auxiliary_data=("o", "M2", "M10", "M30", "M50"),
-        bias=120,
-        dims=100,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "F17",
+        year: Optional[str] = "2005",
+        auxiliary_data: Optional[Tuple[str, ...]] = ("o", "M2", "M10", "M30", "M50"),
+        bias: Optional[int] = 120,
+        dims: Optional[int] = 100,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            year (str): Year of the function.
-            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
-            bias (int): Composite function bias.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            year: Year of the function.
+            auxiliary_data: Auxiliary variables to be externally loaded.
+            bias: Composite function bias.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -1394,14 +1396,14 @@ class F17(CECCompositeBenchmark):
         )
 
     @d.check_exact_dimension_and_auxiliary_matrix
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -1467,30 +1469,30 @@ class F18(CECCompositeBenchmark):
 
     def __init__(
         self,
-        name="F18",
-        year="2005",
-        auxiliary_data=("o", "M2", "M10", "M30", "M50"),
-        bias=10,
-        dims=100,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "F18",
+        year: Optional[str] = "2005",
+        auxiliary_data: Optional[Tuple[str, ...]] = ("o", "M2", "M10", "M30", "M50"),
+        bias: Optional[int] = 10,
+        dims: Optional[int] = 100,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            year (str): Year of the function.
-            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
-            bias (int): Composite function bias.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            year: Year of the function.
+            auxiliary_data: Auxiliary variables to be externally loaded.
+            bias: Composite function bias.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -1544,30 +1546,30 @@ class F19(CECCompositeBenchmark):
 
     def __init__(
         self,
-        name="F19",
-        year="2005",
-        auxiliary_data=("o", "M2", "M10", "M30", "M50"),
-        bias=10,
-        dims=100,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "F19",
+        year: Optional[str] = "2005",
+        auxiliary_data: Optional[Tuple[str, ...]] = ("o", "M2", "M10", "M30", "M50"),
+        bias: Optional[int] = 10,
+        dims: Optional[int] = 100,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            year (str): Year of the function.
-            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
-            bias (int): Composite function bias.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            year: Year of the function.
+            auxiliary_data: Auxiliary variables to be externally loaded.
+            bias: Composite function bias.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -1621,30 +1623,30 @@ class F20(CECCompositeBenchmark):
 
     def __init__(
         self,
-        name="F20",
-        year="2005",
-        auxiliary_data=("o", "M2", "M10", "M30", "M50"),
-        bias=10,
-        dims=100,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "F20",
+        year: Optional[str] = "2005",
+        auxiliary_data: Optional[Tuple[str, ...]] = ("o", "M2", "M10", "M30", "M50"),
+        bias: Optional[int] = 10,
+        dims: Optional[int] = 100,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            year (str): Year of the function.
-            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
-            bias (int): Composite function bias.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            year: Year of the function.
+            auxiliary_data: Auxiliary variables to be externally loaded.
+            bias: Composite function bias.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -1683,14 +1685,14 @@ class F20(CECCompositeBenchmark):
         )
 
     @d.check_exact_dimension_and_auxiliary_matrix
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -1761,30 +1763,30 @@ class F21(CECCompositeBenchmark):
 
     def __init__(
         self,
-        name="F21",
-        year="2005",
-        auxiliary_data=("o", "M2", "M10", "M30", "M50"),
-        bias=360,
-        dims=100,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "F21",
+        year: Optional[str] = "2005",
+        auxiliary_data: Optional[Tuple[str, ...]] = ("o", "M2", "M10", "M30", "M50"),
+        bias: Optional[int] = 360,
+        dims: Optional[int] = 100,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            year (str): Year of the function.
-            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
-            bias (int): Composite function bias.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            year: Year of the function.
+            auxiliary_data: Auxiliary variables to be externally loaded.
+            bias: Composite function bias.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -1838,30 +1840,30 @@ class F22(CECCompositeBenchmark):
 
     def __init__(
         self,
-        name="F22",
-        year="2005",
-        auxiliary_data=("o", "M2", "M10", "M30", "M50"),
-        bias=360,
-        dims=100,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "F22",
+        year: Optional[str] = "2005",
+        auxiliary_data: Optional[Tuple[str, ...]] = ("o", "M2", "M10", "M30", "M50"),
+        bias: Optional[int] = 360,
+        dims: Optional[int] = 100,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            year (str): Year of the function.
-            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
-            bias (int): Composite function bias.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            year: Year of the function.
+            auxiliary_data: Auxiliary variables to be externally loaded.
+            bias: Composite function bias.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -1915,30 +1917,30 @@ class F23(CECCompositeBenchmark):
 
     def __init__(
         self,
-        name="F23",
-        year="2005",
-        auxiliary_data=("o", "M2", "M10", "M30", "M50"),
-        bias=360,
-        dims=100,
-        continuous=False,
-        convex=True,
-        differentiable=False,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "F23",
+        year: Optional[str] = "2005",
+        auxiliary_data: Optional[Tuple[str, ...]] = ("o", "M2", "M10", "M30", "M50"),
+        bias: Optional[int] = 360,
+        dims: Optional[int] = 100,
+        continuous: Optional[bool] = False,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = False,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            year (str): Year of the function.
-            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
-            bias (int): Composite function bias.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            year: Year of the function.
+            auxiliary_data: Auxiliary variables to be externally loaded.
+            bias: Composite function bias.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -1977,14 +1979,14 @@ class F23(CECCompositeBenchmark):
         )
 
     @d.check_exact_dimension_and_auxiliary_matrix
-    def __call__(self, x):
+    def __call__(self, x: np.array) -> float:
         """This method returns the function's output when the class is called.
 
         Args:
-            x (np.array): An input array for calculating the function's output.
+            x: An input array for calculating the function's output.
 
         Returns:
-            The benchmarking function output `f(x)`.
+            (float): The benchmarking function output `f(x)`.
 
         """
 
@@ -2053,30 +2055,30 @@ class F24(CECCompositeBenchmark):
 
     def __init__(
         self,
-        name="F24",
-        year="2005",
-        auxiliary_data=("o", "M2", "M10", "M30", "M50"),
-        bias=260,
-        dims=100,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "F24",
+        year: Optional[str] = "2005",
+        auxiliary_data: Optional[Tuple[str, ...]] = ("o", "M2", "M10", "M30", "M50"),
+        bias: Optional[int] = 260,
+        dims: Optional[int] = 100,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            year (str): Year of the function.
-            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
-            bias (int): Composite function bias.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            year: Year of the function.
+            auxiliary_data: Auxiliary variables to be externally loaded.
+            bias: Composite function bias.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
@@ -2130,30 +2132,30 @@ class F25(CECCompositeBenchmark):
 
     def __init__(
         self,
-        name="F25",
-        year="2005",
-        auxiliary_data=("o", "M2", "M10", "M30", "M50"),
-        bias=260,
-        dims=100,
-        continuous=True,
-        convex=True,
-        differentiable=True,
-        multimodal=True,
-        separable=False,
+        name: Optional[str] = "F25",
+        year: Optional[str] = "2005",
+        auxiliary_data: Optional[Tuple[str, ...]] = ("o", "M2", "M10", "M30", "M50"),
+        bias: Optional[int] = 260,
+        dims: Optional[int] = 100,
+        continuous: Optional[bool] = True,
+        convex: Optional[bool] = True,
+        differentiable: Optional[bool] = True,
+        multimodal: Optional[bool] = True,
+        separable: Optional[bool] = False,
     ):
         """Initialization method.
 
         Args:
-            name (str): Name of the function.
-            year (str): Year of the function.
-            auxiliary_data (tuple): Auxiliary variables to be externally loaded.
-            bias (int): Composite function bias.
-            dims (int): Number of allowed dimensions.
-            continuous (bool): Whether the function is continuous.
-            convex (bool): Whether the function is convex.
-            differentiable (bool): Whether the function is differentiable.
-            multimodal (bool): Whether the function is multimodal.
-            separable (bool): Whether the function is separable.
+            name: Name of the function.
+            year: Year of the function.
+            auxiliary_data: Auxiliary variables to be externally loaded.
+            bias: Composite function bias.
+            dims: Number of allowed dimensions.
+            continuous: Whether the function is continuous.
+            convex: Whether the function is convex.
+            differentiable: Whether the function is differentiable.
+            multimodal: Whether the function is multimodal.
+            separable: Whether the function is separable.
 
         """
 
