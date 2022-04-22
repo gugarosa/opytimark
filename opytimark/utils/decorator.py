@@ -38,13 +38,13 @@ def check_exact_dimension(f):
         # If the function's number of dimensions is equal to `-1` (n-dimensional)
         if obj.dims == -1:
             if x.shape[0] == 0:
-                raise e.SizeError(f'{obj.name} input should be n-dimensional')
+                raise e.SizeError(f"{obj.name} input should be n-dimensional")
 
             return f(obj, x)
 
         # If the input dimensions is different from function's allowed dimensions
         if x.shape[0] != obj.dims:
-            raise e.SizeError(f'{obj.name} input should be {obj.dims}-dimensional')
+            raise e.SizeError(f"{obj.name} input should be {obj.dims}-dimensional")
 
         return f(obj, x)
 
@@ -83,19 +83,21 @@ def check_exact_dimension_and_auxiliary_matrix(f):
 
         # If the input dimensions differs from function's allowed dimensions
         if x.shape[0] not in [2, 10, 30, 50]:
-            raise e.SizeError(f'{obj.name} input should be 2-, 10-, 30- or 50-dimensional')
+            raise e.SizeError(
+                f"{obj.name} input should be 2-, 10-, 30- or 50-dimensional"
+            )
 
         if x.shape[0] == 2:
-            setattr(obj, 'M', obj.M2)
+            setattr(obj, "M", obj.M2)
 
         elif x.shape[0] == 10:
-            setattr(obj, 'M', obj.M10)
+            setattr(obj, "M", obj.M10)
 
         elif x.shape[0] == 30:
-            setattr(obj, 'M', obj.M30)
+            setattr(obj, "M", obj.M30)
 
         elif x.shape[0] == 50:
-            setattr(obj, 'M', obj.M50)
+            setattr(obj, "M", obj.M50)
 
         return f(obj, x)
 
@@ -133,7 +135,9 @@ def check_less_equal_dimension(f):
 
         # If the input dimensions is different from function's allowed dimensions
         if x.shape[0] > obj.dims:
-            raise e.SizeError(f'{obj.name} input should be less or equal to {obj.dims}-dimensional')
+            raise e.SizeError(
+                f"{obj.name} input should be less or equal to {obj.dims}-dimensional"
+            )
 
         return f(obj, x)
 

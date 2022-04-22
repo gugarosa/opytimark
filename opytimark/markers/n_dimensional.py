@@ -24,8 +24,16 @@ class Ackley1(Benchmark):
 
     """
 
-    def __init__(self, name='Ackley1', dims=-1, continuous=True, convex=False,
-                 differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="Ackley1",
+        dims=-1,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -39,8 +47,9 @@ class Ackley1(Benchmark):
 
         """
 
-        super(Ackley1, self).__init__(name, dims, continuous,
-                                      convex, differentiable, multimodal, separable)
+        super(Ackley1, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -58,7 +67,7 @@ class Ackley1(Benchmark):
         inv = 1 / x.shape[0]
 
         # Calculating first term
-        term1 = -0.2 * np.sqrt(inv * np.sum(x ** 2))
+        term1 = -0.2 * np.sqrt(inv * np.sum(x**2))
 
         # Calculating second term
         term2 = inv * np.sum(np.cos(2 * np.pi * x))
@@ -82,8 +91,16 @@ class Ackley4(Benchmark):
 
     """
 
-    def __init__(self, name='Ackley4', dims=-1, continuous=True, convex=False,
-                 differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="Ackley4",
+        dims=-1,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -97,8 +114,9 @@ class Ackley4(Benchmark):
 
         """
 
-        super(Ackley4, self).__init__(name, dims, continuous,
-                                      convex, differentiable, multimodal, separable)
+        super(Ackley4, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -118,7 +136,9 @@ class Ackley4(Benchmark):
         # For every input dimension
         for i in range(x.shape[0] - 1):
             # Calculating Ackley's 4th function
-            f += np.exp(-0.2) * np.sqrt(x[i] ** 2 + x[i + 1] ** 2) + 3 * (np.cos(2 * x[i]) + np.sin(2 * x[i + 1]))
+            f += np.exp(-0.2) * np.sqrt(x[i] ** 2 + x[i + 1] ** 2) + 3 * (
+                np.cos(2 * x[i]) + np.sin(2 * x[i + 1])
+            )
 
         return f
 
@@ -136,8 +156,16 @@ class Alpine1(Benchmark):
 
     """
 
-    def __init__(self, name='Alpine1', dims=-1, continuous=True, convex=False,
-                 differentiable=False, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="Alpine1",
+        dims=-1,
+        continuous=True,
+        convex=False,
+        differentiable=False,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -151,8 +179,9 @@ class Alpine1(Benchmark):
 
         """
 
-        super(Alpine1, self).__init__(name, dims, continuous,
-                                      convex, differentiable, multimodal, separable)
+        super(Alpine1, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -185,8 +214,16 @@ class Alpine2(Benchmark):
 
     """
 
-    def __init__(self, name='Alpine2', dims=-1, continuous=True, convex=False,
-                 differentiable=True, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="Alpine2",
+        dims=-1,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -200,8 +237,9 @@ class Alpine2(Benchmark):
 
         """
 
-        super(Alpine2, self).__init__(name, dims, continuous,
-                                      convex, differentiable, multimodal, separable)
+        super(Alpine2, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -234,8 +272,16 @@ class Brown(Benchmark):
 
     """
 
-    def __init__(self, name='Brown', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=False, separable=False):
+    def __init__(
+        self,
+        name="Brown",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -249,8 +295,9 @@ class Brown(Benchmark):
 
         """
 
-        super(Brown, self).__init__(name, dims, continuous,
-                                    convex, differentiable, multimodal, separable)
+        super(Brown, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -289,8 +336,16 @@ class ChungReynolds(Benchmark):
 
     """
 
-    def __init__(self, name='ChungReynolds', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=False, separable=True):
+    def __init__(
+        self,
+        name="ChungReynolds",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -304,8 +359,9 @@ class ChungReynolds(Benchmark):
 
         """
 
-        super(ChungReynolds, self).__init__(name, dims, continuous,
-                                            convex, differentiable, multimodal, separable)
+        super(ChungReynolds, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -320,7 +376,7 @@ class ChungReynolds(Benchmark):
         """
 
         # Calculating the Chung Reynolds' function
-        f = np.sum(x ** 2) ** 2
+        f = np.sum(x**2) ** 2
 
         return f
 
@@ -338,8 +394,16 @@ class CosineMixture(Benchmark):
 
     """
 
-    def __init__(self, name='CosineMixture', dims=-1, continuous=False, convex=False,
-                 differentiable=False, multimodal=False, separable=False):
+    def __init__(
+        self,
+        name="CosineMixture",
+        dims=-1,
+        continuous=False,
+        convex=False,
+        differentiable=False,
+        multimodal=False,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -353,8 +417,9 @@ class CosineMixture(Benchmark):
 
         """
 
-        super(CosineMixture, self).__init__(name, dims, continuous,
-                                            convex, differentiable, multimodal, separable)
+        super(CosineMixture, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -372,7 +437,7 @@ class CosineMixture(Benchmark):
         term1 = np.sum(np.cos(5 * np.pi * x))
 
         # Calculating second term
-        term2 = np.sum(x ** 2)
+        term2 = np.sum(x**2)
 
         # Calculating Cosine's Mixture function
         f = -0.1 * term1 - term2
@@ -393,8 +458,16 @@ class Csendes(Benchmark):
 
     """
 
-    def __init__(self, name='Csendes', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="Csendes",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -408,8 +481,9 @@ class Csendes(Benchmark):
 
         """
 
-        super(Csendes, self).__init__(name, dims, continuous,
-                                      convex, differentiable, multimodal, separable)
+        super(Csendes, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -424,7 +498,7 @@ class Csendes(Benchmark):
         """
 
         # Calculating the Csendes' function
-        f = (x ** 6) * (2 + np.sin(1 / (x + c.EPSILON)))
+        f = (x**6) * (2 + np.sin(1 / (x + c.EPSILON)))
 
         return np.sum(f)
 
@@ -442,8 +516,16 @@ class Deb1(Benchmark):
 
     """
 
-    def __init__(self, name='Deb1', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="Deb1",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -457,8 +539,9 @@ class Deb1(Benchmark):
 
         """
 
-        super(Deb1, self).__init__(name, dims, continuous,
-                                   convex, differentiable, multimodal, separable)
+        super(Deb1, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -494,8 +577,16 @@ class Deb3(Benchmark):
 
     """
 
-    def __init__(self, name='Deb3', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=False, separable=True):
+    def __init__(
+        self,
+        name="Deb3",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -509,8 +600,9 @@ class Deb3(Benchmark):
 
         """
 
-        super(Deb3, self).__init__(name, dims, continuous,
-                                   convex, differentiable, multimodal, separable)
+        super(Deb3, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -525,7 +617,7 @@ class Deb3(Benchmark):
         """
 
         # Calculating partial term
-        term = np.sum(np.sin(5 * np.pi * (x ** (3/4) - 0.05)) ** 6)
+        term = np.sum(np.sin(5 * np.pi * (x ** (3 / 4) - 0.05)) ** 6)
 
         # Declaring Deb's 3rd function
         f = -1 / x.shape[0] * term
@@ -546,8 +638,16 @@ class DixonPrice(Benchmark):
 
     """
 
-    def __init__(self, name='DixonPrice', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=False, separable=False):
+    def __init__(
+        self,
+        name="DixonPrice",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -561,8 +661,9 @@ class DixonPrice(Benchmark):
 
         """
 
-        super(DixonPrice, self).__init__(name, dims, continuous,
-                                         convex, differentiable, multimodal, separable)
+        super(DixonPrice, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -606,8 +707,16 @@ class Exponential(Benchmark):
 
     """
 
-    def __init__(self, name='Exponential', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=False, separable=False):
+    def __init__(
+        self,
+        name="Exponential",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -621,8 +730,9 @@ class Exponential(Benchmark):
 
         """
 
-        super(Exponential, self).__init__(name, dims, continuous,
-                                          convex, differentiable, multimodal, separable)
+        super(Exponential, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -637,7 +747,7 @@ class Exponential(Benchmark):
         """
 
         # Calculating the Exponential's function
-        f = np.exp(-0.5 * np.sum(x ** 2))
+        f = np.exp(-0.5 * np.sum(x**2))
 
         return f
 
@@ -655,8 +765,16 @@ class F8F2(Benchmark):
 
     """
 
-    def __init__(self, name='F8F2', dims=-1, continuous=True, convex=False,
-                 differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="F8F2",
+        dims=-1,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -670,8 +788,9 @@ class F8F2(Benchmark):
 
         """
 
-        super(F8F2, self).__init__(name, dims, continuous,
-                                   convex, differentiable, multimodal, separable)
+        super(F8F2, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -686,10 +805,10 @@ class F8F2(Benchmark):
         """
 
         def _griewank(x):
-            return x ** 2 / 4000 - np.cos(x / np.sqrt(1)) + 1
+            return x**2 / 4000 - np.cos(x / np.sqrt(1)) + 1
 
         def _rosenbrock(x, y):
-            return 100 * (x ** 2 - y) ** 2 + (x - 1) ** 2
+            return 100 * (x**2 - y) ** 2 + (x - 1) ** 2
 
         # Instantiating function
         f = 0
@@ -704,7 +823,7 @@ class F8F2(Benchmark):
             # Checks if it is not the last dimension
             else:
                 # Calculates the Shifted Expanded Griewank's plus Rosenbrock's function using indexes `i` and `i+1`
-                f += _griewank(_rosenbrock(x[i], x[i+1]))
+                f += _griewank(_rosenbrock(x[i], x[i + 1]))
 
         return f
 
@@ -722,8 +841,16 @@ class Griewank(Benchmark):
 
     """
 
-    def __init__(self, name='Griewank', dims=-1, continuous=True, convex=False,
-                 differentiable=True, multimodal=False, separable=False):
+    def __init__(
+        self,
+        name="Griewank",
+        dims=-1,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=False,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -737,8 +864,9 @@ class Griewank(Benchmark):
 
         """
 
-        super(Griewank, self).__init__(name, dims, continuous,
-                                       convex, differentiable, multimodal, separable)
+        super(Griewank, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -782,8 +910,16 @@ class HappyCat(Benchmark):
 
     """
 
-    def __init__(self, name='HappyCat', dims=-1, continuous=True, convex=False,
-                 differentiable=True, multimodal=False, separable=False):
+    def __init__(
+        self,
+        name="HappyCat",
+        dims=-1,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=False,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -797,8 +933,9 @@ class HappyCat(Benchmark):
 
         """
 
-        super(HappyCat, self).__init__(name, dims, continuous,
-                                       convex, differentiable, multimodal, separable)
+        super(HappyCat, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -816,10 +953,14 @@ class HappyCat(Benchmark):
         n = x.shape[0]
 
         # Calculating norm of `x`
-        square = np.sum(x ** 2)
+        square = np.sum(x**2)
 
         # Calculating the HappyCat's function
-        f = ((square - n) ** 2) ** (1 / 8) + (1 / n) * (1 / 2 * square + np.sum(x)) + 1 / 2
+        f = (
+            ((square - n) ** 2) ** (1 / 8)
+            + (1 / n) * (1 / 2 * square + np.sum(x))
+            + 1 / 2
+        )
 
         return f
 
@@ -837,8 +978,16 @@ class HighConditionedElliptic(Benchmark):
 
     """
 
-    def __init__(self, name='HighConditionedElliptic', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=False, separable=False):
+    def __init__(
+        self,
+        name="HighConditionedElliptic",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -852,8 +1001,9 @@ class HighConditionedElliptic(Benchmark):
 
         """
 
-        super(HighConditionedElliptic, self).__init__(name, dims, continuous,
-                                                      convex, differentiable, multimodal, separable)
+        super(HighConditionedElliptic, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -871,7 +1021,7 @@ class HighConditionedElliptic(Benchmark):
         dims = np.linspace(1, x.shape[0], x.shape[0]) - 1
 
         # Calculating the HighConditionedElliptic's function
-        x = 10e6 ** (dims / (x.shape[0] - 1)) * x ** 2
+        x = 10e6 ** (dims / (x.shape[0] - 1)) * x**2
 
         return np.sum(x)
 
@@ -890,8 +1040,16 @@ class Levy(Benchmark):
 
     """
 
-    def __init__(self, name='Levy', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="Levy",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -905,8 +1063,9 @@ class Levy(Benchmark):
 
         """
 
-        super(Levy, self).__init__(name, dims, continuous,
-                                   convex, differentiable, multimodal, separable)
+        super(Levy, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -930,7 +1089,7 @@ class Levy(Benchmark):
         term3 = ((w[-1] - 1) ** 2) * (1 + (np.sin(2 * np.pi * w[-1]) ** 2))
 
         # Reshaping `w`
-        w = w[0:x.shape[0]-1]
+        w = w[0 : x.shape[0] - 1]
 
         # Calculating second term
         term2 = np.sum(((w - 1) ** 2) * (1 + 10 * (np.sin(np.pi * w + 1) ** 2)))
@@ -954,8 +1113,16 @@ class Michalewicz(Benchmark):
 
     """
 
-    def __init__(self, name='Michalewicz', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="Michalewicz",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -969,8 +1136,9 @@ class Michalewicz(Benchmark):
 
         """
 
-        super(Michalewicz, self).__init__(name, dims, continuous,
-                                          convex, differentiable, multimodal, separable)
+        super(Michalewicz, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -1008,8 +1176,16 @@ class NonContinuousExpandedScafferF6(Benchmark):
 
     """
 
-    def __init__(self, name='NonContinuousExpandedScafferF6', dims=-1, continuous=False, convex=False,
-                 differentiable=False, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="NonContinuousExpandedScafferF6",
+        dims=-1,
+        continuous=False,
+        convex=False,
+        differentiable=False,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -1023,8 +1199,9 @@ class NonContinuousExpandedScafferF6(Benchmark):
 
         """
 
-        super(NonContinuousExpandedScafferF6, self).__init__(name, dims, continuous,
-                                                             convex, differentiable, multimodal, separable)
+        super(NonContinuousExpandedScafferF6, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -1039,7 +1216,9 @@ class NonContinuousExpandedScafferF6(Benchmark):
         """
 
         def _scaffer(x, y):
-            return 0.5 + (np.sin(np.sqrt(x ** 2 + y ** 2)) ** 2 - 0.5) / ((1 + 0.0001 * (x ** 2 + y ** 2)) ** 2)
+            return 0.5 + (np.sin(np.sqrt(x**2 + y**2)) ** 2 - 0.5) / (
+                (1 + 0.0001 * (x**2 + y**2)) ** 2
+            )
 
         # Creates the discontinuity
         x = np.where(np.fabs(x) < 0.5, x, np.round(2 * x) / 2)
@@ -1057,7 +1236,7 @@ class NonContinuousExpandedScafferF6(Benchmark):
             # Checks if it is not the last dimension
             else:
                 # Calculates the Non-Continuous Expanded Scaffer's F6 function using indexes `i` and `i+1`
-                f += _scaffer(x[i], x[i+1])
+                f += _scaffer(x[i], x[i + 1])
 
         return f
 
@@ -1075,8 +1254,16 @@ class NonContinuousRastrigin(Benchmark):
 
     """
 
-    def __init__(self, name='NonContinuousRastrigin', dims=-1, continuous=False, convex=True,
-                 differentiable=False, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="NonContinuousRastrigin",
+        dims=-1,
+        continuous=False,
+        convex=True,
+        differentiable=False,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -1090,8 +1277,9 @@ class NonContinuousRastrigin(Benchmark):
 
         """
 
-        super(NonContinuousRastrigin, self).__init__(name, dims, continuous,
-                                                     convex, differentiable, multimodal, separable)
+        super(NonContinuousRastrigin, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -1109,7 +1297,7 @@ class NonContinuousRastrigin(Benchmark):
         x = np.where(np.fabs(x) < 0.5, x, np.round(2 * x) / 2)
 
         # Calculating the Non-Continuous Rastrigin's function
-        f = x ** 2 - 10 * np.cos(2 * np.pi * x)
+        f = x**2 - 10 * np.cos(2 * np.pi * x)
 
         return 10 * x.shape[0] + np.sum(f)
 
@@ -1127,8 +1315,16 @@ class Pathological(Benchmark):
 
     """
 
-    def __init__(self, name='Pathological', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=False, separable=False):
+    def __init__(
+        self,
+        name="Pathological",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -1142,8 +1338,9 @@ class Pathological(Benchmark):
 
         """
 
-        super(Pathological, self).__init__(name, dims, continuous,
-                                           convex, differentiable, multimodal, separable)
+        super(Pathological, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -1164,7 +1361,8 @@ class Pathological(Benchmark):
         for i in range(x.shape[0] - 1):
             # Calculating the Pathological's function
             f += 0.5 + (np.sin(np.sqrt(100 * x[i] ** 2 + x[i + 1] ** 2)) ** 2 - 0.5) / (
-                1 + 0.001 * ((x[i] ** 2 - 2 * x[i] * x[i + 1] + x[i + 1] ** 2) ** 2))
+                1 + 0.001 * ((x[i] ** 2 - 2 * x[i] * x[i + 1] + x[i + 1] ** 2) ** 2)
+            )
 
         return f
 
@@ -1182,8 +1380,16 @@ class Periodic(Benchmark):
 
     """
 
-    def __init__(self, name='Periodic', dims=-1, continuous=True, convex=False,
-                 differentiable=True, multimodal=False, separable=False):
+    def __init__(
+        self,
+        name="Periodic",
+        dims=-1,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=False,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -1197,8 +1403,9 @@ class Periodic(Benchmark):
 
         """
 
-        super(Periodic, self).__init__(name, dims, continuous,
-                                       convex, differentiable, multimodal, separable)
+        super(Periodic, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -1231,8 +1438,16 @@ class Perm0DBeta(Benchmark):
 
     """
 
-    def __init__(self, name='Perm0DBeta', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=False, separable=True):
+    def __init__(
+        self,
+        name="Perm0DBeta",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -1246,8 +1461,9 @@ class Perm0DBeta(Benchmark):
 
         """
 
-        super(Perm0DBeta, self).__init__(name, dims, continuous,
-                                         convex, differentiable, multimodal, separable)
+        super(Perm0DBeta, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -1273,6 +1489,7 @@ class Perm0DBeta(Benchmark):
 
         return f
 
+
 class PermDBeta(Benchmark):
     """PermDBeta class implements the Perm D, Beta's benchmarking function.
 
@@ -1286,8 +1503,16 @@ class PermDBeta(Benchmark):
 
     """
 
-    def __init__(self, name='PermDBeta', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=False, separable=True):
+    def __init__(
+        self,
+        name="PermDBeta",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -1301,8 +1526,9 @@ class PermDBeta(Benchmark):
 
         """
 
-        super(PermDBeta, self).__init__(name, dims, continuous,
-                                        convex, differentiable, multimodal, separable)
+        super(PermDBeta, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -1324,7 +1550,9 @@ class PermDBeta(Benchmark):
             # For every input dimension
             for j in range(x.shape[0]):
                 # Calculating the Perm D, Beta's function
-                f += (((j + 1) ** (i + 1) + 10) * ((x[j] / (j + 1)) ** (i + 1) - 1)) ** 2
+                f += (
+                    ((j + 1) ** (i + 1) + 10) * ((x[j] / (j + 1)) ** (i + 1) - 1)
+                ) ** 2
 
         return f
 
@@ -1342,8 +1570,16 @@ class PowellSingular2(Benchmark):
 
     """
 
-    def __init__(self, name='PowellSingular2', dims=-1, continuous=True, convex=True,
-                 differentiable=False, multimodal=False, separable=True):
+    def __init__(
+        self,
+        name="PowellSingular2",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=False,
+        multimodal=False,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -1357,8 +1593,9 @@ class PowellSingular2(Benchmark):
 
         """
 
-        super(PowellSingular2, self).__init__(name, dims, continuous,
-                                              convex, differentiable, multimodal, separable)
+        super(PowellSingular2, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -1378,7 +1615,12 @@ class PowellSingular2(Benchmark):
         # For every input dimension
         for i in range(x.shape[0] - 2):
             # Calculating the Powell's Singular 2nd function
-            f += (x[i - 1] + 10 * x[i]) ** 2 + 5 * (x[i + 1] - x[i + 2]) ** 2 + (x[i] - 2 * x[i + 1]) ** 4 + 10 * (x[i - 1] - x[i + 2]) ** 4
+            f += (
+                (x[i - 1] + 10 * x[i]) ** 2
+                + 5 * (x[i + 1] - x[i + 2]) ** 2
+                + (x[i] - 2 * x[i + 1]) ** 4
+                + 10 * (x[i - 1] - x[i + 2]) ** 4
+            )
 
         return f
 
@@ -1396,8 +1638,16 @@ class PowellSum(Benchmark):
 
     """
 
-    def __init__(self, name='PowellSum', dims=-1, continuous=True, convex=True,
-                 differentiable=False, multimodal=False, separable=True):
+    def __init__(
+        self,
+        name="PowellSum",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=False,
+        multimodal=False,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -1411,8 +1661,9 @@ class PowellSum(Benchmark):
 
         """
 
-        super(PowellSum, self).__init__(name, dims, continuous,
-                                        convex, differentiable, multimodal, separable)
+        super(PowellSum, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -1450,8 +1701,16 @@ class Qing(Benchmark):
 
     """
 
-    def __init__(self, name='Qing', dims=-1, continuous=True, convex=False,
-                 differentiable=True, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="Qing",
+        dims=-1,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -1465,8 +1724,9 @@ class Qing(Benchmark):
 
         """
 
-        super(Qing, self).__init__(name, dims, continuous,
-                                   convex, differentiable, multimodal, separable)
+        super(Qing, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -1504,8 +1764,16 @@ class Quartic(Benchmark):
 
     """
 
-    def __init__(self, name='Quartic', dims=-1, continuous=True, convex=False,
-                 differentiable=True, multimodal=False, separable=True):
+    def __init__(
+        self,
+        name="Quartic",
+        dims=-1,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=False,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -1519,8 +1787,9 @@ class Quartic(Benchmark):
 
         """
 
-        super(Quartic, self).__init__(name, dims, continuous,
-                                      convex, differentiable, multimodal, separable)
+        super(Quartic, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -1558,8 +1827,16 @@ class Quintic(Benchmark):
 
     """
 
-    def __init__(self, name='Quintic', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="Quintic",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -1573,8 +1850,9 @@ class Quintic(Benchmark):
 
         """
 
-        super(Quintic, self).__init__(name, dims, continuous,
-                                      convex, differentiable, multimodal, separable)
+        super(Quintic, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -1589,7 +1867,7 @@ class Quintic(Benchmark):
         """
 
         # Calculating the Quintic's function
-        f = np.fabs(x ** 5 - 3 * x ** 4 + 4 * x ** 3 + 2 * x ** 2 - 10 * x - 4)
+        f = np.fabs(x**5 - 3 * x**4 + 4 * x**3 + 2 * x**2 - 10 * x - 4)
 
         return np.sum(f)
 
@@ -1607,8 +1885,16 @@ class Rana(Benchmark):
 
     """
 
-    def __init__(self, name='Rana', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="Rana",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -1622,8 +1908,9 @@ class Rana(Benchmark):
 
         """
 
-        super(Rana, self).__init__(name, dims, continuous,
-                                   convex, differentiable, multimodal, separable)
+        super(Rana, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -1649,7 +1936,9 @@ class Rana(Benchmark):
             t2 = np.sqrt(np.fabs(x[i + 1] - x[i] + 1))
 
             # Calculating the Rana's function
-            f += (x[i + 1] + 1) * np.cos(t2) * np.sin(t1) + x[i] * np.cos(t1) * np.sin(t2)
+            f += (x[i + 1] + 1) * np.cos(t2) * np.sin(t1) + x[i] * np.cos(t1) * np.sin(
+                t2
+            )
 
         return f
 
@@ -1667,8 +1956,16 @@ class Rastrigin(Benchmark):
 
     """
 
-    def __init__(self, name='Rastrigin', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="Rastrigin",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -1682,8 +1979,9 @@ class Rastrigin(Benchmark):
 
         """
 
-        super(Rastrigin, self).__init__(name, dims, continuous,
-                                        convex, differentiable, multimodal, separable)
+        super(Rastrigin, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -1698,7 +1996,7 @@ class Rastrigin(Benchmark):
         """
 
         # Calculating the Rastrigin's function
-        f = x ** 2 - 10 * np.cos(2 * np.pi * x)
+        f = x**2 - 10 * np.cos(2 * np.pi * x)
 
         return 10 * x.shape[0] + np.sum(f)
 
@@ -1716,8 +2014,16 @@ class Ridge(Benchmark):
 
     """
 
-    def __init__(self, name='Ridge', dims=-1, continuous=True, convex=False,
-                 differentiable=True, multimodal=False, separable=False):
+    def __init__(
+        self,
+        name="Ridge",
+        dims=-1,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=False,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -1731,8 +2037,9 @@ class Ridge(Benchmark):
 
         """
 
-        super(Ridge, self).__init__(name, dims, continuous,
-                                    convex, differentiable, multimodal, separable)
+        super(Ridge, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -1765,8 +2072,16 @@ class Rosenbrock(Benchmark):
 
     """
 
-    def __init__(self, name='Rosenbrock', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=False, separable=False):
+    def __init__(
+        self,
+        name="Rosenbrock",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -1780,8 +2095,9 @@ class Rosenbrock(Benchmark):
 
         """
 
-        super(Rosenbrock, self).__init__(name, dims, continuous,
-                                         convex, differentiable, multimodal, separable)
+        super(Rosenbrock, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -1819,8 +2135,16 @@ class RotatedExpandedScafferF6(Benchmark):
 
     """
 
-    def __init__(self, name='RotatedExpandedScafferF6', dims=-1, continuous=True, convex=False,
-                 differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="RotatedExpandedScafferF6",
+        dims=-1,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -1834,8 +2158,9 @@ class RotatedExpandedScafferF6(Benchmark):
 
         """
 
-        super(RotatedExpandedScafferF6, self).__init__(name, dims, continuous,
-                                                       convex, differentiable, multimodal, separable)
+        super(RotatedExpandedScafferF6, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -1850,7 +2175,9 @@ class RotatedExpandedScafferF6(Benchmark):
         """
 
         def _scaffer(x, y):
-            return 0.5 + (np.sin(np.sqrt(x ** 2 + y ** 2)) ** 2 - 0.5) / ((1 + 0.0001 * (x ** 2 + y ** 2)) ** 2)
+            return 0.5 + (np.sin(np.sqrt(x**2 + y**2)) ** 2 - 0.5) / (
+                (1 + 0.0001 * (x**2 + y**2)) ** 2
+            )
 
         # Instantiating function
         f = 0
@@ -1865,7 +2192,7 @@ class RotatedExpandedScafferF6(Benchmark):
             # Checks if it is not the last dimension
             else:
                 # Calculates the Rotated Expanded Scaffer's F6 function using indexes `i` and `i+1`
-                f += _scaffer(x[i], x[i+1])
+                f += _scaffer(x[i], x[i + 1])
 
         return f
 
@@ -1883,8 +2210,16 @@ class RotatedHyperEllipsoid(Benchmark):
 
     """
 
-    def __init__(self, name='RotatedHyperEllipsoid', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=False, separable=True):
+    def __init__(
+        self,
+        name="RotatedHyperEllipsoid",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -1898,8 +2233,9 @@ class RotatedHyperEllipsoid(Benchmark):
 
         """
 
-        super(RotatedHyperEllipsoid, self).__init__(name, dims, continuous,
-                                                    convex, differentiable, multimodal, separable)
+        super(RotatedHyperEllipsoid, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -1939,8 +2275,16 @@ class Salomon(Benchmark):
 
     """
 
-    def __init__(self, name='Salomon', dims=-1, continuous=True, convex=False,
-                 differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="Salomon",
+        dims=-1,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -1954,8 +2298,9 @@ class Salomon(Benchmark):
 
         """
 
-        super(Salomon, self).__init__(name, dims, continuous,
-                                      convex, differentiable, multimodal, separable)
+        super(Salomon, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -1970,8 +2315,11 @@ class Salomon(Benchmark):
         """
 
         # Calculating the Salomon's function
-        f = 1 - np.cos(2 * np.pi * np.sqrt(np.sum(x ** 2))) + \
-            0.1 * np.sqrt(np.sum(x ** 2))
+        f = (
+            1
+            - np.cos(2 * np.pi * np.sqrt(np.sum(x**2)))
+            + 0.1 * np.sqrt(np.sum(x**2))
+        )
 
         return f
 
@@ -1989,8 +2337,16 @@ class SchumerSteiglitz(Benchmark):
 
     """
 
-    def __init__(self, name='SchumerSteiglitz', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=False, separable=True):
+    def __init__(
+        self,
+        name="SchumerSteiglitz",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -2004,8 +2360,9 @@ class SchumerSteiglitz(Benchmark):
 
         """
 
-        super(SchumerSteiglitz, self).__init__(name, dims, continuous,
-                                               convex, differentiable, multimodal, separable)
+        super(SchumerSteiglitz, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -2020,7 +2377,7 @@ class SchumerSteiglitz(Benchmark):
         """
 
         # Calculating the Schumer Steiglitz's function
-        f = x ** 4
+        f = x**4
 
         return np.sum(f)
 
@@ -2038,8 +2395,16 @@ class Schwefel(Benchmark):
 
     """
 
-    def __init__(self, name='Schwefel', dims=-1, continuous=True, convex=False,
-                 differentiable=False, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="Schwefel",
+        dims=-1,
+        continuous=True,
+        convex=False,
+        differentiable=False,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -2053,8 +2418,9 @@ class Schwefel(Benchmark):
 
         """
 
-        super(Schwefel, self).__init__(name, dims, continuous,
-                                       convex, differentiable, multimodal, separable)
+        super(Schwefel, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -2087,8 +2453,16 @@ class Schwefel220(Benchmark):
 
     """
 
-    def __init__(self, name='Schwefel220', dims=-1, continuous=True, convex=True,
-                 differentiable=False, multimodal=False, separable=True):
+    def __init__(
+        self,
+        name="Schwefel220",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=False,
+        multimodal=False,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -2102,8 +2476,9 @@ class Schwefel220(Benchmark):
 
         """
 
-        super(Schwefel220, self).__init__(name, dims, continuous,
-                                          convex, differentiable, multimodal, separable)
+        super(Schwefel220, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -2136,8 +2511,16 @@ class Schwefel221(Benchmark):
 
     """
 
-    def __init__(self, name='Schwefel221', dims=-1, continuous=True, convex=True,
-                 differentiable=False, multimodal=False, separable=True):
+    def __init__(
+        self,
+        name="Schwefel221",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=False,
+        multimodal=False,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -2151,8 +2534,9 @@ class Schwefel221(Benchmark):
 
         """
 
-        super(Schwefel221, self).__init__(name, dims, continuous,
-                                          convex, differentiable, multimodal, separable)
+        super(Schwefel221, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -2185,8 +2569,16 @@ class Schwefel222(Benchmark):
 
     """
 
-    def __init__(self, name='Schwefel222', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=False, separable=False):
+    def __init__(
+        self,
+        name="Schwefel222",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -2200,8 +2592,9 @@ class Schwefel222(Benchmark):
 
         """
 
-        super(Schwefel222, self).__init__(name, dims, continuous,
-                                          convex, differentiable, multimodal, separable)
+        super(Schwefel222, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -2234,8 +2627,16 @@ class Schwefel223(Benchmark):
 
     """
 
-    def __init__(self, name='Schwefel223', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=False, separable=False):
+    def __init__(
+        self,
+        name="Schwefel223",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -2249,8 +2650,9 @@ class Schwefel223(Benchmark):
 
         """
 
-        super(Schwefel223, self).__init__(name, dims, continuous,
-                                          convex, differentiable, multimodal, separable)
+        super(Schwefel223, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -2265,7 +2667,7 @@ class Schwefel223(Benchmark):
         """
 
         # Calculating the Schwefel's 2.23 function
-        f = x ** 10
+        f = x**10
 
         return np.sum(f)
 
@@ -2283,8 +2685,16 @@ class Schwefel225(Benchmark):
 
     """
 
-    def __init__(self, name='Schwefel225', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="Schwefel225",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -2298,8 +2708,9 @@ class Schwefel225(Benchmark):
 
         """
 
-        super(Schwefel225, self).__init__(name, dims, continuous,
-                                          convex, differentiable, multimodal, separable)
+        super(Schwefel225, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -2337,8 +2748,16 @@ class Schwefel226(Benchmark):
 
     """
 
-    def __init__(self, name='Schwefel226', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="Schwefel226",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -2352,8 +2771,9 @@ class Schwefel226(Benchmark):
 
         """
 
-        super(Schwefel226, self).__init__(name, dims, continuous,
-                                          convex, differentiable, multimodal, separable)
+        super(Schwefel226, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -2386,8 +2806,16 @@ class Shubert(Benchmark):
 
     """
 
-    def __init__(self, name='Shubert', dims=-1, continuous=True, convex=False,
-                 differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="Shubert",
+        dims=-1,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -2401,8 +2829,9 @@ class Shubert(Benchmark):
 
         """
 
-        super(Shubert, self).__init__(name, dims, continuous,
-                                      convex, differentiable, multimodal, separable)
+        super(Shubert, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -2442,8 +2871,16 @@ class Shubert3(Benchmark):
 
     """
 
-    def __init__(self, name='Shubert3', dims=-1, continuous=True, convex=False,
-                 differentiable=True, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="Shubert3",
+        dims=-1,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -2457,8 +2894,9 @@ class Shubert3(Benchmark):
 
         """
 
-        super(Shubert3, self).__init__(name, dims, continuous,
-                                       convex, differentiable, multimodal, separable)
+        super(Shubert3, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -2498,8 +2936,16 @@ class Shubert4(Benchmark):
 
     """
 
-    def __init__(self, name='Shubert4', dims=-1, continuous=True, convex=False,
-                 differentiable=True, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="Shubert4",
+        dims=-1,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -2513,8 +2959,9 @@ class Shubert4(Benchmark):
 
         """
 
-        super(Shubert4, self).__init__(name, dims, continuous,
-                                       convex, differentiable, multimodal, separable)
+        super(Shubert4, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -2554,8 +3001,16 @@ class SchafferF6(Benchmark):
 
     """
 
-    def __init__(self, name='SchafferF6', dims=-1, continuous=True, convex=False,
-                 differentiable=True, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="SchafferF6",
+        dims=-1,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -2569,8 +3024,9 @@ class SchafferF6(Benchmark):
 
         """
 
-        super(SchafferF6, self).__init__(name, dims, continuous,
-                                         convex, differentiable, multimodal, separable)
+        super(SchafferF6, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -2590,8 +3046,9 @@ class SchafferF6(Benchmark):
         # For every input dimension
         for i in range(x.shape[0] - 1):
             # Calculating the Schaffer's F6 function
-            f += 0.5 + (np.sin(np.sqrt(x[i] ** 2 + x[i + 1] ** 2)) ** 2 - 0.5) / ((
-                1 + 0.001 * (x[i] ** 2 + x[i + 1] ** 2)) ** 2)
+            f += 0.5 + (np.sin(np.sqrt(x[i] ** 2 + x[i + 1] ** 2)) ** 2 - 0.5) / (
+                (1 + 0.001 * (x[i] ** 2 + x[i + 1] ** 2)) ** 2
+            )
 
         return f
 
@@ -2609,8 +3066,16 @@ class Sphere(Benchmark):
 
     """
 
-    def __init__(self, name='Sphere', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=False, separable=True):
+    def __init__(
+        self,
+        name="Sphere",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -2624,8 +3089,9 @@ class Sphere(Benchmark):
 
         """
 
-        super(Sphere, self).__init__(name, dims, continuous,
-                                     convex, differentiable, multimodal, separable)
+        super(Sphere, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -2640,7 +3106,7 @@ class Sphere(Benchmark):
         """
 
         # Calculating the Sphere's function
-        f = x ** 2
+        f = x**2
 
         return np.sum(f)
 
@@ -2658,8 +3124,16 @@ class SphereWithNoise(Benchmark):
 
     """
 
-    def __init__(self, name='SphereWithNoise', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=False, separable=True):
+    def __init__(
+        self,
+        name="SphereWithNoise",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -2673,8 +3147,9 @@ class SphereWithNoise(Benchmark):
 
         """
 
-        super(SphereWithNoise, self).__init__(name, dims, continuous,
-                                              convex, differentiable, multimodal, separable)
+        super(SphereWithNoise, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -2689,7 +3164,7 @@ class SphereWithNoise(Benchmark):
         """
 
         # Calculating the Sphere 's function
-        f = x ** 2
+        f = x**2
 
         # Defines the noise to be added in the final fitness
         noise = 1 + 0.1 * np.fabs(np.random.normal())
@@ -2710,8 +3185,16 @@ class Step(Benchmark):
 
     """
 
-    def __init__(self, name='Step', dims=-1, continuous=False, convex=False,
-                 differentiable=False, multimodal=False, separable=True):
+    def __init__(
+        self,
+        name="Step",
+        dims=-1,
+        continuous=False,
+        convex=False,
+        differentiable=False,
+        multimodal=False,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -2725,8 +3208,9 @@ class Step(Benchmark):
 
         """
 
-        super(Step, self).__init__(name, dims, continuous,
-                                   convex, differentiable, multimodal, separable)
+        super(Step, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -2759,8 +3243,16 @@ class Step2(Benchmark):
 
     """
 
-    def __init__(self, name='Step2', dims=-1, continuous=False, convex=False,
-                 differentiable=False, multimodal=False, separable=True):
+    def __init__(
+        self,
+        name="Step2",
+        dims=-1,
+        continuous=False,
+        convex=False,
+        differentiable=False,
+        multimodal=False,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -2774,8 +3266,9 @@ class Step2(Benchmark):
 
         """
 
-        super(Step2, self).__init__(name, dims, continuous,
-                                    convex, differentiable, multimodal, separable)
+        super(Step2, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -2808,8 +3301,16 @@ class Step3(Benchmark):
 
     """
 
-    def __init__(self, name='Step3', dims=-1, continuous=False, convex=False,
-                 differentiable=False, multimodal=False, separable=True):
+    def __init__(
+        self,
+        name="Step3",
+        dims=-1,
+        continuous=False,
+        convex=False,
+        differentiable=False,
+        multimodal=False,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -2823,8 +3324,9 @@ class Step3(Benchmark):
 
         """
 
-        super(Step3, self).__init__(name, dims, continuous,
-                                    convex, differentiable, multimodal, separable)
+        super(Step3, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -2839,7 +3341,7 @@ class Step3(Benchmark):
         """
 
         # Calculating the Step's 3rd function
-        f = np.floor(x ** 2)
+        f = np.floor(x**2)
 
         return np.sum(f)
 
@@ -2857,8 +3359,16 @@ class StrechedVSineWave(Benchmark):
 
     """
 
-    def __init__(self, name='StrechedVSineWave', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=False, separable=False):
+    def __init__(
+        self,
+        name="StrechedVSineWave",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -2872,8 +3382,9 @@ class StrechedVSineWave(Benchmark):
 
         """
 
-        super(StrechedVSineWave, self).__init__(name, dims, continuous,
-                                                convex, differentiable, multimodal, separable)
+        super(StrechedVSineWave, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -2893,9 +3404,12 @@ class StrechedVSineWave(Benchmark):
         # For every input dimension
         for i in range(x.shape[0] - 1):
             # Calculating the Streched V Sine Wave's function
-            f += (((x[i + 1] ** 2) + (x[i] ** 2)) ** 0.25) * ((np.sin(50 * ((x[i + 1] ** 2) + (x[i] ** 2)) ** 0.1) ** 2) + 0.1)
+            f += (((x[i + 1] ** 2) + (x[i] ** 2)) ** 0.25) * (
+                (np.sin(50 * ((x[i + 1] ** 2) + (x[i] ** 2)) ** 0.1) ** 2) + 0.1
+            )
 
         return f
+
 
 class StyblinskiTang(Benchmark):
     """StyblinskiTang class implements the Styblinski-Tang's benchmarking function.
@@ -2910,8 +3424,16 @@ class StyblinskiTang(Benchmark):
 
     """
 
-    def __init__(self, name='StyblinskiTang', dims=-1, continuous=True, convex=False,
-                 differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="StyblinskiTang",
+        dims=-1,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -2925,8 +3447,9 @@ class StyblinskiTang(Benchmark):
 
         """
 
-        super(StyblinskiTang, self).__init__(name, dims, continuous,
-                                             convex, differentiable, multimodal, separable)
+        super(StyblinskiTang, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -2941,9 +3464,10 @@ class StyblinskiTang(Benchmark):
         """
 
         # Calculating the Styblinski-Tang's function
-        f = 1 / 2 * np.sum(x ** 4 - 16 * x ** 2 + 5 * x)
+        f = 1 / 2 * np.sum(x**4 - 16 * x**2 + 5 * x)
 
         return f
+
 
 class SumDifferentPowers(Benchmark):
     """SumDifferentPowers class implements the Sum of Different Powers' benchmarking function.
@@ -2958,8 +3482,16 @@ class SumDifferentPowers(Benchmark):
 
     """
 
-    def __init__(self, name='SumDifferentPowers', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=False, separable=True):
+    def __init__(
+        self,
+        name="SumDifferentPowers",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -2973,8 +3505,9 @@ class SumDifferentPowers(Benchmark):
 
         """
 
-        super(SumDifferentPowers, self).__init__(name, dims, continuous,
-                                                 convex, differentiable, multimodal, separable)
+        super(SumDifferentPowers, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -2998,6 +3531,7 @@ class SumDifferentPowers(Benchmark):
 
         return f
 
+
 class SumSquares(Benchmark):
     """SumSquares class implements the Sum of Squares' benchmarking function.
 
@@ -3011,8 +3545,16 @@ class SumSquares(Benchmark):
 
     """
 
-    def __init__(self, name='SumSquares', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=False, separable=True):
+    def __init__(
+        self,
+        name="SumSquares",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -3026,8 +3568,9 @@ class SumSquares(Benchmark):
 
         """
 
-        super(SumSquares, self).__init__(name, dims, continuous,
-                                         convex, differentiable, multimodal, separable)
+        super(SumSquares, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -3065,8 +3608,16 @@ class Trid(Benchmark):
 
     """
 
-    def __init__(self, name='Trid', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="Trid",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -3080,8 +3631,9 @@ class Trid(Benchmark):
 
         """
 
-        super(Trid, self).__init__(name, dims, continuous,
-                                   convex, differentiable, multimodal, separable)
+        super(Trid, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -3106,6 +3658,7 @@ class Trid(Benchmark):
 
         return f
 
+
 class Trigonometric1(Benchmark):
     """Trigonometric1 class implements the Trigonometric's 1st benchmarking function.
 
@@ -3119,8 +3672,16 @@ class Trigonometric1(Benchmark):
 
     """
 
-    def __init__(self, name='Trigonometric1', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=False, separable=False):
+    def __init__(
+        self,
+        name="Trigonometric1",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -3134,8 +3695,9 @@ class Trigonometric1(Benchmark):
 
         """
 
-        super(Trigonometric1, self).__init__(name, dims, continuous,
-                                             convex, differentiable, multimodal, separable)
+        super(Trigonometric1, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -3170,6 +3732,7 @@ class Trigonometric1(Benchmark):
 
         return f
 
+
 class Trigonometric2(Benchmark):
     """Trigonometric2 class implements the Trigonometric's 2nd benchmarking function.
 
@@ -3183,8 +3746,16 @@ class Trigonometric2(Benchmark):
 
     """
 
-    def __init__(self, name='Trigonometric2', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="Trigonometric2",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -3198,8 +3769,9 @@ class Trigonometric2(Benchmark):
 
         """
 
-        super(Trigonometric2, self).__init__(name, dims, continuous,
-                                             convex, differentiable, multimodal, separable)
+        super(Trigonometric2, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -3219,7 +3791,11 @@ class Trigonometric2(Benchmark):
         # For every input dimension
         for i in range(x.shape[0]):
             # Calculating the Trigonometric's 2nd function
-            f += 8 * (np.sin(7 * (x[i] - 0.9) ** 2) ** 2) + 6 * (np.sin(14 * (x[0] - 0.9) ** 2) ** 2) + ((x[i] - 0.9) ** 2)
+            f += (
+                8 * (np.sin(7 * (x[i] - 0.9) ** 2) ** 2)
+                + 6 * (np.sin(14 * (x[0] - 0.9) ** 2) ** 2)
+                + ((x[i] - 0.9) ** 2)
+            )
 
         return 1 + f
 
@@ -3237,8 +3813,16 @@ class Wavy(Benchmark):
 
     """
 
-    def __init__(self, name='Wavy', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="Wavy",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -3252,8 +3836,9 @@ class Wavy(Benchmark):
 
         """
 
-        super(Wavy, self).__init__(name, dims, continuous,
-                                   convex, differentiable, multimodal, separable)
+        super(Wavy, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -3268,7 +3853,7 @@ class Wavy(Benchmark):
         """
 
         # Calculating the Wavy's function
-        f = np.cos(10 * x) * np.exp(-1 * (x ** 2) / 2)
+        f = np.cos(10 * x) * np.exp(-1 * (x**2) / 2)
 
         return 1 - (1 / x.shape[0]) * np.sum(f)
 
@@ -3286,8 +3871,16 @@ class Weierstrass(Benchmark):
 
     """
 
-    def __init__(self, name='Weierstrass', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="Weierstrass",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -3301,8 +3894,9 @@ class Weierstrass(Benchmark):
 
         """
 
-        super(Weierstrass, self).__init__(name, dims, continuous,
-                                          convex, differentiable, multimodal, separable)
+        super(Weierstrass, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     def __call__(self, x):
         """This method returns the function's output when the class is called.
@@ -3324,12 +3918,12 @@ class Weierstrass(Benchmark):
             # Iterates until `k_max = 20`
             for k in range(21):
                 # Adds the first term
-                f += 0.5 ** k * np.cos(2 * np.pi * 3 ** k * (x[i] + 0.5))
+                f += 0.5**k * np.cos(2 * np.pi * 3**k * (x[i] + 0.5))
 
         # Iterates again until `k_max = 20`
         for k in range(21):
             # Adds the partial term
-            partial_term += (0.5 ** k * np.cos(2 * np.pi * 3 ** k * 0.5))
+            partial_term += 0.5**k * np.cos(2 * np.pi * 3**k * 0.5)
 
         return f - x.shape[0] * partial_term
 
@@ -3347,8 +3941,16 @@ class XinSheYang(Benchmark):
 
     """
 
-    def __init__(self, name='XinSheYang', dims=-1, continuous=True, convex=False,
-                 differentiable=False, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="XinSheYang",
+        dims=-1,
+        continuous=True,
+        convex=False,
+        differentiable=False,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -3362,8 +3964,9 @@ class XinSheYang(Benchmark):
 
         """
 
-        super(XinSheYang, self).__init__(name, dims, continuous,
-                                         convex, differentiable, multimodal, separable)
+        super(XinSheYang, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -3401,8 +4004,16 @@ class XinSheYang2(Benchmark):
 
     """
 
-    def __init__(self, name='XinSheYang2', dims=-1, continuous=True, convex=False,
-                 differentiable=False, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="XinSheYang2",
+        dims=-1,
+        continuous=True,
+        convex=False,
+        differentiable=False,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -3416,8 +4027,9 @@ class XinSheYang2(Benchmark):
 
         """
 
-        super(XinSheYang2, self).__init__(name, dims, continuous,
-                                          convex, differentiable, multimodal, separable)
+        super(XinSheYang2, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -3432,9 +4044,10 @@ class XinSheYang2(Benchmark):
         """
 
         # Calculating the Xin-She Yang's 2nd function
-        f = np.sum(np.fabs(x)) * np.exp(-np.sum(np.sin(x ** 2)))
+        f = np.sum(np.fabs(x)) * np.exp(-np.sum(np.sin(x**2)))
 
         return f
+
 
 class XinSheYang3(Benchmark):
     """XinSheYang3 class implements the Xin-She Yang's 3rd benchmarking function.
@@ -3449,8 +4062,16 @@ class XinSheYang3(Benchmark):
 
     """
 
-    def __init__(self, name='XinSheYang3', dims=-1, continuous=True, convex=False,
-                 differentiable=True, multimodal=False, separable=False):
+    def __init__(
+        self,
+        name="XinSheYang3",
+        dims=-1,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=False,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -3464,8 +4085,9 @@ class XinSheYang3(Benchmark):
 
         """
 
-        super(XinSheYang3, self).__init__(name, dims, continuous,
-                                          convex, differentiable, multimodal, separable)
+        super(XinSheYang3, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -3480,9 +4102,12 @@ class XinSheYang3(Benchmark):
         """
 
         # Calculating the Xin-She Yang's 3rd function
-        f = np.exp(-np.sum((x / 15) ** 10)) - 2 * np.exp(-np.sum(x ** 2)) * np.prod(np.cos(x) ** 2)
+        f = np.exp(-np.sum((x / 15) ** 10)) - 2 * np.exp(-np.sum(x**2)) * np.prod(
+            np.cos(x) ** 2
+        )
 
         return f
+
 
 class XinSheYang4(Benchmark):
     """XinSheYang4 class implements the Xin-She Yang's 4th benchmarking function.
@@ -3497,8 +4122,16 @@ class XinSheYang4(Benchmark):
 
     """
 
-    def __init__(self, name='XinSheYang4', dims=-1, continuous=True, convex=False,
-                 differentiable=False, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="XinSheYang4",
+        dims=-1,
+        continuous=True,
+        convex=False,
+        differentiable=False,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -3512,8 +4145,9 @@ class XinSheYang4(Benchmark):
 
         """
 
-        super(XinSheYang4, self).__init__(name, dims, continuous,
-                                          convex, differentiable, multimodal, separable)
+        super(XinSheYang4, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -3528,7 +4162,9 @@ class XinSheYang4(Benchmark):
         """
 
         # Calculating the Xin-She Yang's 4th function
-        f = (np.sum(np.sin(x) ** 2) - np.exp(-np.sum(x ** 2))) * np.exp(-np.sum(np.sin(np.sqrt(np.fabs(x)) ** 2)))
+        f = (np.sum(np.sin(x) ** 2) - np.exp(-np.sum(x**2))) * np.exp(
+            -np.sum(np.sin(np.sqrt(np.fabs(x)) ** 2))
+        )
 
         return f
 
@@ -3546,8 +4182,16 @@ class Zakharov(Benchmark):
 
     """
 
-    def __init__(self, name='Zakharov', dims=-1, continuous=True, convex=True,
-                 differentiable=True, multimodal=False, separable=False):
+    def __init__(
+        self,
+        name="Zakharov",
+        dims=-1,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -3561,8 +4205,9 @@ class Zakharov(Benchmark):
 
         """
 
-        super(Zakharov, self).__init__(name, dims, continuous,
-                                       convex, differentiable, multimodal, separable)
+        super(Zakharov, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -3584,6 +4229,6 @@ class Zakharov(Benchmark):
             term += 0.5 * i * x[i]
 
         # Calculating the Zakharov's function
-        f = np.sum(x) + (term ** 2) + (term ** 4)
+        f = np.sum(x) + (term**2) + (term**4)
 
         return f

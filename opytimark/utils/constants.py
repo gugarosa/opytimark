@@ -4,7 +4,7 @@
 import sys
 
 # Defines where data should be downloaded and loaded
-DATA_FOLDER = 'data/'
+DATA_FOLDER = "data/"
 
 # A constant value used to avoid division by zero, zero logarithms
 # and any possible mathematical error

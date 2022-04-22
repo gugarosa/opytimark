@@ -16,8 +16,18 @@ class CECBenchmark:
 
     """
 
-    def __init__(self, name, year, auxiliary_data=(), dims=1, continuous=False,
-                 convex=False, differentiable=False, multimodal=False, separable=False):
+    def __init__(
+        self,
+        name,
+        year,
+        auxiliary_data=(),
+        dims=1,
+        continuous=False,
+        convex=False,
+        differentiable=False,
+        multimodal=False,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -62,123 +72,107 @@ class CECBenchmark:
 
     @property
     def name(self):
-        """str: Name of the function.
-
-        """
+        """str: Name of the function."""
 
         return self._name
 
     @name.setter
     def name(self, name):
         if not isinstance(name, str):
-            raise e.TypeError('`name` should be a string')
+            raise e.TypeError("`name` should be a string")
 
         self._name = name
 
     @property
     def year(self):
-        """str: Year of the function.
-
-        """
+        """str: Year of the function."""
 
         return self._year
 
     @year.setter
     def year(self, year):
         if not isinstance(year, str):
-            raise e.TypeError('`year` should be a string')
+            raise e.TypeError("`year` should be a string")
 
         self._year = year
 
     @property
     def dims(self):
-        """int: Number of allowed dimensions.
-
-        """
+        """int: Number of allowed dimensions."""
 
         return self._dims
 
     @dims.setter
     def dims(self, dims):
         if not isinstance(dims, int):
-            raise e.TypeError('`dims` should be a integer')
-        if (dims < -1 or dims == 0):
-            raise e.ValueError('`dims` should be >= -1 and different than 0')
+            raise e.TypeError("`dims` should be a integer")
+        if dims < -1 or dims == 0:
+            raise e.ValueError("`dims` should be >= -1 and different than 0")
 
         self._dims = dims
 
     @property
     def continuous(self):
-        """bool: Whether function is continuous or not.
-
-        """
+        """bool: Whether function is continuous or not."""
 
         return self._continuous
 
     @continuous.setter
     def continuous(self, continuous):
         if not isinstance(continuous, bool):
-            raise e.TypeError('`continuous` should be a boolean')
+            raise e.TypeError("`continuous` should be a boolean")
 
         self._continuous = continuous
 
     @property
     def convex(self):
-        """bool: Whether function is convex or not.
-
-        """
+        """bool: Whether function is convex or not."""
 
         return self._convex
 
     @convex.setter
     def convex(self, convex):
         if not isinstance(convex, bool):
-            raise e.TypeError('`convex` should be a boolean')
+            raise e.TypeError("`convex` should be a boolean")
 
         self._convex = convex
 
     @property
     def differentiable(self):
-        """bool: Whether function is differentiable or not.
-
-        """
+        """bool: Whether function is differentiable or not."""
 
         return self._differentiable
 
     @differentiable.setter
     def differentiable(self, differentiable):
         if not isinstance(differentiable, bool):
-            raise e.TypeError('`differentiable` should be a boolean')
+            raise e.TypeError("`differentiable` should be a boolean")
 
         self._differentiable = differentiable
 
     @property
     def multimodal(self):
-        """bool: Whether function is multimodal or not.
-
-        """
+        """bool: Whether function is multimodal or not."""
 
         return self._multimodal
 
     @multimodal.setter
     def multimodal(self, multimodal):
         if not isinstance(multimodal, bool):
-            raise e.TypeError('`multimodal` should be a boolean')
+            raise e.TypeError("`multimodal` should be a boolean")
 
         self._multimodal = multimodal
 
     @property
     def separable(self):
-        """bool: Whether function is separable or not.
-
-        """
+        """bool: Whether function is separable or not."""
 
         return self._separable
 
     @separable.setter
     def separable(self, separable):
         if not isinstance(separable, bool):
-            raise e.TypeError('`separable` should be a boolean')
+            raise e.TypeError("`separable` should be a boolean")
 
         self._separable = separable
 
@@ -211,7 +205,7 @@ class CECBenchmark:
         for dt in data:
             # Constructs the data file
             # Note that it will always be NAME_VARIABLE
-            data_file = f'{name}_{dt}'
+            data_file = f"{name}_{dt}"
 
             # Loads the data to a temporary variable
             tmp = ld.load_cec_auxiliary(data_file, year)
@@ -227,8 +221,22 @@ class CECCompositeBenchmark(CECBenchmark):
 
     """
 
-    def __init__(self, name, year, auxiliary_data=(), sigma=(), l=(), functions=(), bias=1, dims=1, continuous=False,
-                 convex=False, differentiable=False, multimodal=False, separable=False):
+    def __init__(
+        self,
+        name,
+        year,
+        auxiliary_data=(),
+        sigma=(),
+        l=(),
+        functions=(),
+        bias=1,
+        dims=1,
+        continuous=False,
+        convex=False,
+        differentiable=False,
+        multimodal=False,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -248,8 +256,17 @@ class CECCompositeBenchmark(CECBenchmark):
 
         """
 
-        super(CECCompositeBenchmark, self).__init__(name, year, auxiliary_data, dims, continuous,
-                                                    convex, differentiable, multimodal, separable)
+        super(CECCompositeBenchmark, self).__init__(
+            name,
+            year,
+            auxiliary_data,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
 
         # Defines the common constants
         self.C = 2000
@@ -289,7 +306,7 @@ class CECCompositeBenchmark(CECBenchmark):
             z = x - self.o[i][:D]
 
             # Calculates the `w`
-            w[i] = np.exp(-np.sum(z ** 2) / (2 * D * self.sigma[i] ** 2))
+            w[i] = np.exp(-np.sum(z**2) / (2 * D * self.sigma[i] ** 2))
 
             # Calculates the start and end indexes of the shift matrix
             start, end = i * x.shape[0], (i + 1) * x.shape[0]
@@ -309,7 +326,7 @@ class CECCompositeBenchmark(CECBenchmark):
             # If current `w` is different than `w_max`
             if w[i] != w_max:
                 # Re-scales its value
-                w[i] *= (1 - w_max ** 10)
+                w[i] *= 1 - w_max**10
 
             # Normalizes `w`
             w[i] /= w_sum

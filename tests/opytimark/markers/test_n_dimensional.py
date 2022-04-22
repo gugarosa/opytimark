@@ -226,7 +226,7 @@ def test_periodic():
 def test_perm_0_d_beta():
     f = n_dimensional.Perm0DBeta()
 
-    x = np.array([1, 1/2, 1/3, 1/4, 1/5])
+    x = np.array([1, 1 / 2, 1 / 3, 1 / 4, 1 / 5])
 
     y = f(x)
 

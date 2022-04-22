@@ -42,7 +42,7 @@ def untar_file(file_path):
     """
 
     with tarfile.open(file_path, "r:gz") as tar:
-        folder_path = file_path.split('.tar.gz')[0]
+        folder_path = file_path.split(".tar.gz")[0]
         folder_path_exists = os.path.exists(folder_path)
 
         if not folder_path_exists:
@@ -64,9 +64,9 @@ def load_cec_auxiliary(name, year):
     """
 
     # Defines some common-use variables
-    base_url = 'http://recogna.tech/files/opytimark/'
-    tar_name = f'{year}.tar.gz'
-    tar_path = f'data/{tar_name}'
+    base_url = "http://recogna.tech/files/opytimark/"
+    tar_name = f"{year}.tar.gz"
+    tar_path = f"data/{tar_name}"
 
     # Downloads the file
     download_file(base_url + tar_name, tar_path)
@@ -75,6 +75,6 @@ def load_cec_auxiliary(name, year):
     folder_path = untar_file(tar_path)
 
     # Loads the auxiliary data
-    data = np.loadtxt(f'{folder_path}/{name}.txt')
+    data = np.loadtxt(f"{folder_path}/{name}.txt")
 
     return data

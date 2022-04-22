@@ -21,8 +21,16 @@ class Forrester(Benchmark):
 
     """
 
-    def __init__(self, name='Forrester', dims=1, continuous=True, convex=False,
-                 differentiable=True, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="Forrester",
+        dims=1,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -36,8 +44,9 @@ class Forrester(Benchmark):
 
         """
 
-        super(Forrester, self).__init__(name, dims, continuous,
-                                        convex, differentiable, multimodal, separable)
+        super(Forrester, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -70,8 +79,16 @@ class GramacyLee(Benchmark):
 
     """
 
-    def __init__(self, name='GramacyLee', dims=1, continuous=True, convex=False,
-                 differentiable=True, multimodal=False, separable=True):
+    def __init__(
+        self,
+        name="GramacyLee",
+        dims=1,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=False,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -85,8 +102,9 @@ class GramacyLee(Benchmark):
 
         """
 
-        super(GramacyLee, self).__init__(name, dims, continuous,
-                                         convex, differentiable, multimodal, separable)
+        super(GramacyLee, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):

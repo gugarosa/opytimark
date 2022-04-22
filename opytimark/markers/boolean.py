@@ -25,9 +25,19 @@ class Knapsack(Benchmark):
 
     """
 
-    def __init__(self, name='Knapsack', dims=-1, continuous=False, convex=False,
-                 differentiable=False, multimodal=False, separable=False,
-                 values=(0,), weights=(0,), max_capacity=0.0):
+    def __init__(
+        self,
+        name="Knapsack",
+        dims=-1,
+        continuous=False,
+        convex=False,
+        differentiable=False,
+        multimodal=False,
+        separable=False,
+        values=(0,),
+        weights=(0,),
+        max_capacity=0.0,
+    ):
         """Initialization method.
 
         Args:
@@ -44,11 +54,12 @@ class Knapsack(Benchmark):
 
         """
 
-        super(Knapsack, self).__init__(name, dims, continuous,
-                                       convex, differentiable, multimodal, separable)
+        super(Knapsack, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
         if len(values) != len(weights):
-            raise e.SizeError('`values` and `weights` needs to have the same size')
+            raise e.SizeError("`values` and `weights` needs to have the same size")
 
         # Items values
         self.values = values
@@ -64,48 +75,42 @@ class Knapsack(Benchmark):
 
     @property
     def values(self):
-        """tuple: values of items in the knapsack.
-
-        """
+        """tuple: values of items in the knapsack."""
 
         return self._values
 
     @values.setter
     def values(self, values):
         if not isinstance(values, tuple):
-            raise e.TypeError('`values` should be a tuple')
+            raise e.TypeError("`values` should be a tuple")
 
         self._values = values
 
     @property
     def weights(self):
-        """tuple: Weights of items in the knapsack.
-
-        """
+        """tuple: Weights of items in the knapsack."""
 
         return self._weights
 
     @weights.setter
     def weights(self, weights):
         if not isinstance(weights, tuple):
-            raise e.TypeError('`weights` should be a tuple')
+            raise e.TypeError("`weights` should be a tuple")
 
         self._weights = weights
 
     @property
     def max_capacity(self):
-        """float: Maximum capacity of the knapsack.
-
-        """
+        """float: Maximum capacity of the knapsack."""
 
         return self._max_capacity
 
     @max_capacity.setter
     def max_capacity(self, max_capacity):
         if not isinstance(max_capacity, (float, int)):
-            raise e.TypeError('`max_capacity` should be a float or integer')
+            raise e.TypeError("`max_capacity` should be a float or integer")
         if max_capacity < 0:
-            raise e.ValueError('`max_capacity` should be >= 0')
+            raise e.ValueError("`max_capacity` should be >= 0")
 
         self._max_capacity = max_capacity
 

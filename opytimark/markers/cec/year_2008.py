@@ -23,8 +23,18 @@ class F1(CECBenchmark):
 
     """
 
-    def __init__(self, name='F1', year='2008', auxiliary_data=('o'), dims=1000,
-                 continuous=True, convex=True, differentiable=True, multimodal=False, separable=True):
+    def __init__(
+        self,
+        name="F1",
+        year="2008",
+        auxiliary_data=("o"),
+        dims=1000,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -40,8 +50,17 @@ class F1(CECBenchmark):
 
         """
 
-        super(F1, self).__init__(name, year, auxiliary_data, dims, continuous,
-                                 convex, differentiable, multimodal, separable)
+        super(F1, self).__init__(
+            name,
+            year,
+            auxiliary_data,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
 
     @d.check_less_equal_dimension
     def __call__(self, x):
@@ -56,10 +75,10 @@ class F1(CECBenchmark):
         """
 
         # Re-calculates the input
-        z = x - self.o[:x.shape[0]]
+        z = x - self.o[: x.shape[0]]
 
         # Calculating the Shifted Sphere's function
-        f = z ** 2
+        f = z**2
 
         return np.sum(f) - 450
 
@@ -77,8 +96,18 @@ class F2(CECBenchmark):
 
     """
 
-    def __init__(self, name='F2', year='2008', auxiliary_data=('o'), dims=1000,
-                 continuous=True, convex=True, differentiable=True, multimodal=False, separable=False):
+    def __init__(
+        self,
+        name="F2",
+        year="2008",
+        auxiliary_data=("o"),
+        dims=1000,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -94,8 +123,17 @@ class F2(CECBenchmark):
 
         """
 
-        super(F2, self).__init__(name, year, auxiliary_data, dims, continuous,
-                                 convex, differentiable, multimodal, separable)
+        super(F2, self).__init__(
+            name,
+            year,
+            auxiliary_data,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
 
     @d.check_less_equal_dimension
     def __call__(self, x):
@@ -110,7 +148,7 @@ class F2(CECBenchmark):
         """
 
         # Re-calculates the input
-        z = x - self.o[:x.shape[0]]
+        z = x - self.o[: x.shape[0]]
 
         # Calculating the Schwefel's 2.21 function
         f = np.fabs(z)
@@ -131,8 +169,18 @@ class F3(CECBenchmark):
 
     """
 
-    def __init__(self, name='F3', year='2008', auxiliary_data=('o'), dims=1000,
-                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="F3",
+        year="2008",
+        auxiliary_data=("o"),
+        dims=1000,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -148,8 +196,17 @@ class F3(CECBenchmark):
 
         """
 
-        super(F3, self).__init__(name, year, auxiliary_data, dims, continuous,
-                                 convex, differentiable, multimodal, separable)
+        super(F3, self).__init__(
+            name,
+            year,
+            auxiliary_data,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
 
     @d.check_less_equal_dimension
     def __call__(self, x):
@@ -164,7 +221,7 @@ class F3(CECBenchmark):
         """
 
         # Re-calculates the input
-        z = x - self.o[:x.shape[0]]
+        z = x - self.o[: x.shape[0]]
 
         # Instantiating function
         f = 0
@@ -172,7 +229,7 @@ class F3(CECBenchmark):
         # For every input dimension
         for i in range(x.shape[0] - 1):
             # Calculating the Shifted Rosenbrock's function
-            f += (100 * (z[i] ** 2 - z[i+1]) ** 2 + (z[i] - 1) ** 2)
+            f += 100 * (z[i] ** 2 - z[i + 1]) ** 2 + (z[i] - 1) ** 2
 
         return f + 390
 
@@ -190,8 +247,18 @@ class F4(CECBenchmark):
 
     """
 
-    def __init__(self, name='F4', year='2008', auxiliary_data=('o'), dims=1000,
-                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="F4",
+        year="2008",
+        auxiliary_data=("o"),
+        dims=1000,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -207,8 +274,17 @@ class F4(CECBenchmark):
 
         """
 
-        super(F4, self).__init__(name, year, auxiliary_data, dims, continuous,
-                                 convex, differentiable, multimodal, separable)
+        super(F4, self).__init__(
+            name,
+            year,
+            auxiliary_data,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
 
     @d.check_less_equal_dimension
     def __call__(self, x):
@@ -223,10 +299,10 @@ class F4(CECBenchmark):
         """
 
         # Re-calculates the input
-        z = x - self.o[:x.shape[0]]
+        z = x - self.o[: x.shape[0]]
 
         # Calculating the Shifted Rastrigin's function
-        f = z ** 2 - 10 * np.cos(2 * np.pi * z) + 10
+        f = z**2 - 10 * np.cos(2 * np.pi * z) + 10
 
         return np.sum(f) - 330
 
@@ -244,8 +320,18 @@ class F5(CECBenchmark):
 
     """
 
-    def __init__(self, name='F5', year='2008', auxiliary_data=('o'), dims=1000,
-                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="F5",
+        year="2008",
+        auxiliary_data=("o"),
+        dims=1000,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -261,8 +347,17 @@ class F5(CECBenchmark):
 
         """
 
-        super(F5, self).__init__(name, year, auxiliary_data, dims, continuous,
-                                 convex, differentiable, multimodal, separable)
+        super(F5, self).__init__(
+            name,
+            year,
+            auxiliary_data,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
 
     @d.check_less_equal_dimension
     def __call__(self, x):
@@ -277,7 +372,7 @@ class F5(CECBenchmark):
         """
 
         # Re-calculates the input
-        z = x - self.o[:x.shape[0]]
+        z = x - self.o[: x.shape[0]]
 
         # Initializing terms
         term1, term2 = 0, 1
@@ -309,8 +404,18 @@ class F6(CECBenchmark):
 
     """
 
-    def __init__(self, name='F6', year='2008', auxiliary_data=('o'), dims=1000,
-                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="F6",
+        year="2008",
+        auxiliary_data=("o"),
+        dims=1000,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -326,8 +431,17 @@ class F6(CECBenchmark):
 
         """
 
-        super(F6, self).__init__(name, year, auxiliary_data, dims, continuous,
-                                 convex, differentiable, multimodal, separable)
+        super(F6, self).__init__(
+            name,
+            year,
+            auxiliary_data,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
 
     @d.check_less_equal_dimension
     def __call__(self, x):
@@ -342,13 +456,13 @@ class F6(CECBenchmark):
         """
 
         # Re-calculates the input
-        z = x - self.o[:x.shape[0]]
+        z = x - self.o[: x.shape[0]]
 
         # Calculating the 1 / n term
         inv = 1 / x.shape[0]
 
         # Calculating first term
-        term1 = -0.2 * np.sqrt(inv * np.sum(z ** 2))
+        term1 = -0.2 * np.sqrt(inv * np.sum(z**2))
 
         # Calculating second term
         term2 = inv * np.sum(np.cos(2 * np.pi * z))
@@ -372,8 +486,18 @@ class F7(CECBenchmark):
 
     """
 
-    def __init__(self, name='F7', year='2008', auxiliary_data=(), dims=1000,
-                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="F7",
+        year="2008",
+        auxiliary_data=(),
+        dims=1000,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -389,8 +513,17 @@ class F7(CECBenchmark):
 
         """
 
-        super(F7, self).__init__(name, year, auxiliary_data, dims, continuous,
-                                 convex, differentiable, multimodal, separable)
+        super(F7, self).__init__(
+            name,
+            year,
+            auxiliary_data,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
 
     def _double_dip(self, x, c, s):
         """Calculates the Double Dip's function.
@@ -408,7 +541,9 @@ class F7(CECBenchmark):
         # If `x` is between -0.5 and 0.5
         if -0.5 < x < 0.5:
             # Calculates the Double Dip's function.
-            return (-6144 * (x - c) ** 6 + 3088 * (x - c) ** 4 - 392 * (x - c) ** 2 + 1) * s
+            return (
+                -6144 * (x - c) ** 6 + 3088 * (x - c) ** 4 - 392 * (x - c) ** 2 + 1
+            ) * s
 
         return 0
 
@@ -423,7 +558,7 @@ class F7(CECBenchmark):
 
         """
 
-        return 4 * (y ** 4 - 2 * y ** 3 + y ** 2)
+        return 4 * (y**4 - 2 * y**3 + y**2)
 
     def _fractal_1d(self, x):
         """Calculates the 1-dimensional fractal function.

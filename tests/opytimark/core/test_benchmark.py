@@ -7,7 +7,7 @@ from opytimark.core import benchmark
 def test_benchmark_name():
     new_benchmark = benchmark.Benchmark()
 
-    assert new_benchmark.name == 'Benchmark'
+    assert new_benchmark.name == "Benchmark"
 
 
 def test_benchmark_name_setter():
@@ -16,9 +16,9 @@ def test_benchmark_name_setter():
     try:
         new_benchmark.name = 1
     except:
-        new_benchmark.name = 'name'
+        new_benchmark.name = "name"
 
-    assert new_benchmark.name == 'name'
+    assert new_benchmark.name == "name"
 
 
 def test_benchmark_dims():
@@ -31,7 +31,7 @@ def test_benchmark_dims_setter():
     new_benchmark = benchmark.Benchmark()
 
     try:
-        new_benchmark.dims = 'a'
+        new_benchmark.dims = "a"
     except:
         new_benchmark.dims = 1
 
@@ -48,7 +48,7 @@ def test_benchmark_dims_setter():
 def test_benchmark_continuous():
     new_benchmark = benchmark.Benchmark()
 
-    assert new_benchmark.continuous == False
+    assert new_benchmark.continuous is False
 
 
 def test_benchmark_continuous_setter():
@@ -59,13 +59,13 @@ def test_benchmark_continuous_setter():
     except:
         new_benchmark.continuous = True
 
-    assert new_benchmark.continuous == True
+    assert new_benchmark.continuous is True
 
 
 def test_benchmark_convex():
     new_benchmark = benchmark.Benchmark()
 
-    assert new_benchmark.convex == False
+    assert new_benchmark.convex is False
 
 
 def test_benchmark_convex_setter():
@@ -76,13 +76,13 @@ def test_benchmark_convex_setter():
     except:
         new_benchmark.convex = True
 
-    assert new_benchmark.convex == True
+    assert new_benchmark.convex is True
 
 
 def test_benchmark_differentiable():
     new_benchmark = benchmark.Benchmark()
 
-    assert new_benchmark.differentiable == False
+    assert new_benchmark.differentiable is False
 
 
 def test_benchmark_differentiable_setter():
@@ -93,13 +93,13 @@ def test_benchmark_differentiable_setter():
     except:
         new_benchmark.differentiable = True
 
-    assert new_benchmark.differentiable == True
+    assert new_benchmark.differentiable is True
 
 
 def test_benchmark_multimodal():
     new_benchmark = benchmark.Benchmark()
 
-    assert new_benchmark.multimodal == False
+    assert new_benchmark.multimodal is False
 
 
 def test_benchmark_multimodal_setter():
@@ -110,13 +110,13 @@ def test_benchmark_multimodal_setter():
     except:
         new_benchmark.multimodal = True
 
-    assert new_benchmark.multimodal == True
+    assert new_benchmark.multimodal is True
 
 
 def test_benchmark_separable():
     new_benchmark = benchmark.Benchmark()
 
-    assert new_benchmark.separable == False
+    assert new_benchmark.separable is False
 
 
 def test_benchmark_separable_setter():
@@ -127,7 +127,7 @@ def test_benchmark_separable_setter():
     except:
         new_benchmark.separable = True
 
-    assert new_benchmark.separable == True
+    assert new_benchmark.separable is True
 
 
 def test_benchmark_call():

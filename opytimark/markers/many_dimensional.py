@@ -20,8 +20,16 @@ class BiggsExponential3(Benchmark):
 
     """
 
-    def __init__(self, name='BiggsExponential3', dims=3, continuous=True, convex=False,
-                 differentiable=True, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="BiggsExponential3",
+        dims=3,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -35,8 +43,9 @@ class BiggsExponential3(Benchmark):
 
         """
 
-        super(BiggsExponential3, self).__init__(name, dims, continuous,
-                                                convex, differentiable, multimodal, separable)
+        super(BiggsExponential3, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -80,8 +89,16 @@ class BiggsExponential4(Benchmark):
 
     """
 
-    def __init__(self, name='BiggsExponential4', dims=4, continuous=True, convex=False,
-                 differentiable=True, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="BiggsExponential4",
+        dims=4,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -95,8 +112,9 @@ class BiggsExponential4(Benchmark):
 
         """
 
-        super(BiggsExponential4, self).__init__(name, dims, continuous,
-                                                convex, differentiable, multimodal, separable)
+        super(BiggsExponential4, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -140,8 +158,16 @@ class BiggsExponential5(Benchmark):
 
     """
 
-    def __init__(self, name='BiggsExponential5', dims=5, continuous=True, convex=False,
-                 differentiable=True, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="BiggsExponential5",
+        dims=5,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -155,8 +181,9 @@ class BiggsExponential5(Benchmark):
 
         """
 
-        super(BiggsExponential5, self).__init__(name, dims, continuous,
-                                                convex, differentiable, multimodal, separable)
+        super(BiggsExponential5, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -182,8 +209,12 @@ class BiggsExponential5(Benchmark):
             y = np.exp(-z) - 5 * np.exp(-10 * z) + 3 * np.exp(-4 * z)
 
             # Calculating Biggs Exponential's 5th function
-            f += (x[2] * np.exp(-z * x[0]) - x[3] *
-                  np.exp(-z * x[1]) + 3 * np.exp(-z * x[4]) - y) ** 2
+            f += (
+                x[2] * np.exp(-z * x[0])
+                - x[3] * np.exp(-z * x[1])
+                + 3 * np.exp(-z * x[4])
+                - y
+            ) ** 2
 
         return f
 
@@ -201,8 +232,16 @@ class BiggsExponential6(Benchmark):
 
     """
 
-    def __init__(self, name='BiggsExponential6', dims=6, continuous=True, convex=False,
-                 differentiable=True, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="BiggsExponential6",
+        dims=6,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -216,8 +255,9 @@ class BiggsExponential6(Benchmark):
 
         """
 
-        super(BiggsExponential6, self).__init__(name, dims, continuous,
-                                                convex, differentiable, multimodal, separable)
+        super(BiggsExponential6, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -243,8 +283,12 @@ class BiggsExponential6(Benchmark):
             y = np.exp(-z) - 5 * np.exp(-10 * z) + 3 * np.exp(-4 * z)
 
             # Calculating Biggs Exponential's 6th function
-            f += (x[2] * np.exp(-z * x[0]) - x[3] *
-                  np.exp(-z * x[1]) + x[5] * np.exp(-z * x[4]) - y) ** 2
+            f += (
+                x[2] * np.exp(-z * x[0])
+                - x[3] * np.exp(-z * x[1])
+                + x[5] * np.exp(-z * x[4])
+                - y
+            ) ** 2
 
         return f
 
@@ -263,8 +307,16 @@ class BoxBetts(Benchmark):
 
     """
 
-    def __init__(self, name='BoxBetts', dims=3, continuous=True, convex=False,
-                 differentiable=True, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="BoxBetts",
+        dims=3,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -278,8 +330,9 @@ class BoxBetts(Benchmark):
 
         """
 
-        super(BoxBetts, self).__init__(name, dims, continuous,
-                                       convex, differentiable, multimodal, separable)
+        super(BoxBetts, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -299,8 +352,11 @@ class BoxBetts(Benchmark):
         # For every input dimension
         for i in range(x.shape[0]):
             # Calculating the BoxBetts's function
-            f += (np.exp(-0.1 * (i + 2) * x[0]) - np.exp(-0.1 * (i + 2) * x[1]) - (
-                np.exp(-0.1 * (i + 2)) - np.exp(-(i + 2)) * x[2])) ** 2
+            f += (
+                np.exp(-0.1 * (i + 2) * x[0])
+                - np.exp(-0.1 * (i + 2) * x[1])
+                - (np.exp(-0.1 * (i + 2)) - np.exp(-(i + 2)) * x[2])
+            ) ** 2
 
         return f
 
@@ -318,8 +374,16 @@ class Colville(Benchmark):
 
     """
 
-    def __init__(self, name='Colville', dims=4, continuous=True, convex=False,
-                 differentiable=True, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="Colville",
+        dims=4,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -333,8 +397,9 @@ class Colville(Benchmark):
 
         """
 
-        super(Colville, self).__init__(name, dims, continuous,
-                                       convex, differentiable, multimodal, separable)
+        super(Colville, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -349,9 +414,14 @@ class Colville(Benchmark):
         """
 
         # Calculating the Colville's function
-        f = 100 * (x[0] - x[1] ** 2) ** 2 + (1 - x[0]) ** 2 + 90 * (x[3] - x[2] ** 2) ** 2 + \
-            (1 - x[2]) ** 2 + 10.1 * ((x[1] - 1) ** 2 +
-                                      (x[3] - 1) ** 2) + 19.8 * (x[1] - 1) * (x[3] - 1)
+        f = (
+            100 * (x[0] - x[1] ** 2) ** 2
+            + (1 - x[0]) ** 2
+            + 90 * (x[3] - x[2] ** 2) ** 2
+            + (1 - x[2]) ** 2
+            + 10.1 * ((x[1] - 1) ** 2 + (x[3] - 1) ** 2)
+            + 19.8 * (x[1] - 1) * (x[3] - 1)
+        )
 
         return f
 
@@ -369,8 +439,16 @@ class GulfResearch(Benchmark):
 
     """
 
-    def __init__(self, name='GulfResearch', dims=3, continuous=True, convex=False,
-                 differentiable=True, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="GulfResearch",
+        dims=3,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -384,8 +462,9 @@ class GulfResearch(Benchmark):
 
         """
 
-        super(GulfResearch, self).__init__(name, dims, continuous,
-                                           convex, differentiable, multimodal, separable)
+        super(GulfResearch, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -426,8 +505,16 @@ class HelicalValley(Benchmark):
 
     """
 
-    def __init__(self, name='HelicalValley', dims=3, continuous=True, convex=False,
-                 differentiable=True, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="HelicalValley",
+        dims=3,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -441,8 +528,9 @@ class HelicalValley(Benchmark):
 
         """
 
-        super(HelicalValley, self).__init__(name, dims, continuous,
-                                            convex, differentiable, multimodal, separable)
+        super(HelicalValley, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -467,8 +555,11 @@ class HelicalValley(Benchmark):
             theta = np.pi + np.arctan(x[1] / x[0])
 
         # Calculating the Helical Valley's function
-        f = 100 * (x[2] - 10 * theta) ** 2 + \
-            (np.sqrt(x[0] ** 2 + x[1] ** 2) - 1) ** 2 + x[2] ** 2
+        f = (
+            100 * (x[2] - 10 * theta) ** 2
+            + (np.sqrt(x[0] ** 2 + x[1] ** 2) - 1) ** 2
+            + x[2] ** 2
+        )
 
         return f
 
@@ -486,8 +577,16 @@ class MieleCantrell(Benchmark):
 
     """
 
-    def __init__(self, name='MieleCantrell', dims=4, continuous=True, convex=False,
-                 differentiable=True, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="MieleCantrell",
+        dims=4,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -501,8 +600,9 @@ class MieleCantrell(Benchmark):
 
         """
 
-        super(MieleCantrell, self).__init__(name, dims, continuous,
-                                            convex, differentiable, multimodal, separable)
+        super(MieleCantrell, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -517,8 +617,12 @@ class MieleCantrell(Benchmark):
         """
 
         # Calculating the MieleCantrell's function
-        f = (np.exp(-x[0]) - x[1]) ** 4 + 100 * (x[1] - x[2]
-                                                 ) ** 6 + (np.tan(x[2] - x[3])) ** 4 + x[0] ** 8
+        f = (
+            (np.exp(-x[0]) - x[1]) ** 4
+            + 100 * (x[1] - x[2]) ** 6
+            + (np.tan(x[2] - x[3])) ** 4
+            + x[0] ** 8
+        )
 
         return f
 
@@ -536,8 +640,16 @@ class Mishra9(Benchmark):
 
     """
 
-    def __init__(self, name='Mishra9', dims=3, continuous=True, convex=False,
-                 differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="Mishra9",
+        dims=3,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -551,8 +663,9 @@ class Mishra9(Benchmark):
 
         """
 
-        super(Mishra9, self).__init__(name, dims, continuous,
-                                      convex, differentiable, multimodal, separable)
+        super(Mishra9, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -567,19 +680,18 @@ class Mishra9(Benchmark):
         """
 
         # Calculating `a`
-        a = 2 * (x[0] ** 3) + 5 * x[0] * x[1] + 4 * \
-            x[2] - 2 * (x[0] ** 2) * x[2] - 18
+        a = 2 * (x[0] ** 3) + 5 * x[0] * x[1] + 4 * x[2] - 2 * (x[0] ** 2) * x[2] - 18
 
         # Calculating `b`
         b = x[0] + (x[1] ** 2) * x[2] + x[0] * (x[2] ** 2) - 22
 
         # Calculating `c`
-        c = 8 * (x[0] ** 2) + 2 * x[1] * x[2] + 2 * \
-            (x[1] ** 2) + 3 * (x[1] ** 3) - 52
+        c = 8 * (x[0] ** 2) + 2 * x[1] * x[2] + 2 * (x[1] ** 2) + 3 * (x[1] ** 3) - 52
 
         # Calculating the Mishra's 9th function
-        f = (a * (b ** 2) * c + a * b * (c ** 2) +
-             (b ** 2) + (x[0] + x[1] - x[2]) ** 2) ** 2
+        f = (
+            a * (b**2) * c + a * b * (c**2) + (b**2) + (x[0] + x[1] - x[2]) ** 2
+        ) ** 2
 
         return f
 
@@ -597,8 +709,16 @@ class Paviani(Benchmark):
 
     """
 
-    def __init__(self, name='Paviani', dims=10, continuous=True, convex=True,
-                 differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="Paviani",
+        dims=10,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -612,8 +732,9 @@ class Paviani(Benchmark):
 
         """
 
-        super(Paviani, self).__init__(name, dims, continuous,
-                                      convex, differentiable, multimodal, separable)
+        super(Paviani, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -642,7 +763,7 @@ class Paviani(Benchmark):
             prod_term *= x[i]
 
         # Calculating the Paviani's function
-        f = sum_term - prod_term ** 0.2
+        f = sum_term - prod_term**0.2
 
         return f
 
@@ -660,8 +781,16 @@ class SchmidtVetters(Benchmark):
 
     """
 
-    def __init__(self, name='SchmidtVetters', dims=3, continuous=True, convex=False,
-                 differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="SchmidtVetters",
+        dims=3,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -675,8 +804,9 @@ class SchmidtVetters(Benchmark):
 
         """
 
-        super(SchmidtVetters, self).__init__(name, dims, continuous,
-                                             convex, differentiable, multimodal, separable)
+        super(SchmidtVetters, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -691,8 +821,11 @@ class SchmidtVetters(Benchmark):
         """
 
         # Calculating the Schmidt Vetters's function
-        f = 1 / (1 + (x[0] - x[1]) ** 2) + np.sin((np.pi ** x[1] +
-                                                   x[2]) / 2) + np.exp((x[0] + x[1]) / x[1] - 2) ** 2
+        f = (
+            1 / (1 + (x[0] - x[1]) ** 2)
+            + np.sin((np.pi ** x[1] + x[2]) / 2)
+            + np.exp((x[0] + x[1]) / x[1] - 2) ** 2
+        )
 
         return f
 
@@ -710,8 +843,16 @@ class Simpleton(Benchmark):
 
     """
 
-    def __init__(self, name='Simpleton', dims=10, continuous=True, convex=False,
-                 differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="Simpleton",
+        dims=10,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -725,8 +866,9 @@ class Simpleton(Benchmark):
 
         """
 
-        super(Simpleton, self).__init__(name, dims, continuous,
-                                        convex, differentiable, multimodal, separable)
+        super(Simpleton, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -759,8 +901,16 @@ class Watson(Benchmark):
 
     """
 
-    def __init__(self, name='Watson', dims=6, continuous=True, convex=False,
-                 differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="Watson",
+        dims=6,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -774,8 +924,9 @@ class Watson(Benchmark):
 
         """
 
-        super(Watson, self).__init__(name, dims, continuous,
-                                     convex, differentiable, multimodal, separable)
+        super(Watson, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):
@@ -811,7 +962,7 @@ class Watson(Benchmark):
                 inner_sum += (a ** (j - 1)) * x[j - 1]
 
             # Calculating partial Watson's function
-            f += (outer_sum - inner_sum ** 2 - 1) ** 2
+            f += (outer_sum - inner_sum**2 - 1) ** 2
 
         # Calculating final Watson's function
         f += x[0] ** 2
@@ -832,8 +983,16 @@ class Wolfe(Benchmark):
 
     """
 
-    def __init__(self, name='Wolfe', dims=3, continuous=True, convex=False,
-                 differentiable=True, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="Wolfe",
+        dims=3,
+        continuous=True,
+        convex=False,
+        differentiable=True,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -847,8 +1006,9 @@ class Wolfe(Benchmark):
 
         """
 
-        super(Wolfe, self).__init__(name, dims, continuous,
-                                    convex, differentiable, multimodal, separable)
+        super(Wolfe, self).__init__(
+            name, dims, continuous, convex, differentiable, multimodal, separable
+        )
 
     @d.check_exact_dimension
     def __call__(self, x):

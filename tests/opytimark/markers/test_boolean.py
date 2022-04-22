@@ -51,7 +51,7 @@ def test_knapsack_max_capacity_setter():
     new_knapsack = boolean.Knapsack()
 
     try:
-        new_knapsack.max_capacity = 'a'
+        new_knapsack.max_capacity = "a"
     except:
         new_knapsack.max_capacity = 0
 

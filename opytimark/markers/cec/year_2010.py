@@ -25,8 +25,18 @@ class F1(CECBenchmark):
 
     """
 
-    def __init__(self, name='F1', year='2010', auxiliary_data=('o'), dims=1000,
-                 continuous=True, convex=True, differentiable=True, multimodal=False, separable=True):
+    def __init__(
+        self,
+        name="F1",
+        year="2010",
+        auxiliary_data=("o"),
+        dims=1000,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -42,8 +52,17 @@ class F1(CECBenchmark):
 
         """
 
-        super(F1, self).__init__(name, year, auxiliary_data, dims, continuous,
-                                 convex, differentiable, multimodal, separable)
+        super(F1, self).__init__(
+            name,
+            year,
+            auxiliary_data,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
 
     @d.check_less_equal_dimension
     def __call__(self, x):
@@ -65,7 +84,7 @@ class F1(CECBenchmark):
         z = x - self.o[:D]
 
         # Calculating the Shifted Elliptic's function
-        z = 10e6 ** (dims / (D - 1)) * z ** 2
+        z = 10e6 ** (dims / (D - 1)) * z**2
 
         return np.sum(z)
 
@@ -83,8 +102,18 @@ class F2(CECBenchmark):
 
     """
 
-    def __init__(self, name='F2', year='2010', auxiliary_data=('o'), dims=1000,
-                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="F2",
+        year="2010",
+        auxiliary_data=("o"),
+        dims=1000,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -100,8 +129,17 @@ class F2(CECBenchmark):
 
         """
 
-        super(F2, self).__init__(name, year, auxiliary_data, dims, continuous,
-                                 convex, differentiable, multimodal, separable)
+        super(F2, self).__init__(
+            name,
+            year,
+            auxiliary_data,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
 
     @d.check_less_equal_dimension
     def __call__(self, x):
@@ -116,10 +154,10 @@ class F2(CECBenchmark):
         """
 
         # Re-calculates the input
-        z = x - self.o[:x.shape[0]]
+        z = x - self.o[: x.shape[0]]
 
         # Calculating the Shifted Rastrigin's function
-        f = z ** 2 - 10 * np.cos(2 * np.pi * z) + 10
+        f = z**2 - 10 * np.cos(2 * np.pi * z) + 10
 
         return np.sum(f)
 
@@ -137,8 +175,18 @@ class F3(CECBenchmark):
 
     """
 
-    def __init__(self, name='F3', year='2010', auxiliary_data=('o'), dims=1000,
-                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=True):
+    def __init__(
+        self,
+        name="F3",
+        year="2010",
+        auxiliary_data=("o"),
+        dims=1000,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=True,
+    ):
         """Initialization method.
 
         Args:
@@ -154,8 +202,17 @@ class F3(CECBenchmark):
 
         """
 
-        super(F3, self).__init__(name, year, auxiliary_data, dims, continuous,
-                                 convex, differentiable, multimodal, separable)
+        super(F3, self).__init__(
+            name,
+            year,
+            auxiliary_data,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
 
     @d.check_less_equal_dimension
     def __call__(self, x):
@@ -170,13 +227,13 @@ class F3(CECBenchmark):
         """
 
         # Re-calculates the input
-        z = x - self.o[:x.shape[0]]
+        z = x - self.o[: x.shape[0]]
 
         # Calculating the 1 / n term
         inv = 1 / x.shape[0]
 
         # Calculating first term
-        term1 = -0.2 * np.sqrt(inv * np.sum(z ** 2))
+        term1 = -0.2 * np.sqrt(inv * np.sum(z**2))
 
         # Calculating second term
         term2 = inv * np.sum(np.cos(2 * np.pi * z))
@@ -200,8 +257,19 @@ class F4(CECBenchmark):
 
     """
 
-    def __init__(self, name='F4', year='2010', auxiliary_data=('o', 'M'), dims=1000, group_size=50,
-                 continuous=True, convex=True, differentiable=True, multimodal=False, separable=False):
+    def __init__(
+        self,
+        name="F4",
+        year="2010",
+        auxiliary_data=("o", "M"),
+        dims=1000,
+        group_size=50,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -218,8 +286,17 @@ class F4(CECBenchmark):
 
         """
 
-        super(F4, self).__init__(name, year, auxiliary_data, dims, continuous,
-                                 convex, differentiable, multimodal, separable)
+        super(F4, self).__init__(
+            name,
+            year,
+            auxiliary_data,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
 
         # Defines the size of the group and benchmarking function
         self.m = group_size
@@ -244,18 +321,19 @@ class F4(CECBenchmark):
         if self.m >= D:
             # Raises an error
             raise e.SizeError(
-                '`group_size` should be smaller than number of input dimensions')
+                "`group_size` should be smaller than number of input dimensions"
+            )
 
         # Calculates an array of permutations and defines both groups' indexes
         p = np.random.permutation(D)
-        p_1 = p[:self.m]
-        p_2 = p[self.m:]
+        p_1 = p[: self.m]
+        p_2 = p[self.m :]
 
         # Shifts the input data
         s = x - self.o[:D]
 
         # Re-calculates both groups' inputs
-        z_rot = np.dot(s[p_1], self.M[:self.m][:self.m])
+        z_rot = np.dot(s[p_1], self.M[: self.m][: self.m])
         z = s[p_2]
 
         return self.f(z_rot) * 10e6 + self.f(z)
@@ -274,8 +352,19 @@ class F5(CECBenchmark):
 
     """
 
-    def __init__(self, name='F5', year='2010', auxiliary_data=('o', 'M'), dims=1000, group_size=50,
-                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="F5",
+        year="2010",
+        auxiliary_data=("o", "M"),
+        dims=1000,
+        group_size=50,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -292,8 +381,17 @@ class F5(CECBenchmark):
 
         """
 
-        super(F5, self).__init__(name, year, auxiliary_data, dims, continuous,
-                                 convex, differentiable, multimodal, separable)
+        super(F5, self).__init__(
+            name,
+            year,
+            auxiliary_data,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
 
         # Defines the size of the group and benchmarking function
         self.m = group_size
@@ -318,18 +416,19 @@ class F5(CECBenchmark):
         if self.m >= D:
             # Raises an error
             raise e.SizeError(
-                '`group_size` should be smaller than number of input dimensions')
+                "`group_size` should be smaller than number of input dimensions"
+            )
 
         # Calculates an array of permutations and defines both groups' indexes
         p = np.random.permutation(D)
-        p_1 = p[:self.m]
-        p_2 = p[self.m:]
+        p_1 = p[: self.m]
+        p_2 = p[self.m :]
 
         # Shifts the input data
         s = x - self.o[:D]
 
         # Re-calculates both groups' inputs
-        z_rot = np.dot(s[p_1], self.M[:self.m][:self.m])
+        z_rot = np.dot(s[p_1], self.M[: self.m][: self.m])
         z = s[p_2]
 
         return self.f(z_rot) * 10e6 + self.f(z)
@@ -348,8 +447,19 @@ class F6(CECBenchmark):
 
     """
 
-    def __init__(self, name='F6', year='2010', auxiliary_data=('o', 'M'), dims=1000, group_size=50,
-                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="F6",
+        year="2010",
+        auxiliary_data=("o", "M"),
+        dims=1000,
+        group_size=50,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -366,8 +476,17 @@ class F6(CECBenchmark):
 
         """
 
-        super(F6, self).__init__(name, year, auxiliary_data, dims, continuous,
-                                 convex, differentiable, multimodal, separable)
+        super(F6, self).__init__(
+            name,
+            year,
+            auxiliary_data,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
 
         # Defines the size of the group and benchmarking function
         self.m = group_size
@@ -392,18 +511,19 @@ class F6(CECBenchmark):
         if self.m >= D:
             # Raises an error
             raise e.SizeError(
-                '`group_size` should be smaller than number of input dimensions')
+                "`group_size` should be smaller than number of input dimensions"
+            )
 
         # Calculates an array of permutations and defines both groups' indexes
         p = np.random.permutation(D)
-        p_1 = p[:self.m]
-        p_2 = p[self.m:]
+        p_1 = p[: self.m]
+        p_2 = p[self.m :]
 
         # Shifts the input data
         s = x - self.o[:D]
 
         # Re-calculates both groups' inputs
-        z_rot = np.dot(s[p_1], self.M[:self.m][:self.m])
+        z_rot = np.dot(s[p_1], self.M[: self.m][: self.m])
         z = s[p_2]
 
         return self.f(z_rot) * 10e6 + self.f(z)
@@ -422,8 +542,19 @@ class F7(CECBenchmark):
 
     """
 
-    def __init__(self, name='F7', year='2010', auxiliary_data=('o'), dims=1000, group_size=50,
-                 continuous=True, convex=True, differentiable=True, multimodal=False, separable=False):
+    def __init__(
+        self,
+        name="F7",
+        year="2010",
+        auxiliary_data=("o"),
+        dims=1000,
+        group_size=50,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -440,8 +571,17 @@ class F7(CECBenchmark):
 
         """
 
-        super(F7, self).__init__(name, year, auxiliary_data, dims, continuous,
-                                 convex, differentiable, multimodal, separable)
+        super(F7, self).__init__(
+            name,
+            year,
+            auxiliary_data,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
 
         # Defines the size of the group and benchmarking function
         self.m = group_size
@@ -467,12 +607,13 @@ class F7(CECBenchmark):
         if self.m >= D:
             # Raises an error
             raise e.SizeError(
-                '`group_size` should be smaller than number of input dimensions')
+                "`group_size` should be smaller than number of input dimensions"
+            )
 
         # Calculates an array of permutations and defines both groups' indexes
         p = np.random.permutation(D)
-        p_1 = p[:self.m]
-        p_2 = p[self.m:]
+        p_1 = p[: self.m]
+        p_2 = p[self.m :]
 
         # Shifts the input data
         s = x - self.o[:D]
@@ -497,8 +638,19 @@ class F8(CECBenchmark):
 
     """
 
-    def __init__(self, name='F8', year='2010', auxiliary_data=('o'), dims=1000, group_size=50,
-                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="F8",
+        year="2010",
+        auxiliary_data=("o"),
+        dims=1000,
+        group_size=50,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -515,8 +667,17 @@ class F8(CECBenchmark):
 
         """
 
-        super(F8, self).__init__(name, year, auxiliary_data, dims, continuous,
-                                 convex, differentiable, multimodal, separable)
+        super(F8, self).__init__(
+            name,
+            year,
+            auxiliary_data,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
 
         # Defines the size of the group and benchmarking function
         self.m = group_size
@@ -542,12 +703,13 @@ class F8(CECBenchmark):
         if self.m >= D:
             # Raises an error
             raise e.SizeError(
-                '`group_size` should be smaller than number of input dimensions')
+                "`group_size` should be smaller than number of input dimensions"
+            )
 
         # Calculates an array of permutations and defines both groups' indexes
         p = np.random.permutation(D)
-        p_1 = p[:self.m]
-        p_2 = p[self.m:]
+        p_1 = p[: self.m]
+        p_2 = p[self.m :]
 
         # Shifts the input data
         s = x - self.o[:D]
@@ -572,8 +734,19 @@ class F9(CECBenchmark):
 
     """
 
-    def __init__(self, name='F9', year='2010', auxiliary_data=('o', 'M'), dims=1000, group_size=50,
-                 continuous=True, convex=True, differentiable=True, multimodal=False, separable=False):
+    def __init__(
+        self,
+        name="F9",
+        year="2010",
+        auxiliary_data=("o", "M"),
+        dims=1000,
+        group_size=50,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -590,8 +763,17 @@ class F9(CECBenchmark):
 
         """
 
-        super(F9, self).__init__(name, year, auxiliary_data, dims, continuous,
-                                 convex, differentiable, multimodal, separable)
+        super(F9, self).__init__(
+            name,
+            year,
+            auxiliary_data,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
 
         # Defines the size of the group and benchmarking function
         self.m = group_size
@@ -618,7 +800,8 @@ class F9(CECBenchmark):
         if self.m >= D:
             # Raises an error
             raise e.SizeError(
-                '`group_size` should be smaller than number of input dimensions')
+                "`group_size` should be smaller than number of input dimensions"
+            )
 
         # Calculates an array of permutations
         p = np.random.permutation(D)
@@ -629,14 +812,14 @@ class F9(CECBenchmark):
         # Iterates through all groups
         for i in range(n_groups):
             # Re-calculates the first group input
-            p_1 = p[i*self.m:(i+1)*self.m]
-            z_rot = np.dot(s[p_1], self.M[:self.m][:self.m])
+            p_1 = p[i * self.m : (i + 1) * self.m]
+            z_rot = np.dot(s[p_1], self.M[: self.m][: self.m])
 
             # Sums up the first group output
             f += self.f(z_rot)
 
         # Re-calculates the second group input
-        p_2 = p[int(D/2):]
+        p_2 = p[int(D / 2) :]
         z = s[p_2]
 
         # Sums up the second group output
@@ -658,8 +841,19 @@ class F10(CECBenchmark):
 
     """
 
-    def __init__(self, name='F10', year='2010', auxiliary_data=('o', 'M'), dims=1000, group_size=50,
-                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="F10",
+        year="2010",
+        auxiliary_data=("o", "M"),
+        dims=1000,
+        group_size=50,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -676,8 +870,17 @@ class F10(CECBenchmark):
 
         """
 
-        super(F10, self).__init__(name, year, auxiliary_data, dims, continuous,
-                                  convex, differentiable, multimodal, separable)
+        super(F10, self).__init__(
+            name,
+            year,
+            auxiliary_data,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
 
         # Defines the size of the group and benchmarking function
         self.m = group_size
@@ -704,7 +907,8 @@ class F10(CECBenchmark):
         if self.m >= D:
             # Raises an error
             raise e.SizeError(
-                '`group_size` should be smaller than number of input dimensions')
+                "`group_size` should be smaller than number of input dimensions"
+            )
 
         # Calculates an array of permutations
         p = np.random.permutation(D)
@@ -715,14 +919,14 @@ class F10(CECBenchmark):
         # Iterates through all groups
         for i in range(n_groups):
             # Re-calculates the first group input
-            p_1 = p[i*self.m:(i+1)*self.m]
-            z_rot = np.dot(s[p_1], self.M[:self.m][:self.m])
+            p_1 = p[i * self.m : (i + 1) * self.m]
+            z_rot = np.dot(s[p_1], self.M[: self.m][: self.m])
 
             # Sums up the first group output
             f += self.f(z_rot)
 
         # Re-calculates the second group input
-        p_2 = p[int(D/2):]
+        p_2 = p[int(D / 2) :]
         z = s[p_2]
 
         # Sums up the second group output
@@ -744,8 +948,19 @@ class F11(CECBenchmark):
 
     """
 
-    def __init__(self, name='F11', year='2010', auxiliary_data=('o', 'M'), dims=1000, group_size=50,
-                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="F11",
+        year="2010",
+        auxiliary_data=("o", "M"),
+        dims=1000,
+        group_size=50,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -762,8 +977,17 @@ class F11(CECBenchmark):
 
         """
 
-        super(F11, self).__init__(name, year, auxiliary_data, dims, continuous,
-                                  convex, differentiable, multimodal, separable)
+        super(F11, self).__init__(
+            name,
+            year,
+            auxiliary_data,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
 
         # Defines the size of the group and benchmarking function
         self.m = group_size
@@ -790,7 +1014,8 @@ class F11(CECBenchmark):
         if self.m >= D:
             # Raises an error
             raise e.SizeError(
-                '`group_size` should be smaller than number of input dimensions')
+                "`group_size` should be smaller than number of input dimensions"
+            )
 
         # Calculates an array of permutations
         p = np.random.permutation(D)
@@ -801,14 +1026,14 @@ class F11(CECBenchmark):
         # Iterates through all groups
         for i in range(n_groups):
             # Re-calculates the first group input
-            p_1 = p[i*self.m:(i+1)*self.m]
-            z_rot = np.dot(s[p_1], self.M[:self.m][:self.m])
+            p_1 = p[i * self.m : (i + 1) * self.m]
+            z_rot = np.dot(s[p_1], self.M[: self.m][: self.m])
 
             # Sums up the first group output
             f += self.f(z_rot)
 
         # Re-calculates the second group input
-        p_2 = p[int(D/2):]
+        p_2 = p[int(D / 2) :]
         z = s[p_2]
 
         # Sums up the second group output
@@ -830,8 +1055,19 @@ class F12(CECBenchmark):
 
     """
 
-    def __init__(self, name='F12', year='2010', auxiliary_data=('o'), dims=1000, group_size=50,
-                 continuous=True, convex=True, differentiable=True, multimodal=False, separable=False):
+    def __init__(
+        self,
+        name="F12",
+        year="2010",
+        auxiliary_data=("o"),
+        dims=1000,
+        group_size=50,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -848,8 +1084,17 @@ class F12(CECBenchmark):
 
         """
 
-        super(F12, self).__init__(name, year, auxiliary_data, dims, continuous,
-                                  convex, differentiable, multimodal, separable)
+        super(F12, self).__init__(
+            name,
+            year,
+            auxiliary_data,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
 
         # Defines the size of the group and benchmarking function
         self.m = group_size
@@ -877,7 +1122,8 @@ class F12(CECBenchmark):
         if self.m >= D:
             # Raises an error
             raise e.SizeError(
-                '`group_size` should be smaller than number of input dimensions')
+                "`group_size` should be smaller than number of input dimensions"
+            )
 
         # Calculates an array of permutations
         p = np.random.permutation(D)
@@ -888,14 +1134,14 @@ class F12(CECBenchmark):
         # Iterates through all groups
         for i in range(n_groups):
             # Re-calculates the first group input
-            p_1 = p[i*self.m:(i+1)*self.m]
+            p_1 = p[i * self.m : (i + 1) * self.m]
             z_1 = s[p_1]
 
             # Sums up the first group output
             f += self.f_1(z_1)
 
         # Re-calculates the second group input
-        p_2 = p[int(D/2):]
+        p_2 = p[int(D / 2) :]
         z_2 = s[p_2]
 
         # Sums up the second group output
@@ -917,8 +1163,19 @@ class F13(CECBenchmark):
 
     """
 
-    def __init__(self, name='F13', year='2010', auxiliary_data=('o'), dims=1000, group_size=50,
-                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="F13",
+        year="2010",
+        auxiliary_data=("o"),
+        dims=1000,
+        group_size=50,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -935,8 +1192,17 @@ class F13(CECBenchmark):
 
         """
 
-        super(F13, self).__init__(name, year, auxiliary_data, dims, continuous,
-                                  convex, differentiable, multimodal, separable)
+        super(F13, self).__init__(
+            name,
+            year,
+            auxiliary_data,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
 
         # Defines the size of the group and benchmarking function
         self.m = group_size
@@ -964,7 +1230,8 @@ class F13(CECBenchmark):
         if self.m >= D:
             # Raises an error
             raise e.SizeError(
-                '`group_size` should be smaller than number of input dimensions')
+                "`group_size` should be smaller than number of input dimensions"
+            )
 
         # Calculates an array of permutations
         p = np.random.permutation(D)
@@ -975,14 +1242,14 @@ class F13(CECBenchmark):
         # Iterates through all groups
         for i in range(n_groups):
             # Re-calculates the first group input
-            p_1 = p[i*self.m:(i+1)*self.m]
+            p_1 = p[i * self.m : (i + 1) * self.m]
             z_1 = s[p_1]
 
             # Sums up the first group output
             f += self.f_1(z_1)
 
         # Re-calculates the second group input
-        p_2 = p[int(D/2):]
+        p_2 = p[int(D / 2) :]
         z_2 = s[p_2]
 
         # Sums up the second group output
@@ -1004,8 +1271,19 @@ class F14(CECBenchmark):
 
     """
 
-    def __init__(self, name='F14', year='2010', auxiliary_data=('o', 'M'), dims=1000, group_size=50,
-                 continuous=True, convex=True, differentiable=True, multimodal=False, separable=False):
+    def __init__(
+        self,
+        name="F14",
+        year="2010",
+        auxiliary_data=("o", "M"),
+        dims=1000,
+        group_size=50,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -1022,8 +1300,17 @@ class F14(CECBenchmark):
 
         """
 
-        super(F14, self).__init__(name, year, auxiliary_data, dims, continuous,
-                                  convex, differentiable, multimodal, separable)
+        super(F14, self).__init__(
+            name,
+            year,
+            auxiliary_data,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
 
         # Defines the size of the group and benchmarking function
         self.m = group_size
@@ -1050,7 +1337,8 @@ class F14(CECBenchmark):
         if self.m >= D:
             # Raises an error
             raise e.SizeError(
-                '`group_size` should be smaller than number of input dimensions')
+                "`group_size` should be smaller than number of input dimensions"
+            )
 
         # Calculates an array of permutations
         P = np.random.permutation(D)
@@ -1061,8 +1349,8 @@ class F14(CECBenchmark):
         # Iterates through all groups
         for i in range(n_groups):
             # Re-calculates the first group input
-            p = P[i*self.m:(i+1)*self.m]
-            z = np.dot(s[p], self.M[:self.m][:self.m])
+            p = P[i * self.m : (i + 1) * self.m]
+            z = np.dot(s[p], self.M[: self.m][: self.m])
 
             # Sums up the group output
             f += self.f(z)
@@ -1083,8 +1371,19 @@ class F15(CECBenchmark):
 
     """
 
-    def __init__(self, name='F15', year='2010', auxiliary_data=('o', 'M'), dims=1000, group_size=50,
-                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="F15",
+        year="2010",
+        auxiliary_data=("o", "M"),
+        dims=1000,
+        group_size=50,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -1101,8 +1400,17 @@ class F15(CECBenchmark):
 
         """
 
-        super(F15, self).__init__(name, year, auxiliary_data, dims, continuous,
-                                  convex, differentiable, multimodal, separable)
+        super(F15, self).__init__(
+            name,
+            year,
+            auxiliary_data,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
 
         # Defines the size of the group and benchmarking function
         self.m = group_size
@@ -1129,7 +1437,8 @@ class F15(CECBenchmark):
         if self.m >= D:
             # Raises an error
             raise e.SizeError(
-                '`group_size` should be smaller than number of input dimensions')
+                "`group_size` should be smaller than number of input dimensions"
+            )
 
         # Calculates an array of permutations
         P = np.random.permutation(D)
@@ -1140,8 +1449,8 @@ class F15(CECBenchmark):
         # Iterates through all groups
         for i in range(n_groups):
             # Re-calculates the first group input
-            p = P[i*self.m:(i+1)*self.m]
-            z = np.dot(s[p], self.M[:self.m][:self.m])
+            p = P[i * self.m : (i + 1) * self.m]
+            z = np.dot(s[p], self.M[: self.m][: self.m])
 
             # Sums up the group output
             f += self.f(z)
@@ -1162,8 +1471,19 @@ class F16(CECBenchmark):
 
     """
 
-    def __init__(self, name='F16', year='2010', auxiliary_data=('o', 'M'), dims=1000, group_size=50,
-                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="F16",
+        year="2010",
+        auxiliary_data=("o", "M"),
+        dims=1000,
+        group_size=50,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -1180,8 +1500,17 @@ class F16(CECBenchmark):
 
         """
 
-        super(F16, self).__init__(name, year, auxiliary_data, dims, continuous,
-                                  convex, differentiable, multimodal, separable)
+        super(F16, self).__init__(
+            name,
+            year,
+            auxiliary_data,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
 
         # Defines the size of the group and benchmarking function
         self.m = group_size
@@ -1208,7 +1537,8 @@ class F16(CECBenchmark):
         if self.m >= D:
             # Raises an error
             raise e.SizeError(
-                '`group_size` should be smaller than number of input dimensions')
+                "`group_size` should be smaller than number of input dimensions"
+            )
 
         # Calculates an array of permutations
         P = np.random.permutation(D)
@@ -1219,8 +1549,8 @@ class F16(CECBenchmark):
         # Iterates through all groups
         for i in range(n_groups):
             # Re-calculates the first group input
-            p = P[i*self.m:(i+1)*self.m]
-            z = np.dot(s[p], self.M[:self.m][:self.m])
+            p = P[i * self.m : (i + 1) * self.m]
+            z = np.dot(s[p], self.M[: self.m][: self.m])
 
             # Sums up the group output
             f += self.f(z)
@@ -1241,8 +1571,19 @@ class F17(CECBenchmark):
 
     """
 
-    def __init__(self, name='F17', year='2010', auxiliary_data=('o'), dims=1000, group_size=50,
-                 continuous=True, convex=True, differentiable=True, multimodal=False, separable=False):
+    def __init__(
+        self,
+        name="F17",
+        year="2010",
+        auxiliary_data=("o"),
+        dims=1000,
+        group_size=50,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -1259,8 +1600,17 @@ class F17(CECBenchmark):
 
         """
 
-        super(F17, self).__init__(name, year, auxiliary_data, dims, continuous,
-                                  convex, differentiable, multimodal, separable)
+        super(F17, self).__init__(
+            name,
+            year,
+            auxiliary_data,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
 
         # Defines the size of the group and benchmarking function
         self.m = group_size
@@ -1287,7 +1637,8 @@ class F17(CECBenchmark):
         if self.m >= D:
             # Raises an error
             raise e.SizeError(
-                '`group_size` should be smaller than number of input dimensions')
+                "`group_size` should be smaller than number of input dimensions"
+            )
 
         # Calculates an array of permutations
         P = np.random.permutation(D)
@@ -1298,7 +1649,7 @@ class F17(CECBenchmark):
         # Iterates through all groups
         for i in range(n_groups):
             # Re-calculates the first group input
-            p = P[i*self.m:(i+1)*self.m]
+            p = P[i * self.m : (i + 1) * self.m]
             z = s[p]
 
             # Sums up the group output
@@ -1320,8 +1671,19 @@ class F18(CECBenchmark):
 
     """
 
-    def __init__(self, name='F18', year='2010', auxiliary_data=('o'), dims=1000, group_size=50,
-                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="F18",
+        year="2010",
+        auxiliary_data=("o"),
+        dims=1000,
+        group_size=50,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -1338,8 +1700,17 @@ class F18(CECBenchmark):
 
         """
 
-        super(F18, self).__init__(name, year, auxiliary_data, dims, continuous,
-                                  convex, differentiable, multimodal, separable)
+        super(F18, self).__init__(
+            name,
+            year,
+            auxiliary_data,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
 
         # Defines the size of the group and benchmarking function
         self.m = group_size
@@ -1366,7 +1737,8 @@ class F18(CECBenchmark):
         if self.m >= D:
             # Raises an error
             raise e.SizeError(
-                '`group_size` should be smaller than number of input dimensions')
+                "`group_size` should be smaller than number of input dimensions"
+            )
 
         # Calculates an array of permutations
         P = np.random.permutation(D)
@@ -1379,7 +1751,7 @@ class F18(CECBenchmark):
         # Iterates through all groups
         for i in range(n_groups):
             # Re-calculates the first group input
-            p = P[i*self.m:(i+1)*self.m]
+            p = P[i * self.m : (i + 1) * self.m]
             z = s[p]
 
             # Sums up the group output
@@ -1401,8 +1773,18 @@ class F19(CECBenchmark):
 
     """
 
-    def __init__(self, name='F19', year='2010', auxiliary_data=('o'), dims=1000,
-                 continuous=True, convex=True, differentiable=True, multimodal=False, separable=False):
+    def __init__(
+        self,
+        name="F19",
+        year="2010",
+        auxiliary_data=("o"),
+        dims=1000,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=False,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -1418,8 +1800,17 @@ class F19(CECBenchmark):
 
         """
 
-        super(F19, self).__init__(name, year, auxiliary_data, dims, continuous,
-                                  convex, differentiable, multimodal, separable)
+        super(F19, self).__init__(
+            name,
+            year,
+            auxiliary_data,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
 
     @d.check_less_equal_dimension
     def __call__(self, x):
@@ -1434,7 +1825,7 @@ class F19(CECBenchmark):
         """
 
         # Re-calculates the input
-        z = x - self.o[:x.shape[0]]
+        z = x - self.o[: x.shape[0]]
 
         # Instantiating function
         f = 0
@@ -1462,8 +1853,18 @@ class F20(CECBenchmark):
 
     """
 
-    def __init__(self, name='F20', year='2010', auxiliary_data=('o'), dims=1000,
-                 continuous=True, convex=True, differentiable=True, multimodal=True, separable=False):
+    def __init__(
+        self,
+        name="F20",
+        year="2010",
+        auxiliary_data=("o"),
+        dims=1000,
+        continuous=True,
+        convex=True,
+        differentiable=True,
+        multimodal=True,
+        separable=False,
+    ):
         """Initialization method.
 
         Args:
@@ -1479,8 +1880,17 @@ class F20(CECBenchmark):
 
         """
 
-        super(F20, self).__init__(name, year, auxiliary_data, dims, continuous,
-                                  convex, differentiable, multimodal, separable)
+        super(F20, self).__init__(
+            name,
+            year,
+            auxiliary_data,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
 
     @d.check_less_equal_dimension
     def __call__(self, x):
@@ -1495,7 +1905,7 @@ class F20(CECBenchmark):
         """
 
         # Re-calculates the input
-        z = x - self.o[:x.shape[0]]
+        z = x - self.o[: x.shape[0]]
 
         # Instantiating function
         f = 0
@@ -1503,6 +1913,6 @@ class F20(CECBenchmark):
         # For every input dimension
         for i in range(x.shape[0] - 1):
             # Calculating the Shifted Rosenbrock's function
-            f += (100 * (z[i] ** 2 - z[i+1]) ** 2 + (z[i] - 1) ** 2)
+            f += 100 * (z[i] ** 2 - z[i + 1]) ** 2 + (z[i] - 1) ** 2
 
         return f

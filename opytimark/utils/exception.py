@@ -1,6 +1,7 @@
 """Exceptions.
 """
 
+
 class Error(Exception):
     """A generic Error class derived from Exception.
 
@@ -19,13 +20,11 @@ class Error(Exception):
         super(Error, self).__init__()
 
         # Logs the error in a formatted way
-        print(f'{cls}: {msg}.')
+        print(f"{cls}: {msg}.")
 
 
 class SizeError(Error):
-    """A SizeError class for logging errors related to wrong length or size of variables.
-
-    """
+    """A SizeError class for logging errors related to wrong length or size of variables."""
 
     def __init__(self, error):
         """Initialization method.
@@ -35,12 +34,11 @@ class SizeError(Error):
 
         """
 
-        super(SizeError, self).__init__('SizeError', error)
+        super(SizeError, self).__init__("SizeError", error)
 
 
 class TypeError(Error):
-    """A TypeError class for logging errors related to wrong type of variables.
-    """
+    """A TypeError class for logging errors related to wrong type of variables."""
 
     def __init__(self, error):
         """Initialization method.
@@ -48,12 +46,11 @@ class TypeError(Error):
             error (str): Error message to be logged.
         """
 
-        super(TypeError, self).__init__('TypeError', error)
+        super(TypeError, self).__init__("TypeError", error)
 
 
 class ValueError(Error):
-    """A ValueError class for logging errors related to wrong value of variables.
-    """
+    """A ValueError class for logging errors related to wrong value of variables."""
 
     def __init__(self, error):
         """Initialization method.
@@ -61,4 +58,4 @@ class ValueError(Error):
             error (str): Error message to be logged.
         """
 
-        super(ValueError, self).__init__('ValueError', error)
+        super(ValueError, self).__init__("ValueError", error)

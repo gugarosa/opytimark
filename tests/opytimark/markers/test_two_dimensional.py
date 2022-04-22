@@ -246,11 +246,11 @@ def test_damavandi():
 def test_deckkers_aarts():
     f = two_dimensional.DeckkersAarts()
 
-    x = np.array([0, 15])
+    x = np.array([0, 0])
 
     y = f(x)
 
-    assert y == -24771.093749999996
+    assert y == 0.0
 
 
 def test_drop_wave():
