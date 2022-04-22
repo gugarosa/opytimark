@@ -90,7 +90,7 @@ def test_deb1():
 
     y = f(x)
 
-    assert y == -1.0
+    assert np.round(y, 1) == -1.0
 
 
 def test_deb3():

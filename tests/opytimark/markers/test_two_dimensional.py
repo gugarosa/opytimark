@@ -70,7 +70,7 @@ def test_bird():
 
     y = f(x)
 
-    assert y == -106.76453674760198
+    assert np.round(y, 3) == -106.765
 
 
 def test_bohachevsky1():
@@ -220,7 +220,7 @@ def test_cross_tray():
 
     y = f(x)
 
-    assert y == -2.062611870822739
+    assert np.round(y, 3) == -2.063
 
 
 def test_cube():
@@ -350,7 +350,7 @@ def test_holder_table():
 
     y = f(x)
 
-    assert y == -19.208502567767606
+    assert np.round(y, 3) == -19.209
 
 
 def test_hosaki():
@@ -650,7 +650,7 @@ def test_table1():
 
     y = f(x)
 
-    assert y == -26.920335555515848
+    assert np.round(y, 3) == -26.920
 
 
 def test_table2():
@@ -660,7 +660,7 @@ def test_table2():
 
     y = f(x)
 
-    assert y == -19.20850256788675
+    assert np.round(y, 3) == -19.209
 
 
 def test_table3():
@@ -670,7 +670,7 @@ def test_table3():
 
     y = f(x)
 
-    assert y == -24.156815516506533
+    assert np.round(y, 3) == -24.157
 
 
 def test_testtube_holder():
@@ -680,7 +680,7 @@ def test_testtube_holder():
 
     y = f(x)
 
-    assert y == -10.872299901558
+    assert np.round(y, 3) == -10.872
 
 
 def test_trecani():

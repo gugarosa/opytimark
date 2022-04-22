@@ -10,7 +10,7 @@ def test_forrester():
 
     y = f(x)
 
-    assert y == -5.9932767166446155
+    assert np.round(y, 2) == -5.99
 
 
 def test_gramacy_lee():
