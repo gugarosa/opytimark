@@ -360,7 +360,7 @@ def test_hosaki():
 
     y = f(x)
 
-    assert y == -2.345811576101292
+    assert np.round(y, 3) == -2.346
 
 
 def test_jennrich_sampson():
@@ -490,7 +490,7 @@ def test_pen_holder():
 
     y = f(x)
 
-    assert y == -0.9635348327265058
+    assert np.round(y, 3) == -0.964
 
 
 def test_periodic():
