@@ -27,7 +27,6 @@ def check_exact_dimension(f: callable) -> Any:
 
         """
 
-        # Retrieving the object and the input from arguments
         obj, x = args[0], args[1]
 
         # Tries to squeeze the last dimension of `x` as it might be an array of (dim, 1)
@@ -37,14 +36,12 @@ def check_exact_dimension(f: callable) -> Any:
         except ValueError:
             pass
 
-        # If the function's number of dimensions is equal to `-1` (n-dimensional)
         if obj.dims == -1:
             if x.shape[0] == 0:
                 raise e.SizeError(f"{obj.name} input should be n-dimensional")
 
             return f(obj, x)
 
-        # If the input dimensions is different from function's allowed dimensions
         if x.shape[0] != obj.dims:
             raise e.SizeError(f"{obj.name} input should be {obj.dims}-dimensional")
 
@@ -73,7 +70,6 @@ def check_exact_dimension_and_auxiliary_matrix(f: callable) -> Any:
 
         """
 
-        # Retrieving the object and the input from arguments
         obj, x = args[0], args[1]
 
         # Tries to squeeze the last dimension of `x` as it might be an array of (dim, 1)
@@ -83,7 +79,6 @@ def check_exact_dimension_and_auxiliary_matrix(f: callable) -> Any:
         except ValueError:
             pass
 
-        # If the input dimensions differs from function's allowed dimensions
         if x.shape[0] not in [2, 10, 30, 50]:
             raise e.SizeError(
                 f"{obj.name} input should be 2-, 10-, 30- or 50-dimensional"
@@ -125,7 +120,6 @@ def check_less_equal_dimension(f: callable) -> Any:
 
         """
 
-        # Retrieving the object and the input from arguments
         obj, x = args[0], args[1]
 
         # Tries to squeeze the last dimension of `x` as it might be an array of (dim, 1)
@@ -135,7 +129,6 @@ def check_less_equal_dimension(f: callable) -> Any:
         except ValueError:
             pass
 
-        # If the input dimensions is different from function's allowed dimensions
         if x.shape[0] > obj.dims:
             raise e.SizeError(
                 f"{obj.name} input should be less or equal to {obj.dims}-dimensional"

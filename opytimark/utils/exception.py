@@ -20,7 +20,6 @@ class Error(Exception):
 
         super(Error, self).__init__()
 
-        # Logs the error in a formatted way
         print(f"{cls}: {msg}.")
 
 

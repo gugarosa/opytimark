@@ -62,16 +62,9 @@ class Knapsack(Benchmark):
         if len(values) != len(weights):
             raise e.SizeError("`values` and `weights` needs to have the same size")
 
-        # Items values
         self.values = values
-
-        # Items weights
         self.weights = weights
-
-        # Maximum capacity of the knapsack
         self.max_capacity = max_capacity
-
-        # Re-writes the correct number of dimensions
         self.dims = len(values)
 
     @property
@@ -127,15 +120,10 @@ class Knapsack(Benchmark):
 
         """
 
-        # Gathering an array of possible values
         v = np.array(list(it.compress(self.values, x)))
-
-        # Gathering an array of possible weights
         w = np.array(list(it.compress(self.weights, x)))
 
-        # If the sum of weights exceed the maximum capacity
         if np.sum(w) > self.max_capacity:
-            # Returns the maximum number possible
             return c.FLOAT_MAX
 
         # Returns its negative sum as it is a minimization problem

@@ -39,25 +39,12 @@ class Benchmark:
 
         """
 
-        # Name of the function
         self.name = name
-
-        # Number of allowed dimensions
         self.dims = dims
-
-        # Continuous
         self.continuous = continuous
-
-        # Convexity
         self.convex = convex
-
-        # Differentiability
         self.differentiable = differentiable
-
-        # Modality
         self.multimodal = multimodal
-
-        # Separability
         self.separable = separable
 
     @property

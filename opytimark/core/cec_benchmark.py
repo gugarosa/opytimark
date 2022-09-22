@@ -45,31 +45,15 @@ class CECBenchmark:
 
         """
 
-        # Name of the function
         self.name = name
-
-        # Year of the function
         self.year = year
-
-        # Number of allowed dimensions
         self.dims = dims
-
-        # Continuous
         self.continuous = continuous
-
-        # Convexity
         self.convex = convex
-
-        # Differentiability
         self.differentiable = differentiable
-
-        # Modality
         self.multimodal = multimodal
-
-        # Separability
         self.separable = separable
 
-        # Loads the auxiliary data
         self._load_auxiliary_data(name, year, auxiliary_data)
 
     @property
@@ -205,11 +189,8 @@ class CECBenchmark:
         """
 
         for dt in data:
-            # Constructs the data file
-            # Note that it will always be NAME_VARIABLE
+            # Constructs the data file, where it will always be NAME_VARIABLE
             data_file = f"{name}_{dt}"
-
-            # Loads the data to a temporary variable
             tmp = ld.load_cec_auxiliary(data_file, year)
 
             setattr(self, dt, tmp)
@@ -270,15 +251,13 @@ class CECCompositeBenchmark(CECBenchmark):
             separable,
         )
 
-        # Defines the common constants
-        self.C = 2000
-        self.f_bias = (0, 100, 200, 300, 400, 500, 600, 700, 800, 900)
-
-        # Defines the incomming properties, such as lambda and composite functions
         self.bias = bias
         self.sigma = sigma
         self.l = l
         self.f = functions
+
+        self.C = 2000
+        self.f_bias = (0, 100, 200, 300, 400, 500, 600, 700, 800, 900)
 
     @d.check_exact_dimension_and_auxiliary_matrix
     def __call__(self, x: np.array) -> float:
@@ -292,48 +271,32 @@ class CECCompositeBenchmark(CECBenchmark):
 
         """
 
-        # Defines some constants used throughout the method
         D = x.shape[0]
         n_composition = len(self.f)
         y = 5 * np.ones(x.shape[0])
 
-        # Defines the array of `w`, fitness and maximum fitness
         w = np.zeros(n_composition)
         f_max = np.zeros(n_composition)
         fit = np.zeros(n_composition)
 
-        # Iterates through every possible composition function
         for i, f in enumerate(self.f):
-            # Re-calculates the solution
-            z = x - self.o[i][:D]
-
-            # Calculates the `w`
-            w[i] = np.exp(-np.sum(z**2) / (2 * D * self.sigma[i] ** 2))
-
-            # Calculates the start and end indexes of the shift matrix
             start, end = i * x.shape[0], (i + 1) * x.shape[0]
 
-            # Calculates the maximum fitness
-            f_max[i] = f(np.matmul(y / self.l[i], self.M[start:end]))
+            z = x - self.o[i][:D]
+            w[i] = np.exp(-np.sum(z**2) / (2 * D * self.sigma[i] ** 2))
 
-            # Calculates the fitness
+            f_max[i] = f(np.matmul(y / self.l[i], self.M[start:end]))
             fit[i] = self.C * f(np.matmul(z / self.l[i], self.M[start:end])) / f_max[i]
 
-        # Calculates the sum of `w` and the maximum `w`
         w_sum = np.sum(w)
         w_max = np.max(w)
 
-        # Iterates through the number of composition functions
         for i in range(n_composition):
-            # If current `w` is different than `w_max`
             if w[i] != w_max:
-                # Re-scales its value
                 w[i] *= 1 - w_max**10
 
-            # Normalizes `w`
             w[i] /= w_sum
 
-        # Calculates the final fitness
         f = np.sum(np.matmul(w, (fit + self.f_bias)))
 
         return f + self.bias

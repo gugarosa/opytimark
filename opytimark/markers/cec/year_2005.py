@@ -9,7 +9,6 @@ import opytimark.markers.n_dimensional as n_dim
 import opytimark.utils.decorator as d
 from opytimark.core import CECBenchmark, CECCompositeBenchmark
 
-# Fixes Numpy's random seed
 np.random.seed(0)
 
 

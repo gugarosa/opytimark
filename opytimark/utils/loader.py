@@ -63,18 +63,13 @@ def load_cec_auxiliary(name: str, year: str) -> np.ndarray:
 
     """
 
-    # Defines some common-use variables
     base_url = "http://recogna.tech/files/opytimark/"
     tar_name = f"{year}.tar.gz"
     tar_path = f"data/{tar_name}"
 
-    # Downloads the file
     download_file(base_url + tar_name, tar_path)
 
-    # De-compresses the file
     folder_path = untar_file(tar_path)
-
-    # Loads the auxiliary data
     data = np.loadtxt(f"{folder_path}/{name}.txt")
 
     return data

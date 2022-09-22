@@ -10,7 +10,6 @@ import opytimark.utils.decorator as d
 import opytimark.utils.exception as e
 from opytimark.core import CECBenchmark
 
-# Fixes Numpy's random seed
 np.random.seed(0)
 
 

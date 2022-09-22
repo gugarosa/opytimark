@@ -9,7 +9,6 @@ import opytimark.utils.constants as c
 import opytimark.utils.decorator as d
 from opytimark.core import Benchmark
 
-# Fixes Numpy's random seed
 np.random.seed(0)
 
 
