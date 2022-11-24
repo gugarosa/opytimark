@@ -14,17 +14,17 @@ setup(
     url="https://github.com/gugarosa/opytimark",
     license="Apache 2.0",
     install_requires=[
-        "coverage>=5.5",
         "numpy>=1.19.5",
-        "pre-commit>=2.17.0",
-        "pylint>=2.7.2",
-        "pytest>=6.2.2",
     ],
     extras_require={
         "tests": [
             "coverage",
             "pytest",
             "pytest-pep8",
+        ],
+        "dev": [
+            "pre-commit>=2.17.0",
+            "pylint>=2.7.2",
         ],
     },
     classifiers=[
