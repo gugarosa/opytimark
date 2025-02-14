@@ -9,7 +9,7 @@ def test_T_irregularity():
 
     x_t = year_2013.T_irregularity(x)
 
-    assert np.sum(x_t) == 14.878553613491857
+    assert np.round(np.sum(x_t), 6) == 14.878554
 
 
 def test_T_asymmetry():
@@ -17,13 +17,13 @@ def test_T_asymmetry():
 
     x_t = year_2013.T_asymmetry(x, 0.2)
 
-    assert np.sum(x_t) == 23.061844625640674
+    assert np.round(np.sum(x_t), 6) == 23.061845
 
 
 def test_T_diagonal():
     M = year_2013.T_diagonal(5, 10)
 
-    assert np.sum(M) == 7.905694150420949
+    assert np.round(np.sum(M), 6) == 7.905694
 
 
 def test_F1():

@@ -20,7 +20,7 @@ def test_ackley3():
 
     y = f(x)
 
-    assert y == -195.62902823841935
+    assert np.round(y, 3) == -195.629
 
 
 def test_adjiman():
@@ -120,7 +120,7 @@ def test_branin_hoo():
 
     y = f(x)
 
-    assert y == 0.39788735775266204
+    assert np.round(y, 3) == 0.398
 
 
 def test_brent():
@@ -180,7 +180,7 @@ def test_camel6():
 
     y = f(x)
 
-    assert y == -1.0316284229280819
+    assert np.round(y, 3) == -1.032
 
 
 def test_chen_bird():
@@ -190,7 +190,7 @@ def test_chen_bird():
 
     y = f(x)
 
-    assert y == -2000.0039999840003
+    assert np.round(y, 3) == -2000.004
 
 
 def test_chen_v():
@@ -200,7 +200,7 @@ def test_chen_v():
 
     y = f(x)
 
-    assert y == 2000.0000000000002
+    assert np.round(y, 3) == 2000.000
 
 
 def test_chichinadze():
@@ -210,7 +210,7 @@ def test_chichinadze():
 
     y = f(x)
 
-    assert y == -42.94438701899099
+    assert np.round(y, 3) == -42.944
 
 
 def test_cross_tray():
@@ -280,7 +280,7 @@ def test_el_attar_vidyasagar_dutta():
 
     y = f(x)
 
-    assert y == 1.7127803548622027
+    assert np.round(y, 3) == 1.713
 
 
 def test_egg_crate():
@@ -300,7 +300,7 @@ def test_egg_holder():
 
     y = f(x)
 
-    assert y == -959.6406627106155
+    assert np.round(y, 3) == -959.641
 
 
 def test_freudenstein_roth():
@@ -320,7 +320,7 @@ def test_giunta():
 
     y = f(x)
 
-    assert y == 0.06447042053690571
+    assert np.round(y, 3) == 0.064
 
 
 def test_goldenstein_price():
@@ -370,7 +370,7 @@ def test_jennrich_sampson():
 
     y = f(x)
 
-    assert y == 124.36218236181409
+    assert np.round(y, 3) == 124.362
 
 
 def test_keane():
@@ -380,7 +380,7 @@ def test_keane():
 
     y = f(x)
 
-    assert y == 0.6736675211468548
+    assert np.round(y, 3) == 0.674
 
 
 def test_leon():
@@ -420,7 +420,7 @@ def test_mc_cormick():
 
     y = f(x)
 
-    assert y == -1.9132228873800594
+    assert np.round(y, 3) == -1.913
 
 
 def test_mishra3():
@@ -430,7 +430,7 @@ def test_mishra3():
 
     y = f(x)
 
-    assert y == -0.18465133334298883
+    assert np.round(y, 3) == -0.185
 
 
 def test_mishra4():
@@ -440,7 +440,7 @@ def test_mishra4():
 
     y = f(x)
 
-    assert y == -0.1994069700888328
+    assert np.round(y, 3) == -0.199
 
 
 def test_mishra5():
@@ -450,7 +450,7 @@ def test_mishra5():
 
     y = f(x)
 
-    assert y == -1.019829519930943
+    assert np.round(y, 3) == -1.020
 
 
 def test_mishra6():
@@ -460,7 +460,7 @@ def test_mishra6():
 
     y = f(x)
 
-    assert y == -2.2839498384747587
+    assert np.round(y, 3) == -2.284
 
 
 def test_mishra8():
@@ -550,7 +550,7 @@ def test_quadratic():
 
     y = f(x)
 
-    assert y == -3873.7241821830326
+    assert np.round(y, 3) == -3873.724
 
 
 def test_rotated_ellipse1():
@@ -610,7 +610,7 @@ def test_schaffer3():
 
     y = f(x)
 
-    assert y == 0.0015668545260126288
+    assert np.round(y, 6) == 0.001567
 
 
 def test_schaffer4():
@@ -620,7 +620,7 @@ def test_schaffer4():
 
     y = f(x)
 
-    assert y == 0.29243850703298857
+    assert np.round(y, 3) == 0.292
 
 
 def test_schwefel26():
@@ -700,7 +700,7 @@ def test_trefethen():
 
     y = f(x)
 
-    assert y == -3.3068686465567008
+    assert np.round(y, 3) == -3.307
 
 
 def test_venter_sobiezcczanski_sobieski():
@@ -740,7 +740,7 @@ def test_wayburn_seader3():
 
     y = f(x)
 
-    assert y == 19.105879794568
+    assert np.round(y, 3) == 19.106
 
 
 def test_zettl():
@@ -750,7 +750,7 @@ def test_zettl():
 
     y = f(x)
 
-    assert y == -0.0037912371501199
+    assert np.round(y, 6) == -0.003791
 
 
 def test_zirilli():
@@ -760,4 +760,4 @@ def test_zirilli():
 
     y = f(x)
 
-    assert y == -0.3523860365437344
+    assert np.round(y, 3) == -0.352

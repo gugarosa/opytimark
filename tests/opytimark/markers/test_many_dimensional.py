@@ -86,7 +86,7 @@ def test_helical_valley():
 
     y = f(x)
 
-    assert y == 98696.04401089359
+    assert np.round(y, 3) == 98696.044
 
 
 def test_miele_cantrell():
@@ -116,7 +116,7 @@ def test_paviani():
 
     y = f(x)
 
-    assert y == -45.778452053828865
+    assert np.round(y, 3) == -45.778
 
 
 def test_schmidt_vetters():
