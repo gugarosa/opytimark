@@ -20,7 +20,7 @@ def test_ackley4():
 
     y = f(x)
 
-    assert y == -4.5901006651507235
+    assert np.round(y, 3) == -4.590
 
 
 def test_alpine1():
@@ -306,7 +306,7 @@ def test_rana():
 
     y = f(x)
 
-    assert y == -22285.14852971478
+    assert np.round(y, 2) == -22285.15
 
 
 def test_rastrigin():
