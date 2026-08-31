@@ -1,15 +1,12 @@
-"""CEC2013 benchmarking functions.
-"""
+"""CEC2013 benchmarking functions."""
 
 import warnings
-from typing import Optional, Tuple
 
 import numpy as np
 
 import opytimark.markers.n_dimensional as n_dim
 import opytimark.utils.constants as c
 import opytimark.utils.decorator as d
-import opytimark.utils.exception as e
 from opytimark.core import CECBenchmark
 
 np.random.seed(0)
@@ -94,7 +91,7 @@ def T_diagonal(D: int, alpha: float) -> np.array:
 
 
 class F1(CECBenchmark):
-    """F1 class implements the Shifted Elliptic's benchmarking function.
+    r"""F1 class implements the Shifted Elliptic's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (10^6)^\\frac{i-1}{n-1} z_i^2 \mid z_i = x_i - o_i
 
@@ -106,56 +103,12 @@ class F1(CECBenchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "F1",
-        year: Optional[str] = "2013",
-        auxiliary_data: Optional[Tuple[str, ...]] = ("o"),
-        dims: Optional[int] = 1000,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = True,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = False,
-        separable: Optional[bool] = True,
-    ):
-        """Initialization method.
-
-        Args:
-            name: Name of the function.
-            year: Year of the function.
-            auxiliary_data: Auxiliary variables to be externally loaded.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(F1, self).__init__(
-            name,
-            year,
-            auxiliary_data,
-            dims,
-            continuous,
-            convex,
-            differentiable,
-            multimodal,
-            separable,
-        )
+    year = "2013"
+    auxiliary_data = ("o",)
+    dims = 1000
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Defines the number of dimensions and an equally-spaced interval between 0 and D-1
         D = x.shape[0]
@@ -171,7 +124,7 @@ class F1(CECBenchmark):
 
 
 class F2(CECBenchmark):
-    """F2 class implements the Shifted Rastrigin's benchmarking function.
+    r"""F2 class implements the Shifted Rastrigin's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (z_i^2 - 10cos(2 \\pi z_i) + 10) \mid z_i = x_i - o_i
 
@@ -183,56 +136,12 @@ class F2(CECBenchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "F2",
-        year: Optional[str] = "2013",
-        auxiliary_data: Optional[Tuple[str, ...]] = ("o"),
-        dims: Optional[int] = 1000,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = True,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = True,
-        separable: Optional[bool] = True,
-    ):
-        """Initialization method.
-
-        Args:
-            name: Name of the function.
-            year: Year of the function.
-            auxiliary_data: Auxiliary variables to be externally loaded.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(F2, self).__init__(
-            name,
-            year,
-            auxiliary_data,
-            dims,
-            continuous,
-            convex,
-            differentiable,
-            multimodal,
-            separable,
-        )
+    year = "2013"
+    auxiliary_data = ("o",)
+    dims = 1000
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Re-calculates the input using the proposed transforms
         z = np.matmul(
@@ -247,7 +156,7 @@ class F2(CECBenchmark):
 
 
 class F3(CECBenchmark):
-    """F3 class implements the Shifted Ackley's benchmarking function.
+    r"""F3 class implements the Shifted Ackley's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = -20e^{-0.2\sqrt{\\frac{1}{n}\sum_{i=1}^{n}x_i^2}}-e^{\\frac{1}{n}\sum_{i=1}^{n}cos(2 \\pi x_i)}+ 20 + e \mid z_i = x_i - o_i
 
@@ -259,56 +168,12 @@ class F3(CECBenchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "F3",
-        year: Optional[str] = "2013",
-        auxiliary_data: Optional[Tuple[str, ...]] = ("o"),
-        dims: Optional[int] = 1000,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = True,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = True,
-        separable: Optional[bool] = True,
-    ):
-        """Initialization method.
-
-        Args:
-            name: Name of the function.
-            year: Year of the function.
-            auxiliary_data: Auxiliary variables to be externally loaded.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(F3, self).__init__(
-            name,
-            year,
-            auxiliary_data,
-            dims,
-            continuous,
-            convex,
-            differentiable,
-            multimodal,
-            separable,
-        )
+    year = "2013"
+    auxiliary_data = ("o",)
+    dims = 1000
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Re-calculates the input using the proposed transforms
         z = np.matmul(
@@ -332,7 +197,7 @@ class F3(CECBenchmark):
 
 
 class F4(CECBenchmark):
-    """F4 class implements the 7-separable, 1-separable Shifted and Rotated Elliptic's benchmarking function.
+    r"""F4 class implements the 7-separable, 1-separable Shifted and Rotated Elliptic's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{|S|-1}w_i f_{elliptic}(z_i) + f_{elliptic}(z_{|S|})
 
@@ -344,61 +209,18 @@ class F4(CECBenchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "F4",
-        year: Optional[str] = "2013",
-        auxiliary_data: Optional[Tuple[str, ...]] = ("o", "R25", "R50", "R100"),
-        dims: Optional[int] = 1000,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = True,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = False,
-        separable: Optional[bool] = False,
-    ):
-        """Initialization method.
+    year = "2013"
+    auxiliary_data = ("o", "R25", "R50", "R100")
+    dims = 1000
 
-        Args:
-            name: Name of the function.
-            year: Year of the function.
-            auxiliary_data: Auxiliary variables to be externally loaded.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(F4, self).__init__(
-            name,
-            year,
-            auxiliary_data,
-            dims,
-            continuous,
-            convex,
-            differentiable,
-            multimodal,
-            separable,
-        )
-
-        # Defines the subsets, weights and the benchmarking to be evaluated
+    def __init__(self):
+        super().__init__()
         self.S = [50, 25, 25, 100, 50, 25, 25]
-        self.W = [45.6996, 1.5646, 18465.3234, 0.0110, 13.6259, 0.3015, 59.6078]
+        self.W = [45.6996, 1.5646, 18465.3234, 0.011, 13.6259, 0.3015, 59.6078]
         self.f = n_dim.HighConditionedElliptic()
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Defines the number of dimensions, an array of permutations, a counter
         # and the function itself
@@ -410,7 +232,7 @@ class F4(CECBenchmark):
         # Checks if number of dimensions is valid
         if D < 302:
             # Raises an error
-            raise e.SizeError("`D` should be greater than 302")
+            raise ValueError("`D` should be greater than 302")
 
         # Re-calculates the input and permutes its input
         y = x - self.o[:D]
@@ -449,7 +271,7 @@ class F4(CECBenchmark):
 
 
 class F5(CECBenchmark):
-    """F5 class implements the 7-separable, 1-separable Shifted and Rotated Rastrigin's benchmarking function.
+    r"""F5 class implements the 7-separable, 1-separable Shifted and Rotated Rastrigin's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{|S|-1}w_i f_{rastrigin}(z_i) + f_{rastrigin}(z_{|S|})
 
@@ -461,61 +283,18 @@ class F5(CECBenchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "F5",
-        year: Optional[str] = "2013",
-        auxiliary_data: Optional[Tuple[str, ...]] = ("o", "R25", "R50", "R100"),
-        dims: Optional[int] = 1000,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = True,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = True,
-        separable: Optional[bool] = False,
-    ):
-        """Initialization method.
+    year = "2013"
+    auxiliary_data = ("o", "R25", "R50", "R100")
+    dims = 1000
 
-        Args:
-            name: Name of the function.
-            year: Year of the function.
-            auxiliary_data: Auxiliary variables to be externally loaded.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(F5, self).__init__(
-            name,
-            year,
-            auxiliary_data,
-            dims,
-            continuous,
-            convex,
-            differentiable,
-            multimodal,
-            separable,
-        )
-
-        # Defines the subsets, weights and the benchmarking to be evaluated
+    def __init__(self):
+        super().__init__()
         self.S = [50, 25, 25, 100, 50, 25, 25]
-        self.W = [0.1807, 9081.1379, 24.2718, 1.8630e-06, 17698.0807, 0.0002, 0.0152]
+        self.W = [0.1807, 9081.1379, 24.2718, 1.863e-06, 17698.0807, 0.0002, 0.0152]
         self.f = n_dim.Rastrigin()
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Defines the number of dimensions, an array of permutations, a counter
         # and the function itself
@@ -527,7 +306,7 @@ class F5(CECBenchmark):
         # Checks if number of dimensions is valid
         if D < 302:
             # Raises an error
-            raise e.SizeError("`D` should be greater than 302")
+            raise ValueError("`D` should be greater than 302")
 
         # Re-calculates the input and permutes its input
         y = x - self.o[:D]
@@ -574,7 +353,7 @@ class F5(CECBenchmark):
 
 
 class F6(CECBenchmark):
-    """F6 class implements the 7-separable, 1-separable Shifted and Rotated Ackley's benchmarking function.
+    r"""F6 class implements the 7-separable, 1-separable Shifted and Rotated Ackley's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{|S|-1}w_i f_{ackley}(z_i) + f_{ackley}(z_{|S|})
 
@@ -586,61 +365,18 @@ class F6(CECBenchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "F6",
-        year: Optional[str] = "2013",
-        auxiliary_data: Optional[Tuple[str, ...]] = ("o", "R25", "R50", "R100"),
-        dims: Optional[int] = 1000,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = True,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = True,
-        separable: Optional[bool] = False,
-    ):
-        """Initialization method.
+    year = "2013"
+    auxiliary_data = ("o", "R25", "R50", "R100")
+    dims = 1000
 
-        Args:
-            name: Name of the function.
-            year: Year of the function.
-            auxiliary_data: Auxiliary variables to be externally loaded.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(F6, self).__init__(
-            name,
-            year,
-            auxiliary_data,
-            dims,
-            continuous,
-            convex,
-            differentiable,
-            multimodal,
-            separable,
-        )
-
-        # Defines the subsets, weights and the benchmarking to be evaluated
+    def __init__(self):
+        super().__init__()
         self.S = [50, 25, 25, 100, 50, 25, 25]
-        self.W = [0.0352, 5.3156e-05, 0.8707, 49513.7420, 0.0831, 3.4764e-05, 282.2934]
+        self.W = [0.0352, 5.3156e-05, 0.8707, 49513.742, 0.0831, 3.4764e-05, 282.2934]
         self.f = n_dim.Ackley1()
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Defines the number of dimensions, an array of permutations, a counter
         # and the function itself
@@ -652,7 +388,7 @@ class F6(CECBenchmark):
         # Checks if number of dimensions is valid
         if D < 302:
             # Raises an error
-            raise e.SizeError("`D` should be greater than 302")
+            raise ValueError("`D` should be greater than 302")
 
         # Re-calculates the input and permutes its input
         y = x - self.o[:D]
@@ -699,7 +435,7 @@ class F6(CECBenchmark):
 
 
 class F7(CECBenchmark):
-    """F7 class implements the 7-separable, 1-separable Shifted Schwefel's benchmarking function.
+    r"""F7 class implements the 7-separable, 1-separable Shifted Schwefel's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{|S|-1}w_i f_{schwefel}(z_i) + f_{sphere}(z_{|S|})
 
@@ -711,62 +447,19 @@ class F7(CECBenchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "F7",
-        year: Optional[str] = "2013",
-        auxiliary_data: Optional[Tuple[str, ...]] = ("o", "R25", "R50", "R100"),
-        dims: Optional[int] = 1000,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = True,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = True,
-        separable: Optional[bool] = False,
-    ):
-        """Initialization method.
+    year = "2013"
+    auxiliary_data = ("o", "R25", "R50", "R100")
+    dims = 1000
 
-        Args:
-            name: Name of the function.
-            year: Year of the function.
-            auxiliary_data: Auxiliary variables to be externally loaded.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(F7, self).__init__(
-            name,
-            year,
-            auxiliary_data,
-            dims,
-            continuous,
-            convex,
-            differentiable,
-            multimodal,
-            separable,
-        )
-
-        # Defines the subsets, weights and the benchmarking to be evaluated
+    def __init__(self):
+        super().__init__()
         self.S = [50, 25, 25, 100, 50, 25, 25]
-        self.W = [679.9025, 0.9321, 2122.8501, 0.5060, 434.5961, 33389.6244, 2.5692]
+        self.W = [679.9025, 0.9321, 2122.8501, 0.506, 434.5961, 33389.6244, 2.5692]
         self.f_1 = n_dim.RotatedHyperEllipsoid()
         self.f_2 = n_dim.Sphere()
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Defines the number of dimensions, an array of permutations, a counter
         # and the function itself
@@ -778,7 +471,7 @@ class F7(CECBenchmark):
         # Checks if number of dimensions is valid
         if D < 302:
             # Raises an error
-            raise e.SizeError("`D` should be greater than 302")
+            raise ValueError("`D` should be greater than 302")
 
         # Re-calculates the input and permutes its input
         y = x - self.o[:D]
@@ -823,7 +516,7 @@ class F7(CECBenchmark):
 
 
 class F8(CECBenchmark):
-    """F8 class implements the 20-nonseparable Shifted and Rotated Elliptic's benchmarking function.
+    r"""F8 class implements the 20-nonseparable Shifted and Rotated Elliptic's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{|S|}w_i f_{elliptic}(z_i)
 
@@ -835,46 +528,12 @@ class F8(CECBenchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "F8",
-        year: Optional[str] = "2013",
-        auxiliary_data: Optional[Tuple[str, ...]] = ("o", "R25", "R50", "R100"),
-        dims: Optional[int] = 1000,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = True,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = False,
-        separable: Optional[bool] = False,
-    ):
-        """Initialization method.
+    year = "2013"
+    auxiliary_data = ("o", "R25", "R50", "R100")
+    dims = 1000
 
-        Args:
-            name: Name of the function.
-            year: Year of the function.
-            auxiliary_data: Auxiliary variables to be externally loaded.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(F8, self).__init__(
-            name,
-            year,
-            auxiliary_data,
-            dims,
-            continuous,
-            convex,
-            differentiable,
-            multimodal,
-            separable,
-        )
-
-        # Defines the subsets, weights and the benchmarking to be evaluated
+    def __init__(self):
+        super().__init__()
         self.S = [
             50,
             50,
@@ -917,21 +576,12 @@ class F8(CECBenchmark):
             0.1571,
             0.0441,
             0.3543,
-            0.0060,
+            0.006,
         ]
         self.f = n_dim.HighConditionedElliptic()
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Defines the number of dimensions, an array of permutations, a counter
         # and the function itself
@@ -971,7 +621,7 @@ class F8(CECBenchmark):
 
 
 class F9(CECBenchmark):
-    """F9 class implements the 20-nonseparable Shifted and Rotated Rastrigin's benchmarking function.
+    r"""F9 class implements the 20-nonseparable Shifted and Rotated Rastrigin's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{|S|}w_i f_{rastrigin}(z_i)
 
@@ -983,46 +633,12 @@ class F9(CECBenchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "F9",
-        year: Optional[str] = "2013",
-        auxiliary_data: Optional[Tuple[str, ...]] = ("o", "R25", "R50", "R100"),
-        dims: Optional[int] = 1000,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = True,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = True,
-        separable: Optional[bool] = False,
-    ):
-        """Initialization method.
+    year = "2013"
+    auxiliary_data = ("o", "R25", "R50", "R100")
+    dims = 1000
 
-        Args:
-            name: Name of the function.
-            year: Year of the function.
-            auxiliary_data: Auxiliary variables to be externally loaded.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(F9, self).__init__(
-            name,
-            year,
-            auxiliary_data,
-            dims,
-            continuous,
-            convex,
-            differentiable,
-            multimodal,
-            separable,
-        )
-
-        # Defines the subsets, weights and the benchmarking to be evaluated
+    def __init__(self):
+        super().__init__()
         self.S = [
             50,
             50,
@@ -1062,7 +678,7 @@ class F9(CECBenchmark):
             5089.9133,
             12.6664,
             0.0003,
-            0.2400,
+            0.24,
             3.9643,
             0.0014,
             0.0052,
@@ -1071,15 +687,6 @@ class F9(CECBenchmark):
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Defines the number of dimensions, an array of permutations, a counter
         # and the function itself
@@ -1124,7 +731,7 @@ class F9(CECBenchmark):
 
 
 class F10(CECBenchmark):
-    """F10 class implements the 20-nonseparable Shifted and Rotated Ackley's benchmarking function.
+    r"""F10 class implements the 20-nonseparable Shifted and Rotated Ackley's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{|S|}w_i f_{ackley}(z_i)
 
@@ -1136,46 +743,12 @@ class F10(CECBenchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "F10",
-        year: Optional[str] = "2013",
-        auxiliary_data: Optional[Tuple[str, ...]] = ("o", "R25", "R50", "R100"),
-        dims: Optional[int] = 1000,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = True,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = True,
-        separable: Optional[bool] = False,
-    ):
-        """Initialization method.
+    year = "2013"
+    auxiliary_data = ("o", "R25", "R50", "R100")
+    dims = 1000
 
-        Args:
-            name: Name of the function.
-            year: Year of the function.
-            auxiliary_data: Auxiliary variables to be externally loaded.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(F10, self).__init__(
-            name,
-            year,
-            auxiliary_data,
-            dims,
-            continuous,
-            convex,
-            differentiable,
-            multimodal,
-            separable,
-        )
-
-        # Defines the subsets, weights and the benchmarking to be evaluated
+    def __init__(self):
+        super().__init__()
         self.S = [
             50,
             50,
@@ -1201,7 +774,7 @@ class F10(CECBenchmark):
         self.W = [
             0.3127,
             15.1277,
-            2323.3550,
+            2323.355,
             0.0008,
             11.4208,
             3.5541,
@@ -1224,15 +797,6 @@ class F10(CECBenchmark):
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Defines the number of dimensions, an array of permutations, a counter
         # and the function itself
@@ -1277,7 +841,7 @@ class F10(CECBenchmark):
 
 
 class F11(CECBenchmark):
-    """F11 class implements the 20-nonseparable Shifted and Rotated Schwefel's benchmarking function.
+    r"""F11 class implements the 20-nonseparable Shifted and Rotated Schwefel's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{|S|}w_i f_{schwefel}(z_i)
 
@@ -1289,46 +853,12 @@ class F11(CECBenchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "F11",
-        year: Optional[str] = "2013",
-        auxiliary_data: Optional[Tuple[str, ...]] = ("o", "R25", "R50", "R100"),
-        dims: Optional[int] = 1000,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = True,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = False,
-        separable: Optional[bool] = False,
-    ):
-        """Initialization method.
+    year = "2013"
+    auxiliary_data = ("o", "R25", "R50", "R100")
+    dims = 1000
 
-        Args:
-            name: Name of the function.
-            year: Year of the function.
-            auxiliary_data: Auxiliary variables to be externally loaded.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(F11, self).__init__(
-            name,
-            year,
-            auxiliary_data,
-            dims,
-            continuous,
-            convex,
-            differentiable,
-            multimodal,
-            separable,
-        )
-
-        # Defines the subsets, weights and the benchmarking to be evaluated
+    def __init__(self):
+        super().__init__()
         self.S = [
             50,
             50,
@@ -1371,21 +901,12 @@ class F11(CECBenchmark):
             16011.6801,
             4.1528,
             4208.6086,
-            8.9830e-06,
+            8.983e-06,
         ]
         self.f = n_dim.RotatedHyperEllipsoid()
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Defines the number of dimensions, an array of permutations, a counter
         # and the function itself
@@ -1428,7 +949,7 @@ class F11(CECBenchmark):
 
 
 class F12(CECBenchmark):
-    """F12 class implements the Shifted Rosenbrock's benchmarking function.
+    r"""F12 class implements the Shifted Rosenbrock's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n-1} (100(z_i^2-z_{i+1})^2 + (z_i - 1)^2) \mid z_i = x_i - o_i
 
@@ -1440,56 +961,12 @@ class F12(CECBenchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "F12",
-        year: Optional[str] = "2013",
-        auxiliary_data: Optional[Tuple[str, ...]] = ("o"),
-        dims: Optional[int] = 1000,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = True,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = True,
-        separable: Optional[bool] = True,
-    ):
-        """Initialization method.
-
-        Args:
-            name: Name of the function.
-            year: Year of the function.
-            auxiliary_data: Auxiliary variables to be externally loaded.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(F12, self).__init__(
-            name,
-            year,
-            auxiliary_data,
-            dims,
-            continuous,
-            convex,
-            differentiable,
-            multimodal,
-            separable,
-        )
+    year = "2013"
+    auxiliary_data = ("o",)
+    dims = 1000
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Re-calculates the input
         z = x - self.o[: x.shape[0]]
@@ -1506,7 +983,7 @@ class F12(CECBenchmark):
 
 
 class F13(CECBenchmark):
-    """F13 class implements the Shifted Schwefel's with Conforming Overlapping benchmarking function.
+    r"""F13 class implements the Shifted Schwefel's with Conforming Overlapping benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{|S|}w_i f_{schwefel}(z_i)
 
@@ -1518,46 +995,12 @@ class F13(CECBenchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "F13",
-        year: Optional[str] = "2013",
-        auxiliary_data: Optional[Tuple[str, ...]] = ("o", "R25", "R50", "R100"),
-        dims=905,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = True,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = False,
-        separable: Optional[bool] = False,
-    ):
-        """Initialization method.
+    year = "2013"
+    auxiliary_data = ("o", "R25", "R50", "R100")
+    dims = 905
 
-        Args:
-            name: Name of the function.
-            year: Year of the function.
-            auxiliary_data: Auxiliary variables to be externally loaded.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(F13, self).__init__(
-            name,
-            year,
-            auxiliary_data,
-            dims,
-            continuous,
-            convex,
-            differentiable,
-            multimodal,
-            separable,
-        )
-
-        # Defines the subsets, weights, cumulative sum and the benchmarking to be evaluated
+    def __init__(self):
+        super().__init__()
         self.S = [
             50,
             50,
@@ -1607,15 +1050,6 @@ class F13(CECBenchmark):
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Defines the number of dimensions, an array of permutations, an overlap size
         # and the function itself
@@ -1668,7 +1102,7 @@ class F13(CECBenchmark):
 
 
 class F14(CECBenchmark):
-    """F14 class implements the Shifted Schwefel's with Conflicting Overlapping benchmarking function.
+    r"""F14 class implements the Shifted Schwefel's with Conflicting Overlapping benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{|S|}w_i f_{schwefel}(z_i)
 
@@ -1680,46 +1114,12 @@ class F14(CECBenchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "F14",
-        year: Optional[str] = "2013",
-        auxiliary_data: Optional[Tuple[str, ...]] = ("o", "R25", "R50", "R100"),
-        dims: Optional[int] = 1000,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = True,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = False,
-        separable: Optional[bool] = False,
-    ):
-        """Initialization method.
+    year = "2013"
+    auxiliary_data = ("o", "R25", "R50", "R100")
+    dims = 1000
 
-        Args:
-            name: Name of the function.
-            year: Year of the function.
-            auxiliary_data: Auxiliary variables to be externally loaded.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(F14, self).__init__(
-            name,
-            year,
-            auxiliary_data,
-            dims,
-            continuous,
-            convex,
-            differentiable,
-            multimodal,
-            separable,
-        )
-
-        # Defines the subsets, weights, cumulative sum and the benchmarking to be evaluated
+    def __init__(self):
+        super().__init__()
         self.S = [
             50,
             50,
@@ -1752,7 +1152,7 @@ class F14(CECBenchmark):
             0.0924,
             0.0001,
             0.0093,
-            299.6790,
+            299.679,
             4.9395,
             81.3641,
             0.6544,
@@ -1769,15 +1169,6 @@ class F14(CECBenchmark):
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Defines the number of dimensions, an array of permutations, an overlap size
         # and the function itself
@@ -1835,7 +1226,7 @@ class F14(CECBenchmark):
 
 
 class F15(CECBenchmark):
-    """F15 class implements the Shifted Schwefel's Problem 1.2 benchmarking function.
+    r"""F15 class implements the Shifted Schwefel's Problem 1.2 benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}\sum_{j=1}^{i}z_j^2 \mid z_i = T_{asy}^{0.2}(T_{osz}(x_i - o_i))
 
@@ -1847,56 +1238,12 @@ class F15(CECBenchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "F15",
-        year: Optional[str] = "2013",
-        auxiliary_data: Optional[Tuple[str, ...]] = ("o"),
-        dims: Optional[int] = 1000,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = True,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = False,
-        separable: Optional[bool] = False,
-    ):
-        """Initialization method.
-
-        Args:
-            name: Name of the function.
-            year: Year of the function.
-            auxiliary_data: Auxiliary variables to be externally loaded.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(F15, self).__init__(
-            name,
-            year,
-            auxiliary_data,
-            dims,
-            continuous,
-            convex,
-            differentiable,
-            multimodal,
-            separable,
-        )
+    year = "2013"
+    auxiliary_data = ("o",)
+    dims = 1000
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Re-calculates the input
         z = T_asymmetry(T_irregularity(x - self.o[: x.shape[0]]), 0.2)

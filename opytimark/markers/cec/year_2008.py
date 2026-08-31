@@ -1,7 +1,4 @@
-"""CEC2008 benchmarking functions.
-"""
-
-from typing import Optional, Tuple
+"""CEC2008 benchmarking functions."""
 
 import numpy as np
 
@@ -12,7 +9,7 @@ np.random.seed(0)
 
 
 class F1(CECBenchmark):
-    """F1 class implements the Shifted Sphere's benchmarking function.
+    r"""F1 class implements the Shifted Sphere's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} z_i^2 - 450 \mid z_i = x_i - o_i
 
@@ -24,56 +21,12 @@ class F1(CECBenchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "F1",
-        year: Optional[str] = "2008",
-        auxiliary_data: Optional[Tuple[str, ...]] = ("o"),
-        dims: Optional[int] = 1000,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = True,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = False,
-        separable: Optional[bool] = True,
-    ):
-        """Initialization method.
-
-        Args:
-            name: Name of the function.
-            year: Year of the function.
-            auxiliary_data: Auxiliary variables to be externally loaded.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(F1, self).__init__(
-            name,
-            year,
-            auxiliary_data,
-            dims,
-            continuous,
-            convex,
-            differentiable,
-            multimodal,
-            separable,
-        )
+    year = "2008"
+    auxiliary_data = ("o",)
+    dims = 1000
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Re-calculates the input
         z = x - self.o[: x.shape[0]]
@@ -85,7 +38,7 @@ class F1(CECBenchmark):
 
 
 class F2(CECBenchmark):
-    """F2 class implements the Shifted Schwefel's 2.21 benchmarking function.
+    r"""F2 class implements the Shifted Schwefel's 2.21 benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \max_{i=1, \ldots, n}|z_i| - 450 \mid z_i = x_i - o_i
 
@@ -97,56 +50,12 @@ class F2(CECBenchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "F2",
-        year: Optional[str] = "2008",
-        auxiliary_data: Optional[Tuple[str, ...]] = ("o"),
-        dims: Optional[int] = 1000,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = True,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = False,
-        separable: Optional[bool] = False,
-    ):
-        """Initialization method.
-
-        Args:
-            name: Name of the function.
-            year: Year of the function.
-            auxiliary_data: Auxiliary variables to be externally loaded.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(F2, self).__init__(
-            name,
-            year,
-            auxiliary_data,
-            dims,
-            continuous,
-            convex,
-            differentiable,
-            multimodal,
-            separable,
-        )
+    year = "2008"
+    auxiliary_data = ("o",)
+    dims = 1000
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Re-calculates the input
         z = x - self.o[: x.shape[0]]
@@ -158,7 +67,7 @@ class F2(CECBenchmark):
 
 
 class F3(CECBenchmark):
-    """F3 class implements the Shifted Rosenbrock's benchmarking function.
+    r"""F3 class implements the Shifted Rosenbrock's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n-1} (100(z_i^2-z_{i+1})^2 + (z_i - 1)^2) + 390 \mid z_i = x_i - o_i
 
@@ -170,56 +79,12 @@ class F3(CECBenchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "F3",
-        year: Optional[str] = "2008",
-        auxiliary_data: Optional[Tuple[str, ...]] = ("o"),
-        dims: Optional[int] = 1000,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = True,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = True,
-        separable: Optional[bool] = False,
-    ):
-        """Initialization method.
-
-        Args:
-            name: Name of the function.
-            year: Year of the function.
-            auxiliary_data: Auxiliary variables to be externally loaded.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(F3, self).__init__(
-            name,
-            year,
-            auxiliary_data,
-            dims,
-            continuous,
-            convex,
-            differentiable,
-            multimodal,
-            separable,
-        )
+    year = "2008"
+    auxiliary_data = ("o",)
+    dims = 1000
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Re-calculates the input
         z = x - self.o[: x.shape[0]]
@@ -236,7 +101,7 @@ class F3(CECBenchmark):
 
 
 class F4(CECBenchmark):
-    """F4 class implements the Shifted Rastrigin's benchmarking function.
+    r"""F4 class implements the Shifted Rastrigin's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (z_i^2 - 10cos(2 \\pi z_i) + 10) - 330 \mid z_i = x_i - o_i
 
@@ -248,56 +113,12 @@ class F4(CECBenchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "F4",
-        year: Optional[str] = "2008",
-        auxiliary_data: Optional[Tuple[str, ...]] = ("o"),
-        dims: Optional[int] = 1000,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = True,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = True,
-        separable: Optional[bool] = True,
-    ):
-        """Initialization method.
-
-        Args:
-            name: Name of the function.
-            year: Year of the function.
-            auxiliary_data: Auxiliary variables to be externally loaded.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(F4, self).__init__(
-            name,
-            year,
-            auxiliary_data,
-            dims,
-            continuous,
-            convex,
-            differentiable,
-            multimodal,
-            separable,
-        )
+    year = "2008"
+    auxiliary_data = ("o",)
+    dims = 1000
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Re-calculates the input
         z = x - self.o[: x.shape[0]]
@@ -309,7 +130,7 @@ class F4(CECBenchmark):
 
 
 class F5(CECBenchmark):
-    """F5 class implements the Shifted Griewank's benchmarking function.
+    r"""F5 class implements the Shifted Griewank's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = 1 + \sum_{i=1}^{n}\\frac{x_i^2}{4000} - \prod cos(\\frac{x_i}{\sqrt{i}}) - 180 \mid z_i = x_i - o_i
 
@@ -321,56 +142,12 @@ class F5(CECBenchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "F5",
-        year: Optional[str] = "2008",
-        auxiliary_data: Optional[Tuple[str, ...]] = ("o"),
-        dims: Optional[int] = 1000,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = True,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = True,
-        separable: Optional[bool] = False,
-    ):
-        """Initialization method.
-
-        Args:
-            name: Name of the function.
-            year: Year of the function.
-            auxiliary_data: Auxiliary variables to be externally loaded.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(F5, self).__init__(
-            name,
-            year,
-            auxiliary_data,
-            dims,
-            continuous,
-            convex,
-            differentiable,
-            multimodal,
-            separable,
-        )
+    year = "2008"
+    auxiliary_data = ("o",)
+    dims = 1000
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Re-calculates the input
         z = x - self.o[: x.shape[0]]
@@ -393,7 +170,7 @@ class F5(CECBenchmark):
 
 
 class F6(CECBenchmark):
-    """F6 class implements the Shifted Ackley's benchmarking function.
+    r"""F6 class implements the Shifted Ackley's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = -20e^{-0.2\sqrt{\\frac{1}{n}\sum_{i=1}^{n}x_i^2}}-e^{\\frac{1}{n}\sum_{i=1}^{n}cos(2 \\pi x_i)}+ 20 + e - 140 \mid z_i = x_i - o_i
 
@@ -405,56 +182,12 @@ class F6(CECBenchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "F6",
-        year: Optional[str] = "2008",
-        auxiliary_data: Optional[Tuple[str, ...]] = ("o"),
-        dims: Optional[int] = 1000,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = True,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = True,
-        separable: Optional[bool] = False,
-    ):
-        """Initialization method.
-
-        Args:
-            name: Name of the function.
-            year: Year of the function.
-            auxiliary_data: Auxiliary variables to be externally loaded.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(F6, self).__init__(
-            name,
-            year,
-            auxiliary_data,
-            dims,
-            continuous,
-            convex,
-            differentiable,
-            multimodal,
-            separable,
-        )
+    year = "2008"
+    auxiliary_data = ("o",)
+    dims = 1000
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Re-calculates the input
         z = x - self.o[: x.shape[0]]
@@ -475,7 +208,7 @@ class F6(CECBenchmark):
 
 
 class F7(CECBenchmark):
-    """F7 class implements the Fast Fractal Double Dip's benchmarking function.
+    r"""F7 class implements the Fast Fractal Double Dip's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} fractal1D(x_i + twist(x_{(i mod n) + 1}))
 
@@ -487,44 +220,9 @@ class F7(CECBenchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "F7",
-        year: Optional[str] = "2008",
-        auxiliary_data: Optional[Tuple[str, ...]] = (),
-        dims: Optional[int] = 1000,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = True,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = True,
-        separable: Optional[bool] = False,
-    ):
-        """Initialization method.
-
-        Args:
-            name: Name of the function.
-            year: Year of the function.
-            auxiliary_data: Auxiliary variables to be externally loaded.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(F7, self).__init__(
-            name,
-            year,
-            auxiliary_data,
-            dims,
-            continuous,
-            convex,
-            differentiable,
-            multimodal,
-            separable,
-        )
+    year = "2008"
+    auxiliary_data = ()
+    dims = 1000
 
     def _double_dip(self, x: float, c: float, s: float) -> float:
         """Calculates the Double Dip's function.
@@ -597,15 +295,6 @@ class F7(CECBenchmark):
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Instantiates the function
         f = 0

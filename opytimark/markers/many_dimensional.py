@@ -1,7 +1,4 @@
-"""Many-dimensional benchmarking functions.
-"""
-
-from typing import Optional
+"""Many-dimensional benchmarking functions."""
 
 import numpy as np
 
@@ -10,7 +7,7 @@ from opytimark.core import Benchmark
 
 
 class BiggsExponential3(Benchmark):
-    """BiggsExponential3 class implements the Biggs Exponential's 3rd benchmarking function.
+    r"""BiggsExponential3 class implements the Biggs Exponential's 3rd benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3) = \sum_{i=1}^{10}(e^{-t_ix_1} - x_3e^{-t_ix_2} - y_i)^2
 
@@ -22,44 +19,10 @@ class BiggsExponential3(Benchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "BiggsExponential3",
-        dims: Optional[int] = 3,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = False,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = True,
-        separable: Optional[bool] = True,
-    ):
-        """Initialization method.
-
-        Args:
-            name: Name of the function.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(BiggsExponential3, self).__init__(
-            name, dims, continuous, convex, differentiable, multimodal, separable
-        )
+    dims = 3
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Instantiating function
         f = 0
@@ -79,7 +42,7 @@ class BiggsExponential3(Benchmark):
 
 
 class BiggsExponential4(Benchmark):
-    """BiggsExponential4 class implements the Biggs Exponential's 4th benchmarking function.
+    r"""BiggsExponential4 class implements the Biggs Exponential's 4th benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3, x_4) = \sum_{i=1}^{10}(x_3e^{-t_ix_1} - x_4e^{-t_ix_2} - y_i)^2
 
@@ -91,44 +54,10 @@ class BiggsExponential4(Benchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "BiggsExponential4",
-        dims: Optional[int] = 4,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = False,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = True,
-        separable: Optional[bool] = True,
-    ):
-        """Initialization method.
-
-        Args:
-            name: Name of the function.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(BiggsExponential4, self).__init__(
-            name, dims, continuous, convex, differentiable, multimodal, separable
-        )
+    dims = 4
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Instantiating function
         f = 0
@@ -148,7 +77,7 @@ class BiggsExponential4(Benchmark):
 
 
 class BiggsExponential5(Benchmark):
-    """BiggsExponential5 class implements the Biggs Exponential's 5th benchmarking function.
+    r"""BiggsExponential5 class implements the Biggs Exponential's 5th benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3, x_4, x_5) = \sum_{i=1}^{11}(x_3e^{-t_ix_1} - x_4e^{-t_ix_2} + 3e^{-t_ix_5} - y_i)^2
 
@@ -160,44 +89,10 @@ class BiggsExponential5(Benchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "BiggsExponential5",
-        dims: Optional[int] = 5,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = False,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = True,
-        separable: Optional[bool] = True,
-    ):
-        """Initialization method.
-
-        Args:
-            name: Name of the function.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(BiggsExponential5, self).__init__(
-            name, dims, continuous, convex, differentiable, multimodal, separable
-        )
+    dims = 5
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Instantiating function
         f = 0
@@ -222,7 +117,7 @@ class BiggsExponential5(Benchmark):
 
 
 class BiggsExponential6(Benchmark):
-    """BiggsExponential6 class implements the Biggs Exponential's 6th benchmarking function.
+    r"""BiggsExponential6 class implements the Biggs Exponential's 6th benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3, x_4, x_5, x_6) = \sum_{i=1}^{13}(x_3e^{-t_ix_1} - x_4e^{-t_ix_2} + x_6e^{-t_ix_5} - y_i)^2
 
@@ -234,44 +129,10 @@ class BiggsExponential6(Benchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "BiggsExponential6",
-        dims: Optional[int] = 6,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = False,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = True,
-        separable: Optional[bool] = True,
-    ):
-        """Initialization method.
-
-        Args:
-            name: Name of the function.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(BiggsExponential6, self).__init__(
-            name, dims, continuous, convex, differentiable, multimodal, separable
-        )
+    dims = 6
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Instantiating function
         f = 0
@@ -296,7 +157,7 @@ class BiggsExponential6(Benchmark):
 
 
 class BoxBetts(Benchmark):
-    """BoxBetts class implements the BoxBetts's benchmarking function.
+    r"""BoxBetts class implements the BoxBetts's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3) = \sum_{i=1}^{n}g(x)^2
     .. math:: g(x) = e^{-0.1(i+1)x_1} - e^{-0.1(i+1)x_2} - (e^{-0.1(i+1)} - e^{-(i+1)}*x_3)
@@ -309,44 +170,10 @@ class BoxBetts(Benchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "BoxBetts",
-        dims: Optional[int] = 3,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = False,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = True,
-        separable: Optional[bool] = True,
-    ):
-        """Initialization method.
-
-        Args:
-            name: Name of the function.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(BoxBetts, self).__init__(
-            name, dims, continuous, convex, differentiable, multimodal, separable
-        )
+    dims = 3
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Instantiating function
         f = 0
@@ -364,7 +191,7 @@ class BoxBetts(Benchmark):
 
 
 class Colville(Benchmark):
-    """Colville class implements the Colville's benchmarking function.
+    r"""Colville class implements the Colville's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3, x_4) = 100(x_1 - x_2^2)^2 + (1 - x_1)^2 + 90(x_4 - x_3^2)^2 + (1 - x_3)^2 + 10.1((x_2-1)^2 + (x_4-1)^2) + 19.8(x_2-1)(x_4-1)
 
@@ -376,44 +203,10 @@ class Colville(Benchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "Colville",
-        dims: Optional[int] = 4,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = False,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = True,
-        separable: Optional[bool] = True,
-    ):
-        """Initialization method.
-
-        Args:
-            name: Name of the function.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(Colville, self).__init__(
-            name, dims, continuous, convex, differentiable, multimodal, separable
-        )
+    dims = 4
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Calculating the Colville's function
         f = (
@@ -429,7 +222,7 @@ class Colville(Benchmark):
 
 
 class GulfResearch(Benchmark):
-    """GulfResearch class implements the GulfResearch's benchmarking function.
+    r"""GulfResearch class implements the GulfResearch's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3) = \sum_{i=1}^{99}[e^(-\\frac{(u_i-x_2)^x_3}{x_1}) - 0.01i]^2
 
@@ -441,44 +234,10 @@ class GulfResearch(Benchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "GulfResearch",
-        dims: Optional[int] = 3,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = False,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = True,
-        separable: Optional[bool] = True,
-    ):
-        """Initialization method.
-
-        Args:
-            name: Name of the function.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(GulfResearch, self).__init__(
-            name, dims, continuous, convex, differentiable, multimodal, separable
-        )
+    dims = 3
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Instantiating function
         f = 0
@@ -495,7 +254,7 @@ class GulfResearch(Benchmark):
 
 
 class HelicalValley(Benchmark):
-    """HelicalValley class implements the Helical Valley's benchmarking function.
+    r"""HelicalValley class implements the Helical Valley's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3) = 100[(x_3-10\\theta)^2 + (\\sqrt{x_1^2+x_2^2}-1)] + x_3^2
 
@@ -507,44 +266,10 @@ class HelicalValley(Benchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "HelicalValley",
-        dims: Optional[int] = 3,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = False,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = True,
-        separable: Optional[bool] = True,
-    ):
-        """Initialization method.
-
-        Args:
-            name: Name of the function.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(HelicalValley, self).__init__(
-            name, dims, continuous, convex, differentiable, multimodal, separable
-        )
+    dims = 3
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Checking whether x[0] is bigger or equal to zero
         if x[0] >= 0:
@@ -567,7 +292,7 @@ class HelicalValley(Benchmark):
 
 
 class MieleCantrell(Benchmark):
-    """MieleCantrell class implements the MieleCantrell's benchmarking function.
+    r"""MieleCantrell class implements the MieleCantrell's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3, x_4) = (e^{-x_1} - x_2)^4 + 100(x_2 - x_3)^6 + (tan(x_3-x_4))^4 + x_1^8
 
@@ -579,44 +304,10 @@ class MieleCantrell(Benchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "MieleCantrell",
-        dims: Optional[int] = 4,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = False,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = True,
-        separable: Optional[bool] = True,
-    ):
-        """Initialization method.
-
-        Args:
-            name: Name of the function.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(MieleCantrell, self).__init__(
-            name, dims, continuous, convex, differentiable, multimodal, separable
-        )
+    dims = 4
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Calculating the MieleCantrell's function
         f = (
@@ -630,7 +321,7 @@ class MieleCantrell(Benchmark):
 
 
 class Mishra9(Benchmark):
-    """Mishra9 class implements the Mishra's 9th benchmarking function.
+    r"""Mishra9 class implements the Mishra's 9th benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3) = (ab^2c + abc^2 + b^2 + (x_1 + x_2 - x_3)^2)^2
 
@@ -642,44 +333,10 @@ class Mishra9(Benchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "Mishra9",
-        dims: Optional[int] = 3,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = False,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = True,
-        separable: Optional[bool] = False,
-    ):
-        """Initialization method.
-
-        Args:
-            name: Name of the function.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(Mishra9, self).__init__(
-            name, dims, continuous, convex, differentiable, multimodal, separable
-        )
+    dims = 3
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Calculating `a`
         a = 2 * (x[0] ** 3) + 5 * x[0] * x[1] + 4 * x[2] - 2 * (x[0] ** 2) * x[2] - 18
@@ -691,15 +348,13 @@ class Mishra9(Benchmark):
         c = 8 * (x[0] ** 2) + 2 * x[1] * x[2] + 2 * (x[1] ** 2) + 3 * (x[1] ** 3) - 52
 
         # Calculating the Mishra's 9th function
-        f = (
-            a * (b**2) * c + a * b * (c**2) + (b**2) + (x[0] + x[1] - x[2]) ** 2
-        ) ** 2
+        f = (a * (b**2) * c + a * b * (c**2) + (b**2) + (x[0] + x[1] - x[2]) ** 2) ** 2
 
         return f
 
 
 class Paviani(Benchmark):
-    """Paviani class implements the Paviani's benchmarking function.
+    r"""Paviani class implements the Paviani's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_10) = \sum_{i=1}^{10}[ln(x_i-2)^2 + ln(10-x_i)^2] - (\prod_{i=1}^{10}x_i)^{0.2}
 
@@ -711,44 +366,10 @@ class Paviani(Benchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "Paviani",
-        dims: Optional[int] = 10,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = True,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = True,
-        separable: Optional[bool] = False,
-    ):
-        """Initialization method.
-
-        Args:
-            name: Name of the function.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(Paviani, self).__init__(
-            name, dims, continuous, convex, differentiable, multimodal, separable
-        )
+    dims = 10
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Instantiating summatory term
         sum_term = 0
@@ -771,7 +392,7 @@ class Paviani(Benchmark):
 
 
 class SchmidtVetters(Benchmark):
-    """SchmidtVetters class implements the Schmidt Vetters's benchmarking function.
+    r"""SchmidtVetters class implements the Schmidt Vetters's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3) = \\frac{1}{1 + (x_1-x_2)^2} + sin(\\frac{\\pi x_2+x_3}{2}) + e^{(\\frac{x_1+x_2}{x_2}-2)^2}
 
@@ -783,44 +404,10 @@ class SchmidtVetters(Benchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "SchmidtVetters",
-        dims: Optional[int] = 3,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = False,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = True,
-        separable: Optional[bool] = False,
-    ):
-        """Initialization method.
-
-        Args:
-            name: Name of the function.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(SchmidtVetters, self).__init__(
-            name, dims, continuous, convex, differentiable, multimodal, separable
-        )
+    dims = 3
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Calculating the Schmidt Vetters's function
         f = (
@@ -833,7 +420,7 @@ class SchmidtVetters(Benchmark):
 
 
 class Simpleton(Benchmark):
-    """Simpleton class implements the Simpleton's Problem benchmarking function.
+    r"""Simpleton class implements the Simpleton's Problem benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3, x_4, x_5, x_6, x_7, x_8, x_9, x_10) = \\frac{x_1 x_2 x_3 x_4 x_5}{x_6 x_7 x_8 x_9 x_10}
 
@@ -845,44 +432,10 @@ class Simpleton(Benchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "Simpleton",
-        dims: Optional[int] = 10,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = False,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = True,
-        separable: Optional[bool] = False,
-    ):
-        """Initialization method.
-
-        Args:
-            name: Name of the function.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(Simpleton, self).__init__(
-            name, dims, continuous, convex, differentiable, multimodal, separable
-        )
+    dims = 10
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Calculating the Simpleton's Problem's function
         f = (x[0] * x[1] * x[2] * x[3] * x[4]) / (x[5] * x[6] * x[7] * x[8] * x[9])
@@ -891,7 +444,7 @@ class Simpleton(Benchmark):
 
 
 class Watson(Benchmark):
-    """Watson class implements the Watson's benchmarking function.
+    r"""Watson class implements the Watson's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3, x_4, x_5, x_6) = \sum_{i=0}^{29}{\sum_{j=0}^{4}((j-1)a_i^j x_{j+1}) - [\sum_{j=0}^{5}a_i^j x_{j+1}]^2 - 1}^2 + x_1^2
 
@@ -903,44 +456,10 @@ class Watson(Benchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "Watson",
-        dims: Optional[int] = 6,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = False,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = True,
-        separable: Optional[bool] = False,
-    ):
-        """Initialization method.
-
-        Args:
-            name: Name of the function.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(Watson, self).__init__(
-            name, dims, continuous, convex, differentiable, multimodal, separable
-        )
+    dims = 6
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Instantiating function
         f = 0
@@ -973,7 +492,7 @@ class Watson(Benchmark):
 
 
 class Wolfe(Benchmark):
-    """Wolfe class implements the Wolfe's benchmarking function.
+    r"""Wolfe class implements the Wolfe's benchmarking function.
 
     .. math:: f(\mathbf{x}) = f(x_1, x_2, x_3) = \\frac{4}{3}(x_1^2 + x_2^2 - x_1x_2)^{0.75} + x_3
 
@@ -985,44 +504,10 @@ class Wolfe(Benchmark):
 
     """
 
-    def __init__(
-        self,
-        name: Optional[str] = "Wolfe",
-        dims: Optional[int] = 3,
-        continuous: Optional[bool] = True,
-        convex: Optional[bool] = False,
-        differentiable: Optional[bool] = True,
-        multimodal: Optional[bool] = True,
-        separable: Optional[bool] = True,
-    ):
-        """Initialization method.
-
-        Args:
-            name: Name of the function.
-            dims: Number of allowed dimensions.
-            continuous: Whether the function is continuous.
-            convex: Whether the function is convex.
-            differentiable: Whether the function is differentiable.
-            multimodal: Whether the function is multimodal.
-            separable: Whether the function is separable.
-
-        """
-
-        super(Wolfe, self).__init__(
-            name, dims, continuous, convex, differentiable, multimodal, separable
-        )
+    dims = 3
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
-        """This method returns the function's output when the class is called.
-
-        Args:
-            x: An input array for calculating the function's output.
-
-        Returns:
-            (float): The benchmarking function output `f(x)`.
-
-        """
 
         # Calculating the Wolfe's function
         f = 4 / 3 * ((x[0] ** 2 + x[1] ** 2 - x[0] * x[1]) ** 0.75) + x[2]

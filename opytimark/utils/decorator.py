@@ -1,139 +1,67 @@
-"""Decorators.
-"""
+"""Input validation decorators."""
 
-from typing import Any
+from functools import wraps
 
 import numpy as np
 
-import opytimark.utils.exception as e
+
+def _vector(x):
+    x = np.asarray(x)
+    if x.ndim == 2 and x.shape[1] == 1:
+        return x[:, 0]
+    return x
 
 
-def check_exact_dimension(f: callable) -> Any:
-    """Checks whether the input dimension is exact to the demanded by the evaluated function.
+def check_exact_dimension(function):
+    """Require the exact dimension declared by a benchmark."""
 
-    Args:
-        f: Function to be checked.
+    @wraps(function)
+    def validate(benchmark, x):
+        x = _vector(x)
+        name = type(benchmark).__name__
 
-    Returns:
-        (Any): The function output or an error depending whether the check is valid.
+        if benchmark.dims == -1:
+            if not x.shape[0]:
+                raise ValueError(f"{name} input should be n-dimensional")
+        elif x.shape[0] != benchmark.dims:
+            raise ValueError(f"{name} input should be {benchmark.dims}-dimensional")
 
-    """
+        return function(benchmark, x)
 
-    def _check_exact_dimension(*args) -> Any:
-        """Wraps the dimension checking in order to provide additional logic.
-
-        Returns:
-            (Any): The wrapped function output.
-
-        """
-
-        obj, x = args[0], args[1]
-
-        # Tries to squeeze the last dimension of `x` as it might be an array of (dim, 1)
-        try:
-            x = np.squeeze(x, axis=1)
-
-        except ValueError:
-            pass
-
-        if obj.dims == -1:
-            if x.shape[0] == 0:
-                raise e.SizeError(f"{obj.name} input should be n-dimensional")
-
-            return f(obj, x)
-
-        if x.shape[0] != obj.dims:
-            raise e.SizeError(f"{obj.name} input should be {obj.dims}-dimensional")
-
-        return f(obj, x)
-
-    return _check_exact_dimension
+    return validate
 
 
-def check_exact_dimension_and_auxiliary_matrix(f: callable) -> Any:
-    """Checks whether the input dimension is exact to the demanded by the evaluated function and defines
-    a proper auxiliary matrix accordingly.
+def check_exact_dimension_and_auxiliary_matrix(function):
+    """Require a supported CEC dimension and select its rotation matrix."""
 
-    Args:
-        f: Function to be checked.
-
-    Returns:
-        (Any): The function output or an error depending whether the check is valid.
-
-    """
-
-    def _check_exact_dimension_and_auxiliary_matrix(*args) -> Any:
-        """Wraps the dimension checking in order to provide additional logic.
-
-        Returns:
-            (Any): The wrapped function output.
-
-        """
-
-        obj, x = args[0], args[1]
-
-        # Tries to squeeze the last dimension of `x` as it might be an array of (dim, 1)
-        try:
-            x = np.squeeze(x, axis=1)
-
-        except ValueError:
-            pass
-
-        if x.shape[0] not in [2, 10, 30, 50]:
-            raise e.SizeError(
-                f"{obj.name} input should be 2-, 10-, 30- or 50-dimensional"
+    @wraps(function)
+    def validate(benchmark, x):
+        x = _vector(x)
+        dimension = x.shape[0]
+        if dimension not in {2, 10, 30, 50}:
+            raise ValueError(
+                f"{type(benchmark).__name__} input should be "
+                "2-, 10-, 30- or 50-dimensional"
             )
 
-        if x.shape[0] == 2:
-            setattr(obj, "M", obj.M2)
+        benchmark.M = getattr(benchmark, f"M{dimension}")
+        return function(benchmark, x)
 
-        elif x.shape[0] == 10:
-            setattr(obj, "M", obj.M10)
-
-        elif x.shape[0] == 30:
-            setattr(obj, "M", obj.M30)
-
-        elif x.shape[0] == 50:
-            setattr(obj, "M", obj.M50)
-
-        return f(obj, x)
-
-    return _check_exact_dimension_and_auxiliary_matrix
+    return validate
 
 
-def check_less_equal_dimension(f: callable) -> Any:
-    """Checks whether the input dimension is less or equal to the demanded by the evaluated function.
+def check_less_equal_dimension(function):
+    """Require an input no larger than the benchmark's maximum dimension."""
 
-    Args:
-        f: Function to be checked.
-
-    Returns:
-        (Any): The function output or an error depending whether the check is valid.
-
-    """
-
-    def _check_less_equal_dimension(*args) -> Any:
-        """Wraps the dimension checking in order to provide additional logic.
-
-        Returns:
-            (Any): The wrapped function output.
-
-        """
-
-        obj, x = args[0], args[1]
-
-        # Tries to squeeze the last dimension of `x` as it might be an array of (dim, 1)
-        try:
-            x = np.squeeze(x, axis=1)
-
-        except ValueError:
-            pass
-
-        if x.shape[0] > obj.dims:
-            raise e.SizeError(
-                f"{obj.name} input should be less or equal to {obj.dims}-dimensional"
+    @wraps(function)
+    def validate(benchmark, x):
+        x = _vector(x)
+        if x.shape[0] > benchmark.dims:
+            raise ValueError(
+                f"{type(benchmark).__name__} input should be less than or equal "
+                f"to {benchmark.dims}-dimensional"
             )
 
-        return f(obj, x)
+        return function(benchmark, x)
 
-    return _check_less_equal_dimension
+    return validate

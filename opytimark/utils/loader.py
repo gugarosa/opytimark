@@ -1,75 +1,23 @@
-"""Auxiliary files loader.
-"""
+"""Bundled CEC auxiliary-data loader."""
 
-import os
 import tarfile
-import urllib.request
+from functools import cache
+from importlib.resources import files
 
 import numpy as np
 
-import opytimark.utils.constants as c
+
+@cache
+def _load_cec_auxiliary(name, year):
+    archive = files("opytimark.data").joinpath(f"{year}.tar.gz")
+    with archive.open("rb") as stream, tarfile.open(fileobj=stream, mode="r:gz") as tar:
+        member = tar.extractfile(f"{name}.txt")
+        if member is None:
+            raise FileNotFoundError(f"{name}.txt is missing from {archive.name}")
+        return np.loadtxt(member)
 
 
-def download_file(url: str, output_path: str) -> None:
-    """Downloads a file given its URL and the output path to be saved.
+def load_cec_auxiliary(name, year):
+    """Load a copy of an auxiliary array bundled with the package."""
 
-    Args:
-        url: URL to download the file.
-        output_path: Path to save the downloaded file.
-
-    """
-
-    file_exists = os.path.exists(output_path)
-
-    if not file_exists:
-        folder_exists = os.path.exists(c.DATA_FOLDER)
-
-        if not folder_exists:
-            os.mkdir(c.DATA_FOLDER)
-
-        urllib.request.urlretrieve(url, output_path)
-
-
-def untar_file(file_path: str) -> str:
-    """De-compress a file with .tar.gz.
-
-    Args:
-        file_path: Path of the file to be de-compressed.
-
-    Returns:
-        (str): The folder that has been de-compressed.
-
-    """
-
-    with tarfile.open(file_path, "r:gz") as tar:
-        folder_path = file_path.split(".tar.gz")[0]
-        folder_path_exists = os.path.exists(folder_path)
-
-        if not folder_path_exists:
-            tar.extractall(path=folder_path)
-
-    return folder_path
-
-
-def load_cec_auxiliary(name: str, year: str) -> np.ndarray:
-    """Loads auxiliary data for CEC-based benchmarking functions.
-
-    Args:
-        name: Name of function to be loaded.
-        year: Year of function to be loaded.
-
-    Returns:
-        (np.ndarray): Auxiliary data.
-
-    """
-
-    base_url = "http://recogna.tech/files/opytimark/"
-    tar_name = f"{year}.tar.gz"
-    tar_path = f"data/{tar_name}"
-
-    download_file(base_url + tar_name, tar_path)
-
-    folder_path = untar_file(tar_path)
-    data = np.loadtxt(f"{folder_path}/{name}.txt")
-
-    return data
+    return _load_cec_auxiliary(name, year).copy()

@@ -1,54 +1,38 @@
 import numpy as np
+import pytest
 
 from opytimark.markers import n_dimensional
 from opytimark.markers.cec import year_2005
-from opytimark.utils import decorator
 
 
-def test_check_exact_dimension():
-    @decorator.check_exact_dimension
-    def call(obj, x):
-        return x
+def test_exact_dimension_validation():
+    benchmark = n_dimensional.Sphere()
 
-    f = n_dimensional.Sphere()
+    with pytest.raises(ValueError):
+        benchmark(np.array([]))
 
-    try:
-        call(f, np.array([]))
-    except:
-        call(f, np.array([1]))
+    benchmark.dims = 1
+    with pytest.raises(ValueError):
+        benchmark(np.array([1, 2]))
 
-    f.dims = 1
-
-    try:
-        call(f, np.array([1, 2]))
-    except:
-        call(f, np.array([1]))
+    assert benchmark(np.array([[1]])) == 1
 
 
-def test_check_exact_dimension_and_auxiliary_matrix():
-    @decorator.check_exact_dimension_and_auxiliary_matrix
-    def call(obj, x):
-        return x
+def test_cec_dimension_validation_selects_matrix():
+    benchmark = year_2005.F3()
 
-    f = year_2005.F3()
+    with pytest.raises(ValueError):
+        benchmark(np.zeros(51))
 
-    try:
-        call(f, np.zeros(51))
-    except:
-        call(f, np.zeros(2))
-        call(f, np.zeros(10))
-        call(f, np.zeros(30))
-        call(f, np.zeros(50))
+    for dimension in (2, 10, 30, 50):
+        benchmark(np.zeros(dimension))
+        assert benchmark.M.shape == (dimension, dimension)
 
 
-def test_check_less_equal_dimension():
-    @decorator.check_less_equal_dimension
-    def call(obj, x):
-        return x
+def test_maximum_dimension_validation():
+    benchmark = year_2005.F1()
 
-    f = year_2005.F1()
+    with pytest.raises(ValueError):
+        benchmark(np.zeros(101))
 
-    try:
-        call(f, np.zeros(101))
-    except:
-        call(f, np.zeros(100))
+    benchmark(np.zeros(100))
