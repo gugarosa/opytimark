@@ -14,6 +14,14 @@ Opytimark supports Python 3.11 or newer. Read the full API reference at
 
 ## Installation
 
+Opytimark is published on PyPI. Add it to a project managed by uv with:
+
+```bash
+uv add opytimark
+```
+
+For a consumer installation in an existing Python environment, pip is also supported:
+
 ```bash
 pip install opytimark
 ```

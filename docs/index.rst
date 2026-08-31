@@ -6,7 +6,14 @@ algorithms.
 
 Opytimark supports Python 3.11 or newer.
 
-Install it from PyPI:
+Install it from PyPI into a project managed by uv:
+
+.. code-block:: console
+
+   uv add opytimark
+
+For a consumer installation in an existing Python environment, pip is also
+supported:
 
 .. code-block:: console
 
