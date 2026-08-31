@@ -15,10 +15,9 @@ Thank you!
 
 ### Pre-checkings
 
-- [ ] Check that you are up-to-date with the master branch of Opytimark. You can update with:
-pip install git+git://github.com/gugarosa/opytimark.git --upgrade --no-deps
+- [ ] Check that the issue reproduces on the latest `main` branch.
 
-- [ ] Check that you have read all of our [README](https://github.com/gugarosa/opytimark/blob/master/README.md).
+- [ ] Check that you have read our [README](https://github.com/gugarosa/opytimark/blob/main/README.md).
 
 ### Description
 

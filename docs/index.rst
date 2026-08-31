@@ -4,7 +4,7 @@ Opytimark
 Opytimark provides ready-to-use benchmark functions for evaluating optimization
 algorithms.
 
-Opytimark requires Python 3.11 or newer.
+Opytimark supports Python 3.6 or newer.
 
 Install it from PyPI:
 

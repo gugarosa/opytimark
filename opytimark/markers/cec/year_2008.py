@@ -21,9 +21,9 @@ class F1(CECBenchmark):
 
     """
 
-    year = "2008"
-    auxiliary_data = ("o",)
-    dims = 1000
+    _defaults = ("F1", 1000, True, True, True, False, True)
+    _year = "2008"
+    _auxiliary_data = ("o",)
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
@@ -50,9 +50,9 @@ class F2(CECBenchmark):
 
     """
 
-    year = "2008"
-    auxiliary_data = ("o",)
-    dims = 1000
+    _defaults = ("F2", 1000, True, True, True, False, False)
+    _year = "2008"
+    _auxiliary_data = ("o",)
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
@@ -79,9 +79,9 @@ class F3(CECBenchmark):
 
     """
 
-    year = "2008"
-    auxiliary_data = ("o",)
-    dims = 1000
+    _defaults = ("F3", 1000, True, True, True, True, False)
+    _year = "2008"
+    _auxiliary_data = ("o",)
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
@@ -113,9 +113,9 @@ class F4(CECBenchmark):
 
     """
 
-    year = "2008"
-    auxiliary_data = ("o",)
-    dims = 1000
+    _defaults = ("F4", 1000, True, True, True, True, True)
+    _year = "2008"
+    _auxiliary_data = ("o",)
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
@@ -142,9 +142,9 @@ class F5(CECBenchmark):
 
     """
 
-    year = "2008"
-    auxiliary_data = ("o",)
-    dims = 1000
+    _defaults = ("F5", 1000, True, True, True, True, False)
+    _year = "2008"
+    _auxiliary_data = ("o",)
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
@@ -182,9 +182,9 @@ class F6(CECBenchmark):
 
     """
 
-    year = "2008"
-    auxiliary_data = ("o",)
-    dims = 1000
+    _defaults = ("F6", 1000, True, True, True, True, False)
+    _year = "2008"
+    _auxiliary_data = ("o",)
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
@@ -220,9 +220,9 @@ class F7(CECBenchmark):
 
     """
 
-    year = "2008"
-    auxiliary_data = ()
-    dims = 1000
+    _defaults = ("F7", 1000, True, True, True, True, False)
+    _year = "2008"
+    _auxiliary_data = ()
 
     def _double_dip(self, x: float, c: float, s: float) -> float:
         """Calculates the Double Dip's function.

@@ -9,6 +9,18 @@ from opytimark.core import CECBenchmark, CECCompositeBenchmark
 np.random.seed(0)
 
 
+def _composite_arguments(args, kwargs, default_bias):
+    kwargs = kwargs.copy()
+    if len(args) > 3:
+        if "bias" in kwargs:
+            raise TypeError("bias specified by both position and keyword")
+        bias = args[3]
+        args = args[:3] + args[4:]
+    else:
+        bias = kwargs.pop("bias", default_bias)
+    return args, kwargs, bias
+
+
 class F1(CECBenchmark):
     r"""F1 class implements the Shifted Sphere's benchmarking function.
 
@@ -22,9 +34,9 @@ class F1(CECBenchmark):
 
     """
 
-    year = "2005"
-    auxiliary_data = ("o",)
-    dims = 100
+    _defaults = ("F1", 100, True, True, True, False, True)
+    _year = "2005"
+    _auxiliary_data = ("o",)
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
@@ -51,9 +63,9 @@ class F2(CECBenchmark):
 
     """
 
-    year = "2005"
-    auxiliary_data = ("o",)
-    dims = 100
+    _defaults = ("F2", 100, True, True, True, False, False)
+    _year = "2005"
+    _auxiliary_data = ("o",)
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
@@ -93,9 +105,9 @@ class F3(CECBenchmark):
 
     """
 
-    year = "2005"
-    auxiliary_data = ("o", "M2", "M10", "M30", "M50")
-    dims = -1
+    _defaults = ("F3", -1, True, True, True, False, False)
+    _year = "2005"
+    _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
 
     @d.check_exact_dimension_and_auxiliary_matrix
     def __call__(self, x: np.array) -> float:
@@ -126,9 +138,9 @@ class F4(CECBenchmark):
 
     """
 
-    year = "2005"
-    auxiliary_data = ("o",)
-    dims = 100
+    _defaults = ("F4", 100, True, True, True, False, False)
+    _year = "2005"
+    _auxiliary_data = ("o",)
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
@@ -171,9 +183,9 @@ class F5(CECBenchmark):
 
     """
 
-    year = "2005"
-    auxiliary_data = ("o", "A")
-    dims = 100
+    _defaults = ("F5", 100, True, True, True, False, False)
+    _year = "2005"
+    _auxiliary_data = ("o", "A")
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
@@ -211,9 +223,9 @@ class F6(CECBenchmark):
 
     """
 
-    year = "2005"
-    auxiliary_data = ("o",)
-    dims = 100
+    _defaults = ("F6", 100, True, True, True, True, False)
+    _year = "2005"
+    _auxiliary_data = ("o",)
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
@@ -245,9 +257,9 @@ class F7(CECBenchmark):
 
     """
 
-    year = "2005"
-    auxiliary_data = ("o", "M2", "M10", "M30", "M50")
-    dims = -1
+    _defaults = ("F7", -1, True, True, True, True, False)
+    _year = "2005"
+    _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
 
     @d.check_exact_dimension_and_auxiliary_matrix
     def __call__(self, x: np.array) -> float:
@@ -285,9 +297,9 @@ class F8(CECBenchmark):
 
     """
 
-    year = "2005"
-    auxiliary_data = ("o", "M2", "M10", "M30", "M50")
-    dims = -1
+    _defaults = ("F8", -1, True, True, True, True, False)
+    _year = "2005"
+    _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
 
     @d.check_exact_dimension_and_auxiliary_matrix
     def __call__(self, x: np.array) -> float:
@@ -331,9 +343,9 @@ class F9(CECBenchmark):
 
     """
 
-    year = "2005"
-    auxiliary_data = ("o",)
-    dims = 100
+    _defaults = ("F9", 100, True, True, True, True, True)
+    _year = "2005"
+    _auxiliary_data = ("o",)
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
@@ -360,9 +372,9 @@ class F10(CECBenchmark):
 
     """
 
-    year = "2005"
-    auxiliary_data = ("o", "M2", "M10", "M30", "M50")
-    dims = 100
+    _defaults = ("F10", 100, True, True, True, True, False)
+    _year = "2005"
+    _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
 
     @d.check_exact_dimension_and_auxiliary_matrix
     def __call__(self, x: np.array) -> float:
@@ -389,9 +401,9 @@ class F11(CECBenchmark):
 
     """
 
-    year = "2005"
-    auxiliary_data = ("o", "M2", "M10", "M30", "M50")
-    dims = 100
+    _defaults = ("F11", 100, True, True, True, True, False)
+    _year = "2005"
+    _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
 
     @d.check_exact_dimension_and_auxiliary_matrix
     def __call__(self, x: np.array) -> float:
@@ -430,9 +442,9 @@ class F12(CECBenchmark):
 
     """
 
-    year = "2005"
-    auxiliary_data = ("alpha", "a", "b")
-    dims = 100
+    _defaults = ("F12", 100, True, True, True, True, False)
+    _year = "2005"
+    _auxiliary_data = ("alpha", "a", "b")
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
@@ -465,9 +477,9 @@ class F13(CECBenchmark):
 
     """
 
-    year = "2005"
-    auxiliary_data = ("o",)
-    dims = 100
+    _defaults = ("F13", 100, True, True, True, True, False)
+    _year = "2005"
+    _auxiliary_data = ("o",)
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
@@ -512,9 +524,9 @@ class F14(CECBenchmark):
 
     """
 
-    year = "2005"
-    auxiliary_data = ("o", "M2", "M10", "M30", "M50")
-    dims = 100
+    _defaults = ("F14", 100, True, True, True, True, False)
+    _year = "2005"
+    _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
 
     @d.check_exact_dimension_and_auxiliary_matrix
     def __call__(self, x: np.array) -> float:
@@ -558,12 +570,12 @@ class F15(CECCompositeBenchmark):
 
     """
 
-    year = "2005"
-    auxiliary_data = ("o", "M2", "M10", "M30", "M50")
-    dims = 100
-    bias = 120
+    _defaults = ("F15", 100, True, True, True, True, True)
+    _year = "2005"
+    _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
+    _bias = 120
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         sigma = (1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
         l = (1, 1, 10, 10, 5 / 60, 5 / 60, 5 / 32, 5 / 32, 5 / 100, 5 / 100)
         functions = (
@@ -578,7 +590,9 @@ class F15(CECCompositeBenchmark):
             n_dim.Sphere(),
             n_dim.Sphere(),
         )
-        super().__init__(sigma, l, functions)
+        args, kwargs, bias = _composite_arguments(args, kwargs, self._bias)
+        CECBenchmark.__init__(self, *args, **kwargs)
+        self._initialize_composition(sigma, l, functions, bias)
 
 
 class F16(CECCompositeBenchmark):
@@ -594,12 +608,12 @@ class F16(CECCompositeBenchmark):
 
     """
 
-    year = "2005"
-    auxiliary_data = ("o", "M2", "M10", "M30", "M50")
-    dims = 100
-    bias = 120
+    _defaults = ("F16", 100, True, True, True, True, False)
+    _year = "2005"
+    _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
+    _bias = 120
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         sigma = (1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
         l = (1, 1, 10, 10, 5 / 60, 5 / 60, 5 / 32, 5 / 32, 5 / 100, 5 / 100)
         functions = (
@@ -614,7 +628,9 @@ class F16(CECCompositeBenchmark):
             n_dim.Sphere(),
             n_dim.Sphere(),
         )
-        super().__init__(sigma, l, functions)
+        args, kwargs, bias = _composite_arguments(args, kwargs, self._bias)
+        CECBenchmark.__init__(self, *args, **kwargs)
+        self._initialize_composition(sigma, l, functions, bias)
 
 
 class F17(CECCompositeBenchmark):
@@ -630,12 +646,12 @@ class F17(CECCompositeBenchmark):
 
     """
 
-    year = "2005"
-    auxiliary_data = ("o", "M2", "M10", "M30", "M50")
-    dims = 100
-    bias = 120
+    _defaults = ("F17", 100, True, True, True, True, False)
+    _year = "2005"
+    _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
+    _bias = 120
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         sigma = (1, 2, 1.5, 1.5, 1, 1, 1.5, 1.5, 2, 2)
         l = (5 / 16, 5 / 32, 2, 1, 1 / 10, 1 / 20, 20, 10, 1 / 6, 5 / 60)
         functions = (
@@ -650,7 +666,9 @@ class F17(CECCompositeBenchmark):
             n_dim.Griewank(),
             n_dim.Griewank(),
         )
-        super().__init__(sigma, l, functions)
+        args, kwargs, bias = _composite_arguments(args, kwargs, self._bias)
+        CECBenchmark.__init__(self, *args, **kwargs)
+        self._initialize_composition(sigma, l, functions, bias)
 
     @d.check_exact_dimension_and_auxiliary_matrix
     def __call__(self, x: np.array) -> float:
@@ -715,12 +733,12 @@ class F18(CECCompositeBenchmark):
 
     """
 
-    year = "2005"
-    auxiliary_data = ("o", "M2", "M10", "M30", "M50")
-    dims = 100
-    bias = 10
+    _defaults = ("F18", 100, True, True, True, True, False)
+    _year = "2005"
+    _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
+    _bias = 10
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         sigma = (1, 2, 1.5, 1.5, 1, 1, 1.5, 1.5, 2, 2)
         l = (5 / 16, 5 / 32, 2, 1, 1 / 10, 1 / 20, 20, 10, 1 / 6, 5 / 60)
         functions = (
@@ -735,7 +753,9 @@ class F18(CECCompositeBenchmark):
             n_dim.Griewank(),
             n_dim.Griewank(),
         )
-        super().__init__(sigma, l, functions)
+        args, kwargs, bias = _composite_arguments(args, kwargs, self._bias)
+        CECBenchmark.__init__(self, *args, **kwargs)
+        self._initialize_composition(sigma, l, functions, bias)
 
 
 class F19(CECCompositeBenchmark):
@@ -751,12 +771,12 @@ class F19(CECCompositeBenchmark):
 
     """
 
-    year = "2005"
-    auxiliary_data = ("o", "M2", "M10", "M30", "M50")
-    dims = 100
-    bias = 10
+    _defaults = ("F19", 100, True, True, True, True, False)
+    _year = "2005"
+    _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
+    _bias = 10
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         sigma = (0.1, 2, 1.5, 1.5, 1, 1, 1.5, 1.5, 2, 2)
         l = (0.1 * 5 / 32, 5 / 32, 2, 1, 1 / 10, 1 / 20, 20, 10, 1 / 6, 5 / 60)
         functions = (
@@ -771,7 +791,9 @@ class F19(CECCompositeBenchmark):
             n_dim.Griewank(),
             n_dim.Griewank(),
         )
-        super().__init__(sigma, l, functions)
+        args, kwargs, bias = _composite_arguments(args, kwargs, self._bias)
+        CECBenchmark.__init__(self, *args, **kwargs)
+        self._initialize_composition(sigma, l, functions, bias)
 
 
 class F20(CECCompositeBenchmark):
@@ -787,12 +809,12 @@ class F20(CECCompositeBenchmark):
 
     """
 
-    year = "2005"
-    auxiliary_data = ("o", "M2", "M10", "M30", "M50")
-    dims = 100
-    bias = 10
+    _defaults = ("F20", 100, True, True, True, True, False)
+    _year = "2005"
+    _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
+    _bias = 10
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         sigma = (0.1, 2, 1.5, 1.5, 1, 1, 1.5, 1.5, 2, 2)
         l = (0.1 * 5 / 32, 5 / 32, 2, 1, 1 / 10, 1 / 20, 20, 10, 1 / 6, 5 / 60)
         functions = (
@@ -807,7 +829,9 @@ class F20(CECCompositeBenchmark):
             n_dim.Griewank(),
             n_dim.Griewank(),
         )
-        super().__init__(sigma, l, functions)
+        args, kwargs, bias = _composite_arguments(args, kwargs, self._bias)
+        CECBenchmark.__init__(self, *args, **kwargs)
+        self._initialize_composition(sigma, l, functions, bias)
 
     @d.check_exact_dimension_and_auxiliary_matrix
     def __call__(self, x: np.array) -> float:
@@ -877,12 +901,12 @@ class F21(CECCompositeBenchmark):
 
     """
 
-    year = "2005"
-    auxiliary_data = ("o", "M2", "M10", "M30", "M50")
-    dims = 100
-    bias = 360
+    _defaults = ("F21", 100, True, True, True, True, False)
+    _year = "2005"
+    _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
+    _bias = 360
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         sigma = (1, 1, 1, 1, 1, 2, 2, 2, 2, 2)
         l = (1 / 4, 5 / 100, 5, 1, 5, 1, 50, 10, 1 / 8, 5 / 200)
         functions = (
@@ -897,7 +921,9 @@ class F21(CECCompositeBenchmark):
             n_dim.Griewank(),
             n_dim.Griewank(),
         )
-        super().__init__(sigma, l, functions)
+        args, kwargs, bias = _composite_arguments(args, kwargs, self._bias)
+        CECBenchmark.__init__(self, *args, **kwargs)
+        self._initialize_composition(sigma, l, functions, bias)
 
 
 class F22(CECCompositeBenchmark):
@@ -913,12 +939,12 @@ class F22(CECCompositeBenchmark):
 
     """
 
-    year = "2005"
-    auxiliary_data = ("o", "M2", "M10", "M30", "M50")
-    dims = 100
-    bias = 360
+    _defaults = ("F22", 100, True, True, True, True, False)
+    _year = "2005"
+    _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
+    _bias = 360
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         sigma = (1, 1, 1, 1, 1, 2, 2, 2, 2, 2)
         l = (1 / 4, 5 / 100, 5, 1, 5, 1, 50, 10, 1 / 8, 5 / 200)
         functions = (
@@ -933,7 +959,9 @@ class F22(CECCompositeBenchmark):
             n_dim.Griewank(),
             n_dim.Griewank(),
         )
-        super().__init__(sigma, l, functions)
+        args, kwargs, bias = _composite_arguments(args, kwargs, self._bias)
+        CECBenchmark.__init__(self, *args, **kwargs)
+        self._initialize_composition(sigma, l, functions, bias)
 
 
 class F23(CECCompositeBenchmark):
@@ -949,12 +977,12 @@ class F23(CECCompositeBenchmark):
 
     """
 
-    year = "2005"
-    auxiliary_data = ("o", "M2", "M10", "M30", "M50")
-    dims = 100
-    bias = 360
+    _defaults = ("F23", 100, False, True, False, True, False)
+    _year = "2005"
+    _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
+    _bias = 360
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         sigma = (1, 1, 1, 1, 1, 2, 2, 2, 2, 2)
         l = (1 / 4, 5 / 100, 5, 1, 5, 1, 50, 10, 1 / 8, 5 / 200)
         functions = (
@@ -969,7 +997,9 @@ class F23(CECCompositeBenchmark):
             n_dim.Griewank(),
             n_dim.Griewank(),
         )
-        super().__init__(sigma, l, functions)
+        args, kwargs, bias = _composite_arguments(args, kwargs, self._bias)
+        CECBenchmark.__init__(self, *args, **kwargs)
+        self._initialize_composition(sigma, l, functions, bias)
 
     @d.check_exact_dimension_and_auxiliary_matrix
     def __call__(self, x: np.array) -> float:
@@ -1037,12 +1067,12 @@ class F24(CECCompositeBenchmark):
 
     """
 
-    year = "2005"
-    auxiliary_data = ("o", "M2", "M10", "M30", "M50")
-    dims = 100
-    bias = 260
+    _defaults = ("F24", 100, True, True, True, True, False)
+    _year = "2005"
+    _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
+    _bias = 260
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         sigma = (2, 2, 2, 2, 2, 2, 2, 2, 2, 2)
         l = (10, 1 / 4, 1, 5 / 32, 1, 5 / 100, 1 / 10, 1, 5 / 100, 5 / 100)
         functions = (
@@ -1057,7 +1087,9 @@ class F24(CECCompositeBenchmark):
             n_dim.HighConditionedElliptic(),
             n_dim.SphereWithNoise(),
         )
-        super().__init__(sigma, l, functions)
+        args, kwargs, bias = _composite_arguments(args, kwargs, self._bias)
+        CECBenchmark.__init__(self, *args, **kwargs)
+        self._initialize_composition(sigma, l, functions, bias)
 
 
 class F25(CECCompositeBenchmark):
@@ -1073,12 +1105,12 @@ class F25(CECCompositeBenchmark):
 
     """
 
-    year = "2005"
-    auxiliary_data = ("o", "M2", "M10", "M30", "M50")
-    dims = 100
-    bias = 260
+    _defaults = ("F25", 100, True, True, True, True, False)
+    _year = "2005"
+    _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
+    _bias = 260
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         sigma = (2, 2, 2, 2, 2, 2, 2, 2, 2, 2)
         l = (10, 1 / 4, 1, 5 / 32, 1, 5 / 100, 1 / 10, 1, 5 / 100, 5 / 100)
         functions = (
@@ -1093,4 +1125,6 @@ class F25(CECCompositeBenchmark):
             n_dim.HighConditionedElliptic(),
             n_dim.SphereWithNoise(),
         )
-        super().__init__(sigma, l, functions)
+        args, kwargs, bias = _composite_arguments(args, kwargs, self._bias)
+        CECBenchmark.__init__(self, *args, **kwargs)
+        self._initialize_composition(sigma, l, functions, bias)

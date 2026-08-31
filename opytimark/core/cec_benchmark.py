@@ -2,41 +2,106 @@
 
 import numpy as np
 
-from opytimark.core.benchmark import Benchmark
-from opytimark.utils.decorator import check_exact_dimension_and_auxiliary_matrix
-from opytimark.utils.loader import load_cec_auxiliary
+import opytimark.utils.decorator as d
+import opytimark.utils.exception as e
+import opytimark.utils.loader as ld
+from opytimark.core.benchmark import _MISSING, Benchmark
 
 
 class CECBenchmark(Benchmark):
-    """Base class for CEC benchmarks backed by bundled auxiliary data."""
+    """Base class for CEC benchmarks backed by auxiliary data."""
 
-    year = ""
-    auxiliary_data = ()
+    _year = ""
+    _auxiliary_data = ()
 
-    def __init__(self):
-        name = type(self).__name__
-        for variable in self.auxiliary_data:
-            setattr(
-                self,
-                variable,
-                load_cec_auxiliary(f"{name}_{variable}", self.year),
-            )
+    def __init__(
+        self,
+        name=_MISSING,
+        year=_MISSING,
+        auxiliary_data=_MISSING,
+        dims=_MISSING,
+        continuous=_MISSING,
+        convex=_MISSING,
+        differentiable=_MISSING,
+        multimodal=_MISSING,
+        separable=_MISSING,
+    ):
+        super().__init__(
+            name,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
+        self.year = self._year if year is _MISSING else year
+        data = self._auxiliary_data if auxiliary_data is _MISSING else auxiliary_data
+        self._load_auxiliary_data(self.name, self.year, data)
+
+    @property
+    def year(self):
+        return self._year_value
+
+    @year.setter
+    def year(self, year):
+        if not isinstance(year, str):
+            raise e.TypeError("`year` should be a string")
+        self._year_value = year
+
+    def _load_auxiliary_data(self, name, year, data):
+        for variable in data:
+            setattr(self, variable, ld.load_cec_auxiliary(f"{name}_{variable}", year))
 
 
 class CECCompositeBenchmark(CECBenchmark):
     """Base class for CEC composite benchmarks."""
 
-    C = 2000
-    f_bias = tuple(range(0, 1000, 100))
-    bias = 1
+    _bias = 1
 
-    def __init__(self, sigma, scale, functions):
-        super().__init__()
+    def __init__(
+        self,
+        name=_MISSING,
+        year=_MISSING,
+        auxiliary_data=_MISSING,
+        sigma=(),
+        l=(),
+        functions=(),
+        bias=_MISSING,
+        dims=_MISSING,
+        continuous=_MISSING,
+        convex=_MISSING,
+        differentiable=_MISSING,
+        multimodal=_MISSING,
+        separable=_MISSING,
+    ):
+        super().__init__(
+            name,
+            year,
+            auxiliary_data,
+            dims,
+            continuous,
+            convex,
+            differentiable,
+            multimodal,
+            separable,
+        )
+        self._initialize_composition(
+            sigma,
+            l,
+            functions,
+            self._bias if bias is _MISSING else bias,
+        )
+
+    def _initialize_composition(self, sigma, scale, functions, bias):
         self.sigma = sigma
         self.l = scale
         self.f = functions
+        self.bias = bias
+        self.C = 2000
+        self.f_bias = (0, 100, 200, 300, 400, 500, 600, 700, 800, 900)
 
-    @check_exact_dimension_and_auxiliary_matrix
+    @d.check_exact_dimension_and_auxiliary_matrix
     def __call__(self, x):
         dimension = x.shape[0]
         weights = np.zeros(len(self.f))
@@ -60,8 +125,9 @@ class CECCompositeBenchmark(CECBenchmark):
                 / maxima[index]
             )
 
+        weight_sum = np.sum(weights)
         maximum = np.max(weights)
         weights[weights != maximum] *= 1 - maximum**10
-        weights /= np.sum(weights)
+        weights /= weight_sum
 
         return np.matmul(weights, fitness + self.f_bias) + self.bias

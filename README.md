@@ -4,12 +4,12 @@
 [![CI](https://github.com/gugarosa/opytimark/actions/workflows/ci.yml/badge.svg)](https://github.com/gugarosa/opytimark/actions/workflows/ci.yml)
 [![Documentation](https://readthedocs.org/projects/opytimark/badge/?version=latest)](https://opytimark.readthedocs.io)
 [![Open issues](https://img.shields.io/github/issues/gugarosa/opytimark.svg)](https://github.com/gugarosa/opytimark/issues)
-[![License](https://img.shields.io/github/license/gugarosa/opytimark.svg)](https://github.com/gugarosa/opytimark/blob/master/LICENSE)
+[![License](https://img.shields.io/github/license/gugarosa/opytimark.svg)](https://github.com/gugarosa/opytimark/blob/main/LICENSE)
 
 Opytimark provides ready-to-use benchmark functions for evaluating optimization
 algorithms.
 
-Opytimark requires Python 3.11 or newer. Read the full API reference at
+Opytimark supports Python 3.6 or newer. Read the full API reference at
 [opytimark.readthedocs.io](https://opytimark.readthedocs.io).
 
 ## Installation

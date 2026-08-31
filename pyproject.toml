@@ -1,15 +1,18 @@
 [build-system]
-requires = ["setuptools>=77"]
+requires = [
+    "setuptools==59.6.0; python_version < '3.7'",
+    "setuptools>=61; python_version >= '3.7'",
+    "wheel",
+]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "opytimark"
-version = "2.0.0"
+dynamic = ["version"]
 description = "Python Optimization Benchmarking Functions"
 readme = "README.md"
-requires-python = ">=3.11"
-license = "Apache-2.0"
-license-files = ["LICENSE"]
+requires-python = ">=3.6"
+license = { text = "Apache 2.0" }
 authors = [
     { name = "Gustavo Rosa", email = "gustavo.rosa@unesp.br" },
 ]
@@ -18,6 +21,12 @@ classifiers = [
     "Intended Audience :: Developers",
     "Intended Audience :: Education",
     "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
@@ -28,6 +37,17 @@ dependencies = [
     "numpy>=1.19.5",
 ]
 
+[project.optional-dependencies]
+tests = [
+    "coverage",
+    "pytest",
+    "pytest-pep8",
+]
+dev = [
+    "pre-commit>=2.17.0; python_full_version >= '3.6.1'",
+    "pylint>=2.7.2; python_full_version >= '3.6.2'",
+]
+
 [project.urls]
 Homepage = "https://github.com/gugarosa/opytimark"
 Documentation = "https://opytimark.readthedocs.io"
@@ -35,22 +55,30 @@ Issues = "https://github.com/gugarosa/opytimark/issues"
 
 [dependency-groups]
 dev = [
-    "pre-commit>=2.17.0",
-    "pytest>=9.1.1",
+    "coverage>=5.5",
+    "pre-commit>=2.17.0; python_full_version >= '3.6.1'",
+    "pylint>=2.7.2; python_full_version >= '3.6.2'",
+    "pytest>=6.2.2",
 ]
 docs = [
-    "sphinx>=9",
+    "sphinx>=3.0.3",
 ]
+
+[tool.uv]
+environments = ["python_version >= '3.8'"]
+
+[tool.setuptools.dynamic]
+version = { attr = "opytimark.__version__" }
 
 [tool.setuptools.packages.find]
 include = ["opytimark*"]
 
-[tool.setuptools.data-files]
-data = ["data/*.tar.gz"]
+[tool.setuptools.package-data]
+"opytimark.data" = ["*.tar.gz"]
 
 [tool.black]
 line-length = 88
-target-version = ["py311"]
+target-version = ["py36"]
 
 [tool.isort]
 profile = "black"

@@ -4,9 +4,22 @@ import numpy as np
 
 import opytimark.markers.n_dimensional as n_dim
 import opytimark.utils.decorator as d
+import opytimark.utils.exception as e
 from opytimark.core import CECBenchmark
 
 np.random.seed(0)
+
+
+def _group_arguments(args, kwargs):
+    kwargs = kwargs.copy()
+    if len(args) > 4:
+        if "group_size" in kwargs:
+            raise TypeError("group_size specified by both position and keyword")
+        group_size = args[4]
+        args = args[:4] + args[5:]
+    else:
+        group_size = kwargs.pop("group_size", 50)
+    return args, kwargs, group_size
 
 
 class F1(CECBenchmark):
@@ -22,9 +35,9 @@ class F1(CECBenchmark):
 
     """
 
-    year = "2010"
-    auxiliary_data = ("o",)
-    dims = 1000
+    _defaults = ("F1", 1000, True, True, True, False, True)
+    _year = "2010"
+    _auxiliary_data = ("o",)
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
@@ -55,9 +68,9 @@ class F2(CECBenchmark):
 
     """
 
-    year = "2010"
-    auxiliary_data = ("o",)
-    dims = 1000
+    _defaults = ("F2", 1000, True, True, True, True, True)
+    _year = "2010"
+    _auxiliary_data = ("o",)
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
@@ -84,9 +97,9 @@ class F3(CECBenchmark):
 
     """
 
-    year = "2010"
-    auxiliary_data = ("o",)
-    dims = 1000
+    _defaults = ("F3", 1000, True, True, True, True, True)
+    _year = "2010"
+    _auxiliary_data = ("o",)
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
@@ -122,12 +135,13 @@ class F4(CECBenchmark):
 
     """
 
-    year = "2010"
-    auxiliary_data = ("o", "M")
-    dims = 1000
+    _defaults = ("F4", 1000, True, True, True, False, False)
+    _year = "2010"
+    _auxiliary_data = ("o", "M")
 
-    def __init__(self, group_size=50):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        args, kwargs, group_size = _group_arguments(args, kwargs)
+        super().__init__(*args, **kwargs)
         self.m = group_size
         self.f = n_dim.HighConditionedElliptic()
 
@@ -140,7 +154,7 @@ class F4(CECBenchmark):
         # If group size is bigger or equal to number of dimensions
         if self.m >= D:
             # Raises an error
-            raise ValueError(
+            raise e.SizeError(
                 "`group_size` should be smaller than number of input dimensions"
             )
 
@@ -172,12 +186,13 @@ class F5(CECBenchmark):
 
     """
 
-    year = "2010"
-    auxiliary_data = ("o", "M")
-    dims = 1000
+    _defaults = ("F5", 1000, True, True, True, True, False)
+    _year = "2010"
+    _auxiliary_data = ("o", "M")
 
-    def __init__(self, group_size=50):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        args, kwargs, group_size = _group_arguments(args, kwargs)
+        super().__init__(*args, **kwargs)
         self.m = group_size
         self.f = n_dim.Rastrigin()
 
@@ -190,7 +205,7 @@ class F5(CECBenchmark):
         # If group size is bigger or equal to number of dimensions
         if self.m >= D:
             # Raises an error
-            raise ValueError(
+            raise e.SizeError(
                 "`group_size` should be smaller than number of input dimensions"
             )
 
@@ -222,12 +237,13 @@ class F6(CECBenchmark):
 
     """
 
-    year = "2010"
-    auxiliary_data = ("o", "M")
-    dims = 1000
+    _defaults = ("F6", 1000, True, True, True, True, False)
+    _year = "2010"
+    _auxiliary_data = ("o", "M")
 
-    def __init__(self, group_size=50):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        args, kwargs, group_size = _group_arguments(args, kwargs)
+        super().__init__(*args, **kwargs)
         self.m = group_size
         self.f = n_dim.Ackley1()
 
@@ -240,7 +256,7 @@ class F6(CECBenchmark):
         # If group size is bigger or equal to number of dimensions
         if self.m >= D:
             # Raises an error
-            raise ValueError(
+            raise e.SizeError(
                 "`group_size` should be smaller than number of input dimensions"
             )
 
@@ -272,12 +288,13 @@ class F7(CECBenchmark):
 
     """
 
-    year = "2010"
-    auxiliary_data = ("o",)
-    dims = 1000
+    _defaults = ("F7", 1000, True, True, True, False, False)
+    _year = "2010"
+    _auxiliary_data = ("o",)
 
-    def __init__(self, group_size=50):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        args, kwargs, group_size = _group_arguments(args, kwargs)
+        super().__init__(*args, **kwargs)
         self.m = group_size
         self.f_1 = n_dim.RotatedHyperEllipsoid()
         self.f_2 = n_dim.Sphere()
@@ -291,7 +308,7 @@ class F7(CECBenchmark):
         # If group size is bigger or equal to number of dimensions
         if self.m >= D:
             # Raises an error
-            raise ValueError(
+            raise e.SizeError(
                 "`group_size` should be smaller than number of input dimensions"
             )
 
@@ -323,12 +340,13 @@ class F8(CECBenchmark):
 
     """
 
-    year = "2010"
-    auxiliary_data = ("o",)
-    dims = 1000
+    _defaults = ("F8", 1000, True, True, True, True, False)
+    _year = "2010"
+    _auxiliary_data = ("o",)
 
-    def __init__(self, group_size=50):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        args, kwargs, group_size = _group_arguments(args, kwargs)
+        super().__init__(*args, **kwargs)
         self.m = group_size
         self.f_1 = n_dim.Rosenbrock()
         self.f_2 = n_dim.Sphere()
@@ -342,7 +360,7 @@ class F8(CECBenchmark):
         # If group size is bigger or equal to number of dimensions
         if self.m >= D:
             # Raises an error
-            raise ValueError(
+            raise e.SizeError(
                 "`group_size` should be smaller than number of input dimensions"
             )
 
@@ -374,12 +392,13 @@ class F9(CECBenchmark):
 
     """
 
-    year = "2010"
-    auxiliary_data = ("o", "M")
-    dims = 1000
+    _defaults = ("F9", 1000, True, True, True, False, False)
+    _year = "2010"
+    _auxiliary_data = ("o", "M")
 
-    def __init__(self, group_size=50):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        args, kwargs, group_size = _group_arguments(args, kwargs)
+        super().__init__(*args, **kwargs)
         self.m = group_size
         self.f = n_dim.HighConditionedElliptic()
 
@@ -394,7 +413,7 @@ class F9(CECBenchmark):
         # If group size is bigger or equal to number of dimensions
         if self.m >= D:
             # Raises an error
-            raise ValueError(
+            raise e.SizeError(
                 "`group_size` should be smaller than number of input dimensions"
             )
 
@@ -436,12 +455,13 @@ class F10(CECBenchmark):
 
     """
 
-    year = "2010"
-    auxiliary_data = ("o", "M")
-    dims = 1000
+    _defaults = ("F10", 1000, True, True, True, True, False)
+    _year = "2010"
+    _auxiliary_data = ("o", "M")
 
-    def __init__(self, group_size=50):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        args, kwargs, group_size = _group_arguments(args, kwargs)
+        super().__init__(*args, **kwargs)
         self.m = group_size
         self.f = n_dim.Rastrigin()
 
@@ -456,7 +476,7 @@ class F10(CECBenchmark):
         # If group size is bigger or equal to number of dimensions
         if self.m >= D:
             # Raises an error
-            raise ValueError(
+            raise e.SizeError(
                 "`group_size` should be smaller than number of input dimensions"
             )
 
@@ -498,12 +518,13 @@ class F11(CECBenchmark):
 
     """
 
-    year = "2010"
-    auxiliary_data = ("o", "M")
-    dims = 1000
+    _defaults = ("F11", 1000, True, True, True, True, False)
+    _year = "2010"
+    _auxiliary_data = ("o", "M")
 
-    def __init__(self, group_size=50):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        args, kwargs, group_size = _group_arguments(args, kwargs)
+        super().__init__(*args, **kwargs)
         self.m = group_size
         self.f = n_dim.Ackley1()
 
@@ -518,7 +539,7 @@ class F11(CECBenchmark):
         # If group size is bigger or equal to number of dimensions
         if self.m >= D:
             # Raises an error
-            raise ValueError(
+            raise e.SizeError(
                 "`group_size` should be smaller than number of input dimensions"
             )
 
@@ -560,12 +581,13 @@ class F12(CECBenchmark):
 
     """
 
-    year = "2010"
-    auxiliary_data = ("o",)
-    dims = 1000
+    _defaults = ("F12", 1000, True, True, True, False, False)
+    _year = "2010"
+    _auxiliary_data = ("o",)
 
-    def __init__(self, group_size=50):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        args, kwargs, group_size = _group_arguments(args, kwargs)
+        super().__init__(*args, **kwargs)
         self.m = group_size
         self.f_1 = n_dim.RotatedHyperEllipsoid()
         self.f_2 = n_dim.Sphere()
@@ -581,7 +603,7 @@ class F12(CECBenchmark):
         # If group size is bigger or equal to number of dimensions
         if self.m >= D:
             # Raises an error
-            raise ValueError(
+            raise e.SizeError(
                 "`group_size` should be smaller than number of input dimensions"
             )
 
@@ -623,12 +645,13 @@ class F13(CECBenchmark):
 
     """
 
-    year = "2010"
-    auxiliary_data = ("o",)
-    dims = 1000
+    _defaults = ("F13", 1000, True, True, True, True, False)
+    _year = "2010"
+    _auxiliary_data = ("o",)
 
-    def __init__(self, group_size=50):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        args, kwargs, group_size = _group_arguments(args, kwargs)
+        super().__init__(*args, **kwargs)
         self.m = group_size
         self.f_1 = n_dim.Rosenbrock()
         self.f_2 = n_dim.Sphere()
@@ -644,7 +667,7 @@ class F13(CECBenchmark):
         # If group size is bigger or equal to number of dimensions
         if self.m >= D:
             # Raises an error
-            raise ValueError(
+            raise e.SizeError(
                 "`group_size` should be smaller than number of input dimensions"
             )
 
@@ -686,12 +709,13 @@ class F14(CECBenchmark):
 
     """
 
-    year = "2010"
-    auxiliary_data = ("o", "M")
-    dims = 1000
+    _defaults = ("F14", 1000, True, True, True, False, False)
+    _year = "2010"
+    _auxiliary_data = ("o", "M")
 
-    def __init__(self, group_size=50):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        args, kwargs, group_size = _group_arguments(args, kwargs)
+        super().__init__(*args, **kwargs)
         self.m = group_size
         self.f = n_dim.HighConditionedElliptic()
 
@@ -706,7 +730,7 @@ class F14(CECBenchmark):
         # If group size is bigger or equal to number of dimensions
         if self.m >= D:
             # Raises an error
-            raise ValueError(
+            raise e.SizeError(
                 "`group_size` should be smaller than number of input dimensions"
             )
 
@@ -741,12 +765,13 @@ class F15(CECBenchmark):
 
     """
 
-    year = "2010"
-    auxiliary_data = ("o", "M")
-    dims = 1000
+    _defaults = ("F15", 1000, True, True, True, True, False)
+    _year = "2010"
+    _auxiliary_data = ("o", "M")
 
-    def __init__(self, group_size=50):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        args, kwargs, group_size = _group_arguments(args, kwargs)
+        super().__init__(*args, **kwargs)
         self.m = group_size
         self.f = n_dim.Rastrigin()
 
@@ -761,7 +786,7 @@ class F15(CECBenchmark):
         # If group size is bigger or equal to number of dimensions
         if self.m >= D:
             # Raises an error
-            raise ValueError(
+            raise e.SizeError(
                 "`group_size` should be smaller than number of input dimensions"
             )
 
@@ -796,12 +821,13 @@ class F16(CECBenchmark):
 
     """
 
-    year = "2010"
-    auxiliary_data = ("o", "M")
-    dims = 1000
+    _defaults = ("F16", 1000, True, True, True, True, False)
+    _year = "2010"
+    _auxiliary_data = ("o", "M")
 
-    def __init__(self, group_size=50):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        args, kwargs, group_size = _group_arguments(args, kwargs)
+        super().__init__(*args, **kwargs)
         self.m = group_size
         self.f = n_dim.Ackley1()
 
@@ -816,7 +842,7 @@ class F16(CECBenchmark):
         # If group size is bigger or equal to number of dimensions
         if self.m >= D:
             # Raises an error
-            raise ValueError(
+            raise e.SizeError(
                 "`group_size` should be smaller than number of input dimensions"
             )
 
@@ -851,12 +877,13 @@ class F17(CECBenchmark):
 
     """
 
-    year = "2010"
-    auxiliary_data = ("o",)
-    dims = 1000
+    _defaults = ("F17", 1000, True, True, True, False, False)
+    _year = "2010"
+    _auxiliary_data = ("o",)
 
-    def __init__(self, group_size=50):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        args, kwargs, group_size = _group_arguments(args, kwargs)
+        super().__init__(*args, **kwargs)
         self.m = group_size
         self.f = n_dim.RotatedHyperEllipsoid()
 
@@ -871,7 +898,7 @@ class F17(CECBenchmark):
         # If group size is bigger or equal to number of dimensions
         if self.m >= D:
             # Raises an error
-            raise ValueError(
+            raise e.SizeError(
                 "`group_size` should be smaller than number of input dimensions"
             )
 
@@ -906,12 +933,13 @@ class F18(CECBenchmark):
 
     """
 
-    year = "2010"
-    auxiliary_data = ("o",)
-    dims = 1000
+    _defaults = ("F18", 1000, True, True, True, True, False)
+    _year = "2010"
+    _auxiliary_data = ("o",)
 
-    def __init__(self, group_size=50):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        args, kwargs, group_size = _group_arguments(args, kwargs)
+        super().__init__(*args, **kwargs)
         self.m = group_size
         self.f = n_dim.Rosenbrock()
 
@@ -926,7 +954,7 @@ class F18(CECBenchmark):
         # If group size is bigger or equal to number of dimensions
         if self.m >= D:
             # Raises an error
-            raise ValueError(
+            raise e.SizeError(
                 "`group_size` should be smaller than number of input dimensions"
             )
 
@@ -963,9 +991,9 @@ class F19(CECBenchmark):
 
     """
 
-    year = "2010"
-    auxiliary_data = ("o",)
-    dims = 1000
+    _defaults = ("F19", 1000, True, True, True, False, False)
+    _year = "2010"
+    _auxiliary_data = ("o",)
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
@@ -999,9 +1027,9 @@ class F20(CECBenchmark):
 
     """
 
-    year = "2010"
-    auxiliary_data = ("o",)
-    dims = 1000
+    _defaults = ("F20", 1000, True, True, True, True, False)
+    _year = "2010"
+    _auxiliary_data = ("o",)
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:

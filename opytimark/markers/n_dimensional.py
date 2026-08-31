@@ -22,7 +22,7 @@ class Ackley1(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Ackley1", -1, True, False, True, True, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -55,7 +55,7 @@ class Ackley4(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Ackley4", -1, True, False, True, True, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -86,7 +86,7 @@ class Alpine1(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Alpine1", -1, True, False, False, True, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -110,7 +110,7 @@ class Alpine2(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Alpine2", -1, True, False, True, True, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -134,7 +134,7 @@ class Brown(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Brown", -1, True, True, True, False, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -164,7 +164,7 @@ class ChungReynolds(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("ChungReynolds", -1, True, True, True, False, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -188,7 +188,7 @@ class CosineMixture(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("CosineMixture", -1, False, False, False, False, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -218,7 +218,7 @@ class Csendes(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Csendes", -1, True, True, True, True, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -242,7 +242,7 @@ class Deb1(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Deb1", -1, True, True, True, True, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -269,7 +269,7 @@ class Deb3(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Deb3", -1, True, True, True, False, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -296,7 +296,7 @@ class DixonPrice(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("DixonPrice", -1, True, True, True, False, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -331,7 +331,7 @@ class Exponential(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Exponential", -1, True, True, True, False, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -355,7 +355,7 @@ class F8F2(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("F8F2", -1, True, False, True, True, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -397,7 +397,7 @@ class Griewank(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Griewank", -1, True, False, True, False, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -432,7 +432,7 @@ class HappyCat(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("HappyCat", -1, True, False, True, False, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -466,7 +466,7 @@ class HighConditionedElliptic(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("HighConditionedElliptic", -1, True, True, True, False, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -494,7 +494,7 @@ class Levy(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Levy", -1, True, True, True, True, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -533,7 +533,7 @@ class Michalewicz(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Michalewicz", -1, True, True, True, True, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -562,7 +562,7 @@ class NonContinuousExpandedScafferF6(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("NonContinuousExpandedScafferF6", -1, False, False, False, True, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -606,7 +606,7 @@ class NonContinuousRastrigin(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("NonContinuousRastrigin", -1, False, True, False, True, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -633,7 +633,7 @@ class Pathological(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Pathological", -1, True, True, True, False, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -664,7 +664,7 @@ class Periodic(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Periodic", -1, True, False, True, False, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -688,7 +688,7 @@ class Perm0DBeta(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Perm0DBeta", -1, True, True, True, False, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -719,7 +719,7 @@ class PermDBeta(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("PermDBeta", -1, True, True, True, False, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -752,7 +752,7 @@ class PowellSingular2(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("PowellSingular2", -1, True, True, False, False, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -786,7 +786,7 @@ class PowellSum(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("PowellSum", -1, True, True, False, False, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -815,7 +815,7 @@ class Qing(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Qing", -1, True, False, True, True, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -844,7 +844,7 @@ class Quartic(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Quartic", -1, True, False, True, False, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -873,7 +873,7 @@ class Quintic(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Quintic", -1, True, True, True, True, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -897,7 +897,7 @@ class Rana(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Rana", -1, True, True, True, True, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -934,7 +934,7 @@ class Rastrigin(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Rastrigin", -1, True, True, True, True, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -958,7 +958,7 @@ class Ridge(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Ridge", -1, True, False, True, False, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -982,7 +982,7 @@ class Rosenbrock(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Rosenbrock", -1, True, True, True, False, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1011,7 +1011,7 @@ class RotatedExpandedScafferF6(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("RotatedExpandedScafferF6", -1, True, False, True, True, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1052,7 +1052,7 @@ class RotatedHyperEllipsoid(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("RotatedHyperEllipsoid", -1, True, True, True, False, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1083,7 +1083,7 @@ class Salomon(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Salomon", -1, True, False, True, True, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1107,7 +1107,7 @@ class SchumerSteiglitz(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("SchumerSteiglitz", -1, True, True, True, False, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1131,7 +1131,7 @@ class Schwefel(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Schwefel", -1, True, False, False, True, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1155,7 +1155,7 @@ class Schwefel220(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Schwefel220", -1, True, True, False, False, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1179,7 +1179,7 @@ class Schwefel221(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Schwefel221", -1, True, True, False, False, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1203,7 +1203,7 @@ class Schwefel222(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Schwefel222", -1, True, True, True, False, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1227,7 +1227,7 @@ class Schwefel223(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Schwefel223", -1, True, True, True, False, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1251,7 +1251,7 @@ class Schwefel225(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Schwefel225", -1, True, True, True, True, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1280,7 +1280,7 @@ class Schwefel226(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Schwefel226", -1, True, True, True, True, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1304,7 +1304,7 @@ class Shubert(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Shubert", -1, True, False, True, True, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1335,7 +1335,7 @@ class Shubert3(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Shubert3", -1, True, False, True, True, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1366,7 +1366,7 @@ class Shubert4(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Shubert4", -1, True, False, True, True, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1397,7 +1397,7 @@ class SchafferF6(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("SchafferF6", -1, True, False, True, True, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1428,7 +1428,7 @@ class Sphere(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Sphere", -1, True, True, True, False, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1452,7 +1452,7 @@ class SphereWithNoise(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("SphereWithNoise", -1, True, True, True, False, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1479,7 +1479,7 @@ class Step(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Step", -1, False, False, False, False, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1503,7 +1503,7 @@ class Step2(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Step2", -1, False, False, False, False, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1527,7 +1527,7 @@ class Step3(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Step3", -1, False, False, False, False, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1551,7 +1551,7 @@ class StrechedVSineWave(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("StrechedVSineWave", -1, True, True, True, False, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1582,7 +1582,7 @@ class StyblinskiTang(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("StyblinskiTang", -1, True, False, True, True, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1606,7 +1606,7 @@ class SumDifferentPowers(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("SumDifferentPowers", -1, True, True, True, False, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1635,7 +1635,7 @@ class SumSquares(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("SumSquares", -1, True, True, True, False, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1664,7 +1664,7 @@ class Trid(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Trid", -1, True, True, True, True, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1694,7 +1694,7 @@ class Trigonometric1(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Trigonometric1", -1, True, True, True, False, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1734,7 +1734,7 @@ class Trigonometric2(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Trigonometric2", -1, True, True, True, True, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1767,7 +1767,7 @@ class Wavy(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Wavy", -1, True, True, True, True, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1791,7 +1791,7 @@ class Weierstrass(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Weierstrass", -1, True, True, True, True, False)
 
     def __call__(self, x: np.array) -> float:
 
@@ -1827,7 +1827,7 @@ class XinSheYang(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("XinSheYang", -1, True, False, False, True, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1856,7 +1856,7 @@ class XinSheYang2(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("XinSheYang2", -1, True, False, False, True, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1880,7 +1880,7 @@ class XinSheYang3(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("XinSheYang3", -1, True, False, True, False, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1906,7 +1906,7 @@ class XinSheYang4(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("XinSheYang4", -1, True, False, False, True, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
@@ -1932,7 +1932,7 @@ class Zakharov(Benchmark):
 
     """
 
-    dims = -1
+    _defaults = ("Zakharov", -1, True, True, True, False, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:

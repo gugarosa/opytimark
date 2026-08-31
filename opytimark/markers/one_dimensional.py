@@ -20,6 +20,8 @@ class Forrester(Benchmark):
 
     """
 
+    _defaults = ("Forrester", 1, True, False, True, True, True)
+
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
 
@@ -41,6 +43,8 @@ class GramacyLee(Benchmark):
         :math:`f(x^*) = -0.8690111349894997 \mid x^* = (0.548563444114526)`.
 
     """
+
+    _defaults = ("GramacyLee", 1, True, False, True, False, True)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:

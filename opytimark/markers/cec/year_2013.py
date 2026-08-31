@@ -7,6 +7,7 @@ import numpy as np
 import opytimark.markers.n_dimensional as n_dim
 import opytimark.utils.constants as c
 import opytimark.utils.decorator as d
+import opytimark.utils.exception as e
 from opytimark.core import CECBenchmark
 
 np.random.seed(0)
@@ -103,9 +104,9 @@ class F1(CECBenchmark):
 
     """
 
-    year = "2013"
-    auxiliary_data = ("o",)
-    dims = 1000
+    _defaults = ("F1", 1000, True, True, True, False, True)
+    _year = "2013"
+    _auxiliary_data = ("o",)
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
@@ -136,9 +137,9 @@ class F2(CECBenchmark):
 
     """
 
-    year = "2013"
-    auxiliary_data = ("o",)
-    dims = 1000
+    _defaults = ("F2", 1000, True, True, True, True, True)
+    _year = "2013"
+    _auxiliary_data = ("o",)
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
@@ -168,9 +169,9 @@ class F3(CECBenchmark):
 
     """
 
-    year = "2013"
-    auxiliary_data = ("o",)
-    dims = 1000
+    _defaults = ("F3", 1000, True, True, True, True, True)
+    _year = "2013"
+    _auxiliary_data = ("o",)
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
@@ -209,12 +210,12 @@ class F4(CECBenchmark):
 
     """
 
-    year = "2013"
-    auxiliary_data = ("o", "R25", "R50", "R100")
-    dims = 1000
+    _defaults = ("F4", 1000, True, True, True, False, False)
+    _year = "2013"
+    _auxiliary_data = ("o", "R25", "R50", "R100")
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.S = [50, 25, 25, 100, 50, 25, 25]
         self.W = [45.6996, 1.5646, 18465.3234, 0.011, 13.6259, 0.3015, 59.6078]
         self.f = n_dim.HighConditionedElliptic()
@@ -232,7 +233,7 @@ class F4(CECBenchmark):
         # Checks if number of dimensions is valid
         if D < 302:
             # Raises an error
-            raise ValueError("`D` should be greater than 302")
+            raise e.SizeError("`D` should be greater than 302")
 
         # Re-calculates the input and permutes its input
         y = x - self.o[:D]
@@ -283,12 +284,12 @@ class F5(CECBenchmark):
 
     """
 
-    year = "2013"
-    auxiliary_data = ("o", "R25", "R50", "R100")
-    dims = 1000
+    _defaults = ("F5", 1000, True, True, True, True, False)
+    _year = "2013"
+    _auxiliary_data = ("o", "R25", "R50", "R100")
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.S = [50, 25, 25, 100, 50, 25, 25]
         self.W = [0.1807, 9081.1379, 24.2718, 1.863e-06, 17698.0807, 0.0002, 0.0152]
         self.f = n_dim.Rastrigin()
@@ -306,7 +307,7 @@ class F5(CECBenchmark):
         # Checks if number of dimensions is valid
         if D < 302:
             # Raises an error
-            raise ValueError("`D` should be greater than 302")
+            raise e.SizeError("`D` should be greater than 302")
 
         # Re-calculates the input and permutes its input
         y = x - self.o[:D]
@@ -365,12 +366,12 @@ class F6(CECBenchmark):
 
     """
 
-    year = "2013"
-    auxiliary_data = ("o", "R25", "R50", "R100")
-    dims = 1000
+    _defaults = ("F6", 1000, True, True, True, True, False)
+    _year = "2013"
+    _auxiliary_data = ("o", "R25", "R50", "R100")
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.S = [50, 25, 25, 100, 50, 25, 25]
         self.W = [0.0352, 5.3156e-05, 0.8707, 49513.742, 0.0831, 3.4764e-05, 282.2934]
         self.f = n_dim.Ackley1()
@@ -388,7 +389,7 @@ class F6(CECBenchmark):
         # Checks if number of dimensions is valid
         if D < 302:
             # Raises an error
-            raise ValueError("`D` should be greater than 302")
+            raise e.SizeError("`D` should be greater than 302")
 
         # Re-calculates the input and permutes its input
         y = x - self.o[:D]
@@ -447,12 +448,12 @@ class F7(CECBenchmark):
 
     """
 
-    year = "2013"
-    auxiliary_data = ("o", "R25", "R50", "R100")
-    dims = 1000
+    _defaults = ("F7", 1000, True, True, True, True, False)
+    _year = "2013"
+    _auxiliary_data = ("o", "R25", "R50", "R100")
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.S = [50, 25, 25, 100, 50, 25, 25]
         self.W = [679.9025, 0.9321, 2122.8501, 0.506, 434.5961, 33389.6244, 2.5692]
         self.f_1 = n_dim.RotatedHyperEllipsoid()
@@ -471,7 +472,7 @@ class F7(CECBenchmark):
         # Checks if number of dimensions is valid
         if D < 302:
             # Raises an error
-            raise ValueError("`D` should be greater than 302")
+            raise e.SizeError("`D` should be greater than 302")
 
         # Re-calculates the input and permutes its input
         y = x - self.o[:D]
@@ -528,12 +529,12 @@ class F8(CECBenchmark):
 
     """
 
-    year = "2013"
-    auxiliary_data = ("o", "R25", "R50", "R100")
-    dims = 1000
+    _defaults = ("F8", 1000, True, True, True, False, False)
+    _year = "2013"
+    _auxiliary_data = ("o", "R25", "R50", "R100")
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.S = [
             50,
             50,
@@ -633,12 +634,12 @@ class F9(CECBenchmark):
 
     """
 
-    year = "2013"
-    auxiliary_data = ("o", "R25", "R50", "R100")
-    dims = 1000
+    _defaults = ("F9", 1000, True, True, True, True, False)
+    _year = "2013"
+    _auxiliary_data = ("o", "R25", "R50", "R100")
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.S = [
             50,
             50,
@@ -743,12 +744,12 @@ class F10(CECBenchmark):
 
     """
 
-    year = "2013"
-    auxiliary_data = ("o", "R25", "R50", "R100")
-    dims = 1000
+    _defaults = ("F10", 1000, True, True, True, True, False)
+    _year = "2013"
+    _auxiliary_data = ("o", "R25", "R50", "R100")
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.S = [
             50,
             50,
@@ -853,12 +854,12 @@ class F11(CECBenchmark):
 
     """
 
-    year = "2013"
-    auxiliary_data = ("o", "R25", "R50", "R100")
-    dims = 1000
+    _defaults = ("F11", 1000, True, True, True, False, False)
+    _year = "2013"
+    _auxiliary_data = ("o", "R25", "R50", "R100")
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.S = [
             50,
             50,
@@ -961,9 +962,9 @@ class F12(CECBenchmark):
 
     """
 
-    year = "2013"
-    auxiliary_data = ("o",)
-    dims = 1000
+    _defaults = ("F12", 1000, True, True, True, True, True)
+    _year = "2013"
+    _auxiliary_data = ("o",)
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
@@ -995,12 +996,12 @@ class F13(CECBenchmark):
 
     """
 
-    year = "2013"
-    auxiliary_data = ("o", "R25", "R50", "R100")
-    dims = 905
+    _defaults = ("F13", 905, True, True, True, False, False)
+    _year = "2013"
+    _auxiliary_data = ("o", "R25", "R50", "R100")
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.S = [
             50,
             50,
@@ -1114,12 +1115,12 @@ class F14(CECBenchmark):
 
     """
 
-    year = "2013"
-    auxiliary_data = ("o", "R25", "R50", "R100")
-    dims = 1000
+    _defaults = ("F14", 1000, True, True, True, False, False)
+    _year = "2013"
+    _auxiliary_data = ("o", "R25", "R50", "R100")
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.S = [
             50,
             50,
@@ -1238,9 +1239,9 @@ class F15(CECBenchmark):
 
     """
 
-    year = "2013"
-    auxiliary_data = ("o",)
-    dims = 1000
+    _defaults = ("F15", 1000, True, True, True, False, False)
+    _year = "2013"
+    _auxiliary_data = ("o",)
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
