@@ -9,7 +9,7 @@
 Opytimark provides ready-to-use benchmark functions for evaluating optimization
 algorithms.
 
-Opytimark supports Python 3.6 or newer. Read the full API reference at
+Opytimark supports Python 3.11 or newer. Read the full API reference at
 [opytimark.readthedocs.io](https://opytimark.readthedocs.io).
 
 ## Installation
