@@ -44,7 +44,7 @@ More examples are available in [`examples/`](examples).
 Imports do not reset NumPy's random state. For reproducible noisy or randomized
 benchmarks, call `np.random.seed(your_seed)` explicitly before the experiment.
 
-The unreleased CEC conditioning, group-rotation, and composition corrections
+The 3.0.1 CEC conditioning, group-rotation, and composition corrections
 change some fitness values relative to 3.0.0. See
 [numerical behavior](docs/numerical_behavior.rst) before comparing old and new
 optimization results.

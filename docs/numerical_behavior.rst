@@ -21,8 +21,8 @@ Some grouped CEC functions draw a new permutation on every evaluation, not just
 at construction. Repeating a point does not therefore imply repeating its
 fitness. This existing permutation policy is unchanged.
 
-Unreleased corrections
-----------------------
+Version 3.0.1 corrections
+-------------------------
 
 The following corrections intentionally change affected fitness values relative
 to version 3.0.0. Compare optimization runs using the same Opytimark revision.
