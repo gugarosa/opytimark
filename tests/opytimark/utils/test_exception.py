@@ -13,5 +13,8 @@ from opytimark.utils import exception
     ],
 )
 def test_custom_exceptions(error):
-    with pytest.raises(exception.Error):
+    with pytest.raises(exception.Error, match="error"):
         raise error
+
+    assert str(error) == "error"
+    assert error.args == ("error",)

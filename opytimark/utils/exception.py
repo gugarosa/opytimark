@@ -5,7 +5,7 @@ class Error(Exception):
     """Base Opytimark exception."""
 
     def __init__(self, cls, msg):
-        super().__init__()
+        super().__init__(msg)
         print(f"{cls}: {msg}.")
 
 
