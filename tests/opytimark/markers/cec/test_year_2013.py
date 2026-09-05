@@ -23,7 +23,7 @@ def test_T_asymmetry():
 def test_T_diagonal():
     M = year_2013.T_diagonal(5, 10)
 
-    assert np.round(np.sum(M), 6) == 7.905694
+    np.testing.assert_allclose(np.diag(M), [10 ** (i / 8) for i in range(5)])
 
 
 def test_F1():

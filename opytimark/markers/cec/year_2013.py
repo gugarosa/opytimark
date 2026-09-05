@@ -1,7 +1,5 @@
 """CEC2013 benchmarking functions."""
 
-import warnings
-
 import numpy as np
 
 import opytimark.markers.n_dimensional as n_dim
@@ -9,8 +7,6 @@ import opytimark.utils.constants as c
 import opytimark.utils.decorator as d
 import opytimark.utils.exception as e
 from opytimark.core import CECBenchmark
-
-np.random.seed(0)
 
 
 def T_irregularity(x: np.array) -> np.array:
@@ -51,24 +47,24 @@ def T_asymmetry(x: np.array, beta: float) -> np.array:
 
     """
 
-    # Gathers the amount of dimensions and calculates an equally-spaced interval between 0 and D-1
-    D = x.shape[0]
-    dims = np.linspace(1, D, D) - 1
-
-    # Activates the context manager for catching warnings
-    with warnings.catch_warnings():
-        # Ignores whenever the np.where raises an invalid square root value
-        # This will ensure that no warnings will be raised when calculating the line below
-        warnings.filterwarnings("ignore", r"invalid value encountered in sqrt")
-
-        # Re-calculates the input
-        x_t = np.where(x > 0, x ** (1 + beta * (dims / (D - 1)) * np.sqrt(x)), x)
-
+    x_t = np.array(x, dtype=np.result_type(x, np.float64), copy=True)
+    positive = x_t > 0
+    exponents = 1 + beta * np.linspace(0, 1, x_t.shape[0])[positive] * np.sqrt(
+        x_t[positive]
+    )
+    x_t[positive] **= exponents
     return x_t
+
+
+def _diagonal_weights(D, alpha):
+    return alpha ** np.linspace(0, 0.5, D)
 
 
 def T_diagonal(D: int, alpha: float) -> np.array:
     """Creates a transformed diagonal matrix used to provide ill-conditioning.
+
+    Its diagonal is ``alpha ** (i / (2 * (D - 1)))`` for zero-based ``i``.
+    For one dimension, the matrix is the identity.
 
     Args:
         D: Amount of dimensions.
@@ -79,16 +75,7 @@ def T_diagonal(D: int, alpha: float) -> np.array:
 
     """
 
-    # Calculates an equally-spaced interval between 0 and D-1
-    dims = np.linspace(1, D, D) - 1
-
-    # Creates an empty matrix
-    M = np.zeros((D, D))
-
-    # Fill the diagonal matrix with the ill-condition
-    np.fill_diagonal(M, alpha**0.5 * (dims / (D - 1)))
-
-    return M
+    return np.diag(_diagonal_weights(D, alpha))
 
 
 class F1(CECBenchmark):
@@ -110,18 +97,8 @@ class F1(CECBenchmark):
 
     @d.check_less_equal_dimension
     def __call__(self, x: np.array) -> float:
-
-        # Defines the number of dimensions and an equally-spaced interval between 0 and D-1
-        D = x.shape[0]
-        dims = np.linspace(1, D, D) - 1
-
-        # Re-calculates the input using the proposed transform
         z = T_irregularity(x - self.o[: x.shape[0]])
-
-        # Calculating the Shifted Elliptic's function
-        z = 10e6 ** (dims / (D - 1)) * z**2
-
-        return np.sum(z)
+        return n_dim._elliptic(z)
 
 
 class F2(CECBenchmark):
@@ -145,10 +122,9 @@ class F2(CECBenchmark):
     def __call__(self, x: np.array) -> float:
 
         # Re-calculates the input using the proposed transforms
-        z = np.matmul(
-            T_asymmetry(T_irregularity(x - self.o[: x.shape[0]]), 0.2),
-            T_diagonal(x.shape[0], 10),
-        )
+        z = T_asymmetry(
+            T_irregularity(x - self.o[: x.shape[0]]), 0.2
+        ) * _diagonal_weights(x.shape[0], 10)
 
         # Calculating the Shifted Rastrigin's function
         f = z**2 - 10 * np.cos(2 * np.pi * z) + 10
@@ -177,10 +153,9 @@ class F3(CECBenchmark):
     def __call__(self, x: np.array) -> float:
 
         # Re-calculates the input using the proposed transforms
-        z = np.matmul(
-            T_asymmetry(T_irregularity(x - self.o[: x.shape[0]]), 0.2),
-            T_diagonal(x.shape[0], 10),
-        )
+        z = T_asymmetry(
+            T_irregularity(x - self.o[: x.shape[0]]), 0.2
+        ) * _diagonal_weights(x.shape[0], 10)
 
         # Calculating the 1 / n term
         inv = 1 / x.shape[0]
@@ -331,9 +306,7 @@ class F5(CECBenchmark):
                 z = np.matmul(self.R100, y[n : n + s])
 
             # Applies the irregulary, asymmetry and diagonal transforms
-            z = np.matmul(
-                T_asymmetry(T_irregularity(z), 0.2), T_diagonal(z.shape[0], 10)
-            )
+            z = T_asymmetry(T_irregularity(z), 0.2) * _diagonal_weights(z.shape[0], 10)
 
             # Sums up the calculated fitness multiplied by its corresponding weight
             f += w * self.f(z)
@@ -345,7 +318,7 @@ class F5(CECBenchmark):
         z = y[n:]
 
         # Applies the irregulary, asymmetry and diagonal transforms
-        z = np.matmul(T_asymmetry(T_irregularity(z), 0.2), T_diagonal(z.shape[0], 10))
+        z = T_asymmetry(T_irregularity(z), 0.2) * _diagonal_weights(z.shape[0], 10)
 
         # Calculates their fitness and sums up to produce the final result
         f += self.f(z)
@@ -413,9 +386,7 @@ class F6(CECBenchmark):
                 z = np.matmul(self.R100, y[n : n + s])
 
             # Applies the irregulary, asymmetry and diagonal transforms
-            z = np.matmul(
-                T_asymmetry(T_irregularity(z), 0.2), T_diagonal(z.shape[0], 10)
-            )
+            z = T_asymmetry(T_irregularity(z), 0.2) * _diagonal_weights(z.shape[0], 10)
 
             # Sums up the calculated fitness multiplied by its corresponding weight
             f += w * self.f(z)
@@ -427,7 +398,7 @@ class F6(CECBenchmark):
         z = y[n:]
 
         # Applies the irregulary, asymmetry and diagonal transforms
-        z = np.matmul(T_asymmetry(T_irregularity(z), 0.2), T_diagonal(z.shape[0], 10))
+        z = T_asymmetry(T_irregularity(z), 0.2) * _diagonal_weights(z.shape[0], 10)
 
         # Calculates their fitness and sums up to produce the final result
         f += self.f(z)
@@ -718,9 +689,7 @@ class F9(CECBenchmark):
                 z = np.matmul(self.R100, y[n : n + s])
 
             # Applies the irregulary, asymmetry and diagonal transforms
-            z = np.matmul(
-                T_asymmetry(T_irregularity(z), 0.2), T_diagonal(z.shape[0], 10)
-            )
+            z = T_asymmetry(T_irregularity(z), 0.2) * _diagonal_weights(z.shape[0], 10)
 
             # Sums up the calculated fitness multiplied by its corresponding weight
             f += w * self.f(z)
@@ -828,9 +797,7 @@ class F10(CECBenchmark):
                 z = np.matmul(self.R100, y[n : n + s])
 
             # Applies the irregulary, asymmetry and diagonal transforms
-            z = np.matmul(
-                T_asymmetry(T_irregularity(z), 0.2), T_diagonal(z.shape[0], 10)
-            )
+            z = T_asymmetry(T_irregularity(z), 0.2) * _diagonal_weights(z.shape[0], 10)
 
             # Sums up the calculated fitness multiplied by its corresponding weight
             f += w * self.f(z)

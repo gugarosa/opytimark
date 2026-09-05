@@ -103,9 +103,13 @@ class CECCompositeBenchmark(CECBenchmark):
 
     @d.check_exact_dimension_and_auxiliary_matrix
     def __call__(self, x):
+        return self._evaluate_composition(x) + self.bias
+
+    def _evaluate_composition(self, x):
+        """Evaluate the weighted components without the overall bias."""
+
         dimension = x.shape[0]
-        weights = np.zeros(len(self.f))
-        maxima = np.zeros(len(self.f))
+        log_weights = np.zeros(len(self.f))
         fitness = np.zeros(len(self.f))
         reference = 5 * np.ones(dimension)
 
@@ -113,21 +117,22 @@ class CECCompositeBenchmark(CECBenchmark):
             start = index * dimension
             end = start + dimension
             shifted = x - self.o[index][:dimension]
-            weights[index] = np.exp(
-                -np.sum(shifted**2) / (2 * dimension * self.sigma[index] ** 2)
+            log_weights[index] = -np.sum(shifted**2) / (
+                2 * dimension * self.sigma[index] ** 2
             )
-            maxima[index] = function(
+            normalizer = function(
                 np.matmul(reference / self.l[index], self.M[start:end])
             )
             fitness[index] = (
                 self.C
                 * function(np.matmul(shifted / self.l[index], self.M[start:end]))
-                / maxima[index]
+                / normalizer
             )
 
-        weight_sum = np.sum(weights)
-        maximum = np.max(weights)
-        weights[weights != maximum] *= 1 - maximum**10
-        weights /= weight_sum
+        # Relative exponentials avoid underflow; attenuation precedes normalization.
+        maximum = np.max(log_weights)
+        weights = np.exp(log_weights - maximum)
+        weights[log_weights != maximum] *= -np.expm1(10 * maximum)
+        weights /= np.sum(weights)
 
-        return np.matmul(weights, fitness + self.f_bias) + self.bias
+        return np.matmul(weights, fitness + self.f_bias)

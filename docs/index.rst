@@ -35,6 +35,7 @@ Evaluate a benchmark:
    :caption: Reference
 
    api
+   numerical_behavior
 
 Indices and tables
 ==================

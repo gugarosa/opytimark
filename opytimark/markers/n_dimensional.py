@@ -6,7 +6,10 @@ import opytimark.utils.constants as c
 import opytimark.utils.decorator as d
 from opytimark.core import Benchmark
 
-np.random.seed(0)
+
+def _elliptic(x):
+    coefficients = 1e6 ** np.linspace(0, 1, x.shape[0])
+    return np.sum(coefficients * x**2)
 
 
 class Ackley1(Benchmark):
@@ -464,20 +467,15 @@ class HighConditionedElliptic(Benchmark):
     Global Minima:
         :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
+    For one input variable, the coefficient is one.
+
     """
 
     _defaults = ("HighConditionedElliptic", -1, True, True, True, False, False)
 
     @d.check_exact_dimension
     def __call__(self, x: np.array) -> float:
-
-        # Calculates an equally-spaced interval between 0 and D-1
-        dims = np.linspace(1, x.shape[0], x.shape[0]) - 1
-
-        # Calculating the HighConditionedElliptic's function
-        x = 10e6 ** (dims / (x.shape[0] - 1)) * x**2
-
-        return np.sum(x)
+        return _elliptic(x)
 
 
 class Levy(Benchmark):

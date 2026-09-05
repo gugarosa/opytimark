@@ -1,12 +1,13 @@
 """CEC auxiliary-data loading."""
 
 import os
-import pkgutil
 import tarfile
 import urllib.request
 from functools import lru_cache
+from importlib.resources import files
 from io import BytesIO
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 import numpy as np
 
@@ -16,38 +17,42 @@ _BASE_URL = "http://recogna.tech/files/opytimark/"
 
 
 def download_file(url, output_path):
-    """Download a file unless it already exists."""
+    """Download a file unless it already exists, publishing only complete data."""
 
     output = Path(output_path)
     if not output.exists():
         output.parent.mkdir(parents=True, exist_ok=True)
-        urllib.request.urlretrieve(url, str(output))
+        with TemporaryDirectory(dir=output.parent) as temporary:
+            downloaded = Path(temporary) / output.name
+            urllib.request.urlretrieve(url, str(downloaded))
+            downloaded.replace(output)
 
 
 def untar_file(file_path):
-    """Extract a ``.tar.gz`` archive once and return its folder."""
+    """Extract a trusted ``.tar.gz`` archive once and return its completed folder."""
 
     archive = Path(file_path)
     folder = Path(str(archive)[: -len(".tar.gz")])
     if not folder.exists():
-        folder.mkdir(parents=True)
-        with tarfile.open(str(archive), "r:gz") as tar:
-            root = os.path.abspath(str(folder))
-            for member in tar.getmembers():
-                target = os.path.abspath(os.path.join(root, member.name))
-                if os.path.commonpath((root, target)) != root:
-                    raise ValueError(f"Unsafe archive member: {member.name}")
-            tar.extractall(str(folder))
+        with TemporaryDirectory(dir=folder.parent) as temporary:
+            extracted = Path(temporary) / folder.name
+            extracted.mkdir()
+            with tarfile.open(str(archive), "r:gz") as tar:
+                root = os.path.abspath(str(extracted))
+                for member in tar.getmembers():
+                    target = os.path.abspath(os.path.join(root, member.name))
+                    if os.path.commonpath((root, target)) != root:
+                        raise ValueError(f"Unsafe archive member: {member.name}")
+                tar.extractall(str(extracted))
+            extracted.rename(folder)
     return str(folder)
 
 
 @lru_cache(maxsize=None)
 def _load_bundled(name, year):
     try:
-        archive = pkgutil.get_data("opytimark.data", f"{year}.tar.gz")
-    except OSError:
-        return None
-    if archive is None:
+        archive = files("opytimark.data").joinpath(f"{year}.tar.gz").read_bytes()
+    except FileNotFoundError:
         return None
 
     with tarfile.open(fileobj=BytesIO(archive), mode="r:gz") as tar:

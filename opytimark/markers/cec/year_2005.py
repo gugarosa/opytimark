@@ -6,8 +6,6 @@ import opytimark.markers.n_dimensional as n_dim
 import opytimark.utils.decorator as d
 from opytimark.core import CECBenchmark, CECCompositeBenchmark
 
-np.random.seed(0)
-
 
 def _composite_arguments(args, kwargs, default_bias):
     kwargs = kwargs.copy()
@@ -111,18 +109,8 @@ class F3(CECBenchmark):
 
     @d.check_exact_dimension_and_auxiliary_matrix
     def __call__(self, x: np.array) -> float:
-
-        # Defines the number of dimensions and an equally-spaced interval between 0 and D-1
-        D = x.shape[0]
-        dims = np.linspace(1, D, D) - 1
-
-        # Re-calculates the input
-        z = np.matmul(x - self.o[:D], self.M)
-
-        # Calculating the Shifted Rotated High Conditioned Elliptic's function
-        z = 10e6 ** (dims / (D - 1)) * z**2
-
-        return np.sum(z) - 450
+        z = np.matmul(x - self.o[: x.shape[0]], self.M)
+        return n_dim._elliptic(z) - 450
 
 
 class F4(CECBenchmark):
@@ -672,51 +660,7 @@ class F17(CECCompositeBenchmark):
 
     @d.check_exact_dimension_and_auxiliary_matrix
     def __call__(self, x: np.array) -> float:
-
-        # Defines some constants used throughout the method
-        D = x.shape[0]
-        n_composition = len(self.f)
-        y = 5 * np.ones(x.shape[0])
-
-        # Defines the array of `w`, fitness and maximum fitness
-        w = np.zeros(n_composition)
-        f_max = np.zeros(n_composition)
-        fit = np.zeros(n_composition)
-
-        # Iterates through every possible composition function
-        for i, f in enumerate(self.f):
-            # Re-calculates the solution
-            z = x - self.o[i][:D]
-
-            # Calculates the `w`
-            w[i] = np.exp(-np.sum(z**2) / (2 * D * self.sigma[i] ** 2))
-
-            # Calculates the start and end indexes of the shift matrix
-            start, end = i * x.shape[0], (i + 1) * x.shape[0]
-
-            # Calculates the maximum fitness
-            f_max[i] = f(np.matmul(y / self.l[i], self.M[start:end]))
-
-            # Calculates the fitness
-            fit[i] = self.C * f(np.matmul(z / self.l[i], self.M[start:end])) / f_max[i]
-
-        # Calculates the sum of `w` and the maximum `w`
-        w_sum = np.sum(w)
-        w_max = np.max(w)
-
-        # Iterates through the number of composition functions
-        for i in range(n_composition):
-            # If current `w` is different than `w_max`
-            if w[i] != w_max:
-                # Re-scales its value
-                w[i] *= 1 - w_max**10
-
-            # Normalizes `w`
-            w[i] /= w_sum
-
-        # Calculates the fitness without noise
-        g = np.sum(np.matmul(w, (fit + self.f_bias)))
-
+        g = self._evaluate_composition(x)
         return g * (1 + 0.2 * np.fabs(np.random.normal())) + self.bias
 
 
@@ -835,57 +779,12 @@ class F20(CECCompositeBenchmark):
 
     @d.check_exact_dimension_and_auxiliary_matrix
     def __call__(self, x: np.array) -> float:
-
-        # Defines some constants used throughout the method
-        D = x.shape[0]
-        n_composition = len(self.f)
-        y = 5 * np.ones(x.shape[0])
-
-        # Defines the array of `w`, fitness and maximum fitness
-        w = np.zeros(n_composition)
-        f_max = np.zeros(n_composition)
-        fit = np.zeros(n_composition)
-
         # Iterates through half of available dimensions
-        for j in range(int(D / 2)):
+        for j in range(x.shape[0] // 2):
             # Re-arranges the values in `o`
             self.o[0][2 * j + 1] = 5
 
-        # Iterates through every possible composition function
-        for i, f in enumerate(self.f):
-            # Re-calculates the solution
-            z = x - self.o[i][:D]
-
-            # Calculates the `w`
-            w[i] = np.exp(-np.sum(z**2) / (2 * D * self.sigma[i] ** 2))
-
-            # Calculates the start and end indexes of the shift matrix
-            start, end = i * x.shape[0], (i + 1) * x.shape[0]
-
-            # Calculates the maximum fitness
-            f_max[i] = f(np.matmul(y / self.l[i], self.M[start:end]))
-
-            # Calculates the fitness
-            fit[i] = self.C * f(np.matmul(z / self.l[i], self.M[start:end])) / f_max[i]
-
-        # Calculates the sum of `w` and the maximum `w`
-        w_sum = np.sum(w)
-        w_max = np.max(w)
-
-        # Iterates through the number of composition functions
-        for i in range(n_composition):
-            # If current `w` is different than `w_max`
-            if w[i] != w_max:
-                # Re-scales its value
-                w[i] *= 1 - w_max**10
-
-            # Normalizes `w`
-            w[i] /= w_sum
-
-        # Calculates the final fitness
-        f = np.sum(np.matmul(w, (fit + self.f_bias)))
-
-        return f + self.bias
+        return self._evaluate_composition(x) + self.bias
 
 
 class F21(CECCompositeBenchmark):
@@ -1003,55 +902,9 @@ class F23(CECCompositeBenchmark):
 
     @d.check_exact_dimension_and_auxiliary_matrix
     def __call__(self, x: np.array) -> float:
-
-        # Defines some constants used throughout the method
         D = x.shape[0]
-        n_composition = len(self.f)
-        y = 5 * np.ones(x.shape[0])
-
-        # Defines the array of `w`, fitness and maximum fitness
-        w = np.zeros(n_composition)
-        f_max = np.zeros(n_composition)
-        fit = np.zeros(n_composition)
-
-        # Creates the discontinuity
         x = np.where(np.fabs(x - self.o[0][:D]) < 0.5, x, np.round(2 * x) / 2)
-
-        # Iterates through every possible composition function
-        for i, f in enumerate(self.f):
-            # Re-calculates the solution
-            z = x - self.o[i][:D]
-
-            # Calculates the `w`
-            w[i] = np.exp(-np.sum(z**2) / (2 * D * self.sigma[i] ** 2))
-
-            # Calculates the start and end indexes of the shift matrix
-            start, end = i * x.shape[0], (i + 1) * x.shape[0]
-
-            # Calculates the maximum fitness
-            f_max[i] = f(np.matmul(y / self.l[i], self.M[start:end]))
-
-            # Calculates the fitness
-            fit[i] = self.C * f(np.matmul(z / self.l[i], self.M[start:end])) / f_max[i]
-
-        # Calculates the sum of `w` and the maximum `w`
-        w_sum = np.sum(w)
-        w_max = np.max(w)
-
-        # Iterates through the number of composition functions
-        for i in range(n_composition):
-            # If current `w` is different than `w_max`
-            if w[i] != w_max:
-                # Re-scales its value
-                w[i] *= 1 - w_max**10
-
-            # Normalizes `w`
-            w[i] /= w_sum
-
-        # Calculates the final fitness
-        f = np.sum(np.matmul(w, (fit + self.f_bias)))
-
-        return f + self.bias
+        return self._evaluate_composition(x) + self.bias
 
 
 class F24(CECCompositeBenchmark):
