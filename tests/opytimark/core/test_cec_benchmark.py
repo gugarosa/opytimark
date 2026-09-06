@@ -1,4 +1,8 @@
+# Copyright (c) 2020-2026 Gustavo de Rosa.
+# Licensed under the Apache License, Version 2.0.
+
 import math
+from typing import get_type_hints
 
 import numpy as np
 import pytest
@@ -88,6 +92,65 @@ def test_cec_year_validation_and_manual_loading():
 
     with pytest.raises(exception.TypeError):
         year_2005.F1(year=None)
+
+    assert benchmark.year == "2005"
+    original = benchmark.o
+    benchmark.year = "custom"
+    assert benchmark.year == "custom"
+    assert benchmark.o is original
+
+
+def test_cec_year_property_exposes_public_types_and_documentation():
+    accessor = CECBenchmark.year
+
+    assert get_type_hints(accessor.fget)["return"] is str
+    assert get_type_hints(accessor.fset)["year"] is str
+    assert get_type_hints(accessor.fset)["return"] is type(None)
+    assert accessor.fget.__doc__
+    assert accessor.fset.__doc__
+
+
+def test_cec_base_classes_remain_instantiable_without_auxiliary_data():
+    benchmark = CECBenchmark()
+    composite = CECCompositeBenchmark()
+
+    assert benchmark.name == composite.name == "Benchmark"
+    assert benchmark.year == composite.year == ""
+    assert composite.sigma == composite.l == composite.f == ()
+    assert composite.bias == 1
+    assert composite.C == 2000
+    assert composite.f_bias == (0, 100, 200, 300, 400, 500, 600, 700, 800, 900)
+
+
+def test_composite_constructor_preserves_positional_arguments_and_component_objects():
+    sigma = np.array([1, 2], dtype=np.float32)
+    scales = [1, 2]
+    functions = [lambda x: np.sum(x**2), lambda x: np.sum(x**2) + 1]
+    bias = np.float32(7)
+    benchmark = CECCompositeBenchmark(
+        "custom", "test", (), sigma, scales, functions, bias, 2, True, False, True, False, True
+    )
+
+    assert benchmark.name == "custom"
+    assert benchmark.year == "test"
+    assert benchmark.sigma is sigma
+    assert benchmark.l is scales
+    assert benchmark.f is functions
+    assert benchmark.bias is bias
+    assert benchmark.dims == 2
+    assert benchmark.continuous is True
+    assert benchmark.convex is False
+    assert benchmark.differentiable is True
+    assert benchmark.multimodal is False
+    assert benchmark.separable is True
+
+
+def test_composite_omitted_bias_uses_subclass_default_without_rejecting_explicit_none():
+    class CustomComposite(CECCompositeBenchmark):
+        _bias = 17
+
+    assert CustomComposite().bias == 17
+    assert CustomComposite(bias=None).bias is None
 
 
 @pytest.mark.parametrize(

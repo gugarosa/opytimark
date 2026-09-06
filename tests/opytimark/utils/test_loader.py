@@ -1,3 +1,6 @@
+# Copyright (c) 2020-2026 Gustavo de Rosa.
+# Licensed under the Apache License, Version 2.0.
+
 import io
 import subprocess
 import sys
@@ -45,6 +48,32 @@ def test_load_cec_auxiliary_prefers_local_data(tmp_path, monkeypatch):
     monkeypatch.setattr(loader, "DATA_FOLDER", str(tmp_path))
 
     assert np.array_equal(loader.load_cec_auxiliary("F1_o", "custom"), [1, 2, 3])
+
+
+def test_load_cec_auxiliary_prefers_a_local_archive_over_bundled_data(tmp_path, monkeypatch):
+    payload = b"1 2 3\n"
+    with tarfile.open(tmp_path / "2005.tar.gz", "w:gz") as archive:
+        member = tarfile.TarInfo("F1_o.txt")
+        member.size = len(payload)
+        archive.addfile(member, io.BytesIO(payload))
+    monkeypatch.setattr(loader, "DATA_FOLDER", str(tmp_path))
+
+    np.testing.assert_array_equal(loader.load_cec_auxiliary("F1_o", "2005"), [1, 2, 3])
+
+
+def test_archive_path_diagnostics_identify_the_offending_member(tmp_path):
+    source = tmp_path / "unsafe.tar.gz"
+    with tarfile.open(source, "w:gz") as archive:
+        member = tarfile.TarInfo("../outside.txt")
+        member.size = 2
+        archive.addfile(member, io.BytesIO(b"1\n"))
+
+    with pytest.raises(ValueError) as error:
+        loader.untar_file(source)
+
+    assert str(error.value).startswith("`archive member=../outside.txt` would extract outside ")
+    assert str(error.value).endswith(".")
+    assert list(tmp_path.iterdir()) == [source]
 
 
 def test_failed_download_is_retryable(tmp_path, monkeypatch):
@@ -115,9 +144,7 @@ def test_existing_download_and_extraction_are_preserved(tmp_path):
 
 def test_bundled_io_errors_do_not_fall_back_to_download(tmp_path, monkeypatch):
     resource = Mock()
-    resource.joinpath.return_value.read_bytes.side_effect = PermissionError(
-        "bundled data is not readable"
-    )
+    resource.joinpath.return_value.read_bytes.side_effect = PermissionError("bundled data is not readable")
 
     def unexpected_download(*args):
         pytest.fail("an unreadable bundled resource must not trigger a download")
@@ -128,6 +155,17 @@ def test_bundled_io_errors_do_not_fall_back_to_download(tmp_path, monkeypatch):
 
     with pytest.raises(PermissionError, match="bundled data is not readable"):
         loader.load_cec_auxiliary("unreadable", "test-permissions")
+
+
+def test_missing_bundled_member_does_not_fall_back_to_download(tmp_path, monkeypatch):
+    download = Mock()
+    monkeypatch.setattr(loader, "DATA_FOLDER", str(tmp_path))
+    monkeypatch.setattr(loader, "download_file", download)
+
+    with pytest.raises(KeyError, match="missing_member.txt"):
+        loader.load_cec_auxiliary("missing_member", "2005")
+
+    download.assert_not_called()
 
 
 def test_missing_bundled_archive_uses_fallback(tmp_path, monkeypatch):
@@ -145,9 +183,7 @@ def test_missing_bundled_archive_uses_fallback(tmp_path, monkeypatch):
     monkeypatch.setattr(loader, "files", lambda package: tmp_path)
     monkeypatch.setattr(loader.urllib.request, "urlretrieve", download)
 
-    np.testing.assert_array_equal(
-        loader.load_cec_auxiliary("values", "missing"), [1, 2, 3]
-    )
+    np.testing.assert_array_equal(loader.load_cec_auxiliary("values", "missing"), [1, 2, 3])
 
 
 def test_zip_import_handles_present_and_missing_resources(tmp_path):
@@ -156,6 +192,7 @@ def test_zip_import_handles_present_and_missing_resources(tmp_path):
     with zipfile.ZipFile(archive_path, "w") as archive:
         for parts in [
             ("__init__.py",),
+            ("logging.py",),
             ("utils", "__init__.py"),
             ("utils", "constants.py"),
             ("utils", "loader.py"),

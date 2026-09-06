@@ -1,367 +1,512 @@
-"""N-dimensional benchmarking functions."""
+# Copyright (c) 2020-2026 Gustavo de Rosa.
+# Licensed under the Apache License, Version 2.0.
+
+from typing import Any
 
 import numpy as np
+from numpy.typing import NDArray
 
 import opytimark.utils.constants as c
 import opytimark.utils.decorator as d
 from opytimark.core import Benchmark
+from opytimark.typing import BenchmarkValue
 
 
-def _elliptic(x):
+def _elliptic(x: NDArray[Any]) -> BenchmarkValue:
     coefficients = 1e6 ** np.linspace(0, 1, x.shape[0])
     return np.sum(coefficients * x**2)
 
 
 class Ackley1(Benchmark):
-    r"""Ackley1 class implements the Ackley's 1st benchmarking function.
+    r"""Ackley's 1st benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = -20e^{-0.2\sqrt{\\frac{1}{n}\sum_{i=1}^{n}x_i^2}}-e^{\\frac{1}{n}\sum_{i=1}^{n}cos(2 \\pi x_i)}+ 20 + e
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = -20e^{-0.2\sqrt{\frac{1}{n}\sum_{i=1}^{n}x_i^2}}-e^{\frac{1}{n}\sum_{i=1}^{n}cos(2 \pi x_i)}+ 20 + e
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-32, -32] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-32, -32] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("Ackley1", -1, True, False, True, True, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Ackley1 benchmark.
 
-        # Calculating the 1 / n term
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         inv = 1 / x.shape[0]
 
-        # Calculating first term
         term1 = -0.2 * np.sqrt(inv * np.sum(x**2))
 
-        # Calculating second term
         term2 = inv * np.sum(np.cos(2 * np.pi * x))
 
-        # Calculating Ackley's 1st function
         f = 20 + np.e - np.exp(term2) - 20 * np.exp(term1)
 
         return np.sum(f)
 
 
 class Ackley4(Benchmark):
-    r"""Ackley4 class implements the Ackley's 4th benchmarking function.
+    r"""Ackley's 4th benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n-1}(e^{-0.2}\sqrt{x_i^2+x_{i+1}^2}+3(cos(2x_i)+sin(2x_{i+1})))
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n-1}(e^{-0.2}\sqrt{x_i^2+x_{i+1}^2}+3(cos(2x_i)+sin(2x_{i+1})))
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-35, -35] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-35, -35] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = −4.590101633799122 \mid \mathbf{x^*} = (-1.51, -0.755)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = −4.590101633799122 \mid \mathbf{x^*} = (-1.51, -0.755)`.
 
     """
 
     _defaults = ("Ackley4", -1, True, False, True, True, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Ackley4 benchmark.
 
-        # Instantiating function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = 0
 
-        # For every input dimension
         for i in range(x.shape[0] - 1):
-            # Calculating Ackley's 4th function
-            f += np.exp(-0.2) * np.sqrt(x[i] ** 2 + x[i + 1] ** 2) + 3 * (
-                np.cos(2 * x[i]) + np.sin(2 * x[i + 1])
-            )
+            f += np.exp(-0.2) * np.sqrt(x[i] ** 2 + x[i + 1] ** 2) + 3 * (np.cos(2 * x[i]) + np.sin(2 * x[i + 1]))
 
         return f
 
 
 class Alpine1(Benchmark):
-    r"""Alpine1 class implements the Alpine's 1st benchmarking function.
+    r"""Alpine's 1st benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}|x_i sin(x_i)+0.1x_i|
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}|x_i sin(x_i)+0.1x_i|
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("Alpine1", -1, True, False, False, True, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Alpine1 benchmark.
 
-        # Calculating the Alpine's 1st function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = np.fabs(x * np.sin(x) + 0.1 * x)
 
         return np.sum(f)
 
 
 class Alpine2(Benchmark):
-    r"""Alpine2 class implements the Alpine's 2nd benchmarking function.
+    r"""Alpine's 2nd benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \prod_{i=1}^{n}\sqrt{x_i}sin(x_i)
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \prod_{i=1}^{n}\sqrt{x_i}sin(x_i)
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [0, 10] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [0, 10] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 2.808^n \mid \mathbf{x^*} = (7.917, 7.917, \ldots, 7.917)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 2.808^n \mid \mathbf{x^*} = (7.917, 7.917, \ldots, 7.917)`.
 
     """
 
     _defaults = ("Alpine2", -1, True, False, True, True, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Alpine2 benchmark.
 
-        # Calculating the Alpine's 2nd function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = np.sqrt(x) * np.sin(x)
 
         return -np.prod(f)
 
 
 class Brown(Benchmark):
-    r"""Brown class implements the Brown's benchmarking function.
+    r"""Brown's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n-1}(x_i^2)^{(x_{i+1}^{2}+1)}+(x_{i+1}^2)^{(x_{i}^{2}+1)}
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n-1}(x_i^2)^{(x_{i+1}^{2}+1)}+(x_{i+1}^2)^{(x_{i}^{2}+1)}
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-1, 4] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-1, 4] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("Brown", -1, True, True, True, False, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Brown benchmark.
 
-        # Calculating first term squares
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         term1 = x[:-1] ** 2
 
-        # Calculating second term squares
         term2 = x[1:] ** 2
 
-        # Calculating Brown's function
         f = np.sum(term1 ** (term2 + 1) + term2 ** (term1 + 1))
 
         return f
 
 
 class ChungReynolds(Benchmark):
-    r"""ChungReynolds class implements the Chung Reynolds' benchmarking function.
+    r"""Chung Reynolds' benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = (\sum_{i=1}^{n} x_i^2)^2
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = (\sum_{i=1}^{n} x_i^2)^2
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("ChungReynolds", -1, True, True, True, False, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the ChungReynolds benchmark.
 
-        # Calculating the Chung Reynolds' function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = np.sum(x**2) ** 2
 
         return f
 
 
 class CosineMixture(Benchmark):
-    r"""CosineMixture class implements the Cosine Mixture's benchmarking function.
+    r"""Cosine Mixture's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = -0.1\sum_{i=1}^{n}cos(5 \\pi x_i) - \sum_{i=1}^{n}x_i^2
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = -0.1\sum_{i=1}^{n}cos(5 \pi x_i) - \sum_{i=1}^{n}x_i^2
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-1, 1] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-1, 1] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = -0.1n \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = -0.1n \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("CosineMixture", -1, False, False, False, False, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the CosineMixture benchmark.
 
-        # Calculating first term
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         term1 = np.sum(np.cos(5 * np.pi * x))
 
-        # Calculating second term
         term2 = np.sum(x**2)
 
-        # Calculating Cosine's Mixture function
         f = -0.1 * term1 - term2
 
         return f
 
 
 class Csendes(Benchmark):
-    r"""Csendes class implements the Csendes' benchmarking function.
+    r"""Csendes' benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}x_i^6(2 + sin(\\frac{1}{x_i}))
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}x_i^6(2 + sin(\frac{1}{x_i}))
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-1, 1] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-1, 1] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("Csendes", -1, True, True, True, True, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Csendes benchmark.
 
-        # Calculating the Csendes' function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = (x**6) * (2 + np.sin(1 / (x + c.EPSILON)))
 
         return np.sum(f)
 
 
 class Deb1(Benchmark):
-    r"""Deb1 class implements the Deb's 1st benchmarking function.
+    r"""Deb's 1st benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = -\\frac{1}{n}\sum_{i=1}^{n}sin^6(5 \\pi x_i)
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = -\frac{1}{n}\sum_{i=1}^{n}sin^6(5 \pi x_i)
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-1, 1] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-1, 1] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = -1 \mid \mathbf{x^*} = (-0.9, -0.7, \ldots, 0.9)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = -1 \mid \mathbf{x^*} = (-0.9, -0.7, \ldots, 0.9)`.
 
     """
 
     _defaults = ("Deb1", -1, True, True, True, True, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Deb1 benchmark.
 
-        # Calculating partial term
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         term = np.sum(np.sin(5 * np.pi * x) ** 6)
 
-        # Declaring Deb's 1st function
         f = -1 / x.shape[0] * term
 
         return f
 
 
 class Deb3(Benchmark):
-    r"""Deb3 class implements the Deb's 3rd benchmarking function.
+    r"""Deb's 3rd benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = -\\frac{1}{n}\sum_{i=1}^{n}sin^6(5 \\pi (x_i^{\\frac{3}{4}}-0.05))
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = -\frac{1}{n}\sum_{i=1}^{n}sin^6(5 \pi (x_i^{\frac{3}{4}}-0.05))
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [0, 1] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [0, 1] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = ? \mid \mathbf{x^*} = (?, ?, \ldots, ?)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = ? \mid \mathbf{x^*} = (?, ?, \ldots, ?)`.
 
     """
 
     _defaults = ("Deb3", -1, True, True, True, False, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Deb3 benchmark.
 
-        # Calculating partial term
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         term = np.sum(np.sin(5 * np.pi * (x ** (3 / 4) - 0.05)) ** 6)
 
-        # Declaring Deb's 3rd function
         f = -1 / x.shape[0] * term
 
         return f
 
 
 class DixonPrice(Benchmark):
-    r"""DixonPrice class implements the Dixon & Price's benchmarking function.
+    r"""Dixon & Price's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = (x_1 - 1)^2 + \sum_{i=2}^{n}i(2x_i^2 - x_{i-1})^2
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = (x_1 - 1)^2 + \sum_{i=2}^{n}i(2x_i^2 - x_{i-1})^2
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid x_i^* = 2^{-\\frac{2^i-2}{2^i}}`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid x_i^* = 2^{-\frac{2^i-2}{2^i}}`.
 
     """
 
     _defaults = ("DixonPrice", -1, True, True, True, False, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the DixonPrice benchmark.
 
-        # Calculating first partial term
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         term1 = (x[0] - 1) ** 2
 
-        # Initializing second partial term
         term2 = 0
 
-        # For every possible dimension of `x`
         for i in range(1, x.shape[0]):
-            # Calculating second partial term
             term2 += (i + 1) * ((2 * (x[i] ** 2) - x[i - 1]) ** 2)
 
-        # Calculating the Dixon & Price's function
         f = term1 + term2
 
         return f
 
 
 class Exponential(Benchmark):
-    r"""Exponential class implements the Exponential's benchmarking function.
+    r"""Exponential's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = e^{-0.5\sum_{i=1}^n{x_i^2}}
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = e^{-0.5\sum_{i=1}^n{x_i^2}}
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-1, 1] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-1, 1] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("Exponential", -1, True, True, True, False, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Exponential benchmark.
 
-        # Calculating the Exponential's function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = np.exp(-0.5 * np.sum(x**2))
 
         return f
 
 
 class F8F2(Benchmark):
-    r"""F8F2 class implements the Shifted Expanded Griewank's plus Rosenbrock's benchmarking function.
+    r"""Shifted Expanded Griewank's plus Rosenbrock's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) =  f(x_1, x_2) + f(x_2, x_3) + \ldots + f(x_n, f_1)
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) =  f(x_1, x_2) + f(x_2, x_3) + \ldots + f(x_n, f_1)
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (1, 1, \ldots, 1)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (1, 1, \ldots, 1)`.
 
     """
 
     _defaults = ("F8F2", -1, True, False, True, True, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the F8F2 benchmark.
+
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
 
         def _griewank(x):
             return x**2 / 4000 - np.cos(x / np.sqrt(1)) + 1
@@ -369,279 +514,343 @@ class F8F2(Benchmark):
         def _rosenbrock(x, y):
             return 100 * (x**2 - y) ** 2 + (x - 1) ** 2
 
-        # Instantiating function
         f = 0
 
-        # Iterates through every dimension
         for i in range(x.shape[0]):
-            # Checks if it is the last dimension
             if i == (x.shape[0] - 1):
-                # Calculates the Shifted Expanded Griewank's plus Rosenbrock's function using indexes `n` and `0`
                 f += _griewank(_rosenbrock(x[i], x[0]))
 
-            # Checks if it is not the last dimension
             else:
-                # Calculates the Shifted Expanded Griewank's plus Rosenbrock's function using indexes `i` and `i+1`
                 f += _griewank(_rosenbrock(x[i], x[i + 1]))
 
         return f
 
 
 class Griewank(Benchmark):
-    r"""Griewank class implements the Griewank's benchmarking function.
+    r"""Griewank's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = 1 + \sum_{i=1}^{n}\\frac{x_i^2}{4000} - \prod cos(\\frac{x_i}{\sqrt{i}})
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = 1 + \sum_{i=1}^{n}\frac{x_i^2}{4000} - \prod cos(\frac{x_i}{\sqrt{i}})
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("Griewank", -1, True, False, True, False, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Griewank benchmark.
 
-        # Initializing terms
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         term1, term2 = 0, 1
 
-        # For every possible dimension of `x`
         for i in range(x.shape[0]):
-            # Calculating first term
             term1 += (x[i] ** 2) / 4000
 
-            # Calculating second term
             term2 *= np.cos(x[i] / np.sqrt(i + 1))
 
-        # Calculating the Griewank's function
         f = 1 + term1 - term2
 
         return f
 
 
 class HappyCat(Benchmark):
-    r"""HappyCat class implements the HappyCat's benchmarking function.
+    r"""HappyCat's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = [(||\mathbf{x}||_2 - n)^2]^{\\alpha} + \\frac{1}{n}(\\frac{1}{2}||\mathbf{x}||_2 + \sum_{i=1}^{n}x_i) + \\frac{1}{2}
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = [(||\mathbf{x}||_2 - n)^2]^{\alpha} + \frac{1}{n}(\frac{1}{2}||\mathbf{x}||_2 + \sum_{i=1}^{n}x_i) + \frac{1}{2}
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-2, 2] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-2, 2] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (-1, -1, \ldots, -1)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (-1, -1, \ldots, -1)`.
 
     """
 
     _defaults = ("HappyCat", -1, True, False, True, False, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the HappyCat benchmark.
 
-        # Gathering the input's dimension
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         n = x.shape[0]
 
-        # Calculating norm of `x`
         square = np.sum(x**2)
 
-        # Calculating the HappyCat's function
-        f = (
-            ((square - n) ** 2) ** (1 / 8)
-            + (1 / n) * (1 / 2 * square + np.sum(x))
-            + 1 / 2
-        )
+        f = ((square - n) ** 2) ** (1 / 8) + (1 / n) * (1 / 2 * square + np.sum(x)) + 1 / 2
 
         return f
 
 
 class HighConditionedElliptic(Benchmark):
-    r"""HighConditionedElliptic class implements the High Conditioned Elliptic's benchmarking function.
+    r"""High Conditioned Elliptic's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (10^6)^\\frac{i-1}{n-1} x_i^2
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (10^6)^\frac{i-1}{n-1} x_i^2
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
-    For one input variable, the coefficient is one.
+        For one input variable, the coefficient is one.
 
     """
 
     _defaults = ("HighConditionedElliptic", -1, True, True, True, False, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the HighConditionedElliptic benchmark.
+
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         return _elliptic(x)
 
 
 class Levy(Benchmark):
-    r"""Levy class implements the Levy's benchmarking function.
+    r"""Levy's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = sin^2(\\pi w_1) + \sum_{i=1}^{n-1}(w_i-1)^2 [1+10sin^2(\\pi w_i + 1)]
-    .. math:: + (w_n - 1)^2 [1 + sin^2(2 \\pi w_n)] \mid w_i = 1 + \\frac{x_i - 1}{4}
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = sin^2(\pi w_1) + \sum_{i=1}^{n-1}(w_i-1)^2 [1+10sin^2(\pi w_i + 1)]
+        .. math:: + (w_n - 1)^2 [1 + sin^2(2 \pi w_n)] \mid w_i = 1 + \frac{x_i - 1}{4}
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (1, 1, \ldots, 1)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (1, 1, \ldots, 1)`.
 
     """
 
     _defaults = ("Levy", -1, True, True, True, True, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Levy benchmark.
 
-        # Calculating `w` term
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         w = 1 + (x - 1) / 4
 
-        # Defining first term
         term1 = np.sin(np.pi * w[0]) ** 2
 
-        # Defining third term
         term3 = ((w[-1] - 1) ** 2) * (1 + (np.sin(2 * np.pi * w[-1]) ** 2))
 
-        # Reshaping `w`
         w = w[0 : x.shape[0] - 1]
 
-        # Calculating second term
         term2 = np.sum(((w - 1) ** 2) * (1 + 10 * (np.sin(np.pi * w + 1) ** 2)))
 
-        # Calculating the Levy's function
         f = term1 + term2 + term3
 
         return f
 
 
 class Michalewicz(Benchmark):
-    r"""Michalewicz class implements the Michalewicz's benchmarking function.
+    r"""Michalewicz's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = - \sum_{i=1}^{n}sin(x_i)sin^{20}(\\frac{ix_i^2}{\\pi})
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = - \sum_{i=1}^{n}sin(x_i)sin^{20}(\frac{ix_i^2}{\pi})
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [0, \\pi] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [0, \pi] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = ? \mid \mathbf{x^*} = (?, ?, \ldots, ?)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = ? \mid \mathbf{x^*} = (?, ?, \ldots, ?)`.
 
     """
 
     _defaults = ("Michalewicz", -1, True, True, True, True, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Michalewicz benchmark.
 
-        # Instantiating function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = 0
 
-        # For every input dimension
         for i in range(x.shape[0]):
-            # Calculating the Michalewicz's function
             f += np.sin(x[i]) * (np.sin((i + 1) * x[i] ** 2 / np.pi) ** 20)
 
         return -f
 
 
 class NonContinuousExpandedScafferF6(Benchmark):
-    r"""NonContinuousExpandedScafferF6 class implements the Non-Continuous Expanded Scaffer's F6 benchmarking function.
+    r"""Non-Continuous Expanded Scaffer's F6 benchmark.
 
-    .. math:: f(\mathbf{y}) = f(y_1, y_2, \ldots, y_n) =  f(y_1, y_2) + f(y_2, y_3) + \ldots + f(y_n, y_1) \mid y_i = round(2x_i)/2, |x_i| >= 0.5
+    Notes:
+        .. math:: f(\mathbf{y}) = f(y_1, y_2, \ldots, y_n) =  f(y_1, y_2) + f(y_2, y_3) + \ldots + f(y_n, y_1) \mid y_i = round(2x_i)/2, |x_i| >= 0.5
 
-    Domain:
-        The function is commonly evaluated using :math:`y_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`y_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{y^*}) = 0 \mid \mathbf{y^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{y^*}) = 0 \mid \mathbf{y^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("NonContinuousExpandedScafferF6", -1, False, False, False, True, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the NonContinuousExpandedScafferF6 benchmark.
+
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
 
         def _scaffer(x, y):
-            return 0.5 + (np.sin(np.sqrt(x**2 + y**2)) ** 2 - 0.5) / (
-                (1 + 0.0001 * (x**2 + y**2)) ** 2
-            )
+            return 0.5 + (np.sin(np.sqrt(x**2 + y**2)) ** 2 - 0.5) / ((1 + 0.0001 * (x**2 + y**2)) ** 2)
 
-        # Creates the discontinuity
         x = np.where(np.fabs(x) < 0.5, x, np.round(2 * x) / 2)
 
-        # Instantiating function
         f = 0
 
-        # Iterates through every dimension
         for i in range(x.shape[0]):
-            # Checks if it is the last dimension
             if i == (x.shape[0] - 1):
-                # Calculates the Non-Continuous Expanded Scaffer's F6 function using indexes `n` and `0`
                 f += _scaffer(x[i], x[0])
 
-            # Checks if it is not the last dimension
             else:
-                # Calculates the Non-Continuous Expanded Scaffer's F6 function using indexes `i` and `i+1`
                 f += _scaffer(x[i], x[i + 1])
 
         return f
 
 
 class NonContinuousRastrigin(Benchmark):
-    r"""NonContinuousRastrigin class implements the Non-Continuous Rastrigin's benchmarking function.
+    r"""Non-Continuous Rastrigin's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(y_1, y_2, \ldots, y_n) = 10n + \sum_{i=1}^{n}(y_i^2 - 10cos(2 \\pi y_i)) \mid y_i = round(2x_i)/2, |x_i| >= 0.5
+    Notes:
+        .. math:: f(\mathbf{x}) = f(y_1, y_2, \ldots, y_n) = 10n + \sum_{i=1}^{n}(y_i^2 - 10cos(2 \pi y_i)) \mid y_i = round(2x_i)/2, |x_i| >= 0.5
 
-    Domain:
-        The function is commonly evaluated using :math:`y_i \in [-5.12, 5.12] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`y_i \in [-5.12, 5.12] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{y^*}) = 0 \mid \mathbf{y^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{y^*}) = 0 \mid \mathbf{y^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("NonContinuousRastrigin", -1, False, True, False, True, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the NonContinuousRastrigin benchmark.
 
-        # Creates the discontinuity
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         x = np.where(np.fabs(x) < 0.5, x, np.round(2 * x) / 2)
 
-        # Calculating the Non-Continuous Rastrigin's function
         f = x**2 - 10 * np.cos(2 * np.pi * x)
 
         return 10 * x.shape[0] + np.sum(f)
 
 
 class Pathological(Benchmark):
-    r"""Pathological class implements the Pathological's benchmarking function.
+    r"""Pathological's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n-1}0.5 + \\frac{sin^2(\sqrt{100x_i^2+x_{i+1}^2})-0.5}{1 + 0.001(x_i^2 - 2x_i x_{i+1} + x_{i+1}^2)^2}
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n-1}0.5 + \frac{sin^2(\sqrt{100x_i^2+x_{i+1}^2})-0.5}{1 + 0.001(x_i^2 - 2x_i x_{i+1} + x_{i+1}^2)^2}
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("Pathological", -1, True, True, True, False, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Pathological benchmark.
 
-        # Instantiating function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = 0
 
-        # For every input dimension
         for i in range(x.shape[0] - 1):
-            # Calculating the Pathological's function
             f += 0.5 + (np.sin(np.sqrt(100 * x[i] ** 2 + x[i + 1] ** 2)) ** 2 - 0.5) / (
                 1 + 0.001 * ((x[i] ** 2 - 2 * x[i] * x[i + 1] + x[i + 1] ** 2) ** 2)
             )
@@ -650,117 +859,155 @@ class Pathological(Benchmark):
 
 
 class Periodic(Benchmark):
-    r"""Periodic class implements the Periodic's benchmarking function.
+    r"""Periodic's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = 1 + \sum_{i=1}^{n}sin^2(x_i) - 0.1e^{\sum_{i=1}^{n}x_i^2}
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = 1 + \sum_{i=1}^{n}sin^2(x_i) - 0.1e^{\sum_{i=1}^{n}x_i^2}
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0.9 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0.9 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("Periodic", -1, True, False, True, False, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Periodic benchmark.
 
-        # Calculating the Periodic's function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = 1 + np.sum(np.sin(x) ** 2) - 0.1 * np.exp(np.sum(x))
 
         return f
 
 
 class Perm0DBeta(Benchmark):
-    r"""Perm0DBeta class implements the Perm 0, D, Beta's benchmarking function.
+    r"""Perm 0, D, Beta's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}(\sum_{j=1}^{n} (j + 10)(x_j^i - \\frac{1}{j^i}))^2
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}(\sum_{j=1}^{n} (j + 10)(x_j^i - \frac{1}{j^i}))^2
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-n, n] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-n, n] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (1, \\frac{1}{2}, \ldots, \\frac{1}{n})`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (1, \frac{1}{2}, \ldots, \frac{1}{n})`.
 
     """
 
     _defaults = ("Perm0DBeta", -1, True, True, True, False, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Perm0DBeta benchmark.
 
-        # Instantiating function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = 0
 
-        # For every input dimension
         for i in range(x.shape[0]):
-            # For every input dimension
             for j in range(x.shape[0]):
-                # Calculating the Perm 0, D, Beta's function
                 f += ((j + 1 + 10) * (x[j] ** (i + 1) - (1 / (j + 1) ** (i + 1)))) ** 2
 
         return f
 
 
 class PermDBeta(Benchmark):
-    r"""PermDBeta class implements the Perm D, Beta's benchmarking function.
+    r"""Perm D, Beta's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}(\sum_{j=1}^{n} (j^i + 10)((\\frac{x_j}{j})^i - 1))^2
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}(\sum_{j=1}^{n} (j^i + 10)((\frac{x_j}{j})^i - 1))^2
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-n, n] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-n, n] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (1, 2, \ldots, n)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (1, 2, \ldots, n)`.
 
     """
 
     _defaults = ("PermDBeta", -1, True, True, True, False, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the PermDBeta benchmark.
 
-        # Instantiating function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = 0
 
-        # For every input dimension
         for i in range(x.shape[0]):
-            # For every input dimension
             for j in range(x.shape[0]):
-                # Calculating the Perm D, Beta's function
-                f += (
-                    ((j + 1) ** (i + 1) + 10) * ((x[j] / (j + 1)) ** (i + 1) - 1)
-                ) ** 2
+                f += (((j + 1) ** (i + 1) + 10) * ((x[j] / (j + 1)) ** (i + 1) - 1)) ** 2
 
         return f
 
 
 class PowellSingular2(Benchmark):
-    r"""PowellSingular2 class implements the Powell's Singular 2nd benchmarking function.
+    r"""Powell's Singular 2nd benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n-2}(x_{i-1}+10x_i)^2 + 5(x_{i+1} - x_{i+2})^2 + (x_i - 2x_{i+1})^4 + 10(x_{i-1} - x_{i+2})^4
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n-2}(x_{i-1}+10x_i)^2 + 5(x_{i+1} - x_{i+2})^2 + (x_i - 2x_{i+1})^4 + 10(x_{i-1} - x_{i+2})^4
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-4, 5] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-4, 5] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("PowellSingular2", -1, True, True, False, False, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the PowellSingular2 benchmark.
 
-        # Instanciating function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = 0
 
-        # For every input dimension
         for i in range(x.shape[0] - 2):
-            # Calculating the Powell's Singular 2nd function
             f += (
                 (x[i - 1] + 10 * x[i]) ** 2
                 + 5 * (x[i + 1] - x[i + 2]) ** 2
@@ -772,640 +1019,879 @@ class PowellSingular2(Benchmark):
 
 
 class PowellSum(Benchmark):
-    r"""PowellSum class implements the Powell's Sum benchmarking function.
+    r"""Powell's Sum benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}|x_i|^{i+1}
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}|x_i|^{i+1}
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-1, 1] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-1, 1] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("PowellSum", -1, True, True, False, False, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the PowellSum benchmark.
 
-        # Instanciating function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = 0
 
-        # For every input dimension
         for i in range(x.shape[0]):
-            # Calculating the Powell's Sum function
             f += np.fabs(x[i]) ** (i + 2)
 
         return f
 
 
 class Qing(Benchmark):
-    r"""Qing class implements the Qing's benchmarking function.
+    r"""Qing's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}(x_i^2 - i)^2
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}(x_i^2 - i)^2
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-500, 500] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-500, 500] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid x_i^* = (\pm \sqrt{i}, \pm \sqrt{i}, \ldots, \pm \sqrt{i})`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid x_i^* = (\pm \sqrt{i}, \pm \sqrt{i}, \ldots, \pm \sqrt{i})`.
 
     """
 
     _defaults = ("Qing", -1, True, False, True, True, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Qing benchmark.
 
-        # Instanciating function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = 0
 
-        # For every input dimension
         for i in range(x.shape[0]):
-            # Calculating the Qing's function
             f += (x[i] ** 2 - (i + 1)) ** 2
 
         return f
 
 
 class Quartic(Benchmark):
-    r"""Quartic class implements the Quartic's benchmarking function.
+    r"""Quartic's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}ix_i^4 + rand()
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}ix_i^4 + rand()
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-1.28, 1.28] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-1.28, 1.28] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 + rand() \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 + rand() \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("Quartic", -1, True, False, True, False, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Quartic benchmark.
 
-        # Instanciating function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = 0
 
-        # For every input dimension
         for i in range(x.shape[0]):
-            # Calculating the Quartic's function
             f += (i + 1) * (x[i] ** 4)
 
         return f + np.random.uniform()
 
 
 class Quintic(Benchmark):
-    r"""Quintic class implements the Quintic's benchmarking function.
+    r"""Quintic's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}|x_i^5 - 3x_i^4 + 4x_i^3 + 2x_i^2 - 10x_i - 4|
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}|x_i^5 - 3x_i^4 + 4x_i^3 + 2x_i^2 - 10x_i - 4|
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (-1 or 2, -1 or 2, \ldots, -1 or 2)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (-1 or 2, -1 or 2, \ldots, -1 or 2)`.
 
     """
 
     _defaults = ("Quintic", -1, True, True, True, True, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Quintic benchmark.
 
-        # Calculating the Quintic's function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = np.fabs(x**5 - 3 * x**4 + 4 * x**3 + 2 * x**2 - 10 * x - 4)
 
         return np.sum(f)
 
 
 class Rana(Benchmark):
-    r"""Rana class implements the Rana's benchmarking function.
+    r"""Rana's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n-2}(x_{i+1} + 1)cos(t_2)sin(t_1) + x_i cos(t_1)sin(t_2)
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n-2}(x_{i+1} + 1)cos(t_2)sin(t_1) + x_i cos(t_1)sin(t_2)
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-500, 500] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-500, 500] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("Rana", -1, True, True, True, True, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Rana benchmark.
 
-        # Instantiating function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = 0
 
-        # For every input dimension
         for i in range(x.shape[0] - 2):
-            # Calculating `t1`
             t1 = np.sqrt(np.fabs(x[i + 1] + x[i] + 1))
 
-            # Calculating `t2`
             t2 = np.sqrt(np.fabs(x[i + 1] - x[i] + 1))
 
-            # Calculating the Rana's function
-            f += (x[i + 1] + 1) * np.cos(t2) * np.sin(t1) + x[i] * np.cos(t1) * np.sin(
-                t2
-            )
+            f += (x[i + 1] + 1) * np.cos(t2) * np.sin(t1) + x[i] * np.cos(t1) * np.sin(t2)
 
         return f
 
 
 class Rastrigin(Benchmark):
-    r"""Rastrigin class implements the Rastrigin's benchmarking function.
+    r"""Rastrigin's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = 10n + \sum_{i=1}^{n}(x_i^2 - 10cos(2 \\pi x_i))
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = 10n + \sum_{i=1}^{n}(x_i^2 - 10cos(2 \pi x_i))
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-5.12, 5.12] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-5.12, 5.12] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("Rastrigin", -1, True, True, True, True, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Rastrigin benchmark.
 
-        # Calculating the Rastrigin's function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = x**2 - 10 * np.cos(2 * np.pi * x)
 
         return 10 * x.shape[0] + np.sum(f)
 
 
 class Ridge(Benchmark):
-    r"""Ridge class implements the Ridge's benchmarking function.
+    r"""Ridge's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = x_1 + (\sum_{i=2}^{n}x_i^2)^{0.5}
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = x_1 + (\sum_{i=2}^{n}x_i^2)^{0.5}
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-\lambda, \lambda]^n \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-\lambda, \lambda]^n \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = -\lambda \mid \mathbf{x^*} = (-\lambda, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = -\lambda \mid \mathbf{x^*} = (-\lambda, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("Ridge", -1, True, False, True, False, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Ridge benchmark.
 
-        # Calculating the Ridge's function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = x[1:] ** 2
 
         return x[0] + np.sum(f) ** 0.5
 
 
 class Rosenbrock(Benchmark):
-    r"""Rosenbrock class implements the Rosenbrock's benchmarking function.
+    r"""Rosenbrock's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n-1}[100(x_{i+1}-x_i^2)^2 + (x_i - 1)^2]
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n-1}[100(x_{i+1}-x_i^2)^2 + (x_i - 1)^2]
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-30, 30] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-30, 30] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (1, 1, \ldots, 1)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (1, 1, \ldots, 1)`.
 
     """
 
     _defaults = ("Rosenbrock", -1, True, True, True, False, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Rosenbrock benchmark.
 
-        # Instantiating function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = 0
 
-        # For every input dimension
         for i in range(x.shape[0] - 1):
-            # Calculating the Rosenbrock's function
             f += 100 * ((x[i + 1] - x[i] ** 2) ** 2) + ((x[i] - 1) ** 2)
 
         return f
 
 
 class RotatedExpandedScafferF6(Benchmark):
-    r"""RotatedExpandedScafferF6 class implements the Rotated Expanded Scaffer's F6 benchmarking function.
+    r"""Rotated Expanded Scaffer's F6 benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) =  f(x_1, x_2) + f(x_2, x_3) + \ldots + f(x_n, x_1)
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) =  f(x_1, x_2) + f(x_2, x_3) + \ldots + f(x_n, x_1)
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("RotatedExpandedScafferF6", -1, True, False, True, True, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the RotatedExpandedScafferF6 benchmark.
+
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
 
         def _scaffer(x, y):
-            return 0.5 + (np.sin(np.sqrt(x**2 + y**2)) ** 2 - 0.5) / (
-                (1 + 0.0001 * (x**2 + y**2)) ** 2
-            )
+            return 0.5 + (np.sin(np.sqrt(x**2 + y**2)) ** 2 - 0.5) / ((1 + 0.0001 * (x**2 + y**2)) ** 2)
 
-        # Instantiating function
         f = 0
 
-        # Iterates through every dimension
         for i in range(x.shape[0]):
-            # Checks if it is the last dimension
             if i == (x.shape[0] - 1):
-                # Calculates the Rotated Expanded Scaffer's F6 function using indexes `n` and `0`
                 f += _scaffer(x[i], x[0])
 
-            # Checks if it is not the last dimension
             else:
-                # Calculates the Rotated Expanded Scaffer's F6 function using indexes `i` and `i+1`
                 f += _scaffer(x[i], x[i + 1])
 
         return f
 
 
 class RotatedHyperEllipsoid(Benchmark):
-    r"""RotatedHyperEllipsoid class implements the Rotated Hyper-Ellipsoid's benchmarking function.
+    r"""Rotated Hyper-Ellipsoid's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}\sum_{j=1}^{i}x_j^2
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}\sum_{j=1}^{i}x_j^2
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-65.536, 65.536] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-65.536, 65.536] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("RotatedHyperEllipsoid", -1, True, True, True, False, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the RotatedHyperEllipsoid benchmark.
 
-        # Instantiating function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = 0
 
-        # For every input dimension
         for i in range(x.shape[0]):
-            # For `j` in `i` range
             for j in range(i):
-                # Calculating the Rotated Hyper-Ellipsoid's function
                 f += x[j] ** 2
 
         return f
 
 
 class Salomon(Benchmark):
-    r"""Salomon class implements the Salomon's benchmarking function.
+    r"""Salomon's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = 1 - cos(2 \\pi \sqrt{\sum_{i=1}^{n}x_i^2}) + 0.1\sqrt{\sum_{i=1}^{n}x_i^2}
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = 1 - cos(2 \pi \sqrt{\sum_{i=1}^{n}x_i^2}) + 0.1\sqrt{\sum_{i=1}^{n}x_i^2}
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("Salomon", -1, True, False, True, True, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Salomon benchmark.
 
-        # Calculating the Salomon's function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = 1 - np.cos(2 * np.pi * np.sqrt(np.sum(x**2))) + 0.1 * np.sqrt(np.sum(x**2))
 
         return f
 
 
 class SchumerSteiglitz(Benchmark):
-    r"""SchumerSteiglitz class implements the Schumer Steiglitz's benchmarking function.
+    r"""Schumer Steiglitz's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}x_i^4
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}x_i^4
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("SchumerSteiglitz", -1, True, True, True, False, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the SchumerSteiglitz benchmark.
 
-        # Calculating the Schumer Steiglitz's function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = x**4
 
         return np.sum(f)
 
 
 class Schwefel(Benchmark):
-    r"""Schwefel class implements the Schwefel's benchmarking function.
+    r"""Schwefel's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = 418.9829n -\sum_{i=1}^{n} x_i sin(\sqrt{|x_i|})
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = 418.9829n -\sum_{i=1}^{n} x_i sin(\sqrt{|x_i|})
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (420.9687, 420.9687, \ldots, 420.9687)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (420.9687, 420.9687, \ldots, 420.9687)`.
 
     """
 
     _defaults = ("Schwefel", -1, True, False, False, True, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Schwefel benchmark.
 
-        # Calculating the Schwefel's function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = x * np.sin(np.sqrt(np.fabs(x)))
 
         return 418.9829 * x.shape[0] - np.sum(f)
 
 
 class Schwefel220(Benchmark):
-    r"""Schwefel220 class implements the Schwefel's 2.20 benchmarking function.
+    r"""Schwefel's 2.20 benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}|x_i|
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}|x_i|
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("Schwefel220", -1, True, True, False, False, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Schwefel220 benchmark.
 
-        # Calculating the Schwefel's 2.20 function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = np.fabs(x)
 
         return np.sum(f)
 
 
 class Schwefel221(Benchmark):
-    r"""Schwefel221 class implements the Schwefel's 2.21 benchmarking function.
+    r"""Schwefel's 2.21 benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \max_{i=1, \ldots, n}|x_i|
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \max_{i=1, \ldots, n}|x_i|
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("Schwefel221", -1, True, True, False, False, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Schwefel221 benchmark.
 
-        # Calculating the Schwefel's 2.21 function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = np.fabs(x)
 
         return np.amax(f)
 
 
 class Schwefel222(Benchmark):
-    r"""Schwefel222 class implements the Schwefel's 2.22 benchmarking function.
+    r"""Schwefel's 2.22 benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}|x_i| + \prod_{i=1}^{n}|x_i|
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}|x_i| + \prod_{i=1}^{n}|x_i|
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("Schwefel222", -1, True, True, True, False, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Schwefel222 benchmark.
 
-        # Calculating the Schwefel's 2.22 function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = np.fabs(x)
 
         return np.sum(f) + np.prod(f)
 
 
 class Schwefel223(Benchmark):
-    r"""Schwefel223 class implements the Schwefel's 2.23 benchmarking function.
+    r"""Schwefel's 2.23 benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}x_i^{10}
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}x_i^{10}
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("Schwefel223", -1, True, True, True, False, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Schwefel223 benchmark.
 
-        # Calculating the Schwefel's 2.23 function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = x**10
 
         return np.sum(f)
 
 
 class Schwefel225(Benchmark):
-    r"""Schwefel225 class implements the Schwefel's 2.25 benchmarking function.
+    r"""Schwefel's 2.25 benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=2}^{n}(x_i - 1)^2 + (x_1 - x_i^2)^2
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=2}^{n}(x_i - 1)^2 + (x_1 - x_i^2)^2
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [0, 10] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [0, 10] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (1, 1, \ldots, 1)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (1, 1, \ldots, 1)`.
 
     """
 
     _defaults = ("Schwefel225", -1, True, True, True, True, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Schwefel225 benchmark.
 
-        # Instantiating function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = 0
 
-        # For every input dimension starting from `1`
         for i in range(1, x.shape[0]):
-            # Calculating the Schwefel's 2.25 function
             f += (x[i] - 1) ** 2 + (x[0] - x[i] ** 2) ** 2
 
         return f
 
 
 class Schwefel226(Benchmark):
-    r"""Schwefel226 class implements the Schwefel's 2.26 benchmarking function.
+    r"""Schwefel's 2.26 benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = -\\frac{1}{n} \sum_{i=1}^{n}x_i sin(\sqrt{|x_i|})
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = -\frac{1}{n} \sum_{i=1}^{n}x_i sin(\sqrt{|x_i|})
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-500, 500] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-500, 500] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = -418.983 \mid \mathbf{x^*} = (\pm[\\pi (0.5+k)]^2, \pm[\\pi (0.5+k)]^2, \ldots, \pm[\\pi (0.5+k)]^2)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = -418.983 \mid \mathbf{x^*} = (\pm[\pi (0.5+k)]^2, \pm[\pi (0.5+k)]^2, \ldots, \pm[\pi (0.5+k)]^2)`.
 
     """
 
     _defaults = ("Schwefel226", -1, True, True, True, True, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Schwefel226 benchmark.
 
-        # Calculating the Schwefel's 2.26 function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = x * np.sin(np.sqrt(np.fabs(x)))
 
         return -1 / x.shape[0] * np.sum(f)
 
 
 class Shubert(Benchmark):
-    r"""Shubert class implements the Shubert's benchmarking function.
+    r"""Shubert's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \prod_{i=1}^n \sum_{j=1}^{5}cos((j+1)x_i+j)
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \prod_{i=1}^n \sum_{j=1}^{5}cos((j+1)x_i+j)
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = -186.7309 \mid \mathbf{x^*} = \\text{multiple solutions}`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = -186.7309 \mid \mathbf{x^*} = \text{multiple solutions}`.
 
     """
 
     _defaults = ("Shubert", -1, True, False, True, True, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Shubert benchmark.
 
-        # Instantiating function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = 1
 
-        # For every input dimension
         for i in range(x.shape[0]):
-            # For `j` from 1 to 5:
             for j in range(1, 6):
-                # Calculating the Shubert's function
                 f *= np.cos((j + 1) * x[i] + j)
 
         return f
 
 
 class Shubert3(Benchmark):
-    r"""Shubert3 class implements the Shubert's 3rd benchmarking function.
+    r"""Shubert's 3rd benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^n \sum_{j=1}^{5}j sin((j+1)x_i+j)
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^n \sum_{j=1}^{5}j sin((j+1)x_i+j)
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = -29.6733337 \mid \mathbf{x^*} = (?, ?, \ldots, ?)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = -29.6733337 \mid \mathbf{x^*} = (?, ?, \ldots, ?)`.
 
     """
 
     _defaults = ("Shubert3", -1, True, False, True, True, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Shubert3 benchmark.
 
-        # Instantiating function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = 0
 
-        # For every input dimension
         for i in range(x.shape[0]):
-            # For `j` from 1 to 5:
             for j in range(1, 6):
-                # Calculating the Shubert's 3rd function
                 f += j * np.sin((j + 1) * x[i] + j)
 
         return f
 
 
 class Shubert4(Benchmark):
-    r"""Shubert4 class implements the Shubert's 4th benchmarking function.
+    r"""Shubert's 4th benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^n \sum_{j=1}^{5}j cos((j+1)x_i+j)
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^n \sum_{j=1}^{5}j cos((j+1)x_i+j)
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = -25.740858 \mid \mathbf{x^*} = (?, ?, \ldots, ?)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = -25.740858 \mid \mathbf{x^*} = (?, ?, \ldots, ?)`.
 
     """
 
     _defaults = ("Shubert4", -1, True, False, True, True, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Shubert4 benchmark.
 
-        # Instantiating function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = 0
 
-        # For every input dimension
         for i in range(x.shape[0]):
-            # For `j` from 1 to 5:
             for j in range(1, 6):
-                # Calculating the Shubert's 4th function
                 f += j * np.cos((j + 1) * x[i] + j)
 
         return f
 
 
 class SchafferF6(Benchmark):
-    r"""SchafferF6 class implements the Schaffer's F6 benchmarking function.
+    r"""Schaffer's F6 benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n-1}0.5 + \\frac{sin^2(\sqrt{x_i^2+x_{i+1}^2})-0.5}{[1 + 0.001(x_i^2 + x_{i+1}^2)]^2}
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n-1}0.5 + \frac{sin^2(\sqrt{x_i^2+x_{i+1}^2})-0.5}{[1 + 0.001(x_i^2 + x_{i+1}^2)]^2}
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("SchafferF6", -1, True, False, True, True, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the SchafferF6 benchmark.
 
-        # Instantiating function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = 0
 
-        # For every input dimension
         for i in range(x.shape[0] - 1):
-            # Calculating the Schaffer's F6 function
             f += 0.5 + (np.sin(np.sqrt(x[i] ** 2 + x[i + 1] ** 2)) ** 2 - 0.5) / (
                 (1 + 0.001 * (x[i] ** 2 + x[i + 1] ** 2)) ** 2
             )
@@ -1414,152 +1900,221 @@ class SchafferF6(Benchmark):
 
 
 class Sphere(Benchmark):
-    r"""Sphere class implements the Sphere's benchmarking function.
+    r"""Sphere's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} x_i^2
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} x_i^2
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-5.12, 5.12] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-5.12, 5.12] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("Sphere", -1, True, True, True, False, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Sphere benchmark.
 
-        # Calculating the Sphere's function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = x**2
 
         return np.sum(f)
 
 
 class SphereWithNoise(Benchmark):
-    r"""SphereWithNoise class implements the Sphere with Noise's benchmarking function.
+    r"""Sphere with Noise's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = (\sum_{i=1}^{n} x_i^2)(1 + 0.1|N(0,1)|)
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = (\sum_{i=1}^{n} x_i^2)(1 + 0.1|N(0,1)|)
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-5.12, 5.12] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-5.12, 5.12] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("SphereWithNoise", -1, True, True, True, False, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the SphereWithNoise benchmark.
 
-        # Calculating the Sphere 's function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = x**2
 
-        # Defines the noise to be added in the final fitness
         noise = 1 + 0.1 * np.fabs(np.random.normal())
 
         return np.sum(f) * noise
 
 
 class Step(Benchmark):
-    r"""Step class implements the Step's benchmarking function.
+    r"""Step's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} ⌊x_i⌋
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} ⌊x_i⌋
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("Step", -1, False, False, False, False, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Step benchmark.
 
-        # Calculating the Step's function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = np.floor(np.fabs(x))
 
         return np.sum(f)
 
 
 class Step2(Benchmark):
-    r"""Step2 class implements the Step's 2nd benchmarking function.
+    r"""Step's 2nd benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} ⌊x_i + 0.5⌋^2
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} ⌊x_i + 0.5⌋^2
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (-0.5, -0.5, \ldots, -0.5)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (-0.5, -0.5, \ldots, -0.5)`.
 
     """
 
     _defaults = ("Step2", -1, False, False, False, False, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Step2 benchmark.
 
-        # Calculating the Step's 2nd function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = np.floor(x + 0.5) ** 2
 
         return np.sum(f)
 
 
 class Step3(Benchmark):
-    r"""Step3 class implements the Step's 3rd benchmarking function.
+    r"""Step's 3rd benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} ⌊x_i^2⌋
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} ⌊x_i^2⌋
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("Step3", -1, False, False, False, False, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Step3 benchmark.
 
-        # Calculating the Step's 3rd function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = np.floor(x**2)
 
         return np.sum(f)
 
 
 class StrechedVSineWave(Benchmark):
-    r"""StrechedVSineWave class implements the Streched V Sine Wave's benchmarking function.
+    r"""Streched V Sine Wave's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n-1}(x_{i+1}^2 + x_i^2)^{0.25}[sin^2(50(x_{i+1}^2 + x_i^2)^{0.1})+0.1]
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n-1}(x_{i+1}^2 + x_i^2)^{0.25}[sin^2(50(x_{i+1}^2 + x_i^2)^{0.1})+0.1]
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("StrechedVSineWave", -1, True, True, True, False, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the StrechedVSineWave benchmark.
 
-        # Instantiating function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = 0
 
-        # For every input dimension
         for i in range(x.shape[0] - 1):
-            # Calculating the Streched V Sine Wave's function
             f += (((x[i + 1] ** 2) + (x[i] ** 2)) ** 0.25) * (
                 (np.sin(50 * ((x[i + 1] ** 2) + (x[i] ** 2)) ** 0.1) ** 2) + 0.1
             )
@@ -1568,181 +2123,240 @@ class StrechedVSineWave(Benchmark):
 
 
 class StyblinskiTang(Benchmark):
-    r"""StyblinskiTang class implements the Styblinski-Tang's benchmarking function.
+    r"""Styblinski-Tang's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \\frac{1}{2}\sum_{i=1}^{n}(x_i^4 - 16x_i^2 + 5x_i)
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \frac{1}{2}\sum_{i=1}^{n}(x_i^4 - 16x_i^2 + 5x_i)
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = −39.16599n \mid \mathbf{x^*} = (-2.903534, -2.903534, \ldots, -2.903534)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = −39.16599n \mid \mathbf{x^*} = (-2.903534, -2.903534, \ldots, -2.903534)`.
 
     """
 
     _defaults = ("StyblinskiTang", -1, True, False, True, True, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the StyblinskiTang benchmark.
 
-        # Calculating the Styblinski-Tang's function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = 1 / 2 * np.sum(x**4 - 16 * x**2 + 5 * x)
 
         return f
 
 
 class SumDifferentPowers(Benchmark):
-    r"""SumDifferentPowers class implements the Sum of Different Powers' benchmarking function.
+    r"""Sum of Different Powers' benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}|x_i|^{i+1}
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}|x_i|^{i+1}
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-1, 1] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-1, 1] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("SumDifferentPowers", -1, True, True, True, False, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the SumDifferentPowers benchmark.
 
-        # Instantiating function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = 0
 
-        # For every input dimension
         for i in range(x.shape[0]):
-            # Calculating the Sum of Different Powers' function
             f += np.fabs(x[i]) ** (i + 2)
 
         return f
 
 
 class SumSquares(Benchmark):
-    r"""SumSquares class implements the Sum of Squares' benchmarking function.
+    r"""Sum of Squares' benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}ix_i^2
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}ix_i^2
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("SumSquares", -1, True, True, True, False, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the SumSquares benchmark.
 
-        # Instantiating function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = 0
 
-        # For every input dimension
         for i in range(x.shape[0]):
-            # Calculating the Sum of Squares' function
             f += (i + 1) * (x[i] ** 2)
 
         return f
 
 
 class Trid(Benchmark):
-    r"""Trid class implements the Trid's benchmarking function.
+    r"""Trid's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}(x_i - 1)^2 - \sum_{i=2}^{n}x_i x_{i-1}
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}(x_i - 1)^2 - \sum_{i=2}^{n}x_i x_{i-1}
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-n^2, n^2] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-n^2, n^2] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = -\\frac{n(n+4)(n-1)}{6} \mid x_i = i(n+1-i)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = -\frac{n(n+4)(n-1)}{6} \mid x_i = i(n+1-i)`.
 
     """
 
     _defaults = ("Trid", -1, True, True, True, True, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Trid benchmark.
 
-        # Instantiating term
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         term = 0
 
         for i in range(1, x.shape[0]):
             term += x[i] * x[i - 1]
 
-        # Calculating the Trid's function
         f = np.sum((x - 1) ** 2) - term
 
         return f
 
 
 class Trigonometric1(Benchmark):
-    r"""Trigonometric1 class implements the Trigonometric's 1st benchmarking function.
+    r"""Trigonometric's 1st benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}[n - \sum_{j=1}^{n} cos(x_j) + i(1 - cos(x_i) - sin(x_i))]^2
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}[n - \sum_{j=1}^{n} cos(x_j) + i(1 - cos(x_i) - sin(x_i))]^2
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [0, \\pi] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [0, \pi] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("Trigonometric1", -1, True, True, True, False, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Trigonometric1 benchmark.
 
-        # Defining the input dimension
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         n = x.shape[0]
 
-        # Instantiating function
         f = 0
 
-        # For every input dimension
         for i in range(n):
-            # Resetting partial term
             partial = 0
 
-            # For every input dimension
             for j in range(n):
-                # Calculating partial term
                 partial += np.cos(x[j])
 
-            # Calculating the Trigonometric's 1st function
             f += (n - partial + i * (1 - np.cos(x[i] - np.sin(x[i])))) ** 2
 
         return f
 
 
 class Trigonometric2(Benchmark):
-    r"""Trigonometric2 class implements the Trigonometric's 2nd benchmarking function.
+    r"""Trigonometric's 2nd benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = 1 + \sum_{i=1}^{n}8sin^2[7(x_i - 0.9)^2] + 6sin^2[14(x_1-0.9)^2] + (x_i-0.9)^2
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = 1 + \sum_{i=1}^{n}8sin^2[7(x_i - 0.9)^2] + 6sin^2[14(x_1-0.9)^2] + (x_i-0.9)^2
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-500, 500] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-500, 500] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 1 \mid \mathbf{x^*} = (0.9, 0.9, \ldots, 0.9)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 1 \mid \mathbf{x^*} = (0.9, 0.9, \ldots, 0.9)`.
 
     """
 
     _defaults = ("Trigonometric2", -1, True, True, True, True, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Trigonometric2 benchmark.
 
-        # Instantiating function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = 0
 
-        # For every input dimension
         for i in range(x.shape[0]):
-            # Calculating the Trigonometric's 2nd function
             f += (
                 8 * (np.sin(7 * (x[i] - 0.9) ** 2) ** 2)
                 + 6 * (np.sin(14 * (x[0] - 0.9) ** 2) ** 2)
@@ -1753,196 +2367,267 @@ class Trigonometric2(Benchmark):
 
 
 class Wavy(Benchmark):
-    r"""Wavy class implements the Wavy's benchmarking function.
+    r"""Wavy's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = 1 - \\frac{1}{n} \sum_{i=1}^{n}cos(10x_i)e^{\\frac{-x_i^2}{2}}
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = 1 - \frac{1}{n} \sum_{i=1}^{n}cos(10x_i)e^{\frac{-x_i^2}{2}}
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-\\pi, \\pi] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-\pi, \pi] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("Wavy", -1, True, True, True, True, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Wavy benchmark.
 
-        # Calculating the Wavy's function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = np.cos(10 * x) * np.exp(-1 * (x**2) / 2)
 
         return 1 - (1 / x.shape[0]) * np.sum(f)
 
 
 class Weierstrass(Benchmark):
-    r"""Weierstrass class implements the Weierstrass's benchmarking function.
+    r"""Weierstrass's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (\sum_{k=0}^{20} [0.5^k cos(2\\pi 3^k(x_i+0.5))]) - n \sum_{k=0}^{20}[0.5^k cos(2\\pi 3^k 0.5)]
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (\sum_{k=0}^{20} [0.5^k cos(2\pi 3^k(x_i+0.5))]) - n \sum_{k=0}^{20}[0.5^k cos(2\pi 3^k 0.5)]
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-0.5, 0.5] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-0.5, 0.5] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("Weierstrass", -1, True, True, True, True, False)
 
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Weierstrass benchmark.
 
-        # Instantiates the function and the partial term
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = 0
         partial_term = 0
 
-        # For every possible dimension of `x`
         for i in range(x.shape[0]):
-            # Iterates until `k_max = 20`
             for k in range(21):
-                # Adds the first term
                 f += 0.5**k * np.cos(2 * np.pi * 3**k * (x[i] + 0.5))
 
-        # Iterates again until `k_max = 20`
         for k in range(21):
-            # Adds the partial term
             partial_term += 0.5**k * np.cos(2 * np.pi * 3**k * 0.5)
 
         return f - x.shape[0] * partial_term
 
 
 class XinSheYang(Benchmark):
-    r"""XinSheYang class implements the Xin-She Yang's benchmarking function.
+    r"""Xin-She Yang's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}\epsilon_i|x_i|^i
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}\epsilon_i|x_i|^i
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("XinSheYang", -1, True, False, False, True, True)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the XinSheYang benchmark.
 
-        # Instantiating function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = 0
 
-        # For every decision variable
         for i in range(x.shape[0]):
-            # Calculating the Xin-She Yang's function
             f += np.random.uniform() * (np.fabs(x[i]) ** (i + 1))
 
         return f
 
 
 class XinSheYang2(Benchmark):
-    r"""XinSheYang2 class implements the Xin-She Yang's 2nd benchmarking function.
+    r"""Xin-She Yang's 2nd benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = (\sum_{i=1}^{n}|x_i|)e^{-\sum_{i=1}^{n}sin(x_i^2)}
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = (\sum_{i=1}^{n}|x_i|)e^{-\sum_{i=1}^{n}sin(x_i^2)}
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-2 \\pi, 2 \\pi] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-2 \pi, 2 \pi] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("XinSheYang2", -1, True, False, False, True, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the XinSheYang2 benchmark.
 
-        # Calculating the Xin-She Yang's 2nd function
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         f = np.sum(np.fabs(x)) * np.exp(-np.sum(np.sin(x**2)))
 
         return f
 
 
 class XinSheYang3(Benchmark):
-    r"""XinSheYang3 class implements the Xin-She Yang's 3rd benchmarking function.
+    r"""Xin-She Yang's 3rd benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = e^{-\sum_{i=1}^{n}(\\frac{x_i}{\\beta})^{2m}} - 2e^{-\sum_{i=1}^{n}x_i^2} \prod_{i=1}^{n} cos^2(x_i)
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = e^{-\sum_{i=1}^{n}(\frac{x_i}{\beta})^{2m}} - 2e^{-\sum_{i=1}^{n}x_i^2} \prod_{i=1}^{n} cos^2(x_i)
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-2 \\pi, 2 \\pi] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-2 \pi, 2 \pi] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = -1 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = -1 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("XinSheYang3", -1, True, False, True, False, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the XinSheYang3 benchmark.
 
-        # Calculating the Xin-She Yang's 3rd function
-        f = np.exp(-np.sum((x / 15) ** 10)) - 2 * np.exp(-np.sum(x**2)) * np.prod(
-            np.cos(x) ** 2
-        )
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
+        f = np.exp(-np.sum((x / 15) ** 10)) - 2 * np.exp(-np.sum(x**2)) * np.prod(np.cos(x) ** 2)
 
         return f
 
 
 class XinSheYang4(Benchmark):
-    r"""XinSheYang4 class implements the Xin-She Yang's 4th benchmarking function.
+    r"""Xin-She Yang's 4th benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = (\sum_{i=1}^{n} sin^2(x_i) - e^{-\sum_{i=1}^{n}x_i^2})e^{-\sum_{i=1}^{n}sin^2(\sqrt{|x_i|})}
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = (\sum_{i=1}^{n} sin^2(x_i) - e^{-\sum_{i=1}^{n}x_i^2})e^{-\sum_{i=1}^{n}sin^2(\sqrt{|x_i|})}
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-10, 10] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = -1 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = -1 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("XinSheYang4", -1, True, False, False, True, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the XinSheYang4 benchmark.
 
-        # Calculating the Xin-She Yang's 4th function
-        f = (np.sum(np.sin(x) ** 2) - np.exp(-np.sum(x**2))) * np.exp(
-            -np.sum(np.sin(np.sqrt(np.fabs(x)) ** 2))
-        )
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
+        f = (np.sum(np.sin(x) ** 2) - np.exp(-np.sum(x**2))) * np.exp(-np.sum(np.sin(np.sqrt(np.fabs(x)) ** 2)))
 
         return f
 
 
 class Zakharov(Benchmark):
-    r"""Zakharov class implements the Zakharov's benchmarking function.
+    r"""Zakharov's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^n x_i^{2}+(\sum_{i=1}^n 0.5ix_i)^2 + (\sum_{i=1}^n 0.5ix_i)^4
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^n x_i^{2}+(\sum_{i=1}^n 0.5ix_i)^2 + (\sum_{i=1}^n 0.5ix_i)^4
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-5, 10] \mid i = \{1, 2, \ldots, n\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-5, 10] \mid i = \{1, 2, \ldots, n\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 0 \mid \mathbf{x^*} = (0, 0, \ldots, 0)`.
 
     """
 
     _defaults = ("Zakharov", -1, True, True, True, False, False)
 
     @d.check_exact_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the Zakharov benchmark.
 
-        # Instantiating term
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         term = 0
 
-        # For every input dimension
         for i in range(x.shape[0]):
             term += 0.5 * i * x[i]
 
-        # Calculating the Zakharov's function
         f = np.sum(x) + (term**2) + (term**4)
 
         return f
