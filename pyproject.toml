@@ -49,6 +49,12 @@ docs = [
     "sphinx>=8.2.3,<9",
 ]
 
+[tool.uv]
+cache-keys = [
+    { file = "pyproject.toml" },
+    { file = "opytimark/__init__.py" },
+]
+
 [tool.setuptools.dynamic]
 version = { attr = "opytimark.__version__" }
 
@@ -59,11 +65,12 @@ include = ["opytimark*"]
 "opytimark.data" = ["*.tar.gz"]
 
 [tool.black]
-line-length = 88
+line-length = 120
 target-version = ["py311"]
 
 [tool.isort]
 profile = "black"
+line_length = 120
 
 [tool.pytest.ini_options]
 addopts = ["-v", "--durations=10"]
