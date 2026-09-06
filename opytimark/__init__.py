@@ -5,7 +5,7 @@ from logging import NullHandler
 
 from opytimark.logging import get_logger
 
-__version__ = "3.0.1"
+__version__ = "3.0.2"
 
 _logger = get_logger(__name__)
 if not any(isinstance(handler, NullHandler) for handler in _logger.handlers):
