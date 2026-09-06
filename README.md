@@ -49,7 +49,13 @@ change some fitness values relative to 3.0.0. See
 [numerical behavior](docs/numerical_behavior.rst) before comparing old and new
 optimization results.
 
+Library diagnostics use Python logging rather than writing to standard output.
+Applications control log handlers, output streams, and levels.
+
 ## Development
+
+Follow the [project conventions](CONVENTIONS.md) when changing Python code,
+scientific documentation, or tests.
 
 Install [uv](https://docs.astral.sh/uv/), clone the repository, then run:
 

@@ -1,34 +1,45 @@
-"""CEC2005 benchmarking functions."""
+# Copyright (c) 2020-2026 Gustavo de Rosa.
+# Licensed under the Apache License, Version 2.0.
+
+from typing import Any
 
 import numpy as np
+from numpy.typing import NDArray
 
 import opytimark.markers.n_dimensional as n_dim
 import opytimark.utils.decorator as d
 from opytimark.core import CECBenchmark, CECCompositeBenchmark
+from opytimark.typing import BenchmarkValue
 
 
-def _composite_arguments(args, kwargs, default_bias):
+def _composite_arguments(
+    args: tuple[Any, ...], kwargs: dict[str, Any], default_bias: Any
+) -> tuple[tuple[Any, ...], dict[str, Any], Any]:
     kwargs = kwargs.copy()
+
+    # Keep the public positional bias slot when forwarding shared metadata
     if len(args) > 3:
         if "bias" in kwargs:
-            raise TypeError("bias specified by both position and keyword")
+            raise TypeError("`bias` was supplied both positionally and by keyword.")
         bias = args[3]
         args = args[:3] + args[4:]
     else:
         bias = kwargs.pop("bias", default_bias)
+
     return args, kwargs, bias
 
 
 class F1(CECBenchmark):
-    r"""F1 class implements the Shifted Sphere's benchmarking function.
+    r"""Shifted Sphere's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} z_i^2 - 450 \mid z_i = x_i - o_i
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} z_i^2 - 450 \mid z_i = x_i - o_i
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = -450 \mid \mathbf{x^*} = \mathbf{o}`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = -450 \mid \mathbf{x^*} = \mathbf{o}`.
 
     """
 
@@ -37,27 +48,38 @@ class F1(CECBenchmark):
     _auxiliary_data = ("o",)
 
     @d.check_less_equal_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the F1 benchmark.
 
-        # Re-calculates the input
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         z = x - self.o[: x.shape[0]]
 
-        # Calculating the Shifted Sphere's function
         f = z**2
 
         return np.sum(f) - 450
 
 
 class F2(CECBenchmark):
-    r"""F2 class implements the Shifted Schwefel's 1.2 benchmarking function.
+    r"""Shifted Schwefel's 1.2 benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (\sum_{j=1}^i z_j)^2 - 450 \mid z_i = x_i - o_i
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (\sum_{j=1}^i z_j)^2 - 450 \mid z_i = x_i - o_i
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = -450 \mid \mathbf{x^*} = \mathbf{o}`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = -450 \mid \mathbf{x^*} = \mathbf{o}`.
 
     """
 
@@ -66,40 +88,46 @@ class F2(CECBenchmark):
     _auxiliary_data = ("o",)
 
     @d.check_less_equal_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the F2 benchmark.
 
-        # Re-calculates the input
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         z = x - self.o[: x.shape[0]]
 
-        # Instantiating function
         f = 0
 
-        # For every input dimension
         for i in range(x.shape[0]):
-            # Resetting partial term
             partial = 0
 
-            # For every dimension till `i`
             for j in range(i):
-                # Sums up the partial term
                 partial += z[j]
 
-            # Calculating the Shifted Schwefel's 1.2 function
             f += partial**2
 
         return f - 450
 
 
 class F3(CECBenchmark):
-    r"""F3 class implements the Shifted Rotated High Conditioned Elliptic's benchmarking function.
+    r"""Shifted Rotated High Conditioned Elliptic's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (10^6)^\\frac{i-1}{n-1} z_i^2 - 450 \mid z_i = (x_i - o_i) * M_i
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (10^6)^\frac{i-1}{n-1} z_i^2 - 450 \mid z_i = (x_i - o_i) * M_i
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}, n \in \{2, 10, 30, 50\}`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}, n \in \{2, 10, 30, 50\}`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = -450 \mid \mathbf{x^*} = \mathbf{o}`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = -450 \mid \mathbf{x^*} = \mathbf{o}`.
 
     """
 
@@ -108,21 +136,35 @@ class F3(CECBenchmark):
     _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
 
     @d.check_exact_dimension_and_auxiliary_matrix
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the F3 benchmark.
+
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         z = np.matmul(x - self.o[: x.shape[0]], self.M)
         return n_dim._elliptic(z) - 450
 
 
 class F4(CECBenchmark):
-    r"""F4 class implements the Shifted Schwefel's 1.2 with Noise in Fitness benchmarking function.
+    r"""Shifted Schwefel's 1.2 with Noise in Fitness benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (\sum_{j=1}^i z_j)^2 * (1 + 0.4|N(0,1)|) - 450 \mid z_i = x_i - o_i
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (\sum_{j=1}^i z_j)^2 * (1 + 0.4|N(0,1)|) - 450 \mid z_i = x_i - o_i
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = -450 \mid \mathbf{x^*} = \mathbf{o}`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = -450 \mid \mathbf{x^*} = \mathbf{o}`.
 
     """
 
@@ -131,43 +173,48 @@ class F4(CECBenchmark):
     _auxiliary_data = ("o",)
 
     @d.check_less_equal_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the F4 benchmark.
 
-        # Re-calculates the input
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         z = x - self.o[: x.shape[0]]
 
-        # Instantiating function
         f = 0
 
-        # For every input dimension
         for i in range(x.shape[0]):
-            # Resetting partial term
             partial = 0
 
-            # For every dimension till `i`
             for j in range(i):
-                # Sums up the partial term
                 partial += z[j]
 
-            # Calculating the Shifted Schwefel's 1.2 with Noise in Fitness function
             f += partial**2
 
-        # Generates a random uniform noise
         noise = np.random.uniform()
 
         return f * (1 + 0.4 * noise) - 450
 
 
 class F5(CECBenchmark):
-    r"""F5 class implements the Schwefel's Problem 2.6 with Global Optimum on Bounds benchmarking function.
+    r"""Schwefel's Problem 2.6 with Global Optimum on Bounds benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \max{|A_i x - B_i|} - 310 \mid B_i = A_i - o_i
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \max{|A_i x - B_i|} - 310 \mid B_i = A_i - o_i
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = -310 \mid \mathbf{x^*} = \mathbf{o}`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = -310 \mid \mathbf{x^*} = \mathbf{o}`.
 
     """
 
@@ -176,38 +223,46 @@ class F5(CECBenchmark):
     _auxiliary_data = ("o", "A")
 
     @d.check_less_equal_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the F5 benchmark.
 
-        # Defines the shift re-arrangement points
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         shift_1 = int(x.shape[0] / 4)
         shift_2 = int(3 * x.shape[0] / 4)
 
-        # Re-sets `o` values
         self.o[:shift_1] = -100
         self.o[shift_2:] = 100
 
-        # Gathers the correct input
         A = self.A[: x.shape[0], : x.shape[0]]
 
-        # Calculates the `B` matrix
         B = np.matmul(A, self.o[: x.shape[0]])
 
-        # Calculating the Schwefel's Problem 2.6 with Global Optimum on Bounds function
         f = np.max(np.fabs(np.matmul(A, x) - B))
 
         return f - 310
 
 
 class F6(CECBenchmark):
-    r"""F6 class implements the Shifted Rosenbrock's benchmarking function.
+    r"""Shifted Rosenbrock's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n-1} (100(z_i^2-z_{i+1})^2 + (z_i - 1)^2) + 390 \mid z_i = x_i - o_i
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n-1} (100(z_i^2-z_{i+1})^2 + (z_i - 1)^2) + 390 \mid z_i = x_i - o_i
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = -390 \mid \mathbf{x^*} = \mathbf{o} + 1`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = -390 \mid \mathbf{x^*} = \mathbf{o} + 1`.
 
     """
 
@@ -216,32 +271,41 @@ class F6(CECBenchmark):
     _auxiliary_data = ("o",)
 
     @d.check_less_equal_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the F6 benchmark.
 
-        # Re-calculates the input
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         z = x - self.o[: x.shape[0]]
 
-        # Instantiating function
         f = 0
 
-        # For every input dimension
         for i in range(x.shape[0] - 1):
-            # Calculating the Shifted Rosenbrock's function
             f += 100 * (z[i] ** 2 - z[i + 1]) ** 2 + (z[i] - 1) ** 2
 
         return f + 390
 
 
 class F7(CECBenchmark):
-    r"""F7 class implements the Shifted Rotated Griewank's without Bounds benchmarking function.
+    r"""Shifted Rotated Griewank's without Bounds benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = 1 + \sum_{i=1}^{n}\\frac{x_i^2}{4000} - \prod cos(\\frac{x_i}{\sqrt{i}}) - 180 \mid z_i = (x_i - o_i) * M_i
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = 1 + \sum_{i=1}^{n}\frac{x_i^2}{4000} - \prod cos(\frac{x_i}{\sqrt{i}}) - 180 \mid z_i = (x_i - o_i) * M_i
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [0, 600] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [0, 600] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = -180 \mid \mathbf{x^*} = \mathbf{o}`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = -180 \mid \mathbf{x^*} = \mathbf{o}`.
 
     """
 
@@ -250,38 +314,45 @@ class F7(CECBenchmark):
     _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
 
     @d.check_exact_dimension_and_auxiliary_matrix
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the F7 benchmark.
 
-        # Re-calculates the input
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         z = np.matmul(x - self.o[: x.shape[0]], self.M)
 
-        # Initializing terms
         term1, term2 = 0, 1
 
-        # For every possible dimension of `x`
         for i in range(x.shape[0]):
-            # Calculating first term
             term1 += (z[i] ** 2) / 4000
 
-            # Calculating second term
             term2 *= np.cos(z[i] / np.sqrt(i + 1))
 
-        # Calculating the Shifted Rotated Griewank's without Bounds function
         f = 1 + term1 - term2
 
         return f - 180
 
 
 class F8(CECBenchmark):
-    r"""F8 class implements the Shifted Rotated Ackley's with Global Optimum on Bounds benchmarking function.
+    r"""Shifted Rotated Ackley's with Global Optimum on Bounds benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = -20e^{-0.2\sqrt{\\frac{1}{n}\sum_{i=1}^{n}x_i^2}}-e^{\\frac{1}{n}\sum_{i=1}^{n}cos(2 \\pi x_i)}+ 20 + e - 140 \mid z_i = (x_i - o_i) * M_i
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = -20e^{-0.2\sqrt{\frac{1}{n}\sum_{i=1}^{n}x_i^2}}-e^{\frac{1}{n}\sum_{i=1}^{n}cos(2 \pi x_i)}+ 20 + e - 140 \mid z_i = (x_i - o_i) * M_i
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-32, 32] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-32, 32] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = -140 \mid \mathbf{x^*} = \mathbf{o}`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = -140 \mid \mathbf{x^*} = \mathbf{o}`.
 
     """
 
@@ -290,44 +361,49 @@ class F8(CECBenchmark):
     _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
 
     @d.check_exact_dimension_and_auxiliary_matrix
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the F8 benchmark.
 
-        # Defines the shift point for re-arrangement
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         shift = int(x.shape[0] / 2)
 
-        # Iterates till reach the shift point
         for j in range(shift):
-            # Re-sets the value of `o`
             self.o[2 * j] = -32 * self.o[2 * j + 1]
 
-        # Re-calculates the input
         z = np.matmul(x - self.o[: x.shape[0]], self.M)
 
-        # Calculating the 1 / n term
         inv = 1 / x.shape[0]
 
-        # Calculating first term
         term1 = -0.2 * np.sqrt(inv * np.sum(z**2))
 
-        # Calculating second term
         term2 = inv * np.sum(np.cos(2 * np.pi * z))
 
-        # Calculating Shifted Rotated Ackley's Function with Global Optimum on Bounds function
         f = 20 + np.e - np.exp(term2) - 20 * np.exp(term1)
 
         return np.sum(f) - 140
 
 
 class F9(CECBenchmark):
-    r"""F9 class implements the Shifted Rastrigin's benchmarking function.
+    r"""Shifted Rastrigin's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (z_i^2 - 10cos(2 \\pi z_i) + 10) - 330 \mid z_i = x_i - o_i
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (z_i^2 - 10cos(2 \pi z_i) + 10) - 330 \mid z_i = x_i - o_i
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = -330 \mid \mathbf{x^*} = \mathbf{o}`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = -330 \mid \mathbf{x^*} = \mathbf{o}`.
 
     """
 
@@ -336,27 +412,38 @@ class F9(CECBenchmark):
     _auxiliary_data = ("o",)
 
     @d.check_less_equal_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the F9 benchmark.
 
-        # Re-calculates the input
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         z = x - self.o[: x.shape[0]]
 
-        # Calculating the Shifted Rastrigin's function
         f = z**2 - 10 * np.cos(2 * np.pi * z) + 10
 
         return np.sum(f) - 330
 
 
 class F10(CECBenchmark):
-    r"""F10 class implements the Shifted Rotated Rastrigin's benchmarking function.
+    r"""Shifted Rotated Rastrigin's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (z_i^2 - 10cos(2 \\pi z_i) + 10) - 330 \mid z_i = (x_i - o_i) * M_i
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (z_i^2 - 10cos(2 \pi z_i) + 10) - 330 \mid z_i = (x_i - o_i) * M_i
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = -330 \mid \mathbf{x^*} = \mathbf{o}`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = -330 \mid \mathbf{x^*} = \mathbf{o}`.
 
     """
 
@@ -365,27 +452,38 @@ class F10(CECBenchmark):
     _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
 
     @d.check_exact_dimension_and_auxiliary_matrix
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the F10 benchmark.
 
-        # Re-calculates the input
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         z = np.matmul(x - self.o[: x.shape[0]], self.M)
 
-        # Calculating the Shifted Rastrigin's function
         f = z**2 - 10 * np.cos(2 * np.pi * z) + 10
 
         return np.sum(f) - 330
 
 
 class F11(CECBenchmark):
-    r"""F11 class implements the Shifted Rotated Weierstrass's benchmarking function.
+    r"""Shifted Rotated Weierstrass's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (\sum_{k=0}^{20} [0.5^k cos(2\\pi 3^k(z_i+0.5))]) - n \sum_{k=0}^{20}[0.5^k cos(2\\pi 3^k 0.5)] \mid z_i = (x_i - o_i) * M_i
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (\sum_{k=0}^{20} [0.5^k cos(2\pi 3^k(z_i+0.5))]) - n \sum_{k=0}^{20}[0.5^k cos(2\pi 3^k 0.5)] \mid z_i = (x_i - o_i) * M_i
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-0.5, 0.5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-0.5, 0.5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 90 \mid \mathbf{x^*} = \mathbf{o}`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 90 \mid \mathbf{x^*} = \mathbf{o}`.
 
     """
 
@@ -394,39 +492,45 @@ class F11(CECBenchmark):
     _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
 
     @d.check_exact_dimension_and_auxiliary_matrix
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the F11 benchmark.
 
-        # Re-calculates the input
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         z = np.matmul(x - self.o[: x.shape[0]], self.M)
 
-        # Instantiates the function
         f = 0
 
-        # For every possible dimension of `x`
         for i in range(x.shape[0]):
-            # Iterates until `k_max = 20`
             for k in range(21):
-                # Adds the first term
                 f += 0.5**k * np.cos(2 * np.pi * 3**k * (z[i] + 0.5))
 
-        # Iterates again until `k_max = 20`
         for k in range(21):
-            # Adds the second term
             f -= x.shape[0] * (0.5**k * np.cos(2 * np.pi * 3**k * 0.5))
 
         return f + 90
 
 
 class F12(CECBenchmark):
-    r"""F12 class implements the Schwefel's Problem 2.13 benchmarking function.
+    r"""Schwefel's Problem 2.13 benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (A_i - B_i)^2 - 460 \mid A_i = \sum_{j=1}^{n} a_{ij} sin(\\alpha_j) + b_{ij} cos(\\alpha_j), A_i = \sum_{j=1}^{n} a_{ij} sin(x_j) + b_{ij} cos(x_j)
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n} (A_i - B_i)^2 - 460 \mid A_i = \sum_{j=1}^{n} a_{ij} sin(\alpha_j) + b_{ij} cos(\alpha_j), A_i = \sum_{j=1}^{n} a_{ij} sin(x_j) + b_{ij} cos(x_j)
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-\\pi, \\pi] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-\pi, \pi] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = -460 \mid \mathbf{x^*} = \mathbf{\alpha}`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = -460 \mid \mathbf{x^*} = \mathbf{\alpha}`.
 
     """
 
@@ -435,33 +539,43 @@ class F12(CECBenchmark):
     _auxiliary_data = ("alpha", "a", "b")
 
     @d.check_less_equal_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the F12 benchmark.
 
-        # Gathers the correct input
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         alpha = self.alpha[: x.shape[0]]
         a = self.a[: x.shape[0], : x.shape[0]]
         b = self.b[: x.shape[0], : x.shape[0]]
 
-        # Calculates the `A` and `B` matrices
         A = a * np.sin(alpha) + b * np.cos(alpha)
         B = a * np.sin(x) + b * np.cos(x)
 
-        # Calculating the Schwefel's Problem 2.13 function
         f = (A - B) ** 2
 
         return np.sum(f) - 460
 
 
 class F13(CECBenchmark):
-    r"""F13 class implements the Shifted Expanded Griewank's plus Rosenbrock's benchmarking function.
+    r"""Shifted Expanded Griewank's plus Rosenbrock's benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) =  f(x_1, x_2) + f(x_2, x_3) + \ldots + f(x_n, x_1) - 130 \mid z_i = x_i - o_i + 1
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) =  f(x_1, x_2) + f(x_2, x_3) + \ldots + f(x_n, x_1) - 130 \mid z_i = x_i - o_i + 1
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-3, 1] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-3, 1] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = -130 \mid \mathbf{x^*} = \mathbf{\alpha}`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = -130 \mid \mathbf{x^*} = \mathbf{\alpha}`.
 
     """
 
@@ -470,7 +584,19 @@ class F13(CECBenchmark):
     _auxiliary_data = ("o",)
 
     @d.check_less_equal_dimension
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the F13 benchmark.
+
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
 
         def _griewank(x):
             return x**2 / 4000 - np.cos(x / np.sqrt(1)) + 1
@@ -478,37 +604,31 @@ class F13(CECBenchmark):
         def _rosenbrock(x, y):
             return 100 * (x**2 - y) ** 2 + (x - 1) ** 2
 
-        # Re-calculates the input
         z = x - self.o[: x.shape[0]] + 1
 
-        # Instantiating function
         f = 0
 
-        # Iterates through every dimension
         for i in range(x.shape[0]):
-            # Checks if it is the last dimension
             if i == (x.shape[0] - 1):
-                # Calculates the Shifted Expanded Griewank's plus Rosenbrock's function using indexes `n` and `0`
                 f += _griewank(_rosenbrock(z[i], z[0]))
 
-            # Checks if it is not the last dimension
             else:
-                # Calculates the Shifted Expanded Griewank's plus Rosenbrock's function using indexes `i` and `i+1`
                 f += _griewank(_rosenbrock(z[i], z[i + 1]))
 
         return f - 130
 
 
 class F14(CECBenchmark):
-    r"""F14 class implements the Shifted Rotated Expanded Scaffer's F6 benchmarking function.
+    r"""Shifted Rotated Expanded Scaffer's F6 benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) =  f(x_1, x_2) + f(x_2, x_3) + \ldots + f(x_n, x_1) - 300 \mid z_i = x_i - o_i + 1
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) =  f(x_1, x_2) + f(x_2, x_3) + \ldots + f(x_n, x_1) - 300 \mid z_i = x_i - o_i + 1
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-100, 100] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = -300 \mid \mathbf{x^*} = \mathbf{o}`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = -300 \mid \mathbf{x^*} = \mathbf{o}`.
 
     """
 
@@ -517,44 +637,48 @@ class F14(CECBenchmark):
     _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
 
     @d.check_exact_dimension_and_auxiliary_matrix
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the F14 benchmark.
+
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
 
         def _scaffer(x, y):
-            return 0.5 + (np.sin(np.sqrt(x**2 + y**2)) ** 2 - 0.5) / (
-                (1 + 0.0001 * (x**2 + y**2)) ** 2
-            )
+            return 0.5 + (np.sin(np.sqrt(x**2 + y**2)) ** 2 - 0.5) / ((1 + 0.0001 * (x**2 + y**2)) ** 2)
 
-        # Re-calculates the input
         z = np.matmul(x - self.o[: x.shape[0]], self.M)
 
-        # Instantiating function
         f = 0
 
-        # Iterates through every dimension
         for i in range(x.shape[0]):
-            # Checks if it is the last dimension
             if i == (x.shape[0] - 1):
-                # Calculates the Shifted Rotated Expanded Scaffer's F6 function using indexes `n` and `0`
                 f += _scaffer(z[i], z[0])
 
-            # Checks if it is not the last dimension
             else:
-                # Calculates the Shifted Rotated Expanded Scaffer's F6 function using indexes `i` and `i+1`
                 f += _scaffer(z[i], z[i + 1])
 
         return f - 300
 
 
 class F15(CECCompositeBenchmark):
-    r"""F15 class implements the Hybrid Composition 1 benchmarking function.
+    r"""Hybrid Composition 1 benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \\ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \\ast \mathbf{M_i}) + bias_i]} + f_{bias}
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \lambda_i \ast \mathbf{M_i}) + bias_i]} + f_{bias}
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 120 \mid \mathbf{x^*} = \mathbf{o_1}`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 120 \mid \mathbf{x^*} = \mathbf{o_1}`.
 
     """
 
@@ -563,7 +687,20 @@ class F15(CECCompositeBenchmark):
     _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
     _bias = 120
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        """Initialize the F15 benchmark.
+
+        Args:
+            args: Positional metadata overrides with bias as the fourth argument.
+            kwargs: Keyword metadata and bias overrides.
+
+        Raises:
+            TypeError: A metadata value has an unsupported type.
+            ValueError: The declared dimension is invalid.
+            OSError: Required auxiliary data cannot be loaded.
+
+        """
+
         sigma = (1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
         l = (1, 1, 10, 10, 5 / 60, 5 / 60, 5 / 32, 5 / 32, 5 / 100, 5 / 100)
         functions = (
@@ -578,21 +715,24 @@ class F15(CECCompositeBenchmark):
             n_dim.Sphere(),
             n_dim.Sphere(),
         )
+
         args, kwargs, bias = _composite_arguments(args, kwargs, self._bias)
         CECBenchmark.__init__(self, *args, **kwargs)
+
         self._initialize_composition(sigma, l, functions, bias)
 
 
 class F16(CECCompositeBenchmark):
-    r"""F16 class implements the Rotated Hybrid Composition 1 benchmarking function.
+    r"""Rotated Hybrid Composition 1 benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \\ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \\ast \mathbf{M_i}) + bias_i]} + f_{bias}
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \lambda_i \ast \mathbf{M_i}) + bias_i]} + f_{bias}
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 120 \mid \mathbf{x^*} = \mathbf{o_1}`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 120 \mid \mathbf{x^*} = \mathbf{o_1}`.
 
     """
 
@@ -601,7 +741,20 @@ class F16(CECCompositeBenchmark):
     _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
     _bias = 120
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        """Initialize the F16 benchmark.
+
+        Args:
+            args: Positional metadata overrides with bias as the fourth argument.
+            kwargs: Keyword metadata and bias overrides.
+
+        Raises:
+            TypeError: A metadata value has an unsupported type.
+            ValueError: The declared dimension is invalid.
+            OSError: Required auxiliary data cannot be loaded.
+
+        """
+
         sigma = (1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
         l = (1, 1, 10, 10, 5 / 60, 5 / 60, 5 / 32, 5 / 32, 5 / 100, 5 / 100)
         functions = (
@@ -616,21 +769,24 @@ class F16(CECCompositeBenchmark):
             n_dim.Sphere(),
             n_dim.Sphere(),
         )
+
         args, kwargs, bias = _composite_arguments(args, kwargs, self._bias)
         CECBenchmark.__init__(self, *args, **kwargs)
+
         self._initialize_composition(sigma, l, functions, bias)
 
 
 class F17(CECCompositeBenchmark):
-    r"""F17 class implements the Rotated Hybrid Composition 1 with Noise benchmarking function.
+    r"""Rotated Hybrid Composition 1 with Noise benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \\ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \\ast \mathbf{M_i}) + bias_i]} + f_{bias}
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \lambda_i \ast \mathbf{M_i}) + bias_i]} + f_{bias}
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 120 \mid \mathbf{x^*} = \mathbf{o_1}`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 120 \mid \mathbf{x^*} = \mathbf{o_1}`.
 
     """
 
@@ -639,7 +795,20 @@ class F17(CECCompositeBenchmark):
     _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
     _bias = 120
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        """Initialize the F17 benchmark.
+
+        Args:
+            args: Positional metadata overrides with bias as the fourth argument.
+            kwargs: Keyword metadata and bias overrides.
+
+        Raises:
+            TypeError: A metadata value has an unsupported type.
+            ValueError: The declared dimension is invalid.
+            OSError: Required auxiliary data cannot be loaded.
+
+        """
+
         sigma = (1, 2, 1.5, 1.5, 1, 1, 1.5, 1.5, 2, 2)
         l = (5 / 16, 5 / 32, 2, 1, 1 / 10, 1 / 20, 20, 10, 1 / 6, 5 / 60)
         functions = (
@@ -654,26 +823,42 @@ class F17(CECCompositeBenchmark):
             n_dim.Griewank(),
             n_dim.Griewank(),
         )
+
         args, kwargs, bias = _composite_arguments(args, kwargs, self._bias)
         CECBenchmark.__init__(self, *args, **kwargs)
+
         self._initialize_composition(sigma, l, functions, bias)
 
     @d.check_exact_dimension_and_auxiliary_matrix
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the F17 benchmark.
+
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         g = self._evaluate_composition(x)
         return g * (1 + 0.2 * np.fabs(np.random.normal())) + self.bias
 
 
 class F18(CECCompositeBenchmark):
-    r"""F18 class implements the Rotated Hybrid Composition 2 benchmarking function.
+    r"""Rotated Hybrid Composition 2 benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \\ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \\ast \mathbf{M_i}) + bias_i]} + f_{bias}
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \lambda_i \ast \mathbf{M_i}) + bias_i]} + f_{bias}
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 10 \mid \mathbf{x^*} = \mathbf{o_1}`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 10 \mid \mathbf{x^*} = \mathbf{o_1}`.
 
     """
 
@@ -682,7 +867,20 @@ class F18(CECCompositeBenchmark):
     _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
     _bias = 10
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        """Initialize the F18 benchmark.
+
+        Args:
+            args: Positional metadata overrides with bias as the fourth argument.
+            kwargs: Keyword metadata and bias overrides.
+
+        Raises:
+            TypeError: A metadata value has an unsupported type.
+            ValueError: The declared dimension is invalid.
+            OSError: Required auxiliary data cannot be loaded.
+
+        """
+
         sigma = (1, 2, 1.5, 1.5, 1, 1, 1.5, 1.5, 2, 2)
         l = (5 / 16, 5 / 32, 2, 1, 1 / 10, 1 / 20, 20, 10, 1 / 6, 5 / 60)
         functions = (
@@ -697,21 +895,24 @@ class F18(CECCompositeBenchmark):
             n_dim.Griewank(),
             n_dim.Griewank(),
         )
+
         args, kwargs, bias = _composite_arguments(args, kwargs, self._bias)
         CECBenchmark.__init__(self, *args, **kwargs)
+
         self._initialize_composition(sigma, l, functions, bias)
 
 
 class F19(CECCompositeBenchmark):
-    r"""F19 class implements the Rotated Hybrid Composition 2 with Narrow Basin Global Optimum benchmarking function.
+    r"""Rotated Hybrid Composition 2 with Narrow Basin Global Optimum benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \\ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \\ast \mathbf{M_i}) + bias_i]} + f_{bias}
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \lambda_i \ast \mathbf{M_i}) + bias_i]} + f_{bias}
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 10 \mid \mathbf{x^*} = \mathbf{o_1}`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 10 \mid \mathbf{x^*} = \mathbf{o_1}`.
 
     """
 
@@ -720,7 +921,20 @@ class F19(CECCompositeBenchmark):
     _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
     _bias = 10
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        """Initialize the F19 benchmark.
+
+        Args:
+            args: Positional metadata overrides with bias as the fourth argument.
+            kwargs: Keyword metadata and bias overrides.
+
+        Raises:
+            TypeError: A metadata value has an unsupported type.
+            ValueError: The declared dimension is invalid.
+            OSError: Required auxiliary data cannot be loaded.
+
+        """
+
         sigma = (0.1, 2, 1.5, 1.5, 1, 1, 1.5, 1.5, 2, 2)
         l = (0.1 * 5 / 32, 5 / 32, 2, 1, 1 / 10, 1 / 20, 20, 10, 1 / 6, 5 / 60)
         functions = (
@@ -735,21 +949,24 @@ class F19(CECCompositeBenchmark):
             n_dim.Griewank(),
             n_dim.Griewank(),
         )
+
         args, kwargs, bias = _composite_arguments(args, kwargs, self._bias)
         CECBenchmark.__init__(self, *args, **kwargs)
+
         self._initialize_composition(sigma, l, functions, bias)
 
 
 class F20(CECCompositeBenchmark):
-    r"""F20 class implements the Rotated Hybrid Composition 2 with Global Optimum on the Bounds benchmarking function.
+    r"""Rotated Hybrid Composition 2 with Global Optimum on the Bounds benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \\ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \\ast \mathbf{M_i}) + bias_i]} + f_{bias}
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \lambda_i \ast \mathbf{M_i}) + bias_i]} + f_{bias}
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 10 \mid \mathbf{x^*} = \mathbf{o_1}`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 10 \mid \mathbf{x^*} = \mathbf{o_1}`.
 
     """
 
@@ -758,7 +975,20 @@ class F20(CECCompositeBenchmark):
     _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
     _bias = 10
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        """Initialize the F20 benchmark.
+
+        Args:
+            args: Positional metadata overrides with bias as the fourth argument.
+            kwargs: Keyword metadata and bias overrides.
+
+        Raises:
+            TypeError: A metadata value has an unsupported type.
+            ValueError: The declared dimension is invalid.
+            OSError: Required auxiliary data cannot be loaded.
+
+        """
+
         sigma = (0.1, 2, 1.5, 1.5, 1, 1, 1.5, 1.5, 2, 2)
         l = (0.1 * 5 / 32, 5 / 32, 2, 1, 1 / 10, 1 / 20, 20, 10, 1 / 6, 5 / 60)
         functions = (
@@ -773,30 +1003,44 @@ class F20(CECCompositeBenchmark):
             n_dim.Griewank(),
             n_dim.Griewank(),
         )
+
         args, kwargs, bias = _composite_arguments(args, kwargs, self._bias)
         CECBenchmark.__init__(self, *args, **kwargs)
+
         self._initialize_composition(sigma, l, functions, bias)
 
     @d.check_exact_dimension_and_auxiliary_matrix
-    def __call__(self, x: np.array) -> float:
-        # Iterates through half of available dimensions
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the F20 benchmark.
+
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         for j in range(x.shape[0] // 2):
-            # Re-arranges the values in `o`
             self.o[0][2 * j + 1] = 5
 
         return self._evaluate_composition(x) + self.bias
 
 
 class F21(CECCompositeBenchmark):
-    r"""F21 class implements the Rotated Hybrid Composition 3 benchmarking function.
+    r"""Rotated Hybrid Composition 3 benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \\ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \\ast \mathbf{M_i}) + bias_i]} + f_{bias}
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \lambda_i \ast \mathbf{M_i}) + bias_i]} + f_{bias}
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 360 \mid \mathbf{x^*} = \mathbf{o_1}`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 360 \mid \mathbf{x^*} = \mathbf{o_1}`.
 
     """
 
@@ -805,7 +1049,20 @@ class F21(CECCompositeBenchmark):
     _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
     _bias = 360
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        """Initialize the F21 benchmark.
+
+        Args:
+            args: Positional metadata overrides with bias as the fourth argument.
+            kwargs: Keyword metadata and bias overrides.
+
+        Raises:
+            TypeError: A metadata value has an unsupported type.
+            ValueError: The declared dimension is invalid.
+            OSError: Required auxiliary data cannot be loaded.
+
+        """
+
         sigma = (1, 1, 1, 1, 1, 2, 2, 2, 2, 2)
         l = (1 / 4, 5 / 100, 5, 1, 5, 1, 50, 10, 1 / 8, 5 / 200)
         functions = (
@@ -820,21 +1077,24 @@ class F21(CECCompositeBenchmark):
             n_dim.Griewank(),
             n_dim.Griewank(),
         )
+
         args, kwargs, bias = _composite_arguments(args, kwargs, self._bias)
         CECBenchmark.__init__(self, *args, **kwargs)
+
         self._initialize_composition(sigma, l, functions, bias)
 
 
 class F22(CECCompositeBenchmark):
-    r"""F22 class implements the Rotated Hybrid Composition 3 with High Condition Number Matrix benchmarking function.
+    r"""Rotated Hybrid Composition 3 with High Condition Number Matrix benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \\ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \\ast \mathbf{M_i}) + bias_i]} + f_{bias}
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \lambda_i \ast \mathbf{M_i}) + bias_i]} + f_{bias}
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 360 \mid \mathbf{x^*} = \mathbf{o_1}`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 360 \mid \mathbf{x^*} = \mathbf{o_1}`.
 
     """
 
@@ -843,7 +1103,20 @@ class F22(CECCompositeBenchmark):
     _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
     _bias = 360
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        """Initialize the F22 benchmark.
+
+        Args:
+            args: Positional metadata overrides with bias as the fourth argument.
+            kwargs: Keyword metadata and bias overrides.
+
+        Raises:
+            TypeError: A metadata value has an unsupported type.
+            ValueError: The declared dimension is invalid.
+            OSError: Required auxiliary data cannot be loaded.
+
+        """
+
         sigma = (1, 1, 1, 1, 1, 2, 2, 2, 2, 2)
         l = (1 / 4, 5 / 100, 5, 1, 5, 1, 50, 10, 1 / 8, 5 / 200)
         functions = (
@@ -858,21 +1131,24 @@ class F22(CECCompositeBenchmark):
             n_dim.Griewank(),
             n_dim.Griewank(),
         )
+
         args, kwargs, bias = _composite_arguments(args, kwargs, self._bias)
         CECBenchmark.__init__(self, *args, **kwargs)
+
         self._initialize_composition(sigma, l, functions, bias)
 
 
 class F23(CECCompositeBenchmark):
-    r"""F23 class implements the Non-Continuous Rotated Hybrid Composition 3 benchmarking function.
+    r"""Non-Continuous Rotated Hybrid Composition 3 benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \\ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \\ast \mathbf{M_i}) + bias_i]} + f_{bias}
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \lambda_i \ast \mathbf{M_i}) + bias_i]} + f_{bias}
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) \\approx 360 \mid \mathbf{x^*} = \mathbf{o_1}`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) \approx 360 \mid \mathbf{x^*} = \mathbf{o_1}`.
 
     """
 
@@ -881,7 +1157,20 @@ class F23(CECCompositeBenchmark):
     _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
     _bias = 360
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        """Initialize the F23 benchmark.
+
+        Args:
+            args: Positional metadata overrides with bias as the fourth argument.
+            kwargs: Keyword metadata and bias overrides.
+
+        Raises:
+            TypeError: A metadata value has an unsupported type.
+            ValueError: The declared dimension is invalid.
+            OSError: Required auxiliary data cannot be loaded.
+
+        """
+
         sigma = (1, 1, 1, 1, 1, 2, 2, 2, 2, 2)
         l = (1 / 4, 5 / 100, 5, 1, 5, 1, 50, 10, 1 / 8, 5 / 200)
         functions = (
@@ -896,27 +1185,43 @@ class F23(CECCompositeBenchmark):
             n_dim.Griewank(),
             n_dim.Griewank(),
         )
+
         args, kwargs, bias = _composite_arguments(args, kwargs, self._bias)
         CECBenchmark.__init__(self, *args, **kwargs)
+
         self._initialize_composition(sigma, l, functions, bias)
 
     @d.check_exact_dimension_and_auxiliary_matrix
-    def __call__(self, x: np.array) -> float:
+    def __call__(self, x: NDArray[Any]) -> BenchmarkValue:
+        """Evaluate the F23 benchmark.
+
+        Args:
+            x: Numeric coordinates supplied as a vector or single-column array.
+
+        Returns:
+            Computed benchmark value with its existing Python or NumPy type.
+
+        Raises:
+            SizeError: The input or group dimensions are unsupported.
+
+        """
+
         D = x.shape[0]
         x = np.where(np.fabs(x - self.o[0][:D]) < 0.5, x, np.round(2 * x) / 2)
         return self._evaluate_composition(x) + self.bias
 
 
 class F24(CECCompositeBenchmark):
-    r"""F24 class implements the Rotated Hybrid Composition 4 benchmarking function.
+    r"""Rotated Hybrid Composition 4 benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \\ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \\ast \mathbf{M_i}) + bias_i]} + f_{bias}
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \lambda_i \ast \mathbf{M_i}) + bias_i]} + f_{bias}
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [-5, 5] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 260 \mid \mathbf{x^*} = \mathbf{o_1}`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 260 \mid \mathbf{x^*} = \mathbf{o_1}`.
 
     """
 
@@ -925,7 +1230,20 @@ class F24(CECCompositeBenchmark):
     _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
     _bias = 260
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        """Initialize the F24 benchmark.
+
+        Args:
+            args: Positional metadata overrides with bias as the fourth argument.
+            kwargs: Keyword metadata and bias overrides.
+
+        Raises:
+            TypeError: A metadata value has an unsupported type.
+            ValueError: The declared dimension is invalid.
+            OSError: Required auxiliary data cannot be loaded.
+
+        """
+
         sigma = (2, 2, 2, 2, 2, 2, 2, 2, 2, 2)
         l = (10, 1 / 4, 1, 5 / 32, 1, 5 / 100, 1 / 10, 1, 5 / 100, 5 / 100)
         functions = (
@@ -940,21 +1258,24 @@ class F24(CECCompositeBenchmark):
             n_dim.HighConditionedElliptic(),
             n_dim.SphereWithNoise(),
         )
+
         args, kwargs, bias = _composite_arguments(args, kwargs, self._bias)
         CECBenchmark.__init__(self, *args, **kwargs)
+
         self._initialize_composition(sigma, l, functions, bias)
 
 
 class F25(CECCompositeBenchmark):
-    r"""F25 class implements the Rotated Hybrid Composition 4 without Bounds benchmarking function.
+    r"""Rotated Hybrid Composition 4 without Bounds benchmark.
 
-    .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \\ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \\lambda_i \\ast \mathbf{M_i}) + bias_i]} + f_{bias}
+    Notes:
+        .. math:: f(\mathbf{x}) = f(x_1, x_2, \ldots, x_n) = \sum_{i=1}^{n}{w_i \ast [f_i'((\mathbf{x}-\mathbf{o_i})/ \lambda_i \ast \mathbf{M_i}) + bias_i]} + f_{bias}
 
-    Domain:
-        The function is commonly evaluated using :math:`x_i \in [?, ?] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
+        Domain:
+            The function is commonly evaluated using :math:`x_i \in [?, ?] \mid i = \{1, 2, \ldots, n\}, n \leq 100`.
 
-    Global Minima:
-        :math:`f(\mathbf{x^*}) = 260 \mid \mathbf{x^*} = \mathbf{o_1}`.
+        Global Minima:
+            :math:`f(\mathbf{x^*}) = 260 \mid \mathbf{x^*} = \mathbf{o_1}`.
 
     """
 
@@ -963,7 +1284,20 @@ class F25(CECCompositeBenchmark):
     _auxiliary_data = ("o", "M2", "M10", "M30", "M50")
     _bias = 260
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        """Initialize the F25 benchmark.
+
+        Args:
+            args: Positional metadata overrides with bias as the fourth argument.
+            kwargs: Keyword metadata and bias overrides.
+
+        Raises:
+            TypeError: A metadata value has an unsupported type.
+            ValueError: The declared dimension is invalid.
+            OSError: Required auxiliary data cannot be loaded.
+
+        """
+
         sigma = (2, 2, 2, 2, 2, 2, 2, 2, 2, 2)
         l = (10, 1 / 4, 1, 5 / 32, 1, 5 / 100, 1 / 10, 1, 5 / 100, 5 / 100)
         functions = (
@@ -978,6 +1312,8 @@ class F25(CECCompositeBenchmark):
             n_dim.HighConditionedElliptic(),
             n_dim.SphereWithNoise(),
         )
+
         args, kwargs, bias = _composite_arguments(args, kwargs, self._bias)
         CECBenchmark.__init__(self, *args, **kwargs)
+
         self._initialize_composition(sigma, l, functions, bias)
